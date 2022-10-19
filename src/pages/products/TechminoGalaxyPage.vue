@@ -1,16 +1,19 @@
 <template>
   <q-page class="flex flex-center">
     <q-media-player
+      class="full-height full-width bg-transparent no-pointer-events"
+      autoplay
+      no-controls
+      playsinline
+      :show-big-play-button="false"
       type="video"
       :sources="videoSources" />
   </q-page>
 </template>
 
 <script>
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "IndexPage",
+export default {
+  name: "TechminoGalaxyPage",
   setup() {
     const videoSources = [
       {
@@ -26,5 +29,9 @@ export default defineComponent({
       videoSources
     };
   }
-});
+};
 </script>
+
+<style scoped>
+
+</style>
