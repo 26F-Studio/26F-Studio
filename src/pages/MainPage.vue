@@ -1,11 +1,78 @@
 <template>
-  <q-img class="absolute-top" src="images/home-header.png" />
-  <q-page class="flex flex-center column q-pa-md">
-    <div class="self-start row">
-      <div class="offset-1 col-5 header-text text-weight-bolder">
-        This is just
-        a example of
-        filler texts.
+  <q-page class="flex column">
+    <div class="relative-position full-width" style="height:fit-content; margin-top: -50px">
+      <img class="full-width" src="images/home-header.png" alt="home-header" style="object-fit: contain;" />
+      <div class="row absolute-center full-width">
+        <div class="offset-1 header-text">
+          This is just <br>
+          an example of <br>
+          filler texts.
+        </div>
+      </div>
+    </div>
+    <div class="self-center title-text">
+      Our products
+    </div>
+    <div class="row">
+      <img src="images/TechminoGalaxy-icon.png" alt="TechminoGalaxy-icon" style="height: 55vw;margin-top: -10vw" />
+      <div class="q-py-lg" style="margin-left: -5vw">
+        <div class="product-text">
+          Techmino Galaxy
+        </div>
+        <div class="description-text">
+          Lorem Ipsum is simply dummy text of the printing and typesetting <br>
+          industry. Lorem Ipsum has been the industry's standard dummy text <br>
+          ever since the 1500s, when an unknown printer took a galley of type <br>
+          and scrambled it to make a type specimen book.
+        </div>
+        <div class="row" style="margin-top:2vw">
+          <q-btn-dropdown
+            class="download-btn text-white"
+            split
+            size="1.5vw"
+            flat
+            no-caps
+            @click="onMainClick">
+            <template v-slot:label>
+              <div class="column items-center no-wrap q-ma-sm">
+                <div class="text-center text-h5">
+                  Download Now
+                </div>
+                <div class="text-center">
+                  macOS, Universal
+                </div>
+              </div>
+            </template>
+
+            <q-list>
+              <q-item clickable v-close-popup @click="onItemClick">
+                <q-item-section avatar>
+                  <q-avatar icon="folder" color="primary" text-color="white" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>Photos</q-item-label>
+                  <q-item-label caption>February 22, 2016</q-item-label>
+                </q-item-section>
+                <q-item-section side>
+                  <q-icon name="info" color="amber" />
+                </q-item-section>
+              </q-item>
+
+              <q-item clickable v-close-popup @click="onItemClick">
+                <q-item-section avatar>
+                  <q-avatar icon="assignment" color="secondary" text-color="white" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>Vacation</q-item-label>
+                  <q-item-label caption>February 22, 2016</q-item-label>
+                </q-item-section>
+                <q-item-section side>
+                  <q-icon name="info" color="amber" />
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-btn-dropdown>
+        </div>
       </div>
     </div>
   </q-page>
@@ -16,18 +83,66 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "IndexPage"
-
 });
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import "src/css/app.scss";
 
-.header-text {
+.newsreader {
+  font-family: 'newsreader', serif;
+}
+
+.newsreader-italic {
   font-family: 'newsreader-italic', serif;
+}
+
+.header-text {
+  @extend .newsreader-italic;
+  color: #F1F2F3;
   font-style: italic;
-  font-size: 152px;
-  line-height: 152px;
+  font-weight: 800;
+  font-size: 8vw;
+  line-height: 12vw;
   font-feature-settings: 'pnum' on, 'lnum' on;
+}
+
+.title-text {
+  @extend .newsreader;
+  background: linear-gradient(90.8deg, #BF55D4 26.21%, #6271CD 86.62%);
+  text-shadow: 0 1vw 2vw rgba(48, 0, 240, 0.31);
+  font-style: normal;
+  font-weight: 800;
+  font-size: 6vw;
+  line-height: 18vw;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.product-text {
+  @extend .newsreader;
+  background: linear-gradient(90.8deg, #5580D4 4.29%, #7162CD 97.82%);
+  text-shadow: 0 1vw 2vw rgba(48, 0, 240, 0.31);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 5vw;
+  line-height: 8vw;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.description-text {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.8vw;
+  line-height: 3vw;
+}
+
+.download-btn {
+  background: linear-gradient(81.97deg, #B14FFF -3.99%, #474EEE 90.36%);
+  box-shadow: 0 15px 35px rgba(36, 0, 182, 0.21);
+  border-radius: 1vw;
 }
 </style>
