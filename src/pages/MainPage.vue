@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex column">
     <div class="relative-position full-width" style="height:fit-content; margin-top: -50px">
-      <img class="full-width" src="images/home-header.png" alt="home-header" style="object-fit: contain;"/>
+      <img class="full-width" src="images/home-header.png" alt="home-header" style="object-fit: contain;" />
       <div class="row absolute-center full-width">
         <div class="offset-1 header-text">
           This is just <br>
@@ -13,92 +13,124 @@
     <div class="self-center title-text">
       Our products
     </div>
-    <div class="row">
-      <img src="images/TechminoGalaxy-icon.png" alt="TechminoGalaxy-icon" style="height: 55vw;margin-top: -10vw"/>
-      <div class="q-py-lg" style="margin-left: -5vw">
-        <div class="product-text">
-          Techmino Galaxy
-        </div>
-        <div class="description-text">
-          Lorem Ipsum is simply dummy text of the printing and typesetting <br>
-          industry. Lorem Ipsum has been the industry's standard dummy text <br>
-          ever since the 1500s, when an unknown printer took a galley of type <br>
-          and scrambled it to make a type specimen book.
-        </div>
-        <div class="row q-gutter-x-xl items-center" style="margin-top:2vw">
-          <q-btn-dropdown
-            class="download-btn text-white"
-            split
-            size="1.5vw"
-            flat
-            no-caps
-            @click="onDownloadClick">
-            <template v-slot:label>
-              <div class="column items-center no-wrap q-ma-sm">
-                <div style="font-weight: 700; font-size: 1.5vw">
-                  Download Now
-                </div>
-                <div style="font-weight: 400; font-size: 1vw">
-                  macOS, Universal
-                </div>
-              </div>
-            </template>
-
-            <q-list>
-              <q-item clickable v-close-popup @click="onItemClick">
-                <q-item-section avatar>
-                  <q-avatar icon="folder" color="primary" text-color="white"/>
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label>Photos</q-item-label>
-                  <q-item-label caption>February 22, 2016</q-item-label>
-                </q-item-section>
-                <q-item-section side>
-                  <q-icon name="info" color="amber"/>
-                </q-item-section>
-              </q-item>
-
-              <q-item clickable v-close-popup @click="onItemClick">
-                <q-item-section avatar>
-                  <q-avatar icon="assignment" color="secondary" text-color="white"/>
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label>Vacation</q-item-label>
-                  <q-item-label caption>February 22, 2016</q-item-label>
-                </q-item-section>
-                <q-item-section side>
-                  <q-icon name="info" color="amber"/>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-btn-dropdown>
-          <div>
-            <q-btn
-              class="product-btn q-px-xl"
+    <div
+      v-for="(product, index) in products"
+      :key="index">
+      <div
+        class="row"
+        :class="index % 2 === 1 ? 'justify-end' : 'justify-start'">
+        <img
+          v-if="index % 2 === 0"
+          :src="`images/${product}-icon.png`"
+          :alt="`${product}-icon`"
+          style="height: 55vw;margin-top: -10vw" />
+        <div class="col-7" style="margin-left: -5vw">
+          <div class="product-text">
+            {{ i18n(`products.${product}.name`) }}
+          </div>
+          <div class="description-text" style="white-space: pre">
+            {{ i18n(`products.${product}.description`) }}
+          </div>
+          <div
+            class="row q-gutter-x-xl items-center"
+            :class="index % 2 === 1 ? 'justify-end' : 'justify-start'"
+            style="margin-top:2vw">
+            <q-btn-dropdown
+              class="download-btn text-white"
+              split
               size="1.5vw"
               flat
               no-caps
-              @click="onProductClick">
-              Learn More
-            </q-btn>
+              @click="onDownloadClick">
+              <template v-slot:label>
+                <div class="column items-center no-wrap q-ma-sm">
+                  <div style="font-weight: 700; font-size: 1.5vw">
+                    Download Now
+                  </div>
+                  <div style="font-weight: 400; font-size: 1vw">
+                    macOS, Universal
+                  </div>
+                </div>
+              </template>
+
+              <q-list>
+                <q-item clickable v-close-popup @click="onItemClick">
+                  <q-item-section avatar>
+                    <q-avatar icon="folder" color="primary" text-color="white" />
+                  </q-item-section>
+                  <q-item-section>
+                    <q-item-label>Photos</q-item-label>
+                    <q-item-label caption>February 22, 2016</q-item-label>
+                  </q-item-section>
+                  <q-item-section side>
+                    <q-icon name="info" color="amber" />
+                  </q-item-section>
+                </q-item>
+
+                <q-item clickable v-close-popup @click="onItemClick">
+                  <q-item-section avatar>
+                    <q-avatar icon="assignment" color="secondary" text-color="white" />
+                  </q-item-section>
+                  <q-item-section>
+                    <q-item-label>Vacation</q-item-label>
+                    <q-item-label caption>February 22, 2016</q-item-label>
+                  </q-item-section>
+                  <q-item-section side>
+                    <q-icon name="info" color="amber" />
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-btn-dropdown>
+            <div>
+              <q-btn
+                class="product-btn q-px-xl"
+                size="1.5vw"
+                flat
+                no-caps
+                @click="onProductClick">
+                Learn More
+              </q-btn>
+            </div>
           </div>
         </div>
+        <img
+          v-if="index % 2 === 1"
+          :src="`images/${product}-icon.png`"
+          :alt="`${product}-icon`"
+          style="height: 55vw;margin-top: -10vw" />
       </div>
     </div>
   </q-page>
 </template>
 
 <script>
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "IndexPage",
   setup() {
-    const productIndexes = [
+    const products = [
       "techminoGalaxy",
       "techmino",
-      "quatrack",
-    ]
+      "quatrack"
+    ];
+    return {
+      products,
+      onDownloadClick() {
+        console.log("onDownloadClick");
+      },
+      onProductClick() {
+        console.log("onProductClick");
+      },
+      onItemClick() {
+        console.log("onItemClick");
+      }
+    };
+  },
+  methods: {
+    i18n(relativePath) {
+      return this.$t("pages.main." + relativePath);
+    }
   }
 });
 </script>

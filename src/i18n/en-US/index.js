@@ -26,7 +26,7 @@ export default {
           whoWeAre: "Who We Are",
           brandingGuidelines: "Branding Guidelines",
           contact: "Contact",
-          joinUs: "Join Us",
+          joinUs: "Join Us"
         }
       }
     },
@@ -45,20 +45,30 @@ export default {
     main: {}
   },
   pages: {
-    mainPage: {
+    main: {
       products: {
         techminoGalaxy: {
           name: "Techmino Galaxy",
-          description: "",
+          description: "Lorem Ipsum is simply dummy text of the printing and typesetting\n" +
+            "industry. Lorem Ipsum has been the industry's standard dummy text\n" +
+            "ever since the 1500s, when an unknown printer took a galley of type\n" +
+            "and scrambled it to make a type specimen book."
         },
         techmino: {
-          name: "Techmino Galaxy",
-          description: "",
+          name: "Techmino",
+          description: "Welcome to Techmino, a block-stacking game by 26F Studio!\n" +
+            "Immerse yourself in more than 100 modes of this modern yet familiar game,\n" +
+            "with a variety of difficulties so everyone can have a great time!\n" +
+            "Hang out and challenge your friends and players around the world\n" +
+            "in the multiplayer modes, and discover some hidden easter eggs all over the game!\n"
         },
         quatrack: {
-          name: "Techmino Galaxy",
-          description: "",
-        },
+          name: "Quatrack",
+          description: "Lorem Ipsum is simply dummy text of the printing and typesetting\n" +
+            "industry. Lorem Ipsum has been the industry's standard dummy text\n" +
+            "ever since the 1500s, when an unknown printer took a galley of type\n" +
+            "and scrambled it to make a type specimen book."
+        }
       }
     }
   }
