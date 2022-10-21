@@ -46,6 +46,11 @@ export default {
   },
   pages: {
     main: {
+      labels: {
+        header: "Welcome to\n" +
+          "26F Studio!",
+        title: "Our products"
+      },
       products: {
         techminoGalaxy: {
           name: "Techmino Galaxy",
@@ -68,6 +73,17 @@ export default {
             "industry. Lorem Ipsum has been the industry's standard dummy text\n" +
             "ever since the 1500s, when an unknown printer took a galley of type\n" +
             "and scrambled it to make a type specimen book."
+        }
+      },
+      download: {
+        title: "Download Now",
+        platforms: {
+          windows32: "Windows, x86",
+          windows64: "Windows, x64",
+          macos: "macOS, Universal",
+          linux: "Linux, x64",
+          android: "Android, arm64",
+          ios: "iOS, appstore link"
         }
       }
     }

@@ -4,14 +4,12 @@
       <img class="full-width" src="images/home-header.png" alt="home-header" style="object-fit: contain;" />
       <div class="row absolute-center full-width">
         <div class="offset-1 header-text">
-          This is just <br>
-          an example of <br>
-          filler texts.
+          {{ i18n("labels.header") }}
         </div>
       </div>
     </div>
     <div class="self-center title-text">
-      Our products
+      {{ i18n("labels.title") }}
     </div>
     <div
       v-for="(product, index) in products"
@@ -28,59 +26,15 @@
           <div class="product-text">
             {{ i18n(`products.${product}.name`) }}
           </div>
-          <div class="description-text" style="white-space: pre">
+          <div class="description-text">
             {{ i18n(`products.${product}.description`) }}
           </div>
           <div
             class="row q-gutter-x-xl items-center"
             :class="index % 2 === 1 ? 'justify-end' : 'justify-start'"
             style="margin-top:2vw">
-            <q-btn-dropdown
-              class="download-btn text-white"
-              split
-              size="1.5vw"
-              flat
-              no-caps
-              @click="onDownloadClick">
-              <template v-slot:label>
-                <div class="column items-center no-wrap q-ma-sm">
-                  <div style="font-weight: 700; font-size: 1.5vw">
-                    Download Now
-                  </div>
-                  <div style="font-weight: 400; font-size: 1vw">
-                    macOS, Universal
-                  </div>
-                </div>
-              </template>
-
-              <q-list>
-                <q-item clickable v-close-popup @click="onItemClick">
-                  <q-item-section avatar>
-                    <q-avatar icon="folder" color="primary" text-color="white" />
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label>Photos</q-item-label>
-                    <q-item-label caption>February 22, 2016</q-item-label>
-                  </q-item-section>
-                  <q-item-section side>
-                    <q-icon name="info" color="amber" />
-                  </q-item-section>
-                </q-item>
-
-                <q-item clickable v-close-popup @click="onItemClick">
-                  <q-item-section avatar>
-                    <q-avatar icon="assignment" color="secondary" text-color="white" />
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label>Vacation</q-item-label>
-                    <q-item-label caption>February 22, 2016</q-item-label>
-                  </q-item-section>
-                  <q-item-section side>
-                    <q-icon name="info" color="amber" />
-                  </q-item-section>
-                </q-item>
-              </q-list>
-            </q-btn-dropdown>
+            <DownloadButton
+              :callback="downloadProduct" />
             <div>
               <q-btn
                 class="product-btn q-px-xl"
@@ -105,9 +59,11 @@
 
 <script>
 import { defineComponent } from "vue";
+import DownloadButton from "components/DownloadButton";
 
 export default defineComponent({
   name: "IndexPage",
+  components: { DownloadButton },
   setup() {
     const products = [
       "techminoGalaxy",
@@ -116,20 +72,17 @@ export default defineComponent({
     ];
     return {
       products,
-      onDownloadClick() {
-        console.log("onDownloadClick");
-      },
       onProductClick() {
         console.log("onProductClick");
-      },
-      onItemClick() {
-        console.log("onItemClick");
       }
     };
   },
   methods: {
     i18n(relativePath) {
       return this.$t("pages.main." + relativePath);
+    },
+    downloadProduct(product) {
+      console.log("downloadProduct", product);
     }
   }
 });
@@ -154,6 +107,7 @@ export default defineComponent({
   font-size: 8vw;
   line-height: 12vw;
   font-feature-settings: 'pnum' on, 'lnum' on;
+  white-space: pre
 }
 
 .title-text {
@@ -187,6 +141,7 @@ export default defineComponent({
   font-weight: 400;
   font-size: 1.8vw;
   line-height: 3vw;
+  white-space: pre
 }
 
 .download-btn {
