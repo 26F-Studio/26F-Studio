@@ -1,9 +1,20 @@
 @font-face {
+  font-family: inter;
+  font-weight: 1 1000;
+  font-stretch: 1% 1000%;
+  src: url(src/css/fonts/Inter.var.woff2);
+}
+
+@font-face {
   font-family: newsreader;
-  src: url(src/css/fonts/Newsreader.woff2);
+  font-weight: 1 1000;
+  font-stretch: 0.0% 1000%;
+  src: url(src/css/fonts/Newsreader[opsz,wght].woff2);
 }
 
 @font-face {
   font-family: newsreader-italic;
-  src: url(src/css/fonts/Newsreader-italic.woff2);
+  font-weight: 1 1000;
+  font-stretch: 1% 1000%;
+  src: url(src/css/fonts/Newsreader-italic[opsz,wght].woff2);
 }

@@ -43,5 +43,15 @@ export default {
       }
     },
     main: {}
+  },
+  pages: {
+    mainPage: {
+      products: {
+        techminoGalaxy: {
+          name: "Techmino Galaxy",
+          description: "",
+        }
+      }
+    }
   }
 };
