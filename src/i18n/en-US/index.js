@@ -50,7 +50,15 @@ export default {
         techminoGalaxy: {
           name: "Techmino Galaxy",
           description: "",
-        }
+        },
+        techmino: {
+          name: "Techmino Galaxy",
+          description: "",
+        },
+        quatrack: {
+          name: "Techmino Galaxy",
+          description: "",
+        },
       }
     }
   }
