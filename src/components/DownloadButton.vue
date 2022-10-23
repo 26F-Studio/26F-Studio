@@ -9,7 +9,7 @@
     <template v-slot:label>
       <div class="column items-center no-wrap q-ma-sm">
         <div style="font-weight: 700; font-size: 1.5vw">
-          Download Now
+          {{i18n('labels.download') }}
         </div>
         <div style="font-weight: 400; font-size: 1vw">
           macOS, Universal
@@ -28,7 +28,7 @@
           <q-avatar icon="folder" color="primary" text-color="white" />
         </q-item-section>
         <q-item-section>
-          <q-item-label>Photos</q-item-label>
+          <q-item-label>{{ i18n(`labels.platforms.${platform}`) }}</q-item-label>
           <q-item-label caption>February 22, 2016</q-item-label>
         </q-item-section>
         <q-item-section side>
@@ -58,7 +58,7 @@ export default defineComponent({
   },
   methods: {
     i18n(relativePath) {
-      return this.$t("pages.main." + relativePath);
+      return this.$t("components.downloadButton." + relativePath);
     }
   }
 });
