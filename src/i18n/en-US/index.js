@@ -49,7 +49,12 @@ export default {
       labels: {
         header: "Welcome to\n" +
           "26F Studio!",
-        title: "Our products"
+        title: "Our products",
+        invite: {
+          interested: "Interested in what you see?",
+          account: "Create your account now!",
+          button: "Sign Up/Log In"
+        }
       },
       products: {
         techminoGalaxy: {
@@ -69,9 +74,9 @@ export default {
         },
         quatrack: {
           name: "Quatrack",
-          description: "Lorem Ipsum is simply dummy text of the printing and typesetting\n" +
-            "industry. Lorem Ipsum has been the industry's standard dummy text\n" +
-            "ever since the 1500s, when an unknown printer took a galley of type\n" +
+          description: "Lorem Ipsum is simply dummy text of the printing and typesetting " +
+            "industry. Lorem Ipsum has been the industry's standard dummy text " +
+            "ever since the 1500s, when an unknown printer took a galley of type " +
             "and scrambled it to make a type specimen book."
         }
       },

@@ -1,6 +1,6 @@
 <template>
   <q-btn-dropdown
-    class="download-btn text-white"
+    class="download-btn"
     split
     size="1.5vw"
     flat
@@ -64,6 +64,13 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import "src/css/app.scss";
+
+.download-btn {
+  @extend #primary-btn;
+  font-family: 'inter', sans-serif;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+}
 
 </style>

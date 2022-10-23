@@ -49,15 +49,8 @@ const splitArray = (array, count, isBalanced) => {
 };
 
 export default boot(({ app }) => {
-  app.config.globalProperties.$project = project;
-  app.config.globalProperties.$platforms = [
-    "windows32",
-    "windows64",
-    "macos",
-    "linux",
-    "android",
-    "ios"
-  ];
+  app.config.globalProperties.$project = useProject();
+  app.config.globalProperties.$platforms = usePlatforms();
   app.config.globalProperties.$sleep = sleep;
   app.config.globalProperties.$splitArray = splitArray;
 });
