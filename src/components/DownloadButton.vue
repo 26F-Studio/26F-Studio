@@ -1,18 +1,18 @@
 <template>
   <q-btn-dropdown
     class="download-btn"
-    split
-    size="1.5vw"
     flat
     no-caps
-    @click="callback()">
+    split
+    size="1.5vw"
+    @click="downloadProduct(mainPlatform)">
     <template v-slot:label>
       <div class="column items-center no-wrap q-ma-sm">
         <div style="font-weight: 700; font-size: 1.5vw">
-          {{i18n('labels.download') }}
+          {{ i18n("labels.download") }}
         </div>
         <div style="font-weight: 400; font-size: 1vw">
-          macOS, Universal
+          {{ i18n(`labels.platforms.${mainPlatform}`) }}
         </div>
       </div>
     </template>
@@ -23,7 +23,7 @@
         :key="index"
         clickable
         v-close-popup
-        @click="callback()">
+        @click="downloadProduct(platform)">
         <q-item-section avatar>
           <q-avatar icon="folder" color="primary" text-color="white" />
         </q-item-section>
@@ -40,25 +40,68 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { useQuasar } from "quasar";
+import { defineComponent, ref } from "vue";
 
 import { usePlatforms } from "boot/config";
 
 export default defineComponent({
   name: "DownloadButton",
   props: {
-    callback: {
-      type: Function,
+    repo: {
+      type: String,
       required: true
     }
   },
   setup() {
-    const platforms = usePlatforms();
-    return { platforms };
+    const $q = useQuasar();
+    let mainPlatform = "windows64";
+    let platforms = usePlatforms();
+
+    if ($q.platform.is.android) {
+      mainPlatform = "android";
+    } else if ($q.platform.is.ios || $q.platform.is.mac) {
+      mainPlatform = "appstore";
+    } else if ($q.platform.is.linux) {
+      mainPlatform = "linux";
+    }
+
+    platforms = platforms.filter(function(platform) {
+      return platform !== mainPlatform;
+    });
+
+    const mainLoading = ref(false);
+    return { mainPlatform, platforms, mainLoading };
   },
   methods: {
     i18n(relativePath) {
       return this.$t("components.downloadButton." + relativePath);
+    },
+    async downloadProduct(platform) {
+      const notify = this.$q.notify({
+        group: false,
+        message: this.i18n("notifications.download"),
+        spinner: true,
+        timeout: 0,
+        type: "info"
+      });
+      const downloadLink = await this.$github.getDownloadLink(this.repo, platform);
+      if (downloadLink) {
+        window.location.href = downloadLink;
+        notify({
+          message: this.i18n("notifications.success"),
+          spinner: false,
+          timeout: 2500,
+          type: "positive"
+        });
+      } else {
+        notify({
+          message: this.i18n("notifications.error"),
+          spinner: false,
+          timeout: 1500,
+          type: "negative"
+        });
+      }
     }
   }
 });

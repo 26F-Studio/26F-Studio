@@ -5,13 +5,20 @@ export default {
       labels: {
         download: "Download Now",
         platforms: {
-          windows32: "Windows, x86",
-          windows64: "Windows, x64",
-          macos: "macOS, Universal",
-          linux: "Linux, x64",
           android: "Android, arm64",
-          ios: "iOS, appstore link"
+          appstore: "App Store, iOS & macOS",
+          linux: "Linux, x64",
+          macosDmg: "macOS, Universal dmg",
+          macosPkg: "macOS, Universal installer",
+          testflight: "TestFlight, iOS & macOS",
+          windows32: "Windows, x86",
+          windows64: "Windows, x64"
         }
+      },
+      notifications: {
+        download: "Getting download link...",
+        error: "Not available",
+        success: "Succeeded"
       }
     },
     languagesMenu: {},
@@ -68,6 +75,9 @@ export default {
           account: "Create your account now!",
           button: "Sign Up/Log In"
         }
+      },
+      notifications: {
+        comingSoon: "Coming soon!"
       },
       products: {
         techminoGalaxy: {

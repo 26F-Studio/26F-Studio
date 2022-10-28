@@ -38,7 +38,7 @@
             class="row q-gutter-x-xl items-center"
             :class="index % 2 === 1 ? 'justify-end' : 'justify-start'"
             style="margin-top:2vw">
-            <DownloadButton :callback="downloadProduct" />
+            <DownloadButton :repo="repos[product]" />
             <div>
               <q-btn
                 class="product-btn q-px-xl"
@@ -71,7 +71,7 @@
         size="1.5vw"
         flat
         no-caps
-        @click="onProductClick">
+        @click="onSignClick">
         {{ i18n("labels.invite.button") }}
       </q-btn>
     </div>
@@ -91,6 +91,11 @@ export default defineComponent({
       "techmino",
       "quatrack"
     ];
+    const repos = {
+      techminoGalaxy: "Techmino_Galaxy",
+      techmino: "Techmino",
+      quatrack: "Quatrack"
+    };
     const shadowColors = {
       techminoGalaxy: "rgba(0, 14, 143, 0.65)",
       techmino: "rgba(18, 20, 34, 0.65)",
@@ -98,18 +103,25 @@ export default defineComponent({
     };
     return {
       products,
-      shadowColors,
-      onProductClick() {
-        console.log("onProductClick");
-      }
+      repos,
+      shadowColors
     };
   },
   methods: {
     i18n(relativePath) {
       return this.$t("pages.main." + relativePath);
     },
-    downloadProduct(product) {
-      console.log("downloadProduct", product);
+    onProductClick() {
+      this.$q.notify({
+        message: this.i18n("notifications.comingSoon"),
+        type: "info"
+      });
+    },
+    onSignClick() {
+      this.$q.notify({
+        message: this.i18n("notifications.comingSoon"),
+        type: "info"
+      });
     }
   }
 });

@@ -2,13 +2,27 @@ import { boot } from "quasar/wrappers";
 
 const useProject = () => "26f-studio";
 const usePlatforms = () => [
-  "windows32",
-  "windows64",
-  "macos",
-  "linux",
   "android",
-  "ios"
+  "appstore",
+  "linux",
+  "macosDmg",
+  "macosPkg",
+  "testflight",
+  "windows32",
+  "windows64"
 ];
+
+const getSearchInfo = (platform) => {
+  const extensionMap = {
+    android: "Android.apk",
+    linux: "Linux.AppImage",
+    macosDmg: "macOS_portable.dmg",
+    macosPkg: "macOS_portable.pkg",
+    windows32: "Windows_x86.zip",
+    windows64: "Windows_x64.zip"
+  };
+  return extensionMap[platform];
+};
 
 const sleep = (ms) => {
   return new Promise((resolve) => {
@@ -55,4 +69,4 @@ export default boot(({ app }) => {
   app.config.globalProperties.$splitArray = splitArray;
 });
 
-export { useProject, usePlatforms, sleep, splitArray };
+export { useProject, usePlatforms, getSearchInfo, sleep, splitArray };
