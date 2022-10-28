@@ -23,11 +23,13 @@ jobs:
           npm run "spa release"
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           target_branch: gh-pages
           build_dir: dist/spa
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: 26F-Studio_SPA
           path: dist/spa
