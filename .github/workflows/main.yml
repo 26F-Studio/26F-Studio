@@ -30,18 +30,35 @@ jobs:
                                        "        }\n" \
                                        "      }(window.location))\n" \
                                        "    </script>\n" + data[insert_pos:]
-            print(data)
             file.seek(0)
             file.truncate()
             file.write(data)
       - name: Build the app for development
         run: |
           npm run "spa release"
-      - name: Download 404.html for github pages
+      - name: Download and modify 404.html for github pages
         env:
           HTML_LINK: https://raw.githubusercontent.com/rafgraph/spa-github-pages/gh-pages/404.html
+          HTML_PATH: ./dist/spa/404.html
+        shell: python3 {0}
         run: |
-          wget ${{ env.HTML_LINK }} -O dist/spa/404.html
+          import json
+          import os
+          os.system("wget ${{ env.HTML_LINK }} -O ${{ env.HTML_PATH }}")
+          with open("./dist/spa/index.html", "r", encoding="utf-8") as index_html_file:
+            index_html = index_html_file.read()
+            index_html = index_html[data.find("<title"):data.find("<script>")]
+            print(index_html)
+          with open("${{ env.HTML_PATH }}", "r+", encoding="utf-8") as notfound_html_file:
+            notfound_html = notfound_html_file.read()
+            insert_pos = data.find("<title")
+            notfound_html = notfound_html[:insert_pos] + notfound_html[:data.find("\n", data.find("</title>"))]
+            notfound_html = notfound_html[:insert_pos] + index_html + notfound_html[insert_pos:]
+            print(notfound_html)
+            file.seek(0)
+            file.truncate()
+            file.write(notfound_html)
+
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2
         env:
