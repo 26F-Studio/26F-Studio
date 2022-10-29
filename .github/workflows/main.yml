@@ -24,11 +24,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          build_dir: ./dist/spa
+          build_dir: ./dist/ssg
           fqdn: 26f-studio.org
           target_branch: gh-pages
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: 26F-Studio_SPA
-          path: ./dist/spa
+          name: 26F-Studio_SSG
+          path: ./dist/ssg
