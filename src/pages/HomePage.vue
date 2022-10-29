@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex column">
-    <div class="relative-position full-width" style="height:fit-content; margin-top: -50px">
+    <div class="relative-position full-width" style="height:fit-content">
       <img class="full-width" src="images/home-header.png" alt="home-header" style="object-fit: contain;" />
       <div class="row absolute-center full-width">
         <div class="offset-1 header-text">
@@ -83,7 +83,7 @@ import { defineComponent } from "vue";
 import DownloadButton from "components/DownloadButton";
 
 export default defineComponent({
-  name: "IndexPage",
+  name: "HomePage",
   components: { DownloadButton },
   setup() {
     const products = [
