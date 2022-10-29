@@ -61,7 +61,6 @@ jobs:
             notfound_html_file.seek(0)
             notfound_html_file.truncate()
             notfound_html_file.write(notfound_html)
-
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v3
         env:
