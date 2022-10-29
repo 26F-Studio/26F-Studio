@@ -10,11 +10,7 @@ jobs:
   build-spa:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js 16
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16.x
+      - uses: actions/checkout@v3
       - name: Install packages
         run: |
           npm install
@@ -34,6 +30,7 @@ jobs:
                                        "        }\n" \
                                        "      }(window.location))\n" \
                                        "    </script>\n" + data[insert_pos:]
+            print(data)
             file.seek(0)
             file.truncate()
             file.write(data)
