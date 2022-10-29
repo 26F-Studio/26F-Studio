@@ -68,7 +68,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           build_dir: ./dist/spa
-          domain: 26f-studio.org
+          fcdn: 26f-studio.org
           target_branch: gh-pages
       - name: Upload artifact
         uses: actions/upload-artifact@v3
