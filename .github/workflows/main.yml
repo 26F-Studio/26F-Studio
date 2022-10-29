@@ -15,52 +15,10 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
-      - name: Install packages
+      - name: Install & Build
         run: |
           npm install
-      - name: Add hack for github pages
-        shell: python3 {0}
-        run: |
-          with open("./src/index.template.html", "r+", encoding="utf-8") as file:
-            data = file.read()
-            insert_pos = data.find("\n", data.find("</head>")) - 9
-            data = data[:insert_pos] + "    <script type=\"text/javascript\">\n" \
-                                       "      (function(l) {\n" \
-                                       "        if (l.search[1] === '/' ) {\n" \
-                                       "          const decoded = l.search.slice(1).split('&').map(function (s) {\n" \
-                                       "            return s.replace(/~and~/g, '&')\n" \
-                                       "          }).join('?');\n" \
-                                       "          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);\n" \
-                                       "        }\n" \
-                                       "      }(window.location))\n" \
-                                       "    </script>\n" + data[insert_pos:]
-            file.seek(0)
-            file.truncate()
-            file.write(data)
-      - name: Build the app for development
-        run: |
-          npm run "spa release"
-      - name: Download and modify 404.html for github pages
-        env:
-          HTML_LINK: https://raw.githubusercontent.com/rafgraph/spa-github-pages/gh-pages/404.html
-          HTML_PATH: ./dist/spa/404.html
-        shell: python3 {0}
-        run: |
-          import json
-          import os
-          os.system("wget ${{ env.HTML_LINK }} -O ${{ env.HTML_PATH }}")
-          with open("./dist/spa/index.html", "r", encoding="utf-8") as index_html_file:
-            index_html = index_html_file.read()
-            index_html = index_html[index_html.find("<title"):index_html.find("<script>")]
-          with open("${{ env.HTML_PATH }}", "r+", encoding="utf-8") as notfound_html_file:
-            notfound_html = notfound_html_file.read()
-            insert_pos = notfound_html.find("<meta")
-            notfound_html = notfound_html[:insert_pos] + notfound_html[notfound_html.find("<script"):]
-            notfound_html = notfound_html[:insert_pos] + index_html + notfound_html[insert_pos:]
-            print(notfound_html)
-            notfound_html_file.seek(0)
-            notfound_html_file.truncate()
-            notfound_html_file.write(notfound_html)
+          npm run "ssg release"
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v3
         env:

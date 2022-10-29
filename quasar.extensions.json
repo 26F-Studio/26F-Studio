@@ -1,3 +1,8 @@
 {
-  "@quasar/qmediaplayer": {}
+  "ssg": {
+    "scripts": true,
+    "IDE": true,
+    "inlineCriticalCss": true,
+    "inlineCssFromSFC": false
+  }
 }

@@ -8,6 +8,8 @@
   "scripts": {
     "spa dev": "quasar dev -m spa",
     "spa release": "quasar build -m spa",
+    "ssg dev": "quasar ssg dev",
+    "ssg release": "quasar ssg generate",
     "lint": "eslint --ext .js,.vue ./",
     "format": "prettier --write \"**/*.{js,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0"
@@ -25,13 +27,13 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
     "@quasar/app-webpack": "^3.0.0",
-    "@quasar/quasar-app-extension-qmediaplayer": "^2.0.0-beta.6",
     "adm-zip": "^0.5.9",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^9.0.0",
     "eslint-webpack-plugin": "^3.1.1",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "quasar-app-extension-ssg": "^4.6.0"
   },
   "browserslist": [
     "last 10 Chrome versions",
