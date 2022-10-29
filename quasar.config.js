@@ -54,7 +54,7 @@ module.exports = configure(function(ctx) {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-build
     build: {
-      vueRouterMode: "history", // available values: 'hash', 'history'
+      vueRouterMode: "hash", // available values: 'hash', 'history'
       afterBuild: ({ quasarConf }) => {
         console.log(quasarConf);
         console.log("\x1b[36m%s\x1b[0m", `Compressing distribution at "${quasarConf.build.distDir}" ...`);
