@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-spa:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 16
@@ -21,6 +21,30 @@ jobs:
       - name: Build the app for development
         run: |
           npm run "spa release"
+      - name: Add hack for github pages
+        shell: python3 {0}
+        run: |
+          with open("./src/index.template.html", "r+", encoding="utf-8") as file:
+            data = file.read()
+            insert_pos = data.find("\n", data.find("</head>")) - 2
+            data = data[:insert_pos] + "    <script type=\"text/javascript\">\n" \
+                                       "      (function(l) {\n" \
+                                       "        if (l.search[1] === '/' ) {\n" \
+                                       "          const decoded = l.search.slice(1).split('&').map(function (s) {\n" \
+                                       "            return s.replace(/~and~/g, '&')\n" \
+                                       "          }).join('?');\n" \
+                                       "          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);\n" \
+                                       "        }\n" \
+                                       "      }(window.location))\n" \
+                                       "    </script>\n" + data[insert_pos:]
+           file.seek(0)
+           file.truncate()
+           file.write(data)
+      - name: Download 404.html for github pages
+        env:
+          HTML_LINK: https://raw.githubusercontent.com/rafgraph/spa-github-pages/gh-pages/404.html
+        run: |
+          wget ${{ env.HTML_LINK }} -O dist/spa/404.html
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2
         env:
