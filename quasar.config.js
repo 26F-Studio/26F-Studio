@@ -13,8 +13,6 @@ const ESLintPlugin = require("eslint-webpack-plugin");
 
 
 const { configure } = require("quasar/wrappers");
-const adm_zip = require("adm-zip");
-const fs = require("fs");
 
 module.exports = configure(function(ctx) {
   return {
@@ -55,28 +53,6 @@ module.exports = configure(function(ctx) {
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-build
     build: {
       vueRouterMode: "history", // available values: 'hash', 'history'
-      afterBuild: ({ quasarConf }) => {
-        console.log(quasarConf);
-        console.log("\x1b[36m%s\x1b[0m", `Compressing distribution at "${quasarConf.build.distDir}" ...`);
-        const zip = new adm_zip();
-        zip.addLocalFolder(quasarConf.build.distDir);
-        zip.writeZip(
-          `${quasarConf.build.distDir}/../${quasarConf.build.env.MODE}.zip`,
-          (err) => {
-            if (err) {
-              console.log("\x1b[31m%s\x1b[0m", `Error compressing distribution: ${err}`);
-            } else {
-              console.log("\x1b[32m%s\x1b[0m", `Distribution compressed successfully at "${quasarConf.build.distDir}.zip"`);
-            }
-          }
-        );
-        if (process.env.DEPLOY_DIR) {
-          console.log("\x1b[36m%s\x1b[0m", `Deploying from "${quasarConf.build.distDir}" ...`);
-          console.log("\x1b[36m%s\x1b[0m", `  to ${process.env.DEPLOY_DIR}`);
-          fs.cpSync(quasarConf.build.distDir, process.env.DEPLOY_DIR, { recursive: true });
-          console.log("\x1b[32m%s\x1b[0m", "Done!");
-        }
-      },
       // transpile: false,
       // publicPath: '/',
 
