@@ -19,7 +19,7 @@ jobs:
         run: |
           with open("./src/index.template.html", "r+", encoding="utf-8") as file:
             data = file.read()
-            insert_pos = data.find("\n", data.find("</head>")) - 2
+            insert_pos = data.find("\n", data.find("</head>")) - 9
             data = data[:insert_pos] + "    <script type=\"text/javascript\">\n" \
                                        "      (function(l) {\n" \
                                        "        if (l.search[1] === '/' ) {\n" \
