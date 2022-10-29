@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
       - name: Install packages
         run: |
           npm install
@@ -59,14 +63,15 @@ jobs:
             notfound_html_file.write(notfound_html)
 
       - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v2
+        uses: crazy-max/ghaction-github-pages@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          build_dir: ./dist/spa
+          domain: 26f-studio.org
           target_branch: gh-pages
-          build_dir: dist/spa
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: 26F-Studio_SPA
-          path: dist/spa
+          path: ./dist/spa
