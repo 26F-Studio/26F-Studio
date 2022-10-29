@@ -18,9 +18,6 @@ jobs:
       - name: Install packages
         run: |
           npm install
-      - name: Build the app for development
-        run: |
-          npm run "spa release"
       - name: Add hack for github pages
         shell: python3 {0}
         run: |
@@ -40,6 +37,9 @@ jobs:
             file.seek(0)
             file.truncate()
             file.write(data)
+      - name: Build the app for development
+        run: |
+          npm run "spa release"
       - name: Download 404.html for github pages
         env:
           HTML_LINK: https://raw.githubusercontent.com/rafgraph/spa-github-pages/gh-pages/404.html
