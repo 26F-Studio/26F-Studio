@@ -1,62 +1,86 @@
 <template>
   <q-header class="bg-transparent" style="height: 0">
-    <q-toolbar>
+    <q-toolbar style="background: linear-gradient(rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.0))">
       <q-btn
-        class="title-text"
         flat
-        icon="svguse:svgs/26f-studio.svg#logo"
-        :label="$q.screen.lt.sm ? undefined : i18n('labels.title')"
+        :icon="$q.screen.xs ? 'menu' : undefined"
         no-caps
         no-wrap
-        size="1.5vw"
+        :size="$q.screen.gt.sm ? '1.5vw' : undefined"
         square
         to="/home"
-        @click="onLogoClick"/>
-      <q-space/>
+        stretch
+        @click="onLogoClick">
+        <div
+          v-if="$q.screen.gt.xs"
+          class="row q-gutter-x-sm">
+          <q-icon
+            class="self-end"
+            name="svguse:svgs/26f-studio.svg#logo"
+            :size="$q.screen.lt.sm ? '1rem' : '2.5vw'"/>
+          <div
+            class="title-text self-start"
+            style="font-size: 2.8vw">
+            {{ i18n("labels.title") }}
+          </div>
+        </div>
+      </q-btn>
+      <q-space />
       <q-btn
+        v-show="$q.screen.gt.xs"
         v-for="(button, index) in buttons"
         :key="index"
         class="button-text"
         flat
         :label="i18n(`labels.${button}`)"
         no-caps
+        :padding="$q.screen.lt.md ? 'sm' : undefined"
         size="1vw"
         stretch
-        :to="`/${button}`"/>
-      <q-btn flat icon="language" stretch>
-        <LanguagesMenu/>
+        :to="`/${button}`" />
+      <ProfileButton class="q-ml-sm q-ml-md-xs" />
+      <q-btn
+        class="q-ml-sm q-ml-md-xs"
+        flat
+        icon="language"
+        round>
+        <LanguagesMenu />
       </q-btn>
-      <q-btn flat icon="settings" stretch>
-        <SettingsMenu/>
+      <q-btn
+        class="q-ml-sm q-ml-md-xs"
+        flat
+        icon="settings"
+        round>
+        <SettingsMenu />
       </q-btn>
     </q-toolbar>
   </q-header>
 </template>
 
 <script>
-import {defineComponent} from "vue";
-import SettingsMenu from "components/SettingsMenu";
+import { defineComponent } from "vue";
 import LanguagesMenu from "components/LanguagesMenu";
+import ProfileButton from "components/ProfileButton";
+import SettingsMenu from "components/SettingsMenu";
 
 export default defineComponent({
   name: "MainHeader",
-  components: {LanguagesMenu, SettingsMenu},
+  components: { LanguagesMenu, ProfileButton, SettingsMenu },
   setup() {
     const buttons = [
       "products",
       "support",
       "about",
-      "contact",
-      "sign"
+      "contact"
     ];
-    return {buttons};
+    return { buttons };
   },
   methods: {
     i18n(relativePath) {
       return this.$t("layouts.headers.main." + relativePath);
     },
     onLogoClick(event, go) {
-      if (this.$q.screen.lt.sm) {
+      if (this.$q.screen.lt.md) {
         event.preventDefault();
       }
       go();
@@ -71,10 +95,12 @@ export default defineComponent({
 .button-text {
   font-family: 'inter', sans-serif;
   font-feature-settings: 'pnum' on, 'lnum' on;
+  font-weight: 700;
 }
 
 .title-text {
-  @extend .button-text;
-  font-weight: 700;
+  font-family: 'galaxy-sans', sans-serif;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  font-weight: 206;
 }
 </style>

@@ -57,8 +57,7 @@ export default {
           products: "Products",
           support: "Support",
           about: "About",
-          contact: "Contact",
-          sign: "Sign Up/Sign In"
+          contact: "Contact"
         }
       }
     },

@@ -1,7 +1,10 @@
 <template>
   <q-page class="flex column">
     <div class="relative-position full-width" style="height:fit-content">
-      <img class="full-width" src="images/home-header.png" alt="home-header" style="object-fit: contain;" />
+      <img
+        class="full-width"
+        :src="`images/home-header${$q.screen.xs ? '-dense' : ''}.png`"
+        alt="home-header"/>
       <div class="row absolute-center full-width">
         <div class="offset-1 header-text">
           {{ i18n("labels.header") }}
