@@ -21,7 +21,7 @@
           <div
             class="title-text self-start"
             style="font-size: 2.8vw">
-            {{ i18n("labels.title") }}
+            {{ '\uDBBF' + i18n("labels.title") }}
           </div>
         </div>
       </q-btn>
