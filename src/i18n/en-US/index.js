@@ -118,7 +118,7 @@ export default {
           "26F Studio!",
         title: "Our products",
         invite: {
-          interested: "Interested in what you see?",
+          interested: "Interested in \nwhat you see?",
           account: "Create your account now!",
           button: "Sign Up/Log In"
         }
