@@ -2,6 +2,7 @@
   <q-header class="bg-transparent" style="height: 0">
     <q-toolbar style="background: linear-gradient(rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.0))">
       <q-btn
+        dense
         flat
         :icon="$q.screen.xs ? 'menu' : undefined"
         no-caps
@@ -14,6 +15,7 @@
         <div
           v-if="$q.screen.gt.xs"
           class="title-text self-center"
+          :class="$q.screen.gt.sm ? 'q-mb-sm' : 'q-mb-xs'"
           style="font-size: 3vw">
           {{ '\u{0FFFFF}  ' + i18n("labels.title") }}
         </div>
@@ -33,6 +35,7 @@
         :to="`/${button}`"/>
       <ProfileButton class="q-ml-sm q-ml-md-xs"/>
       <q-btn
+        v-show="$q.screen.gt.xs"
         class="q-ml-sm q-ml-md-xs"
         flat
         icon="language"
@@ -40,6 +43,7 @@
         <LanguagesMenu/>
       </q-btn>
       <q-btn
+        v-show="$q.screen.gt.xs"
         class="q-ml-sm q-ml-md-xs"
         flat
         icon="settings"

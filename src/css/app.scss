@@ -6,24 +6,17 @@
 }
 
 @font-face {
-  font-family: newsreader;
-  font-weight: 1 1000;
-  font-stretch: 0.0% 1000%;
-  src: url(src/css/fonts/Newsreader.woff2);
-}
-
-@font-face {
-  font-family: newsreader-italic;
-  font-weight: 1 1000;
-  font-stretch: 1% 1000%;
-  src: url(src/css/fonts/Newsreader-Italic.woff2);
-}
-
-@font-face {
   font-family: galaxy-sans;
   font-weight: 1 1000;
   font-stretch: 1% 1000%;
   src: url(src/css/fonts/26FGalaxySansVF.woff2);
+}
+
+@font-face {
+  font-family: galaxy-sans-oblique;
+  font-weight: 1 1000;
+  font-stretch: 1% 1000%;
+  src: url(src/css/fonts/26FGalaxySans-ObliqueVF.woff2);
 }
 
 #primary-btn {

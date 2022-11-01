@@ -5,64 +5,29 @@
         class="full-width"
         :src="`images/home-header${$q.screen.xs ? '-dense' : ''}.png`"
         alt="home-header"/>
-      <div class="row absolute-center full-width">
-        <div class="offset-1 header-text">
+      <div
+        class="row absolute-center full-width"
+        :class="$q.screen.xs ? 'justify-center' : 'justify-start'">
+        <div
+          class="header-text"
+          :class="$q.screen.xs ? undefined : 'offset-1'">
           {{ i18n("labels.header") }}
         </div>
       </div>
     </div>
-    <div class="title-text text-center" style="font-size: 6vw; line-height: 18vw;">
+    <div class="title-text text-center" style="font-size: 10vw; line-height: 18vw;">
       {{ i18n("labels.title") }}
     </div>
     <div
       v-for="(product, index) in products"
       :key="index"
       style="margin-bottom: 10vw">
-      <div
-        class="row items-center"
-        :class="index % 2 ? 'justify-end' : 'justify-start'">
-        <img
-          v-if="index % 2 === 0"
-          :src="`images/${product}-clipped.png`"
-          :alt="`${product}-icon`"
-          style="height: 35vw; margin-right: 5vw;"
-          :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]})`" />
-        <div
-          class="col-auto column"
-          :class="index % 2 ? 'text-right' : 'text-left'"
-          style="max-width: 65vw">
-          <div class="product-text">
-            {{ i18n(`products.${product}.name`) }}
-          </div>
-          <div class="description-text">
-            {{ i18n(`products.${product}.description`) }}
-          </div>
-          <div
-            class="row q-gutter-x-xl items-center"
-            :class="index % 2 === 1 ? 'justify-end' : 'justify-start'"
-            style="margin-top:2vw">
-            <DownloadButton :repo="repos[product]" />
-            <div>
-              <q-btn
-                class="product-btn q-px-xl"
-                size="1.5vw"
-                flat
-                no-caps
-                @click="onProductClick">
-                Learn More
-              </q-btn>
-            </div>
-          </div>
-        </div>
-        <img
-          v-if="index % 2 === 1"
-          :src="`images/${product}-clipped.png`"
-          :alt="`${product}-icon`"
-          style="height: 35vw; margin-left: 5vw"
-          :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]});`" />
-      </div>
+      <ProductPanel
+        :horizontal="$q.screen.gt.xs"
+        :reversed="index % 2 === 1"
+        :product="product"/>
     </div>
-    <div class="title-text text-center" style="font-size: 5vw;">
+    <div class="title-text text-center" style="font-size: 7vw;">
       {{ i18n("labels.invite.interested") }}
     </div>
     <div class="hint-text text-center q-pt-md">
@@ -82,12 +47,12 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import DownloadButton from "components/DownloadButton";
+import {defineComponent} from "vue";
+import ProductPanel from "components/ProductPanel";
 
 export default defineComponent({
   name: "HomePage",
-  components: { DownloadButton },
+  components: {ProductPanel},
   setup() {
     const products = [
       "techminoGalaxy",
@@ -114,12 +79,6 @@ export default defineComponent({
     i18n(relativePath) {
       return this.$t("pages.main." + relativePath);
     },
-    onProductClick() {
-      this.$q.notify({
-        message: this.i18n("notifications.comingSoon"),
-        type: "info"
-      });
-    },
     onSignClick() {
       this.$q.notify({
         message: this.i18n("notifications.comingSoon"),
@@ -135,10 +94,10 @@ export default defineComponent({
 
 .header-text {
   color: #F1F2F3;
-  font-family: 'newsreader-italic', sans-serif;
+  font-family: 'galaxy-sans-oblique', sans-serif;
   font-weight: 800;
-  font-size: 8vw;
-  line-height: 12vw;
+  font-size: 14vw;
+  line-height: 14vw;
   font-feature-settings: 'pnum' on, 'lnum' on;
   white-space: pre
 }
@@ -146,33 +105,11 @@ export default defineComponent({
 .title-text {
   background: linear-gradient(90.8deg, #BF55D4 26.21%, #6271CD 86.62%);
   text-shadow: 0 2vw 4vw rgba(48, 0, 240, 0.31);
-  font-family: 'newsreader', sans-serif;
+  font-family: 'galaxy-sans', sans-serif;
   font-weight: 800;
   font-feature-settings: 'pnum' on, 'lnum' on;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.product-text {
-  background: linear-gradient(90.8deg, #5580D4 4.29%, #7162CD 97.82%);
-  text-shadow: 0 1vw 2vw rgba(48, 0, 240, 0.31);
-  font-family: 'newsreader', sans-serif;
-  font-weight: 600;
-  font-size: 5vw;
-  line-height: 8vw;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.description-text {
-  color: #636365;
-  font-family: 'inter', sans-serif;
-  font-weight: 500;
-  font-size: 1.8vw;
-  line-height: 3.5vw;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  word-wrap: break-word;
 }
 
 .hint-text {
@@ -184,14 +121,6 @@ export default defineComponent({
   font-feature-settings: 'pnum' on, 'lnum' on;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.product-btn {
-  @extend #secondary-btn;
-  font-family: 'inter', sans-serif;
-  font-size: 1.5vw;
-  font-weight: 700;
-  font-feature-settings: 'pnum' on, 'lnum' on;
 }
 
 .account-btn {

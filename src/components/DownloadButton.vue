@@ -8,15 +8,14 @@
     @click="downloadProduct(mainPlatform)">
     <template v-slot:label>
       <div class="column items-center no-wrap q-ma-sm">
-        <div style="font-weight: 700; font-size: 1.5vw">
+        <div style="font-weight: 700; font-size: 2vw;">
           {{ i18n("labels.download") }}
         </div>
-        <div style="font-weight: 400; font-size: 1vw">
+        <div class="q-mt-sm" style="font-weight: 400; font-size: 1vw">
           {{ i18n(`labels.platforms.${mainPlatform}`) }}
         </div>
       </div>
     </template>
-
     <q-list>
       <q-item
         v-for="(platform, index) in platforms"

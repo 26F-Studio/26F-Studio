@@ -22,6 +22,32 @@ export default {
       }
     },
     languagesMenu: {},
+    productPanel: {
+      products: {
+        techminoGalaxy: {
+          name: "Techmino Galaxy",
+          description: "Lorem Ipsum is simply dummy text of the printing and typesetting\n" +
+            "industry. Lorem Ipsum has been the industry's standard dummy text\n" +
+            "ever since the 1500s, when an unknown printer took a galley of type\n" +
+            "and scrambled it to make a type specimen book."
+        },
+        techmino: {
+          name: "Techmino",
+          description: "Welcome to Techmino, a block-stacking game by 26F Studio!\n" +
+            "Immerse yourself in more than 100 modes of this modern yet familiar game,\n" +
+            "with a variety of difficulties so everyone can have a great time!\n" +
+            "Hang out and challenge your friends and players around the world\n" +
+            "in the multiplayer modes, and discover some hidden easter eggs all over the game!\n"
+        },
+        quatrack: {
+          name: "Quatrack",
+          description: "Lorem Ipsum is simply dummy text of the printing and typesetting " +
+            "industry. Lorem Ipsum has been the industry's standard dummy text " +
+            "ever since the 1500s, when an unknown printer took a galley of type " +
+            "and scrambled it to make a type specimen book."
+        }
+      }
+    },
     settingsMenu: {
       labels: {
         darkMode: "Dark Mode"
@@ -100,30 +126,6 @@ export default {
       notifications: {
         comingSoon: "Coming soon!"
       },
-      products: {
-        techminoGalaxy: {
-          name: "Techmino Galaxy",
-          description: "Lorem Ipsum is simply dummy text of the printing and typesetting\n" +
-            "industry. Lorem Ipsum has been the industry's standard dummy text\n" +
-            "ever since the 1500s, when an unknown printer took a galley of type\n" +
-            "and scrambled it to make a type specimen book."
-        },
-        techmino: {
-          name: "Techmino",
-          description: "Welcome to Techmino, a block-stacking game by 26F Studio!\n" +
-            "Immerse yourself in more than 100 modes of this modern yet familiar game,\n" +
-            "with a variety of difficulties so everyone can have a great time!\n" +
-            "Hang out and challenge your friends and players around the world\n" +
-            "in the multiplayer modes, and discover some hidden easter eggs all over the game!\n"
-        },
-        quatrack: {
-          name: "Quatrack",
-          description: "Lorem Ipsum is simply dummy text of the printing and typesetting " +
-            "industry. Lorem Ipsum has been the industry's standard dummy text " +
-            "ever since the 1500s, when an unknown printer took a galley of type " +
-            "and scrambled it to make a type specimen book."
-        }
-      }
     }
   }
 };
