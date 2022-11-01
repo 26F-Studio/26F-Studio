@@ -13,19 +13,12 @@
         @click="onLogoClick">
         <div
           v-if="$q.screen.gt.xs"
-          class="row q-gutter-x-sm">
-          <q-icon
-            class="self-end"
-            name="svguse:svgs/26f-studio.svg#logo"
-            :size="$q.screen.lt.sm ? '1rem' : '2.5vw'"/>
-          <div
-            class="title-text self-start"
-            style="font-size: 2.8vw">
-            {{ '\uDBBF' + i18n("labels.title") }}
-          </div>
+          class="title-text self-center"
+          style="font-size: 3vw">
+          {{ '\u{0FFFFF}  ' + i18n("labels.title") }}
         </div>
       </q-btn>
-      <q-space />
+      <q-space/>
       <q-btn
         v-show="$q.screen.gt.xs"
         v-for="(button, index) in buttons"
@@ -37,35 +30,35 @@
         :padding="$q.screen.lt.md ? 'sm' : undefined"
         size="1vw"
         stretch
-        :to="`/${button}`" />
-      <ProfileButton class="q-ml-sm q-ml-md-xs" />
+        :to="`/${button}`"/>
+      <ProfileButton class="q-ml-sm q-ml-md-xs"/>
       <q-btn
         class="q-ml-sm q-ml-md-xs"
         flat
         icon="language"
         round>
-        <LanguagesMenu />
+        <LanguagesMenu/>
       </q-btn>
       <q-btn
         class="q-ml-sm q-ml-md-xs"
         flat
         icon="settings"
         round>
-        <SettingsMenu />
+        <SettingsMenu/>
       </q-btn>
     </q-toolbar>
   </q-header>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import {defineComponent} from "vue";
 import LanguagesMenu from "components/LanguagesMenu";
 import ProfileButton from "components/ProfileButton";
 import SettingsMenu from "components/SettingsMenu";
 
 export default defineComponent({
   name: "MainHeader",
-  components: { LanguagesMenu, ProfileButton, SettingsMenu },
+  components: {LanguagesMenu, ProfileButton, SettingsMenu},
   setup() {
     const buttons = [
       "products",
@@ -73,7 +66,7 @@ export default defineComponent({
       "about",
       "contact"
     ];
-    return { buttons };
+    return {buttons};
   },
   methods: {
     i18n(relativePath) {
@@ -82,6 +75,7 @@ export default defineComponent({
     onLogoClick(event, go) {
       if (this.$q.screen.lt.md) {
         event.preventDefault();
+        this.$emit('click:drawer', 'left');
       }
       go();
     }
@@ -102,5 +96,6 @@ export default defineComponent({
   font-family: 'galaxy-sans', sans-serif;
   font-feature-settings: 'pnum' on, 'lnum' on;
   font-weight: 206;
+  -webkit-font-smoothing: antialiased;
 }
 </style>

@@ -9,6 +9,7 @@ const routes = [
         path: "home",
         components: {
           header: () => import("layouts/headers/MainHeader"),
+          drawer: () => import("layouts/drawers/MainDrawer"),
           default: () => import("pages/HomePage"),
           footer: () => import("layouts/footers/MainFooter")
         }

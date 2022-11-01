@@ -23,7 +23,7 @@
         :class="index % 2 ? 'justify-end' : 'justify-start'">
         <img
           v-if="index % 2 === 0"
-          :src="`images/${product}-icon.png`"
+          :src="`images/${product}-clipped.png`"
           :alt="`${product}-icon`"
           style="height: 35vw; margin-right: 5vw;"
           :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]})`" />
@@ -56,7 +56,7 @@
         </div>
         <img
           v-if="index % 2 === 1"
-          :src="`images/${product}-icon.png`"
+          :src="`images/${product}-clipped.png`"
           :alt="`${product}-icon`"
           style="height: 35vw; margin-left: 5vw"
           :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]});`" />

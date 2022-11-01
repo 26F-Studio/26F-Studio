@@ -29,6 +29,28 @@ export default {
     }
   },
   layouts: {
+    drawers: {
+      main: {
+        labels: {
+          title: "26F Studio",
+          products: "Products",
+          techminoGalaxy: "Techmino Galaxy",
+          techmino: "Techmino",
+          quatrack: "Quatrack",
+          miscellaneous: "Miscellaneous",
+          support: "Support",
+          accountSettings: "Account Settings",
+          gameManuals: "Game Manuals",
+          glossary: "Glossary",
+          utilities: "Utilities",
+          about: "About",
+          whoWeAre: "Who We Are",
+          brandingGuidelines: "Branding Guidelines",
+          contact: "Contact",
+          joinUs: "Join Us"
+        }
+      }
+    },
     footers: {
       main: {
         labels: {
