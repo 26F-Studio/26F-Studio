@@ -15,8 +15,8 @@
       <!--        </div>-->
       <!--      </div>-->
       <video class="absolute-center full-width q-px-xl" autoplay muted>
-        <source src="videos/techmino_galaxy.mov">
-        <source src="videos/techmino_galaxy.webm">
+        <source src="videos/techmino_galaxy.webm" type="video/webm">
+        <source src="videos/techmino_galaxy.mov" type="video/mp4">
       </video>
     </div>
     <div class="title-text text-center" style="font-size: 10vw; line-height: 18vw;">
