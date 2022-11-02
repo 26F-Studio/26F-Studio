@@ -4,16 +4,17 @@
       <img
         class="full-width"
         :src="`images/home-header${$q.screen.xs ? '-dense' : ''}.png`"
-        alt="home-header" />
-      <!--      <div-->
-      <!--        class="row absolute-center full-width"-->
-      <!--        :class="$q.screen.xs ? 'justify-center' : 'justify-start'">-->
-      <!--        <div-->
-      <!--          class="header-text"-->
-      <!--          :class="$q.screen.xs ? undefined : 'offset-1'">-->
-      <!--          {{ i18n("labels.header") }}-->
-      <!--        </div>-->
-      <!--      </div>-->
+        alt="home-header"/>
+      <div
+        class="row absolute-center full-width"
+        :class="$q.screen.xs ? 'justify-center' : 'justify-start'">
+        <div
+          class="header-text"
+          :class="$q.screen.xs ? undefined : 'offset-1'">
+          {{ i18n("labels.header") }}
+        </div>
+      </div>
+      <!--
       <video
         class="absolute-center full-width q-px-xl"
         autoplay
@@ -22,6 +23,7 @@
         <source src="videos/techmino_galaxy.mov" type="video/mp4; codecs='hvc1'">
         <source src="videos/techmino_galaxy.webm" type="video/webm">
       </video>
+      -->
     </div>
     <div class="title-text text-center" style="font-size: 10vw; line-height: 18vw;">
       {{ i18n("labels.title") }}
@@ -33,7 +35,7 @@
       <ProductPanel
         :horizontal="$q.screen.gt.xs"
         :reversed="index % 2 === 1"
-        :product="product" />
+        :product="product"/>
     </div>
     <div
       class="title-text text-center"
@@ -58,12 +60,12 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import {defineComponent} from "vue";
 import ProductPanel from "components/ProductPanel";
 
 export default defineComponent({
   name: "HomePage",
-  components: { ProductPanel },
+  components: {ProductPanel},
   setup() {
     const products = [
       "techminoGalaxy",

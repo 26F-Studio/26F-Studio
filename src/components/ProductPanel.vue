@@ -5,9 +5,10 @@
     :class="reversed ? 'justify-end' : 'justify-start'">
     <img
       v-if="!reversed"
-      :src="`images/${product}-clipped.png`"
+      class="cropped-image"
+      :src="`images/${product}-icon.png`"
       :alt="`${product}-icon`"
-      style="height: 35vw; margin-right: 5vw;"
+      style="margin-right: 5vw; object-position: 100% 0"
       :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]})`"/>
     <div
       class="col-auto column"
@@ -38,9 +39,10 @@
     </div>
     <img
       v-if="reversed"
-      :src="`images/${product}-clipped.png`"
+      class="cropped-image"
+      :src="`images/${product}-icon.png`"
       :alt="`${product}-icon`"
-      style="height: 35vw; margin-left: 5vw"
+      style="margin-left: 5vw; object-position: 0 0"
       :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]});`"/>
   </div>
   <div
@@ -48,7 +50,7 @@
     class="row justify-center">
     <div class="col-8 column items-center q-gutter-y-md">
       <img
-        :src="`images/${product}-clipped.png`"
+        :src="`images/${product}-icon.png`"
         :alt="`${product}-icon`"
         style="height: 35vw; margin-bottom: 5vw;"
         :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]})`"/>
@@ -164,5 +166,14 @@ export default defineComponent({
   font-size: 1.5vw;
   font-weight: 700;
   font-feature-settings: 'pnum' on, 'lnum' on;
+}
+
+$length: 35vw;
+
+.cropped-image {
+  height: $length;
+  width: $length * 0.75;
+  overflow: hidden;
+  object-fit: cover;
 }
 </style>
