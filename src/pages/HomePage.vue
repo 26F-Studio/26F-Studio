@@ -72,11 +72,6 @@ export default defineComponent({
       "techmino",
       "quatrack"
     ];
-    const repos = {
-      techminoGalaxy: "Techmino_Galaxy",
-      techmino: "Techmino",
-      quatrack: "Quatrack"
-    };
     const shadowColors = {
       techminoGalaxy: "rgba(0, 14, 143, 0.65)",
       techmino: "rgba(18, 20, 34, 0.65)",
@@ -84,7 +79,6 @@ export default defineComponent({
     };
     return {
       products,
-      repos,
       shadowColors
     };
   },

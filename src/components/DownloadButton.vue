@@ -45,12 +45,12 @@
 import { useQuasar } from "quasar";
 import { defineComponent, ref } from "vue";
 
-import { usePlatforms } from "boot/config";
+import {getLatestDownloadLink, usePlatforms} from "boot/config";
 
 export default defineComponent({
   name: "DownloadButton",
   props: {
-    repo: {
+    product: {
       type: String,
       required: true
     }
@@ -79,25 +79,12 @@ export default defineComponent({
     i18n(relativePath) {
       return this.$t("components.downloadButton." + relativePath);
     },
-    async downloadProduct(platform) {
-      const notify = this.$q.notify({
-        group: false,
-        message: this.i18n("notifications.download"),
-        spinner: true,
-        timeout: 0,
-        type: "info"
-      });
-      const downloadLink = await this.$github.getDownloadLink(this.repo, platform);
+    downloadProduct(platform) {
+      const downloadLink = getLatestDownloadLink(this.product, platform);
       if (downloadLink) {
         window.location.href = downloadLink;
-        notify({
-          message: this.i18n("notifications.success"),
-          spinner: false,
-          timeout: 2500,
-          type: "positive"
-        });
       } else {
-        notify({
+        this.$q.notify({
           message: this.i18n("notifications.error"),
           spinner: false,
           timeout: 1500,

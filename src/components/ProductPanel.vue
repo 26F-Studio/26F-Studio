@@ -24,7 +24,7 @@
         class="row q-gutter-x-xl items-center"
         :class="reversed ? 'justify-end' : 'justify-start'"
         style="margin-top:2vw">
-        <DownloadButton :repo="repos[product]"/>
+        <DownloadButton :product="product"/>
         <div>
           <q-btn
             class="product-btn q-px-xl"
@@ -63,7 +63,7 @@
       <div class="row justify-center q-gutter-y-sm">
         <DownloadButton
           class="col-auto col-10"
-          :repo="repos[product]"/>
+          :product="product"/>
         <q-btn
           class="product-btn col-8"
           size="1.5vw"
@@ -105,11 +105,6 @@ export default defineComponent({
       "techmino",
       "quatrack"
     ];
-    const repos = {
-      techminoGalaxy: "Techmino_Galaxy",
-      techmino: "Techmino",
-      quatrack: "Quatrack"
-    };
     const shadowColors = {
       techminoGalaxy: "rgba(0, 14, 143, 0.65)",
       techmino: "rgba(18, 20, 34, 0.65)",
@@ -117,7 +112,6 @@ export default defineComponent({
     };
     return {
       products,
-      repos,
       shadowColors
     };
   },
