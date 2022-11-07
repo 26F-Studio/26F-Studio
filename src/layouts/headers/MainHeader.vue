@@ -33,7 +33,7 @@
         size="1vw"
         stretch
         :to="`/${button}`"/>
-      <ProfileButton class="q-ml-sm q-ml-md-xs"/>
+      <ProfileButton/>
       <q-btn
         v-show="$q.screen.gt.xs"
         class="q-ml-sm q-ml-md-xs"

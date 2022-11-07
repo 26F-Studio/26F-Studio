@@ -1,26 +1,19 @@
 <template>
   <q-btn
-    v-show="!loggedIn"
     flat
-    icon="login"
+    :icon="loggedIn ? undefined : 'login'"
+    no-caps
     :padding="$q.screen.lt.sm ? 'sm' : undefined"
     round
-    @click="$router.push('/login')"/>
-  <q-btn
-    v-show="loggedIn"
-    flat
-    no-caps
-    padding="xs"
-    round>
+    @click="loggedIn ? undefined : $router.push('/login')">
     <q-avatar
-      v-show="playerStore.avatar"
+      v-if="loggedIn"
+      :icon="loggedIn ? 'mdi-account-circle' : undefined"
       size="lg">
-      <q-img :src="playerStore.avatar"/>
+      <q-img
+        v-if="playerStore.avatar"
+        :src="playerStore.avatar"/>
     </q-avatar>
-    <q-avatar
-      v-show="!playerStore.avatar"
-      icon="mdi-account-circle"
-      size="lg"/>
     <q-menu :offset="[0, 10]" style="min-width:22rem">
       <q-card bordered>
         <q-card-section class="q-gutter-sm">
@@ -79,6 +72,7 @@
 <script>
 import {computed, defineComponent} from 'vue';
 import {usePlayerStore} from "stores/player";
+
 export default defineComponent({
   name: "ProfileButton",
   setup() {
