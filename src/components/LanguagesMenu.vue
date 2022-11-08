@@ -16,8 +16,10 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
 import languages from 'quasar/lang/index.json';
+import {defineComponent} from 'vue';
+
+import {useProject} from "boot/config";
 
 export default defineComponent({
   name: 'LanguagesMenu',
@@ -33,7 +35,7 @@ export default defineComponent({
   methods: {
     setLanguage(lang) {
       this.$i18n.locale = lang;
-      this.$q.localStorage.set('26fStudio.settings.language', this.$i18n.locale);
+      this.$q.localStorage.set(`${useProject()}.settings.language`, this.$i18n.locale);
     },
     i18n(relativePath) {
       return this.$t('components.languagesMenu.' + relativePath);

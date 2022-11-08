@@ -21,7 +21,7 @@ const routes = [
   // but you can also remove it
   {
     path: "/:catchAll(.*)*",
-    component: () => import("pages/ErrorNotFound.vue")
+    component: () => import("pages/NotFoundPage")
   }
 ];
 

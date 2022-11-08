@@ -25,6 +25,11 @@ const extensionMap = {
 };
 
 const useProject = () => "26f-studio";
+const useProducts = () => [
+  "techmino",
+  "quatrack",
+  "techminoGalaxy",
+];
 const usePlatforms = () => [
   "android",
   "appstore",
@@ -55,7 +60,13 @@ const getLatestDownloadLink = (product, platform) => {
 
 export default boot(({app}) => {
   app.config.globalProperties.$project = useProject();
+  app.config.globalProperties.$products = useProducts();
   app.config.globalProperties.$platforms = usePlatforms();
 });
 
-export {useProject, usePlatforms, getLatestDownloadLink};
+export {
+  useProject,
+  useProducts,
+  usePlatforms,
+  getLatestDownloadLink
+};

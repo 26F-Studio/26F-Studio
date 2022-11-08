@@ -94,14 +94,14 @@ export default defineComponent({
       return this.$t("components.profileButton." + path);
     },
     goProfile(query) {
-      this.$router.push({
+      this.$router['push']({
         name: 'profile',
         query: query,
       });
     },
     logout() {
       this.playerStore.logout();
-      this.$router.go(0);
+      this.$router['go'](0);
     }
   }
 });

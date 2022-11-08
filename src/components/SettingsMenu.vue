@@ -19,14 +19,16 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import {defineComponent} from 'vue';
+
+import {useProject} from "boot/config";
 
 export default defineComponent({
   name: 'SettingsMenu',
   methods: {
     toggleDarkMode() {
       this.$q.dark.toggle();
-      this.$q.localStorage.set('26fStudio.settings.darkMode', this.$q.dark.mode);
+      this.$q.localStorage.set(`${useProject()}.settings.darkMode`, this.$q.dark.mode);
     },
     i18n(relativePath) {
       return this.$t('components.settingsMenu.' + relativePath);

@@ -1,3 +1,4 @@
+@import "quasar/src/css/variables";
 @font-face {
   font-family: inter;
   font-weight: 1 1000;
@@ -29,5 +30,11 @@
 #secondary-btn {
   color: #636DD0;
   background: #CCD4FF;
+  border-radius: 1vw;
+}
+
+#disabled-btn {
+  color: $grey-8;
+  background: $grey-4;
   border-radius: 1vw;
 }

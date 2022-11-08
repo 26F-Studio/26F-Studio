@@ -3,7 +3,7 @@
     <div class="relative-position full-width" style="height:fit-content">
       <img
         class="full-width"
-        :src="`images/home-header${$q.screen.xs ? '-dense' : ''}.png`"
+        :src="require(`assets/homePageSplash-${$q.screen.lt.md ? 'v' : 'h'}.png`)"
         alt="home-header"/>
       <div
         class="row absolute-center full-width"
@@ -40,7 +40,7 @@
     <div
       class="title-text text-center"
       style="font-size: 7vw;"
-      :style="`white-space: ${$q.screen.xs ? 'pre-warp' : 'normal'}`">
+      :style="`white-space: ${$q.screen.xs ? 'pre' : 'normal'}`">
       {{ i18n("labels.invite.interested") }}
     </div>
     <div class="hint-text text-center q-pt-md">
@@ -61,25 +61,17 @@
 
 <script>
 import {defineComponent} from "vue";
+
+import {useProducts} from "boot/config";
+
 import ProductPanel from "components/ProductPanel";
 
 export default defineComponent({
   name: "HomePage",
   components: {ProductPanel},
   setup() {
-    const products = [
-      "techminoGalaxy",
-      "techmino",
-      "quatrack"
-    ];
-    const shadowColors = {
-      techminoGalaxy: "rgba(0, 14, 143, 0.65)",
-      techmino: "rgba(18, 20, 34, 0.65)",
-      quatrack: "rgba(18, 20, 34, 0.65)"
-    };
     return {
-      products,
-      shadowColors
+      products: useProducts()
     };
   },
   methods: {

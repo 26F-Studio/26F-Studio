@@ -3,6 +3,7 @@ export default {
   components: {
     downloadButton: {
       labels: {
+        disable: "Coming soon...",
         download: "Download Now",
         platforms: {
           android: "Android, arm64",
@@ -126,6 +127,12 @@ export default {
       notifications: {
         comingSoon: "Coming soon!"
       },
+    },
+    notFound: {
+      labels: {
+        notFound: "Oops! Nothing here...",
+        home: "Go Home"
+      }
     }
   }
 };

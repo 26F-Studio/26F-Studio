@@ -1,30 +1,35 @@
 <template>
-  <router-view />
+  <router-view/>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import { useQuasar } from "quasar";
+import {useQuasar} from "quasar";
+import {defineComponent} from 'vue';
+
+import {useProject} from "boot/config";
+import {useI18n} from "vue-i18n";
 
 export default defineComponent({
   name: 'App',
   setup() {
     const $q = useQuasar();
-    if ($q.localStorage.has("26fStudio.settings.darkMode")) {
-      $q.dark.set($q.localStorage.getItem("26fStudio.settings.darkMode"));
+    const $i18n = useI18n({useScope: 'global'});
+    if ($q.localStorage.has(`${useProject()}.settings.darkMode`)) {
+      $q.dark.set($q.localStorage.getItem(`${useProject()}.settings.darkMode`));
     } else {
       $q.dark.set("auto");
     }
-    return { };
-  },
-  created() {
-    if (this.$q.localStorage.has("26fStudio.settings.language")) {
-      this.$i18n.locale = this.$q.localStorage.getItem(
-        "26fStudio.settings.language"
+    if ($q.localStorage.has(`${useProject()}.settings.language`)) {
+      $i18n.locale.value = $q.localStorage.getItem(
+        `${useProject()}.settings.language`
       );
     } else {
-      this.$i18n.locale = this.$q.lang.getLocale();
+      $i18n.locale.value = $q.lang.getLocale();
     }
+    return {};
+  },
+  created() {
+
   },
   methods: {
     i18n(relativePath) {

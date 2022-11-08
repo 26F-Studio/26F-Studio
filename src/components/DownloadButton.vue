@@ -1,6 +1,8 @@
 <template>
   <q-btn-dropdown
-    class="download-btn"
+    :class="disable ? 'unavailable-btn' : 'download-btn'"
+    :disable-main-btn="disable"
+    :disable-dropdown="disable"
     flat
     no-caps
     split
@@ -10,9 +12,10 @@
       <div class="no-wrap q-ma-sm">
         <div
           style="font-weight: 700; font-size: 2vw;">
-          {{ i18n("labels.download") }}
+          {{ disable ? i18n("labels.disable") : i18n("labels.download") }}
         </div>
         <div
+          v-if="!disable"
           :class="$q.screen.xs ? 'q-pt-sm' : ''"
           style="font-weight: 400; font-size: 1vw">
           {{ i18n(`labels.platforms.${mainPlatform}`) }}
@@ -27,14 +30,14 @@
         v-close-popup
         @click="downloadProduct(platform)">
         <q-item-section avatar>
-          <q-avatar icon="folder" color="primary" text-color="white" />
+          <q-avatar icon="folder" color="primary" text-color="white"/>
         </q-item-section>
         <q-item-section>
           <q-item-label>{{ i18n(`labels.platforms.${platform}`) }}</q-item-label>
           <q-item-label caption>February 22, 2016</q-item-label>
         </q-item-section>
         <q-item-section side>
-          <q-icon name="info" color="amber" />
+          <q-icon name="info" color="amber"/>
         </q-item-section>
       </q-item>
     </q-list>
@@ -42,14 +45,18 @@
 </template>
 
 <script>
-import { useQuasar } from "quasar";
-import { defineComponent, ref } from "vue";
+import {useQuasar} from "quasar";
+import {defineComponent, ref} from "vue";
 
 import {getLatestDownloadLink, usePlatforms} from "boot/config";
 
 export default defineComponent({
   name: "DownloadButton",
   props: {
+    disable: {
+      type: Boolean,
+      default: false
+    },
     product: {
       type: String,
       required: true
@@ -68,12 +75,12 @@ export default defineComponent({
       mainPlatform = "linux";
     }
 
-    platforms = platforms.filter(function(platform) {
+    platforms = platforms.filter(function (platform) {
       return platform !== mainPlatform;
     });
 
     const mainLoading = ref(false);
-    return { mainPlatform, platforms, mainLoading };
+    return {mainPlatform, platforms, mainLoading};
   },
   methods: {
     i18n(relativePath) {
@@ -97,10 +104,16 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-@import "src/css/app.scss";
+@use "src/css/app.scss";
 
 .download-btn {
   @extend #primary-btn;
+  font-family: 'inter', sans-serif;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+}
+
+.unavailable-btn {
+  @extend #disabled-btn;
   font-family: 'inter', sans-serif;
   font-feature-settings: 'pnum' on, 'lnum' on;
 }

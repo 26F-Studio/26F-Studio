@@ -6,7 +6,7 @@
     <img
       v-if="!reversed"
       class="cropped-image"
-      :src="`images/${product}-icon.png`"
+      :src="require(`assets/icons/${product}.png`)"
       :alt="`${product}-icon`"
       style="margin-right: 5vw; object-position: 100% 0"
       :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]})`"/>
@@ -24,7 +24,9 @@
         class="row q-gutter-x-xl items-center"
         :class="reversed ? 'justify-end' : 'justify-start'"
         style="margin-top:2vw">
-        <DownloadButton :product="product"/>
+        <DownloadButton
+          :disable="product === 'techminoGalaxy'"
+          :product="product"/>
         <div>
           <q-btn
             class="product-btn q-px-xl"
@@ -40,7 +42,7 @@
     <img
       v-if="reversed"
       class="cropped-image"
-      :src="`images/${product}-icon.png`"
+      :src="require(`assets/icons/${product}.png`)"
       :alt="`${product}-icon`"
       style="margin-left: 5vw; object-position: 0 0"
       :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]});`"/>
@@ -50,7 +52,7 @@
     class="row justify-center">
     <div class="col-8 column items-center q-gutter-y-md">
       <img
-        :src="`images/${product}-icon.png`"
+        :src="require(`assets/icons/${product}.png`)"
         :alt="`${product}-icon`"
         style="height: 35vw; margin-bottom: 5vw;"
         :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]})`"/>
@@ -63,6 +65,7 @@
       <div class="row justify-center q-gutter-y-sm">
         <DownloadButton
           class="col-auto col-10"
+          :disable="product === 'techminoGalaxy'"
           :product="product"/>
         <q-btn
           class="product-btn col-8"
@@ -100,18 +103,12 @@ export default defineComponent({
     }
   },
   setup() {
-    const products = [
-      "techminoGalaxy",
-      "techmino",
-      "quatrack"
-    ];
     const shadowColors = {
       techminoGalaxy: "rgba(0, 14, 143, 0.65)",
       techmino: "rgba(18, 20, 34, 0.65)",
       quatrack: "rgba(18, 20, 34, 0.65)"
     };
     return {
-      products,
       shadowColors
     };
   },
