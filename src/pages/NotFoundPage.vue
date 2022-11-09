@@ -3,11 +3,10 @@
     class="fullscreen text-center flex flex-center"
     style="background: #1a13ac">
     <div class="relative-position full-width full-height" style="height:fit-content">
-      <img
+      <q-img
         class="full-width full-height"
-        :src="require(`assets/404-${$q.screen.lt.md ? 'v' : 'h'}.jpg`)"
-        alt="not-found-background"
-        style=" object-fit: cover"/>
+        :src="require(`assets/background.webp`)"
+        fit="cover"/>
       <div class="absolute-center full-width">
         <div class="main-text" style="font-size: 50vmin; line-height: 50vmin">
           404

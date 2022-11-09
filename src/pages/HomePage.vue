@@ -1,10 +1,9 @@
 <template>
   <q-page class="flex column">
     <div class="relative-position full-width" style="height:fit-content">
-      <img
+      <q-img
         class="full-width"
-        :src="require(`assets/homePageSplash-${$q.screen.lt.md ? 'v' : 'h'}.png`)"
-        alt="home-header"/>
+        :src="require(`assets/homePageSplash-${$q.screen.lt.md ? 'v' : 'h'}.png`)"/>
       <div
         class="row absolute-center full-width"
         :class="$q.screen.xs ? 'justify-center' : 'justify-start'">
