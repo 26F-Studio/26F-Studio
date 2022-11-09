@@ -24,6 +24,9 @@ export default {
     },
     languagesMenu: {},
     productPanel: {
+      notifications: {
+        comingSoon: "Coming soon!"
+      },
       products: {
         techminoGalaxy: {
           name: "Techmino Galaxy",
@@ -123,10 +126,7 @@ export default {
           account: "Create your account now!",
           button: "Sign Up/Log In"
         }
-      },
-      notifications: {
-        comingSoon: "Coming soon!"
-      },
+      }
     },
     notFound: {
       labels: {
