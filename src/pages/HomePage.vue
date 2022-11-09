@@ -1,6 +1,8 @@
 <template>
   <q-page class="flex column">
-    <div class="relative-position full-width" style="height:fit-content">
+    <div
+      class="relative-position full-width"
+      style="height:fit-content">
       <q-img
         class="full-width"
         :src="require(`assets/homePageSplash-${$q.screen.lt.md ? 'v' : 'h'}.png`)"/>
