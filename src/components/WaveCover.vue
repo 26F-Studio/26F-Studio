@@ -1,13 +1,12 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" width="1920px" height="1080px">
-    <path fill-rule="evenodd" stroke="rgb(0, 0, 0)" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter"
-          :fill="fill"
-          d="M0,900 L0,1080 L1920,1080 L1920,900 C1220,700 700,1100 0,900 Z" />
+  <svg xmlns="http://www.w3.org/2000/svg" :viewbox="`0 0 ${width} ${height}`">
+    <path fill-rule="evenodd" :fill="fill"
+          :d="`M${x},${y} C${bx1},${by1} ${bx2},${by2} ${width},${y} L${width},${height} ${x},${height} ${x},${y}  Z`"/>
   </svg>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import {computed, defineComponent, ref} from "vue";
 
 export default defineComponent({
   name: "WaveCover",
@@ -16,6 +15,38 @@ export default defineComponent({
       type: String,
       default: "rgba(255, 255, 255, 1)"
     }
+  },
+  setup() {
+    const waveFunction = (timestamp) => {
+      return amplitude * Math.sin(timestamp / 1000);
+    };
+    const differentialWaveFunction = (timestamp) => {
+      return amplitude * Math.cos(timestamp / 1000);
+    };
+    const width = 1920, height = 1080, amplitude = 200;
+    const x = 0, y = ref(height - amplitude);
+    const bx1 = 700, by1 = ref(height - amplitude);
+    const bx2 = width - 700, by2 = ref(height - amplitude);
+    const animationInterval = setInterval(() => {
+      const timestamp = Date.now();
+      y.value = height - amplitude + waveFunction(timestamp) / 2;
+      by1.value = height - amplitude - differentialWaveFunction(timestamp);
+      by2.value = height - amplitude + differentialWaveFunction(timestamp);
+    }, 1000 / 60);
+    return {
+      width,
+      height,
+      x,
+      y,
+      bx1,
+      by1,
+      bx2,
+      by2,
+      animationInterval
+    };
+  },
+  beforeUnmount() {
+    clearInterval(this.animationInterval);
   }
 });
 </script>

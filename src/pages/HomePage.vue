@@ -5,7 +5,7 @@
       style="height:fit-content">
       <q-img
         class="full-width"
-        :src="require(`assets/homePageSplash-${$q.screen.lt.md ? 'v' : 'h'}.png`)"/>
+        :src="require(`assets/background.webp`)"/>
       <div
         class="row absolute-center full-width"
         :class="$q.screen.xs ? 'justify-center' : 'justify-start'">
@@ -15,6 +15,7 @@
           {{ i18n("labels.header") }}
         </div>
       </div>
+      <WaveCover class="absolute-bottom-right full-width"/>
       <!--
       <video
         class="absolute-center full-width q-px-xl"
@@ -66,10 +67,11 @@ import {defineComponent} from "vue";
 import {useProducts} from "boot/config";
 
 import ProductPanel from "components/ProductPanel";
+import WaveCover from "components/WaveCover";
 
 export default defineComponent({
   name: "HomePage",
-  components: {ProductPanel},
+  components: {ProductPanel, WaveCover},
   setup() {
     return {
       products: useProducts()
