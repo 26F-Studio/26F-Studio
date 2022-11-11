@@ -1,13 +1,8 @@
 <template>
   <svg xmlns="http://www.w3.org/2000/svg" :viewbox="`0 0 ${width} ${height}`">
-    <g class="waves">
-      <path
-        v-for="(path, index) in paths"
-        :key="index"
-        fill-rule="evenodd" :fill="fill"
-        :d="path"/>
-    </g>
-
+    <path
+      fill-rule="evenodd" :fill="color"
+      :d="path"/>
   </svg>
 </template>
 
@@ -17,82 +12,70 @@ import {computed, defineComponent} from "vue";
 export default defineComponent({
   name: "WaveCover",
   props: {
-    fill: {
+    color: {
       type: String,
       default: "rgba(255, 255, 255, 1)"
+    },
+    end: {
+      type: Object,
+      default: () => ({
+        ratio: 0.7,
+        control: [0.6, 0.7]
+      })
     },
     position: {
       type: String,
       default: "bottom"
     },
-    waves: {
-      type: Array,
-      default: () => [{
-        period: 1,
-        amplitude: 200,
-        speed: 2
-      }]
+    start: {
+      type: Object,
+      default: () => ({
+        ratio: 0.9,
+        control: [0.4, 1.1]
+      })
     },
   },
   setup(props) {
     const width = 1920, height = 1080;
-    const paths = computed(() => {
-      let result = [];
-      for (const wave of props.waves) {
-        const x = 0, y = height - wave.amplitude;
-        let path = `M${x},${y} `;
-        const segment = width / wave.period;
-        for (let index = 0; index < wave.period; index++) {
-          const bx1 = segment * (index + 0.33), by1 = height - wave.amplitude * (Math.sqrt(2) + 1);
-          const bx2 = width - (segment * (index + 0.33)), by2 = height + wave.amplitude * (Math.sqrt(2) - 1);
-          path += `C${bx1},${by1} ${bx2},${by2} ${segment * (index + 1)},${y} `;
-        }
-        path += `L${width},${height} ${x},${height} ${x},${y} Z`;
-        result.push(path);
+    const path = computed(() => {
+      switch (props.position) {
+        case "bottom":
+          return `M0,${height} L0,${height * props.start.ratio} C` +
+            `${width * props.start.control[0]},${height * props.start.control[1]} ` +
+            `${width * props.end.control[0]},${height * props.end.control[1]} ` +
+            `${width},${height * props.end.ratio} ` +
+            `L${width},${height} Z`;
+        case "left":
+          return `M0,0 L${width * props.start.ratio},0 ` +
+            `C${width * props.start.control[0]},${height * props.start.control[1]} ` +
+            `${width * props.end.control[0]},${height * props.end.control[1]} ` +
+            `${width * props.end.ratio},${height} ` +
+            `L0,${height} Z`;
+        case "right":
+          return `M${width},${height} L${width * props.start.ratio},${height} ` +
+            `C${width * props.start.control[0]},${height * props.start.control[1]} ` +
+            `${width * props.end.control[0]},${height * props.end.control[1]} ` +
+            `${width * props.end.ratio},0 ` +
+            `L${width},0 Z`;
+        case "top":
+          return `M0,0 L0,${height * props.start.ratio} C` +
+            `${width * props.start.control[0]},${height * props.start.control[1]} ` +
+            `${width * props.end.control[0]},${height * props.end.control[1]} ` +
+            `${width},${height * props.end.ratio} ` +
+            `L${width},0 Z`;
+        default:
+          return "";
       }
-      console.log(result);
-      return result;
     });
     return {
       width,
       height,
-      paths
+      path
     };
   }
 });
 </script>
 
 <style scoped lang="scss">
-.waves > use {
-  animation: wave 25s cubic-bezier(.55, .5, .45, .5) infinite;
-}
 
-.waves > use:nth-child(1) {
-  animation-delay: -2s;
-  animation-duration: 7s;
-}
-
-.waves > use:nth-child(2) {
-  animation-delay: -3s;
-  animation-duration: 10s;
-}
-
-.waves > use:nth-child(3) {
-  animation-delay: -4s;
-  animation-duration: 13s;
-}
-
-.waves > use:nth-child(4) {
-  animation-delay: -5s;
-  animation-duration: 20s;
-}
-
-@keyframes wave {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(-100%, 0, 0);
-  }
-}
 </style>

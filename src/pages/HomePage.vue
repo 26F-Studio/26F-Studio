@@ -5,17 +5,31 @@
       style="height:fit-content">
       <q-img
         class="full-width"
-        :src="require(`assets/background.webp`)"/>
+        :src="require(`assets/background.webp`)"
+        style="min-height: 540px"/>
+      <div
+        class="header-icon absolute"
+        style="font-size: 80vw; right: -26vw; top:-42vw">
+        {{ '\u{0FFFFF}' }}
+      </div>
       <div
         class="row absolute-center full-width"
         :class="$q.screen.xs ? 'justify-center' : 'justify-start'">
         <div
-          class="header-text"
+          class="header-text q-pb-xl"
           :class="$q.screen.xs ? undefined : 'offset-1'">
           {{ i18n("labels.header") }}
         </div>
       </div>
-      <WaveCover class="absolute-bottom-right full-width"/>
+      <WaveCover
+        class="absolute-bottom-right full-width"
+        :end="$q.screen.xs ? {ratio: 0.6, control: [0.6, 0.61]} : undefined"
+        :start="$q.screen.xs ? {ratio: 1.0, control: [0.3, 0.9]} : undefined"/>
+      <!--      <WaveCover-->
+      <!--        class="absolute-bottom-right full-width"-->
+      <!--        :end="{ratio: 0.3, control: [0.3, 0.2]}"-->
+      <!--        position="right"-->
+      <!--        :start="{ratio: 0.4, control: [0.4, 0.8]}"/>-->
       <!--
       <video
         class="absolute-center full-width q-px-xl"
@@ -74,7 +88,7 @@ export default defineComponent({
   components: {ProductPanel, WaveCover},
   setup() {
     return {
-      products: useProducts()
+      products: useProducts(),
     };
   },
   methods: {
@@ -93,6 +107,17 @@ export default defineComponent({
 
 <style scoped lang="scss">
 @import "src/css/app.scss";
+
+.header-icon {
+  background: linear-gradient(168.41deg, rgba(130, 142, 255, 0.7) 6.5%, rgba(130, 142, 255, 0.3) 96.66%);
+  text-shadow: 0 2vw 4vw rgba(48, 0, 240, 0.31);
+  font-family: 'galaxy-sans', sans-serif;
+  font-weight: 200;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  rotate: 5deg;
+}
 
 .header-text {
   color: #F1F2F3;
