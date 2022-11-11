@@ -5,6 +5,15 @@ const routes = [
     children: [
       {path: '', redirect: 'home'},
       {
+        name: "login",
+        path: "login",
+        components: {
+          header: () => import("layouts/headers/SimpleHeader"),
+          drawer: () => import("layouts/drawers/MainDrawer"),
+          default: () => import("pages/LoginPage")
+        }
+      },
+      {
         name: "home",
         path: "home",
         components: {

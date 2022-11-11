@@ -78,7 +78,7 @@ export default defineComponent({
   setup() {
     const playerStore = usePlayerStore();
     const loggedIn = computed(() => {
-      return playerStore["id"] > 0
+      return playerStore["id"] > 0;
     });
     return {
       playerStore,
