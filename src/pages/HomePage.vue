@@ -110,7 +110,6 @@ export default defineComponent({
 
 .header-icon {
   background: linear-gradient(168.41deg, rgba(130, 142, 255, 0.7) 6.5%, rgba(130, 142, 255, 0.3) 96.66%);
-  text-shadow: 0 2vw 4vw rgba(48, 0, 240, 0.31);
   font-family: 'galaxy-sans', sans-serif;
   font-weight: 200;
   font-feature-settings: 'pnum' on, 'lnum' on;
