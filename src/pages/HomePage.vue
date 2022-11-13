@@ -3,14 +3,15 @@
     <div
       class="relative-position full-width"
       style="height:fit-content; overflow: hidden;">
+      <q-resize-observer @resize="onResize" />
       <q-img
         class="full-width"
         :src="require(`assets/background.webp`)"
-        style="min-height: 540px"/>
+        style="min-height: 540px" />
       <div
         class="header-icon absolute"
         style="font-size: 80vw; right: -26vw; top:-42vw;">
-        {{ '\u{0FFFFF}' }}
+        {{ "\u{0FFFFF}" }}
       </div>
       <div
         class="row absolute-center full-width"
@@ -24,12 +25,7 @@
       <WaveCover
         class="absolute-bottom full-width"
         :end="$q.screen.xs ? {ratio: 0.6, control: [0.6, 0.61]} : undefined"
-        :start="$q.screen.xs ? {ratio: 1.0, control: [0.3, 0.9]} : undefined"/>
-      <!--      <WaveCover-->
-      <!--        class="absolute-bottom-right full-width"-->
-      <!--        :end="{ratio: 0.3, control: [0.3, 0.2]}"-->
-      <!--        position="right"-->
-      <!--        :start="{ratio: 0.4, control: [0.4, 0.8]}"/>-->
+        :start="$q.screen.xs ? {ratio: 1.0, control: [0.3, 0.9]} : undefined" />
       <!--
       <video
         class="absolute-center full-width q-px-xl"
@@ -51,7 +47,7 @@
       <ProductPanel
         :horizontal="$q.screen.gt.xs"
         :reversed="index % 2 === 1"
-        :product="product"/>
+        :product="product" />
     </div>
     <div
       class="title-text text-center"
@@ -76,24 +72,28 @@
 </template>
 
 <script>
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 
-import {useProducts} from "boot/config";
+import { useProducts } from "boot/config";
 
 import ProductPanel from "components/ProductPanel";
 import WaveCover from "components/WaveCover";
 
 export default defineComponent({
   name: "HomePage",
-  components: {ProductPanel, WaveCover},
+  components: { ProductPanel, WaveCover },
   setup() {
     return {
-      products: useProducts(),
+      products: useProducts()
     };
   },
   methods: {
     i18n(relativePath) {
       return this.$t("pages.main." + relativePath);
+    },
+    onResize(size) {
+      this.waveHeight = size.height;
+      this.waveWidth = size.width;
     },
     onSignClick() {
       this.$q.notify({

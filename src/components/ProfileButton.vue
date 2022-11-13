@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import {computed, defineComponent} from 'vue';
+import {computed, defineComponent, onMounted} from 'vue';
 import {usePlayerStore} from "stores/player";
 
 export default defineComponent({
@@ -80,14 +80,14 @@ export default defineComponent({
     const loggedIn = computed(() => {
       return playerStore["id"] > 0;
     });
+    onMounted(() => {
+      // await this.playerStore.check();
+      // this.playerStore.update();
+    });
     return {
       playerStore,
       loggedIn,
     };
-  },
-  async created() {
-    // await this.playerStore.check();
-    // this.playerStore.update();
   },
   methods: {
     i18n(path) {
