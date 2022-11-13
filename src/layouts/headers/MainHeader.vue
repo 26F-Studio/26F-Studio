@@ -33,13 +33,14 @@
         size="1vw"
         stretch
         :to="`/${button}`"/>
-      <ProfileButton/>
+      <ProfileButton size="1vw"/>
       <q-btn
         v-show="$q.screen.gt.xs"
         class="q-ml-sm q-ml-md-xs"
         flat
         icon="language"
-        round>
+        round
+        size="1vw">
         <LanguagesMenu/>
       </q-btn>
       <q-btn
@@ -47,7 +48,8 @@
         class="q-ml-sm q-ml-md-xs"
         flat
         icon="settings"
-        round>
+        round
+        size="1vw">
         <SettingsMenu/>
       </q-btn>
     </q-toolbar>

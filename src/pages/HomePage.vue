@@ -2,14 +2,14 @@
   <q-page class="flex column">
     <div
       class="relative-position full-width"
-      style="height:fit-content">
+      style="height:fit-content; overflow: hidden;">
       <q-img
         class="full-width"
         :src="require(`assets/background.webp`)"
         style="min-height: 540px"/>
       <div
         class="header-icon absolute"
-        style="font-size: 80vw; right: -26vw; top:-42vw">
+        style="font-size: 80vw; right: -26vw; top:-42vw;">
         {{ '\u{0FFFFF}' }}
       </div>
       <div
@@ -22,7 +22,7 @@
         </div>
       </div>
       <WaveCover
-        class="absolute-bottom-right full-width"
+        class="absolute-bottom full-width"
         :end="$q.screen.xs ? {ratio: 0.6, control: [0.6, 0.61]} : undefined"
         :start="$q.screen.xs ? {ratio: 1.0, control: [0.3, 0.9]} : undefined"/>
       <!--      <WaveCover-->

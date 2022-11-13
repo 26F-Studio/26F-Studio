@@ -82,6 +82,11 @@ export default {
       }
     },
     footers: {
+      login: {
+        labels: {
+          login: "Login",
+        }
+      },
       main: {
         labels: {
           products: "Products",

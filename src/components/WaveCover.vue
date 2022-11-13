@@ -23,6 +23,10 @@ export default defineComponent({
         control: [0.6, 0.7]
       })
     },
+    height: {
+      type: Number,
+      default: 1080
+    },
     position: {
       type: String,
       default: "bottom"
@@ -34,42 +38,43 @@ export default defineComponent({
         control: [0.4, 1.1]
       })
     },
+    width: {
+      type: Number,
+      default: 1920
+    }
   },
   setup(props) {
-    const width = 1920, height = 1080;
     const path = computed(() => {
       switch (props.position) {
         case "bottom":
-          return `M0,${height} L0,${height * props.start.ratio} C` +
-            `${width * props.start.control[0]},${height * props.start.control[1]} ` +
-            `${width * props.end.control[0]},${height * props.end.control[1]} ` +
-            `${width},${height * props.end.ratio} ` +
-            `L${width},${height} Z`;
+          return `M0,${props.height} L0,${props.height * props.start.ratio} C` +
+            `${props.width * props.start.control[0]},${props.height * props.start.control[1]} ` +
+            `${props.width * props.end.control[0]},${props.height * props.end.control[1]} ` +
+            `${props.width},${props.height * props.end.ratio} ` +
+            `L${props.width},${props.height} Z`;
         case "left":
-          return `M0,0 L${width * props.start.ratio},0 ` +
-            `C${width * props.start.control[0]},${height * props.start.control[1]} ` +
-            `${width * props.end.control[0]},${height * props.end.control[1]} ` +
-            `${width * props.end.ratio},${height} ` +
-            `L0,${height} Z`;
+          return `M0,0 L${props.width * props.start.ratio},0 ` +
+            `C${props.width * props.start.control[0]},${props.height * props.start.control[1]} ` +
+            `${props.width * props.end.control[0]},${props.height * props.end.control[1]} ` +
+            `${props.width * props.end.ratio},${props.height} ` +
+            `L0,${props.height} Z`;
         case "right":
-          return `M${width},${height} L${width * props.start.ratio},${height} ` +
-            `C${width * props.start.control[0]},${height * props.start.control[1]} ` +
-            `${width * props.end.control[0]},${height * props.end.control[1]} ` +
-            `${width * props.end.ratio},0 ` +
-            `L${width},0 Z`;
+          return `M${props.width},${props.height} L${props.width * props.start.ratio},${props.height} ` +
+            `C${props.width * props.start.control[0]},${props.height * props.start.control[1]} ` +
+            `${props.width * props.end.control[0]},${props.height * props.end.control[1]} ` +
+            `${props.width * props.end.ratio},0 ` +
+            `L${props.width},0 Z`;
         case "top":
-          return `M0,0 L0,${height * props.start.ratio} C` +
-            `${width * props.start.control[0]},${height * props.start.control[1]} ` +
-            `${width * props.end.control[0]},${height * props.end.control[1]} ` +
-            `${width},${height * props.end.ratio} ` +
-            `L${width},0 Z`;
+          return `M0,0 L0,${props.height * props.start.ratio} C` +
+            `${props.width * props.start.control[0]},${props.height * props.start.control[1]} ` +
+            `${props.width * props.end.control[0]},${props.height * props.end.control[1]} ` +
+            `${props.width},${props.height * props.end.ratio} ` +
+            `L${props.width},0 Z`;
         default:
           return "";
       }
     });
     return {
-      width,
-      height,
       path
     };
   }
