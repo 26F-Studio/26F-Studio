@@ -22,6 +22,22 @@ const routes = [
           default: () => import("pages/HomePage"),
           footer: () => import("layouts/footers/MainFooter")
         }
+      },
+      {
+        "path": "products",
+        component: () => import("layouts/MainLayout.vue"),
+        children: [
+          {
+            name: "techmino-galaxy",
+            path: "techmino-galaxy",
+            components: {
+              header: () => import("layouts/headers/MainHeader"),
+              drawer: () => import("layouts/drawers/MainDrawer"),
+              default: () => import("pages/products/TechminoGalaxyPage"),
+              footer: () => import("layouts/footers/MainFooter")
+            }
+          }
+        ]
       }
     ]
   },

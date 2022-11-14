@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import QMediaPlayer from '@quasar/quasar-app-extension-qmediaplayer'
+
 export default {
   name: "TechminoGalaxyPage",
   setup() {

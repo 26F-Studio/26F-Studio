@@ -1,7 +1,3 @@
 {
-  "ssg": {
-    "scripts": false,
-    "inlineCriticalCss": true,
-    "inlineCssFromSFC": false
-  }
+  "@quasar/qmediaplayer": {}
 }

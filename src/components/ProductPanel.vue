@@ -6,7 +6,7 @@
     <img
       v-if="!reversed"
       class="cropped-image"
-      :src="require(`assets/icons/${product}.png`)"
+      :src="require(`assets/icons/${product}.webp`)"
       :alt="`${product}-icon`"
       style="margin-right: 5vw; object-position: 100% 0"
       :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]})`"/>
@@ -42,7 +42,7 @@
     <img
       v-if="reversed"
       class="cropped-image"
-      :src="require(`assets/icons/${product}.png`)"
+      :src="require(`assets/icons/${product}.webp`)"
       :alt="`${product}-icon`"
       style="margin-left: 5vw; object-position: 0 0"
       :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]});`"/>
@@ -52,7 +52,7 @@
     class="row justify-center">
     <div class="col-8 column items-center q-gutter-y-md">
       <img
-        :src="require(`assets/icons/${product}.png`)"
+        :src="require(`assets/icons/${product}.webp`)"
         :alt="`${product}-icon`"
         style="height: 35vw; margin-bottom: 5vw;"
         :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]})`"/>
