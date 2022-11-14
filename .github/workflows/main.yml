@@ -15,9 +15,9 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
-#      - name: Install packages
-#        run: |
-#          npm install
+      - name: Install packages
+        run: |
+          npm install
 #      - name: Add hack for github pages
 #        shell: python3 {0}
 #        run: |
