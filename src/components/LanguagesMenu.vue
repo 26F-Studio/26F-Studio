@@ -17,29 +17,34 @@
 
 <script>
 import languages from 'quasar/lang/index.json';
+import {useQuasar} from "quasar";
 import {defineComponent} from 'vue';
+import {useI18n} from "vue-i18n";
 
 import {useProject} from "boot/config";
 
 export default defineComponent({
   name: 'LanguagesMenu',
   setup() {
+    const $q = useQuasar();
+    const $i18n = useI18n({useScope: "global"});
+
     const appLanguages = languages.filter(lang =>
       ['en-US', 'zh-CN'].includes(lang.isoName)
     );
     const langOptions = appLanguages.map(lang => ({
       label: lang.nativeName, value: lang.isoName
     }));
-    return { langOptions };
-  },
-  methods: {
-    setLanguage(lang) {
-      this.$i18n.locale = lang;
-      this.$q.localStorage.set(`${useProject()}.settings.language`, this.$i18n.locale);
-    },
-    i18n(relativePath) {
-      return this.$t('components.languagesMenu.' + relativePath);
-    }
+
+    const i18n = (relativePath) => {
+      return $i18n.t('components.languagesMenu.' + relativePath);
+    };
+    const setLanguage = (lang) => {
+      $i18n.locale.value = lang;
+      $q.localStorage.set(`${useProject()}.settings.language`, $i18n.locale.value);
+    };
+
+    return {langOptions, i18n, setLanguage};
   }
 });
 </script>

@@ -82,7 +82,10 @@
 </template>
 
 <script>
+import {useQuasar} from "quasar";
 import {defineComponent} from "vue";
+import {useI18n} from "vue-i18n";
+
 import DownloadButton from "components/DownloadButton";
 
 export default defineComponent({
@@ -103,25 +106,28 @@ export default defineComponent({
     }
   },
   setup() {
+    const $q = useQuasar();
+    const $i18n = useI18n({useScope: "global"});
+
     const shadowColors = {
       techminoGalaxy: "rgba(0, 14, 143, 0.65)",
       techmino: "rgba(18, 20, 34, 0.65)",
       quatrack: "rgba(18, 20, 34, 0.65)"
     };
-    return {
-      shadowColors
+    const i18n = (relativePath) => {
+      return $i18n.t("components.productPanel." + relativePath);
     };
-  },
-  methods: {
-    i18n(relativePath) {
-      return this.$t("components.productPanel." + relativePath);
-    },
-    onProductClick() {
-      this.$q.notify({
-        message: this.i18n("notifications.comingSoon"),
+    const onProductClick = () => {
+      $q.notify({
+        message: i18n("notifications.comingSoon"),
         type: "info"
       });
-    },
+    };
+    return {
+      shadowColors,
+      i18n,
+      onProductClick
+    };
   }
 });
 </script>

@@ -1,19 +1,20 @@
 <template>
-  <router-view />
+  <router-view/>
 </template>
 
 <script>
-import { useQuasar } from "quasar";
-import { defineComponent } from "vue";
+import {useQuasar} from "quasar";
+import {defineComponent} from "vue";
 
-import { useProject } from "boot/config";
-import { useI18n } from "vue-i18n";
+import {useProject} from "boot/config";
+import {useI18n} from "vue-i18n";
 
 export default defineComponent({
   name: "App",
   setup() {
     const $q = useQuasar();
-    const $i18n = useI18n({ useScope: "global" });
+    const $i18n = useI18n({useScope: "global"});
+
     if ($q.localStorage.has(`${useProject()}.settings.darkMode`)) {
       $q.dark.set($q.localStorage.getItem(`${useProject()}.settings.darkMode`));
     } else {
@@ -27,11 +28,11 @@ export default defineComponent({
       $i18n.locale.value = $q.lang.getLocale();
     }
 
-    return {
-      i18n: (relativePath) => {
-        return this.$t("app." + relativePath);
-      }
+    const i18n = (relativePath) => {
+      return $i18n.t("app." + relativePath);
     };
+
+    return {i18n};
   }
 });
 </script>

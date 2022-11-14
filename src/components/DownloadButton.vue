@@ -46,9 +46,11 @@
 
 <script>
 import {useQuasar} from "quasar";
-import {defineComponent, ref} from "vue";
+import {defineComponent} from "vue";
 
 import {getLatestDownloadLink, usePlatforms} from "boot/config";
+import {useI18n} from "vue-i18n";
+import {useRouter} from "vue-router";
 
 export default defineComponent({
   name: "DownloadButton",
@@ -62,8 +64,11 @@ export default defineComponent({
       required: true
     }
   },
-  setup() {
+  setup(props) {
     const $q = useQuasar();
+    const $i18n = useI18n({useScope: "global"});
+    const $router = useRouter();
+
     let mainPlatform = "windows64";
     let platforms = usePlatforms();
 
@@ -79,26 +84,29 @@ export default defineComponent({
       return platform !== mainPlatform;
     });
 
-    const mainLoading = ref(false);
-    return {mainPlatform, platforms, mainLoading};
-  },
-  methods: {
-    i18n(relativePath) {
-      return this.$t("components.downloadButton." + relativePath);
-    },
-    downloadProduct(platform) {
-      const downloadLink = getLatestDownloadLink(this.product, platform);
+    const i18n = (relativePath) => {
+      return $i18n.t("components.downloadButton." + relativePath);
+    };
+    const downloadProduct = (platform) => {
+      const downloadLink = getLatestDownloadLink(props.product, platform);
       if (downloadLink) {
-        window.location.href = downloadLink;
+        $router.push(downloadLink);
       } else {
-        this.$q.notify({
-          message: this.i18n("notifications.error"),
+        $q.notify({
+          message: i18n("notifications.error"),
           spinner: false,
           timeout: 1500,
           type: "negative"
         });
       }
-    }
+    };
+
+    return {
+      mainPlatform,
+      platforms,
+      i18n,
+      downloadProduct
+    };
   }
 });
 </script>

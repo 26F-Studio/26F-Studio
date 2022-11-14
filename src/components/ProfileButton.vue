@@ -3,7 +3,7 @@
     flat
     :icon="loggedIn ? undefined : 'login'"
     no-caps
-    :padding="$q.screen.lt.sm ? 'sm' : undefined"
+    :padding="$q.screen.xs ? 'sm' : undefined"
     round
     @click="loggedIn ? undefined : $router.push('/login')">
     <q-avatar
@@ -71,38 +71,48 @@
 
 <script>
 import {computed, defineComponent, onMounted} from 'vue';
+import {useI18n} from "vue-i18n";
+import {useRouter} from "vue-router";
+
 import {usePlayerStore} from "stores/player";
 
 export default defineComponent({
   name: "ProfileButton",
   setup() {
+    const $i18n = useI18n({useScope: "global"});
+    const $router = useRouter();
+
     const playerStore = usePlayerStore();
     const loggedIn = computed(() => {
       return playerStore["id"] > 0;
     });
-    onMounted(() => {
-      // await this.playerStore.check();
-      // this.playerStore.update();
+
+    onMounted(async () => {
+      await playerStore.check();
+      await playerStore.update();
     });
-    return {
-      playerStore,
-      loggedIn,
+
+    const i18n = (path) => {
+      return $i18n.t("components.profileButton." + path);
     };
-  },
-  methods: {
-    i18n(path) {
-      return this.$t("components.profileButton." + path);
-    },
-    goProfile(query) {
-      this.$router['push']({
+    const goProfile = (query) => {
+      $router.push({
         name: 'profile',
         query: query,
       });
-    },
-    logout() {
-      this.playerStore.logout();
-      this.$router['go'](0);
-    }
+    };
+    const logout = () => {
+      playerStore.logout();
+      $router.go(0);
+    };
+
+    return {
+      playerStore,
+      loggedIn,
+      i18n,
+      goProfile,
+      logout,
+    };
   }
 });
 </script>
