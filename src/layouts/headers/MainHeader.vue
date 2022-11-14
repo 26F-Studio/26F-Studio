@@ -56,7 +56,10 @@
 </template>
 
 <script>
+import {useQuasar} from "quasar";
 import {defineComponent} from "vue";
+import {useI18n} from "vue-i18n";
+
 import LanguagesMenu from "components/LanguagesMenu";
 import ProfileButton from "components/ProfileButton";
 import SettingsMenu from "components/SettingsMenu";
@@ -64,26 +67,26 @@ import SettingsMenu from "components/SettingsMenu";
 export default defineComponent({
   name: "MainHeader",
   components: {LanguagesMenu, ProfileButton, SettingsMenu},
-  setup() {
+  setup(_, {emit}) {
+    const $q = useQuasar();
+    const $i18n = useI18n({useScope: "global"});
     const buttons = [
       "products",
       "support",
       "about",
       "contact"
     ];
-    return {buttons};
-  },
-  methods: {
-    i18n(relativePath) {
-      return this.$t("layouts.headers.main." + relativePath);
-    },
-    onLogoClick(event, go) {
-      if (this.$q.screen.lt.md) {
+    const i18n = (relativePath) => {
+      return $i18n.t("layouts.headers.main." + relativePath);
+    };
+    const onLogoClick = (event, go) => {
+      if ($q.screen.lt.md) {
         event.preventDefault();
-        this.$emit('click:drawer', 'left');
+        emit('click:drawer', 'left');
       }
       go();
-    }
+    };
+    return {buttons, i18n, onLogoClick};
   }
 });
 </script>

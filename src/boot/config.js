@@ -42,7 +42,7 @@ const usePlatforms = () => [
 ];
 
 const getLatestDownloadLink = (product, platform) => {
-  if (repoMap.hasOwnProperty(product)) {
+  if (useProducts().includes(product)) {
     if (platform === "appstore") {
       return `https://apps.apple.com/app/${appStoreIdMap[repoMap[product]]}`;
     }

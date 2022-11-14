@@ -3,11 +3,11 @@
     <div
       class="relative-position full-width"
       style="height:fit-content; overflow: hidden;">
-      <q-resize-observer @resize="onResize" />
+      <q-resize-observer @resize="onResize"/>
       <q-img
         class="full-width"
         :src="require(`assets/background.webp`)"
-        style="min-height: 540px" />
+        style="min-height: 540px"/>
       <div
         class="header-icon absolute"
         style="font-size: 80vw; right: -26vw; top:-42vw;">
@@ -25,17 +25,7 @@
       <WaveCover
         class="absolute-bottom full-width"
         :end="$q.screen.xs ? {ratio: 0.6, control: [0.6, 0.61]} : undefined"
-        :start="$q.screen.xs ? {ratio: 1.0, control: [0.3, 0.9]} : undefined" />
-      <!--
-      <video
-        class="absolute-center full-width q-px-xl"
-        autoplay
-        muted
-        playsinline>
-        <source src="videos/techmino_galaxy.mov" type="video/mp4; codecs='hvc1'">
-        <source src="videos/techmino_galaxy.webm" type="video/webm">
-      </video>
-      -->
+        :start="$q.screen.xs ? {ratio: 1.0, control: [0.3, 0.9]} : undefined"/>
     </div>
     <div class="title-text text-center" style="font-size: 10vw; line-height: 18vw;">
       {{ i18n("labels.title") }}
@@ -47,61 +37,75 @@
       <ProductPanel
         :horizontal="$q.screen.gt.xs"
         :reversed="index % 2 === 1"
-        :product="product" />
+        :product="product"/>
     </div>
-    <div
-      class="title-text text-center"
-      style="font-size: 7vw;"
-      :style="`white-space: ${$q.screen.xs ? 'pre' : 'normal'}`">
-      {{ i18n("labels.invite.interested") }}
-    </div>
-    <div class="hint-text text-center q-pt-md">
-      {{ i18n("labels.invite.account") }}
-    </div>
-    <div class="row justify-center q-py-xl q-mb-xl">
-      <q-btn
-        class="account-btn q-px-xl"
-        size="1.5vw"
-        flat
-        no-caps
-        @click="onSignClick">
-        {{ i18n("labels.invite.button") }}
-      </q-btn>
+    <div class="column" v-if="!loggedIn">
+      <div
+        class="title-text text-center"
+        style="font-size: 7vw;"
+        :style="`white-space: ${$q.screen.xs ? 'pre' : 'normal'}`">
+        {{ i18n("labels.invite.interested") }}
+      </div>
+      <div class="hint-text text-center q-pt-md">
+        {{ i18n("labels.invite.account") }}
+      </div>
+      <div class="row justify-center q-py-xl q-mb-xl">
+        <q-btn
+          class="account-btn q-px-xl"
+          size="1.5vw"
+          flat
+          no-caps
+          to="login">
+          {{ i18n("labels.invite.button") }}
+        </q-btn>
+      </div>
     </div>
   </q-page>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import {storeToRefs} from "pinia";
+import {computed, defineComponent, ref} from "vue";
+import {useI18n} from "vue-i18n";
 
-import { useProducts } from "boot/config";
+import {useProducts} from "boot/config";
+
+import {usePlayerStore} from "stores/player";
 
 import ProductPanel from "components/ProductPanel";
 import WaveCover from "components/WaveCover";
 
 export default defineComponent({
   name: "HomePage",
-  components: { ProductPanel, WaveCover },
+  components: {ProductPanel, WaveCover},
   setup() {
+    const $i18n = useI18n({useScope: "global"});
+
+    const products = useProducts();
+
+    const {id} = storeToRefs(usePlayerStore());
+    const loggedIn = computed(() => {
+      return id > 0;
+    });
+
+    const waveHeight = ref(1920);
+    const waveWidth = ref(1080);
+
+    const i18n = (relativePath) => {
+      return $i18n.t("pages.main." + relativePath);
+    };
+    const onResize = (size) => {
+      waveHeight.value = size.height;
+      waveWidth.value = size.width;
+    };
     return {
-      products: useProducts()
+      products,
+      loggedIn,
+      i18n,
+      onResize
     };
   },
-  methods: {
-    i18n(relativePath) {
-      return this.$t("pages.main." + relativePath);
-    },
-    onResize(size) {
-      this.waveHeight = size.height;
-      this.waveWidth = size.width;
-    },
-    onSignClick() {
-      this.$q.notify({
-        message: this.i18n("notifications.comingSoon"),
-        type: "info"
-      });
-    }
-  }
+  methods: {}
 });
 </script>
 

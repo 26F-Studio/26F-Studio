@@ -33,7 +33,7 @@
             size="1.5vw"
             flat
             no-caps
-            @click="onProductClick">
+            :to="`/products/${paramCase(product)}`">
             Learn More
           </q-btn>
         </div>
@@ -73,7 +73,7 @@
           flat
           no-caps
           padding="3vw 0"
-          @click="onProductClick">
+          :to="`/products/${paramCase(product)}`">
           Learn More
         </q-btn>
       </div>
@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import {useQuasar} from "quasar";
+import {paramCase} from "change-case-all";
 import {defineComponent} from "vue";
 import {useI18n} from "vue-i18n";
 
@@ -106,7 +106,6 @@ export default defineComponent({
     }
   },
   setup() {
-    const $q = useQuasar();
     const $i18n = useI18n({useScope: "global"});
 
     const shadowColors = {
@@ -117,16 +116,10 @@ export default defineComponent({
     const i18n = (relativePath) => {
       return $i18n.t("components.productPanel." + relativePath);
     };
-    const onProductClick = () => {
-      $q.notify({
-        message: i18n("notifications.comingSoon"),
-        type: "info"
-      });
-    };
     return {
       shadowColors,
       i18n,
-      onProductClick
+      paramCase
     };
   }
 });

@@ -11,23 +11,24 @@
 
 <script>
 import {defineComponent, ref} from "vue";
+import {useI18n} from "vue-i18n";
 
 export default defineComponent({
   name: "MainLayout",
   setup() {
+    const $i18n = useI18n({useScope: "global"});
+
     const leftDrawer = ref(false);
-    return {leftDrawer}
-  },
-  methods: {
-    i18n(relativePath) {
-      return this.$t("layouts.main." + relativePath);
-    },
-    toggleDrawer(position) {
+    const i18n = (relativePath) => {
+      return $i18n.t("layouts.main." + relativePath);
+    };
+    const toggleDrawer = (position) => {
       switch (position) {
         case 'left':
-          this.leftDrawer = !this.leftDrawer;
+          leftDrawer.value = !leftDrawer.value;
       }
-    }
+    };
+    return {leftDrawer, i18n, toggleDrawer};
   }
 });
 </script>

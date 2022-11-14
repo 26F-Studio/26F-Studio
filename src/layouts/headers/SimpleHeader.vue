@@ -26,24 +26,27 @@
 </template>
 
 <script>
+import {useQuasar} from "quasar";
 import {defineComponent} from "vue";
+import {useI18n} from "vue-i18n";
 
 export default defineComponent({
   name: "SimpleHeader",
-  setup() {
-    return {};
-  },
-  methods: {
-    i18n(relativePath) {
-      return this.$t("layouts.headers.main." + relativePath);
-    },
-    onLogoClick(event, go) {
-      if (this.$q.screen.lt.md) {
+  setup(_, {emit}) {
+    const $q = useQuasar();
+    const $i18n = useI18n({useScope: "global"});
+
+    const i18n = (relativePath) => {
+      return $i18n.t("layouts.headers.simple." + relativePath);
+    };
+    const onLogoClick = (event, go) => {
+      if ($q.screen.lt.md) {
         event.preventDefault();
-        this.$emit('click:drawer', 'left');
+        emit('click:drawer', 'left');
       }
       go();
-    }
+    };
+    return {i18n, onLogoClick};
   }
 });
 </script>
