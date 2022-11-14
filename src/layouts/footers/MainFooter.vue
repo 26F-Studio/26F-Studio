@@ -1,39 +1,57 @@
 <template>
-  <q-footer class="row bg-dark text-light q-px-xl q-py-lg q-gutter-x-xl">
-    <q-space/>
-    <div
-      v-for="(column, columnIndex) in columns"
-      :key="columnIndex"
-      class="q-gutter-y-md">
-      <div class="text-capitalize text-weight-bold">
-        {{ i18n(`labels.${column.category}`) }}
-      </div>
+  <q-footer class="row justify-center bg-dark text-light q-py-xl q-px-xs-md q-px-sm-xl">
+    <q-btn
+      class="col-xs-12 col-sm-auto"
+      flat
+      no-caps
+      no-wrap
+      :size="$q.screen.gt.sm ? '1.5vw' : undefined"
+      square
+      to="/home"
+      :stretch="$q.screen.gt.sm">
       <div
-        v-for="(item, itemIndex) in column.list"
-        :key="itemIndex"
-        class="text-weight-thin"
-        @click="$router['push'](item.to)">
-        {{ i18n(`labels.${item.label}`) }}
+        class="title-text self-center"
+        :style="`font-size: ${$q.screen.xs ? '10vw' : '3vw'}`">
+        {{ '\u{0FFFFF}' + ($q.screen.sm ? '' : '  ' + i18n("labels.title")) }}
+      </div>
+    </q-btn>
+    <q-space v-if="$q.screen.gt.xs"/>
+    <div class="row col-xs-12 col-sm-auto q-py-xs-lg">
+      <div
+        v-for="(column, columnIndex) in columns"
+        :key="columnIndex"
+        class="column col-xs-6 col-sm-auto q-pl-xs-lg q-gutter-sm-y-md">
+        <div
+          class="label-text text-capitalize q-pt-xs-lg q-pl-xs"
+          style="font-weight: 700; font-size: 1.5rem">
+          {{ i18n(`labels.${column.category}`) }}
+        </div>
+        <q-btn
+          v-for="(item, itemIndex) in column.list"
+          :key="itemIndex"
+          class="ellipsis label-text q-py-xs-sm"
+          align="left"
+          dense
+          flat
+          :label="i18n(`labels.${item.label}`)"
+          no-caps
+          no-wrap
+          square
+          :to="item.to"
+          style="font-weight: 400"/>
       </div>
     </div>
   </q-footer>
 </template>
 
 <script>
-import { computed, defineComponent } from "vue";
-import { useQuasar } from "quasar";
+import {defineComponent} from "vue";
+import {useI18n} from "vue-i18n";
 
 export default defineComponent({
   name: "MainFooter",
   setup() {
-    const $q = useQuasar();
-    const footerClass = computed(() => {
-      if ($q.dark.isActive) {
-        return "bg-light text-dark";
-      } else {
-        return "";
-      }
-    });
+    const $i18n = useI18n({useScope: "global"});
     const columns = [
       {
         category: "products",
@@ -85,12 +103,28 @@ export default defineComponent({
         }]
       }
     ];
-    return { columns };
-  },
-  methods: {
-    i18n(relativePath) {
-      return this.$t("layouts.footers.main." + relativePath);
-    }
+
+    const i18n = (relativePath) => {
+      return $i18n.t("layouts.footers.main." + relativePath);
+    };
+
+    return {columns, i18n};
   }
 });
 </script>
+
+<style scoped lang="scss">
+@import "src/css/app.scss";
+
+.label-text {
+  font-family: 'inter', sans-serif;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+}
+
+.title-text {
+  font-family: 'galaxy-sans', sans-serif;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  font-weight: 206;
+  -webkit-font-smoothing: antialiased;
+}
+</style>

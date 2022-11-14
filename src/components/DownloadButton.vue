@@ -50,7 +50,6 @@ import {defineComponent} from "vue";
 
 import {getLatestDownloadLink, usePlatforms} from "boot/config";
 import {useI18n} from "vue-i18n";
-import {useRouter} from "vue-router";
 
 export default defineComponent({
   name: "DownloadButton",
@@ -67,7 +66,6 @@ export default defineComponent({
   setup(props) {
     const $q = useQuasar();
     const $i18n = useI18n({useScope: "global"});
-    const $router = useRouter();
 
     let mainPlatform = "windows64";
     let platforms = usePlatforms();
@@ -90,7 +88,7 @@ export default defineComponent({
     const downloadProduct = (platform) => {
       const downloadLink = getLatestDownloadLink(props.product, platform);
       if (downloadLink) {
-        $router.push(downloadLink);
+        window.location.href = downloadLink;
       } else {
         $q.notify({
           message: i18n("notifications.error"),

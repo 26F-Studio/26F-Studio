@@ -15,9 +15,8 @@
         <div
           v-if="$q.screen.gt.xs"
           class="title-text self-center"
-          :class="$q.screen.gt.sm ? 'q-mb-sm' : 'q-mb-xs'"
           style="font-size: 3vw">
-          {{ '\u{0FFFFF}  ' + i18n("labels.title") }}
+          {{ `\u{0FFFFF}  ${i18n("labels.title")}` }}
         </div>
       </q-btn>
       <q-space/>

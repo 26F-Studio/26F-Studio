@@ -19,21 +19,25 @@
 </template>
 
 <script>
+import {useQuasar} from "quasar";
 import {defineComponent} from 'vue';
+import {useI18n} from "vue-i18n";
 
 import {useProject} from "boot/config";
 
 export default defineComponent({
   name: 'SettingsMenu',
   setup() {
-    const toggleDarkMode = () => {
-      this.$q.dark.toggle();
-      this.$q.localStorage.set(`${useProject()}.settings.darkMode`, this.$q.dark.mode);
-    };
+    const $q = useQuasar();
+    const $i18n = useI18n({useScope: "global"});
     const i18n = (relativePath) => {
-      return this.$t('components.settingsMenu.' + relativePath);
+      return $i18n.t('components.settingsMenu.' + relativePath);
     }
-    return {}
+    const toggleDarkMode = () => {
+      $q.dark.toggle();
+      $q.localStorage.set(`${useProject()}.settings.darkMode`, $q.dark.mode);
+    };
+    return {i18n, toggleDarkMode}
   },
   methods: {}
 });

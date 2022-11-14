@@ -40,6 +40,7 @@
 
 <script>
 import {defineComponent, computed} from 'vue'
+import {useI18n} from "vue-i18n";
 
 export default defineComponent({
   name: 'MainDrawer',
@@ -50,6 +51,7 @@ export default defineComponent({
     }
   },
   setup(props, {emit}) {
+    const $i18n = useI18n({useScope: "global"});
     const isOpen = computed({
       get: () => props.modelValue,
       set: (value) => emit('update:modelValue', value),
@@ -109,13 +111,12 @@ export default defineComponent({
         }]
       },
     ];
-    return {isOpen, categories};
-  },
-  methods: {
-    i18n(relativePath) {
-      return this.$t('layouts.drawers.main.' + relativePath);
-    }
-  },
+
+    const i18n = (relativePath) => {
+      return $i18n.t('layouts.drawers.main.' + relativePath);
+    };
+    return {isOpen, categories, i18n};
+  }
 })
 </script>
 

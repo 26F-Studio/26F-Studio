@@ -89,6 +89,7 @@ export default {
       },
       main: {
         labels: {
+          title: "26F Studio",
           products: "Products",
           techminoGalaxy: "Techmino Galaxy",
           techmino: "Techmino",
