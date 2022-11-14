@@ -1,21 +1,18 @@
 <template>
   <svg xmlns="http://www.w3.org/2000/svg" :viewBox="`0 0 ${width} ${height}`">
     <path
-      fill-rule="evenodd" :fill="color"
+      fill-rule="evenodd" :fill="fill"
       :d="path"/>
   </svg>
 </template>
 
 <script>
+import { useQuasar } from "quasar";
 import {computed, defineComponent} from "vue";
 
 export default defineComponent({
   name: "WaveCover",
   props: {
-    color: {
-      type: String,
-      default: "rgba(255, 255, 255, 1)"
-    },
     end: {
       type: Object,
       default: () => ({
@@ -44,6 +41,10 @@ export default defineComponent({
     }
   },
   setup(props) {
+    const $q = useQuasar();
+    const fill = computed(() => {
+      return $q.dark.isActive ? "#121212" : "#fff";
+    });
     const path = computed(() => {
       switch (props.position) {
         case "bottom":
@@ -75,6 +76,7 @@ export default defineComponent({
       }
     });
     return {
+      fill,
       path
     };
   }
