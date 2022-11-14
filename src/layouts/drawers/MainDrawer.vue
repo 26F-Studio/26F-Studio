@@ -3,7 +3,7 @@
     v-model="isOpen"
     elevated
     overlay>
-    <q-img :src="require(`assets/homePageSplash-h.png`)">
+    <q-img :src="require(`assets/background.webp`)">
       <div class="absolute-bottom bg-transparent">
         <q-avatar size="56px" class="q-mb-sm">
           <img src="https://cdn.quasar.dev/img/boy-avatar.png">

@@ -11,7 +11,7 @@
             checked-icon="dark_mode"
             unchecked-icon="light_mode"
             :model-value="$q.dark.isActive"
-            @update:model-value="toggleDarkMode" />
+            @update:model-value="toggleDarkMode"/>
         </q-item-section>
       </q-item>
     </q-list>
@@ -25,14 +25,16 @@ import {useProject} from "boot/config";
 
 export default defineComponent({
   name: 'SettingsMenu',
-  methods: {
-    toggleDarkMode() {
+  setup() {
+    const toggleDarkMode = () => {
       this.$q.dark.toggle();
       this.$q.localStorage.set(`${useProject()}.settings.darkMode`, this.$q.dark.mode);
-    },
-    i18n(relativePath) {
+    };
+    const i18n = (relativePath) => {
       return this.$t('components.settingsMenu.' + relativePath);
     }
-  }
+    return {}
+  },
+  methods: {}
 });
 </script>
