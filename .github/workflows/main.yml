@@ -72,6 +72,7 @@ jobs:
           fqdn: dev.studio26f.org
           keep_history: true
           repo: 26F-Studio/26F-Studio.github.io
+          target_branch: main
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
