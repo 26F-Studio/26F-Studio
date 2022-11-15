@@ -6,6 +6,7 @@
       <q-resize-observer @resize="onResize"/>
       <q-img
         class="full-width"
+        loading="eager"
         :src="require(`assets/background.webp`)"
         style="min-height: 540px"/>
       <div
