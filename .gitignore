@@ -35,3 +35,5 @@ yarn-error.log*
 # Compiled SCSS & SASS
 /src/css/*.css*
 /src/stores/store-flag.d.ts
+
+.vercel

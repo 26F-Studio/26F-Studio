@@ -82,8 +82,8 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v')
         uses: amondnet/vercel-action@v25
         with:
-          scope: ${{ secrets.VERCEL_TEAM_ID }}
+          scope: "26F Studio"
           vercel-args: --prod
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-org-id: ${{ secrets.VERCEL_TEAM_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
