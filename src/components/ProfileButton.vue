@@ -1,5 +1,6 @@
 <template>
   <q-btn
+    aria-label="Profile"
     flat
     :icon="loggedIn ? undefined : 'login'"
     no-caps
