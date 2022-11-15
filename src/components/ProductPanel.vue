@@ -3,12 +3,13 @@
     v-if="horizontal"
     class="row items-center"
     :class="reversed ? 'justify-end' : 'justify-start'">
-    <img
+    <q-img
       v-if="!reversed"
       class="cropped-image"
+      :placeholder-src="require(`assets/icons/${product}-lite.webp`)"
+      position="100% 0"
       :src="require(`assets/icons/${product}.webp`)"
-      :alt="`${product}-icon`"
-      style="margin-right: 5vw; object-position: 100% 0"
+      style="margin-right: 5vw;"
       :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]})`"/>
     <div
       class="col-auto column"
@@ -39,22 +40,25 @@
         </div>
       </div>
     </div>
-    <img
+    <q-img
       v-if="reversed"
       class="cropped-image"
+      :placeholder-src="require(`assets/icons/${product}-lite.webp`)"
+      position="0 0"
       :src="require(`assets/icons/${product}.webp`)"
-      :alt="`${product}-icon`"
-      style="margin-left: 5vw; object-position: 0 0"
+      style="margin-left: 5vw;"
       :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]});`"/>
   </div>
   <div
     v-if="!horizontal"
     class="row justify-center">
     <div class="col-8 column items-center q-gutter-y-md">
-      <img
+      <q-img
+        fit="contain"
+        height="35vw"
+        :placeholder-src="require(`assets/icons/${product}-lite.webp`)"
         :src="require(`assets/icons/${product}.webp`)"
-        :alt="`${product}-icon`"
-        style="height: 35vw; margin-bottom: 5vw;"
+        style="margin-bottom: 5vw;"
         :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]})`"/>
       <div class="product-text text-center">
         {{ i18n(`products.${product}.name`) }}
