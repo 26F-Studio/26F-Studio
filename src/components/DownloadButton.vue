@@ -1,7 +1,7 @@
 <template>
   <q-btn-dropdown
     :class="disable ? 'unavailable-btn' : 'download-btn'"
-    aria-label="Download"
+    toggle-aria-label="Download"
     :disable-main-btn="disable"
     :disable-dropdown="disable"
     flat
