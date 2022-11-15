@@ -7,7 +7,7 @@ on:
     branches: [ main, ci* ]
 
 env:
-  404_URL: https://raw.githubusercontent.com/rafgraph/spa-github-pages/gh-pages/404.html
+  HTML_404_URL: https://raw.githubusercontent.com/rafgraph/spa-github-pages/gh-pages/404.html
   DIST_PATH: ./dist/spa
 
 jobs:
@@ -49,7 +49,7 @@ jobs:
         run: |
           import json
           import os
-          os.system("wget ${{ env.404_URL }} -O ${{ env.DIST_PATH }}/404.html")
+          os.system("wget ${{ env.HTML_404_URL }} -O ${{ env.DIST_PATH }}/404.html")
           with open("${{ env.DIST_PATH }}/index.html", "r", encoding="utf-8") as index_html_file:
             index_html = index_html_file.read()
             index_html = index_html[index_html.find("<title"):index_html.find("<script>")]
