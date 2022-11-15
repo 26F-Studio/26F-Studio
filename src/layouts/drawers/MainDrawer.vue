@@ -5,9 +5,7 @@
     overlay>
     <q-img :src="require(`assets/background.webp`)">
       <div class="absolute-bottom bg-transparent">
-        <q-avatar size="56px" class="q-mb-sm">
-          <img src="https://cdn.quasar.dev/img/boy-avatar.png">
-        </q-avatar>
+        <q-avatar size="56px" class="q-mb-sm" icon="person"/>
         <div class="text-weight-bold">Razvan Stoenescu</div>
         <div>@rstoenescu</div>
       </div>
