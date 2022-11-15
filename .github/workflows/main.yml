@@ -3,8 +3,9 @@ name: 26F Studio CI
 on:
   push:
     branches: [ main, ci* ]
+    tags: [ v* ]
   pull_request:
-    branches: [ main, ci* ]
+    branches: [ main ]
 
 env:
   HTML_404_URL: https://raw.githubusercontent.com/rafgraph/spa-github-pages/gh-pages/404.html
@@ -70,8 +71,13 @@ jobs:
           build_dir: ${{ env.DIST_PATH }}
           fqdn: dev.studio26f.org
           keep_history: true
+          repo: 26F-Studio/26F-Studio.github.io
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: 26F-Studio_SPA
           path: ${{ env.DIST_PATH }}
+      - name: Deploy to Vercel
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          curl -X POST ${{ secrets.VERCEL_RELEASE }}
