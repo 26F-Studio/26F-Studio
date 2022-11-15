@@ -2,6 +2,7 @@
   <q-header class="bg-transparent" style="height: 0">
     <q-toolbar style="background: linear-gradient(rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.0))">
       <q-btn
+        aria-label="Menu"
         dense
         flat
         :icon="$q.screen.xs ? 'menu' : undefined"
@@ -35,6 +36,7 @@
       <ProfileButton size="1vw"/>
       <q-btn
         v-show="$q.screen.gt.xs"
+        aria-label="Language"
         class="q-ml-sm q-ml-md-xs"
         flat
         icon="language"
@@ -45,6 +47,7 @@
       <q-btn
         v-show="$q.screen.gt.xs"
         class="q-ml-sm q-ml-md-xs"
+        aria-label="Settings"
         flat
         icon="settings"
         round
