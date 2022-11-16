@@ -8,15 +8,15 @@
 </template>
 
 <script>
-import {useQuasar} from "quasar";
-import {computed, defineComponent, ref} from "vue";
+import { useQuasar } from "quasar";
+import { computed, defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "WaveCover",
   props: {
     svgClass: {
       type: String,
-      default: "",
+      default: ""
     },
     end: {
       type: Object,
@@ -75,8 +75,8 @@ export default defineComponent({
       }
     });
     const onResize = (size) => {
-      height.value = size.height;
-      width.value = size.width;
+      height.value = Math.ceil(size.height);
+      width.value = Math.ceil(size.width);
     };
     return {
       fill,
