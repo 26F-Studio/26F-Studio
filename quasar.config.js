@@ -8,13 +8,11 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js
 
-
+const clc = require("cli-color");
 const ESLintPlugin = require("eslint-webpack-plugin");
-
-
 const {configure} = require("quasar/wrappers");
 
-const clc = require("cli-color");
+const GTAG_ID = "G-DLZ9HGSM0C";
 
 module.exports = configure(function (ctx) {
   return {
@@ -26,12 +24,12 @@ module.exports = configure(function (ctx) {
 
     htmlVariables: {
       extraHeads:
-        `<script async src="https://www.googletagmanager.com/gtag/js?id=G-598K0GLRNN"></script>
+        `<script async src="https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}"></script>
          <script>
            window.dataLayer = window.dataLayer || [];
            function gtag(){dataLayer.push(arguments);}
            gtag('js', new Date());
-           gtag('config', 'G-598K0GLRNN');
+           gtag('config', '${GTAG_ID}');
          </script>`,
     },
 
