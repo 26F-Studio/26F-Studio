@@ -31,7 +31,7 @@ jobs:
             data = file.read()
             insert_pos = data.find("\n", data.find("</head>")) - 9
             if "${{ github.ref }}".startswith("refs/tags/v"):
-              data = data[:insert_pos] + "  <script async src="https://www.googletagmanager.com/gtag/js?id=G-598K0GLRNN"></script>\n" \
+              data = data[:insert_pos] + "  <script async src=\"https://www.googletagmanager.com/gtag/js?id=G-598K0GLRNN\"></script>\n" \
                                          "  <script>\n" \
                                          "    window.dataLayer = window.dataLayer || [];\n" \
                                          "    function gtag() {\n" \
