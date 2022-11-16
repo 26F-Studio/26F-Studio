@@ -29,6 +29,7 @@
     "@quasar/app-webpack": "^3.6.1",
     "@quasar/quasar-app-extension-qmediaplayer": "^2.0.0-beta.6",
     "adm-zip": "^0.5.9",
+    "cli-color": "^2.0.3",
     "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-vue": "^9.7.0",

@@ -14,6 +14,8 @@ const ESLintPlugin = require("eslint-webpack-plugin");
 
 const {configure} = require("quasar/wrappers");
 
+const clc = require("cli-color");
+
 module.exports = configure(function (ctx) {
   return {
     // https://v2.quasar.dev/quasar-cli-webpack/supporting-ts
@@ -21,6 +23,17 @@ module.exports = configure(function (ctx) {
 
     // https://v2.quasar.dev/quasar-cli-webpack/prefetch-feature
     // preFetch: true,
+
+    htmlVariables: {
+      extraHeads:
+        `<script async src="https://www.googletagmanager.com/gtag/js?id=G-598K0GLRNN"></script>
+         <script>
+           window.dataLayer = window.dataLayer || [];
+           function gtag(){dataLayer.push(arguments);}
+           gtag('js', new Date());
+           gtag('config', 'G-598K0GLRNN');
+         </script>`,
+    },
 
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
@@ -52,7 +65,7 @@ module.exports = configure(function (ctx) {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-build
     build: {
-      vueRouterMode: "history", // available values: 'hash', 'history'
+      vueRouterMode: "history",
       // transpile: false,
       // publicPath: '/',
 
@@ -71,7 +84,25 @@ module.exports = configure(function (ctx) {
       // extractCSS: false,
 
       beforeBuild({quasarConf}) {
-        console.log("GITHUB_REF: ", process.env.GITHUB_REF);
+        if (typeof process.env.GITHUB_REF === 'string') {
+          console.info(clc.green(" App • ") + "Building with GitHub Actions");
+          if (process.env.GITHUB_REF.startsWith("refs/tags/v")) {
+            console.info(clc.green(" App • ") + "Build in production mode");
+          } else {
+            console.info(clc.green(" App • ") + "Build in development mode");
+            quasarConf.htmlVariables.extraHeads +=
+              `<script type="text/javascript">
+                 (function(l) {
+                   if (l.search[1] === '/' ) {
+                     const decoded = l.search.slice(1).split('&').map(function (s) {
+                       return s.replace(/~and~/g, '&')
+                     }).join('?');
+                     window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+                   }
+                 }(window.location))
+               </script>`;
+          }
+        }
       },
       // https://v2.quasar.dev/quasar-cli-webpack/handling-webpack
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
