@@ -12,10 +12,6 @@ const clc = require("cli-color");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const {configure} = require("quasar/wrappers");
 
-const GTAG_ID = (process.env.GITHUB_REF && process.env.GITHUB_REF.startsWith("refs/tags/v"))
-  ? "G-DLZ9HGSM0C"
-  : "G-J9PXZMJLTN";
-
 module.exports = configure(function (ctx) {
   return {
     // https://v2.quasar.dev/quasar-cli-webpack/supporting-ts
@@ -26,12 +22,12 @@ module.exports = configure(function (ctx) {
 
     htmlVariables: {
       extraHeads:
-        `<script async src="https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}"></script>
+        `<script async src="https://www.googletagmanager.com/gtag/js?id={{GTAG_ID}}"></script>
          <script>
            window.dataLayer = window.dataLayer || [];
            function gtag(){dataLayer.push(arguments);}
            gtag('js', new Date());
-           gtag('config', '${GTAG_ID}');
+           gtag('config', '{{GTAG_ID}}');
          </script>`,
     },
 
@@ -88,8 +84,16 @@ module.exports = configure(function (ctx) {
           console.info(clc.green(" App • ") + "Building with GitHub Actions");
           if (process.env.GITHUB_REF.startsWith("refs/tags/v")) {
             console.info(clc.green(" App • ") + "Build in production mode");
+            quasarConf.htmlVariables.extraHeads = quasarConf.htmlVariables.extraHeads.replace(
+              "{{GTAG_ID}}",
+              "G-DLZ9HGSM0C"
+            );
           } else {
             console.info(clc.green(" App • ") + "Build in development mode");
+            quasarConf.htmlVariables.extraHeads = quasarConf.htmlVariables.extraHeads.replace(
+              "{{GTAG_ID}}",
+              "G-J9PXZMJLTN"
+            );
             quasarConf.htmlVariables.extraHeads +=
               `<script type="text/javascript">
                  (function(l) {
@@ -102,6 +106,9 @@ module.exports = configure(function (ctx) {
                  }(window.location))
                </script>`;
           }
+        } else {
+          console.info(clc.green(" App • ") + "Build with local environment");
+          quasarConf.htmlVariables.extraHeads = "";
         }
       },
       // https://v2.quasar.dev/quasar-cli-webpack/handling-webpack
