@@ -4,15 +4,9 @@
       class="relative-position full-width"
       style="height:fit-content; overflow: hidden;">
       <q-resize-observer @resize="onResize"/>
-      <q-img
+      <BackgroundImage
         class="full-width"
-        loading="lazy"
-        no-spinner
-        no-transition
-        :src="require(`assets/background.png`)"
-        :srcset="backGroundSrcSet"
-        :sizes="backGroundSizes"
-        style="min-height: 540px"/>
+        style="min-height: 35vh"/>
       <div
         class="header-icon absolute"
         style="font-size: 80vw; right: -26vw; top:-42vw;">
@@ -72,7 +66,6 @@
 
 <script>
 import {storeToRefs} from "pinia";
-import {useQuasar} from "quasar";
 import {computed, defineComponent, ref} from "vue";
 import {useI18n} from "vue-i18n";
 
@@ -80,14 +73,14 @@ import {useProducts} from "boot/config";
 
 import {usePlayerStore} from "stores/player";
 
+import BackgroundImage from "components/BackgroundImage";
 import ProductPanel from "components/ProductPanel";
 import WaveCover from "components/WaveCover";
 
 export default defineComponent({
   name: "HomePage",
-  components: {ProductPanel, WaveCover},
+  components: {BackgroundImage, ProductPanel, WaveCover},
   setup() {
-    const $q = useQuasar();
     const $i18n = useI18n({useScope: "global"});
 
     const products = useProducts();
@@ -95,23 +88,6 @@ export default defineComponent({
     const {id} = storeToRefs(usePlayerStore());
     const loggedIn = computed(() => {
       return id > 0;
-    });
-
-    const backGroundSrcSet = computed(() => {
-      let result = "";
-      for (const [key, value] of Object.entries($q.screen.sizes)) {
-        result += `${require(`assets/background-${key}.webp`)} ${value}w,`;
-      }
-      result += `${require(`assets/background.webp`)} 3360w`;
-      return result;
-    });
-    const backGroundSizes = computed(() => {
-      let result = "";
-      for (const value of Object.values($q.screen.sizes)) {
-        result += `(max-width: ${value}px) ${value}px,`;
-      }
-      result += `3360w`;
-      return result;
     });
 
     const waveHeight = ref(1920);
@@ -127,8 +103,6 @@ export default defineComponent({
     return {
       products,
       loggedIn,
-      backGroundSrcSet,
-      backGroundSizes,
       waveHeight,
       waveWidth,
       i18n,

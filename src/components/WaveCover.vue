@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { useQuasar } from "quasar";
+import {useQuasar} from "quasar";
 import {computed, defineComponent} from "vue";
 
 export default defineComponent({

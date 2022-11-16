@@ -3,15 +3,13 @@
     v-model="isOpen"
     elevated
     overlay>
-    <q-img
-      :src="require(`assets/background.png`)"
-      :srcset="backGroundSrcSet">
+    <BackgroundImage>
       <div class="absolute-bottom bg-transparent">
         <q-avatar size="56px" class="q-mb-sm" icon="person"/>
         <div class="text-weight-bold">Razvan Stoenescu</div>
         <div>@rstoenescu</div>
       </div>
-    </q-img>
+    </BackgroundImage>
     <q-list>
       <template v-for="(category, categoryIndex) in categories" :key="categoryIndex">
         <q-expansion-item
@@ -39,12 +37,14 @@
 </template>
 
 <script>
-import {useQuasar} from "quasar";
-import {defineComponent, computed} from 'vue'
+import {computed, defineComponent} from 'vue'
 import {useI18n} from "vue-i18n";
+
+import BackgroundImage from "components/BackgroundImage";
 
 export default defineComponent({
   name: 'MainDrawer',
+  components: {BackgroundImage},
   props: {
     modelValue: {
       type: Boolean,
@@ -52,25 +52,7 @@ export default defineComponent({
     }
   },
   setup(props, {emit}) {
-    const $q = useQuasar();
     const $i18n = useI18n({useScope: "global"});
-
-    const backGroundSrcSet = computed(() => {
-      let result = "";
-      for (const [key, value] of Object.entries($q.screen.sizes)) {
-        result += `${require(`assets/background-${key}.webp`)} ${value}w,`;
-      }
-      result += `${require(`assets/background.webp`)} 3360w`;
-      return result;
-    });
-    const backGroundSizes = computed(() => {
-      let result = "";
-      for (const value of Object.values($q.screen.sizes)) {
-        result += `(max-width: ${value}px) ${value}px,`;
-      }
-      result += `3360w`;
-      return result;
-    });
 
     const isOpen = computed({
       get: () => props.modelValue,
@@ -135,7 +117,7 @@ export default defineComponent({
     const i18n = (relativePath) => {
       return $i18n.t('layouts.drawers.main.' + relativePath);
     };
-    return {isOpen, backGroundSrcSet, backGroundSizes, categories, i18n};
+    return {isOpen, categories, i18n};
   }
 })
 </script>
