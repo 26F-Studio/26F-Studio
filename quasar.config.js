@@ -84,13 +84,13 @@ module.exports = configure(function (ctx) {
           console.info(clc.green(" App • ") + "Building with GitHub Actions");
           if (process.env.GITHUB_REF.startsWith("refs/tags/v")) {
             console.info(clc.green(" App • ") + "Build in production mode");
-            quasarConf.htmlVariables.extraHeads = quasarConf.htmlVariables.extraHeads.replace(
+            quasarConf.htmlVariables.extraHeads = quasarConf.htmlVariables.extraHeads.replaceAll(
               "{{GTAG_ID}}",
               "G-DLZ9HGSM0C"
             );
           } else {
             console.info(clc.green(" App • ") + "Build in development mode");
-            quasarConf.htmlVariables.extraHeads = quasarConf.htmlVariables.extraHeads.replace(
+            quasarConf.htmlVariables.extraHeads = quasarConf.htmlVariables.extraHeads.replaceAll(
               "{{GTAG_ID}}",
               "G-J9PXZMJLTN"
             );
