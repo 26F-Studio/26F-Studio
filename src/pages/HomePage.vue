@@ -5,7 +5,7 @@
       style="height:fit-content; overflow: hidden;">
       <BackgroundImage
         class="full-width"
-        style="min-height: 35vh"/>
+        style="min-height: 50vh" />
       <div
         class="header-icon absolute"
         style="font-size: 80vw; right: -26vw; top:-42vw;">
@@ -62,13 +62,13 @@
 </template>
 
 <script>
-import {storeToRefs} from "pinia";
-import {computed, defineComponent} from "vue";
-import {useI18n} from "vue-i18n";
+import { storeToRefs } from "pinia";
+import { computed, defineComponent } from "vue";
+import { useI18n } from "vue-i18n";
 
-import {useProducts} from "boot/config";
+import { useProducts } from "boot/config";
 
-import {usePlayerStore} from "stores/player";
+import { usePlayerStore } from "stores/player";
 
 import BackgroundImage from "components/BackgroundImage";
 import ProductPanel from "components/ProductPanel";
