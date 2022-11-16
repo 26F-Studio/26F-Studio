@@ -24,6 +24,9 @@ export default {
     },
     languagesMenu: {},
     productPanel: {
+      labels: {
+        learnMore: "Learn More",
+      },
       notifications: {
         comingSoon: "Coming soon!"
       },

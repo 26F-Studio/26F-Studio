@@ -31,12 +31,12 @@
         <div>
           <q-btn
             class="product-btn q-px-xl"
-            size="1.5vw"
+            :aria-label="`product-${product}`"
+            :label="i18n('labels.learnMore')"
             flat
             no-caps
-            :to="`/products/${paramCase(product)}`">
-            Learn More
-          </q-btn>
+            size="1.5vw"
+            :to="`/products/${paramCase(product)}`"/>
         </div>
       </div>
     </div>
@@ -73,13 +73,13 @@
           :product="product"/>
         <q-btn
           class="product-btn col-8"
-          size="1.5vw"
+          :aria-label="`product-${product}`"
+          :label="i18n('labels.learnMore')"
           flat
           no-caps
           padding="3vw 0"
-          :to="`/products/${paramCase(product)}`">
-          Learn More
-        </q-btn>
+          size="1.5vw"
+          :to="`/products/${paramCase(product)}`"/>
       </div>
     </div>
   </div>
