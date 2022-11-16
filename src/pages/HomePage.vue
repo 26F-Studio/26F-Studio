@@ -6,6 +6,7 @@
       <q-resize-observer @resize="onResize"/>
       <q-img
         class="full-width"
+        loading="eager"
         no-spinner
         :placeholder-src="require(`assets/background-lite.webp`)"
         :src="require(`assets/background.webp`)"
