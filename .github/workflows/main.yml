@@ -13,8 +13,9 @@ env:
   PACKAGE_PATH: ./spa.zip
 
 jobs:
-  build-spa:
+  deploy-gh-pages:
     runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v') != true
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -25,7 +26,6 @@ jobs:
         run: |
           npm install && npm run "spa release"
       - name: Download and modify 404.html for github pages
-        if: startsWith(github.ref, 'refs/tags/v') != true
         shell: python3 {0}
         run: |
           import json
@@ -43,7 +43,6 @@ jobs:
             notfound_html_file.truncate()
             notfound_html_file.write(notfound_html)
       - name: Deploy to GitHub Pages
-        if: startsWith(github.ref, 'refs/tags/v') != true
         uses: crazy-max/ghaction-github-pages@v3
         env:
           GH_PAT: ${{ secrets.FINE_PAT }}
@@ -54,13 +53,15 @@ jobs:
           repo: 26F-Studio/26F-Studio.github.io
           target_branch: main
       - name: Upload artifact
-        if: startsWith(github.ref, 'refs/tags/v') != true
         uses: actions/upload-artifact@v3
         with:
           name: 26F-Studio_SPA
           path: ${{ env.DIST_PATH }}
+  deploy-vercel:
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v') == true
+    steps:
       - name: Deploy to Vercel
-        if: startsWith(github.ref, 'refs/tags/v')
         uses: amondnet/vercel-action@v25.1.0
         with:
           scope: ${{ secrets.VERCEL_TEAM_ID }}
@@ -68,14 +69,3 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_TEAM_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-      - name: Prepare for release
-        if: startsWith(github.ref, 'refs/tags/v')
-        shell: bash
-        run: |
-          7z a -tzip ${{ env.PACKAGE_PATH }} ${{ env.DIST_PATH }}/*
-      - name: Upload Release
-        if: startsWith(github.ref, 'refs/tags/v')
-        uses: ncipollo/release-action@v1
-        with:
-          allowUpdates: true
-          artifacts: ${{ env.PACKAGE_PATH }}

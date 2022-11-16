@@ -81,21 +81,13 @@ module.exports = configure(function (ctx) {
 
       beforeBuild({quasarConf}) {
         if (typeof process.env.GITHUB_REF === 'string') {
-          console.info(clc.green(" App • ") + "Building with GitHub Actions");
-          if (process.env.GITHUB_REF.startsWith("refs/tags/v")) {
-            console.info(clc.green(" App • ") + "Build in production mode");
-            quasarConf.htmlVariables.extraHeads = quasarConf.htmlVariables.extraHeads.replaceAll(
-              "{{GTAG_ID}}",
-              "G-DLZ9HGSM0C"
-            );
-          } else {
-            console.info(clc.green(" App • ") + "Build in development mode");
-            quasarConf.htmlVariables.extraHeads = quasarConf.htmlVariables.extraHeads.replaceAll(
-              "{{GTAG_ID}}",
-              "G-J9PXZMJLTN"
-            );
-            quasarConf.htmlVariables.extraHeads +=
-              `<script type="text/javascript">
+          console.info(clc.green(" App • ") + "Build in development mode");
+          quasarConf.htmlVariables.extraHeads = quasarConf.htmlVariables.extraHeads.replaceAll(
+            "{{GTAG_ID}}",
+            "G-J9PXZMJLTN"
+          );
+          quasarConf.htmlVariables.extraHeads +=
+            `<script type="text/javascript">
                  (function(l) {
                    if (l.search[1] === '/' ) {
                      const decoded = l.search.slice(1).split('&').map(function (s) {
@@ -105,10 +97,12 @@ module.exports = configure(function (ctx) {
                    }
                  }(window.location))
                </script>`;
-          }
         } else {
-          console.info(clc.green(" App • ") + "Build with local environment");
-          quasarConf.htmlVariables.extraHeads = "";
+          console.info(clc.green(" App • ") + "Build in production mode");
+          quasarConf.htmlVariables.extraHeads = quasarConf.htmlVariables.extraHeads.replaceAll(
+            "{{GTAG_ID}}",
+            "G-DLZ9HGSM0C"
+          );
         }
       },
       // https://v2.quasar.dev/quasar-cli-webpack/handling-webpack
