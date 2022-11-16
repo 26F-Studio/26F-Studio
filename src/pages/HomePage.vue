@@ -21,7 +21,7 @@
         </div>
       </div>
       <WaveCover
-        :end="$q.screen.xs ? {ratio: 0.6, control: [0.6, 0.61]} : undefined"
+        :end="$q.screen.xs ? {ratio: 0.8, control: [0.8, 0.85]} : undefined"
         :start="$q.screen.xs ? {ratio: 1.0, control: [0.3, 0.9]} : undefined"
         svg-class="absolute-bottom full-width"/>
     </div>
