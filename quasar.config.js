@@ -12,7 +12,9 @@ const clc = require("cli-color");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const {configure} = require("quasar/wrappers");
 
-const GTAG_ID = "G-DLZ9HGSM0C";
+const GTAG_ID = (process.env.GITHUB_REF && process.env.GITHUB_REF.startsWith("refs/tags/v"))
+  ? "G-DLZ9HGSM0C"
+  : "G-J9PXZMJLTN";
 
 module.exports = configure(function (ctx) {
   return {
