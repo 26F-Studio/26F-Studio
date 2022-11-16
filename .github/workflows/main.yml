@@ -39,7 +39,6 @@ jobs:
             insert_pos = notfound_html.find("<meta")
             notfound_html = notfound_html[:insert_pos] + notfound_html[notfound_html.find("<script"):]
             notfound_html = notfound_html[:insert_pos] + index_html + notfound_html[insert_pos:]
-            print(notfound_html)
             notfound_html_file.seek(0)
             notfound_html_file.truncate()
             notfound_html_file.write(notfound_html)
