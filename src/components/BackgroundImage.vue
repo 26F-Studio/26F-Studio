@@ -25,11 +25,12 @@ export default defineComponent({
     const $q = useQuasar();
     const src = computed(() => {
       for (const key of Object.keys($q.screen.sizes)) {
+        console.log(key);
         if ($q.screen[key]) {
           return require(`assets/background-${key}.webp`);
         }
       }
-      return require(`assets/background-${key}.png`);
+      return require(`assets/background-xs.webp`);
     });
     return {
       src
