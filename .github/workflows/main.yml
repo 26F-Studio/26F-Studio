@@ -29,7 +29,7 @@ jobs:
         run: |
           with open("./src/index.template.html", "r+", encoding="utf-8") as file:
             data = file.read()
-            insert_pos = data.find("\n", data.find("</head>")) - 9
+            insert_pos = data.find("\n", data.find("</head>")) - 7
             if "${{ github.ref }}".startswith("refs/tags/v"):
               data = data[:insert_pos] + "  <script async src=\"https://www.googletagmanager.com/gtag/js?id=G-598K0GLRNN\"></script>\n" \
                                          "  <script>\n" \
