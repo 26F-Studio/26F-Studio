@@ -10,6 +10,7 @@ on:
 env:
   HTML_404_URL: https://raw.githubusercontent.com/rafgraph/spa-github-pages/gh-pages/404.html
   DIST_PATH: ./dist/spa
+  PACKAGE_PATH: ./spa.zip
 
 jobs:
   build-spa:
@@ -24,6 +25,7 @@ jobs:
         run: |
           npm install
       - name: Add hack for github pages
+        if: !startsWith(github.ref, 'refs/tags/v')
         shell: python3 {0}
         run: |
           with open("./src/index.template.html", "r+", encoding="utf-8") as file:
@@ -46,6 +48,7 @@ jobs:
         run: |
           npm run "spa release"
       - name: Download and modify 404.html for github pages
+        if: !startsWith(github.ref, 'refs/tags/v')
         shell: python3 {0}
         run: |
           import json
@@ -64,6 +67,7 @@ jobs:
             notfound_html_file.truncate()
             notfound_html_file.write(notfound_html)
       - name: Deploy to GitHub Pages
+        if: !startsWith(github.ref, 'refs/tags/v')
         uses: crazy-max/ghaction-github-pages@v3
         env:
           GH_PAT: ${{ secrets.FINE_PAT }}
@@ -74,6 +78,7 @@ jobs:
           repo: 26F-Studio/26F-Studio.github.io
           target_branch: main
       - name: Upload artifact
+        if: !startsWith(github.ref, 'refs/tags/v')
         uses: actions/upload-artifact@v3
         with:
           name: 26F-Studio_SPA
@@ -87,3 +92,14 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_TEAM_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+      - name: Prepare for release
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        run: |
+          7z a -tzip ${{ env.PACKAGE_PATH }} ${{ env.DIST_PATH }}/*
+      - name: Upload Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifacts: ${{ env.PACKAGE_PATH }}
