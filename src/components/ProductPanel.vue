@@ -6,6 +6,9 @@
     <q-img
       v-if="!reversed"
       class="cropped-image"
+      loading="lazy"
+      no-spinner
+      no-transition
       :placeholder-src="require(`assets/icons/${product}-lite.webp`)"
       position="100% 0"
       :src="require(`assets/icons/${product}.webp`)"
@@ -36,13 +39,20 @@
             no-caps
             size="1.5vw"
             :title="`about-${product}`"
-            :to="`/products/${paramCase(product)}`"/>
+            :to="`/products/${paramCase(product)}`">
+            <div hidden>
+              {{ `about-${product}` }}
+            </div>
+          </q-btn>
         </div>
       </div>
     </div>
     <q-img
       v-if="reversed"
       class="cropped-image"
+      loading="lazy"
+      no-spinner
+      no-transition
       :placeholder-src="require(`assets/icons/${product}-lite.webp`)"
       position="0 0"
       :src="require(`assets/icons/${product}.webp`)"
@@ -56,6 +66,9 @@
       <q-img
         fit="contain"
         height="35vw"
+        loading="lazy"
+        no-spinner
+        no-transition
         :placeholder-src="require(`assets/icons/${product}-lite.webp`)"
         :src="require(`assets/icons/${product}.webp`)"
         style="margin-bottom: 5vw;"
@@ -78,8 +91,11 @@
           no-caps
           padding="3vw 0"
           size="1.5vw"
-          :title="`about-${product}`"
-          :to="`/products/${paramCase(product)}`"/>
+          :to="`/products/${paramCase(product)}`">
+          <div hidden>
+            {{ `about-${product}` }}
+          </div>
+        </q-btn>
       </div>
     </div>
   </div>

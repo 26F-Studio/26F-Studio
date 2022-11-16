@@ -6,10 +6,12 @@
       <q-resize-observer @resize="onResize"/>
       <q-img
         class="full-width"
-        loading="eager"
+        loading="lazy"
         no-spinner
-        :placeholder-src="require(`assets/background-lite.webp`)"
-        :src="require(`assets/background.webp`)"
+        no-transition
+        :src="require(`assets/background.png`)"
+        :srcset="backGroundSrcSet"
+        :sizes="backGroundSizes"
         style="min-height: 540px"/>
       <div
         class="header-icon absolute"
@@ -28,7 +30,9 @@
       <WaveCover
         class="absolute-bottom full-width"
         :end="$q.screen.xs ? {ratio: 0.6, control: [0.6, 0.61]} : undefined"
-        :start="$q.screen.xs ? {ratio: 1.0, control: [0.3, 0.9]} : undefined"/>
+        :height="waveHeight"
+        :start="$q.screen.xs ? {ratio: 1.0, control: [0.3, 0.9]} : undefined"
+        :width="waveWidth"/>
     </div>
     <div class="title-text text-center" style="font-size: 10vw; line-height: 18vw;">
       {{ i18n("labels.title") }}
@@ -68,6 +72,7 @@
 
 <script>
 import {storeToRefs} from "pinia";
+import {useQuasar} from "quasar";
 import {computed, defineComponent, ref} from "vue";
 import {useI18n} from "vue-i18n";
 
@@ -82,6 +87,7 @@ export default defineComponent({
   name: "HomePage",
   components: {ProductPanel, WaveCover},
   setup() {
+    const $q = useQuasar();
     const $i18n = useI18n({useScope: "global"});
 
     const products = useProducts();
@@ -89,6 +95,23 @@ export default defineComponent({
     const {id} = storeToRefs(usePlayerStore());
     const loggedIn = computed(() => {
       return id > 0;
+    });
+
+    const backGroundSrcSet = computed(() => {
+      let result = "";
+      for (const [key, value] of Object.entries($q.screen.sizes)) {
+        result += `${require(`assets/background-${key}.webp`)} ${value}w,`;
+      }
+      result += `${require(`assets/background.webp`)} 3360w`;
+      return result;
+    });
+    const backGroundSizes = computed(() => {
+      let result = "";
+      for (const value of Object.values($q.screen.sizes)) {
+        result += `(max-width: ${value}px) ${value}px,`;
+      }
+      result += `3360w`;
+      return result;
     });
 
     const waveHeight = ref(1920);
@@ -104,6 +127,10 @@ export default defineComponent({
     return {
       products,
       loggedIn,
+      backGroundSrcSet,
+      backGroundSizes,
+      waveHeight,
+      waveWidth,
       i18n,
       onResize
     };
