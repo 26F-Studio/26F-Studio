@@ -24,8 +24,7 @@ const routes = [
         }
       },
       {
-        "path": "products",
-        component: () => import("layouts/MainLayout.vue"),
+        path: "products",
         children: [
           {
             name: "techmino-galaxy",

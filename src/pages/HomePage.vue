@@ -3,7 +3,6 @@
     <div
       class="relative-position full-width"
       style="height:fit-content; overflow: hidden;">
-      <q-resize-observer @resize="onResize"/>
       <BackgroundImage
         class="full-width"
         style="min-height: 35vh"/>
@@ -22,11 +21,9 @@
         </div>
       </div>
       <WaveCover
-        class="absolute-bottom full-width"
         :end="$q.screen.xs ? {ratio: 0.6, control: [0.6, 0.61]} : undefined"
-        :height="waveHeight"
         :start="$q.screen.xs ? {ratio: 1.0, control: [0.3, 0.9]} : undefined"
-        :width="waveWidth"/>
+        svg-class="absolute-bottom full-width"/>
     </div>
     <div class="title-text text-center" style="font-size: 10vw; line-height: 18vw;">
       {{ i18n("labels.title") }}
@@ -66,7 +63,7 @@
 
 <script>
 import {storeToRefs} from "pinia";
-import {computed, defineComponent, ref} from "vue";
+import {computed, defineComponent} from "vue";
 import {useI18n} from "vue-i18n";
 
 import {useProducts} from "boot/config";
@@ -89,24 +86,14 @@ export default defineComponent({
     const loggedIn = computed(() => {
       return id > 0;
     });
-
-    const waveHeight = ref(1920);
-    const waveWidth = ref(1080);
-
     const i18n = (relativePath) => {
       return $i18n.t("pages.main." + relativePath);
     };
-    const onResize = (size) => {
-      waveHeight.value = size.height;
-      waveWidth.value = size.width;
-    };
+
     return {
       products,
       loggedIn,
-      waveHeight,
-      waveWidth,
-      i18n,
-      onResize
+      i18n
     };
   },
   methods: {}
