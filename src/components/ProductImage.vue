@@ -1,6 +1,6 @@
 <template>
   <q-img
-    fit="contain"
+    fit="cover"
     :loading="eager ? 'eager' : 'lazy'"
     no-spinner
     no-transition
@@ -31,8 +31,7 @@ export default defineComponent({
       required: true
     },
     width: {
-      type: String,
-      default: "100%"
+      type: String
     },
   },
   setup(props) {

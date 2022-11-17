@@ -167,6 +167,5 @@ $length: 35vw;
   height: $length;
   width: $length * 0.75;
   overflow: hidden;
-  object-fit: cover;
 }
 </style>
