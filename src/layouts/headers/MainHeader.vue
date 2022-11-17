@@ -20,7 +20,7 @@
         </div>
       </q-btn>
       <q-space/>
-      <q-btn
+      <q-btn-dropdown
         v-show="$q.screen.gt.xs"
         v-for="(button, index) in buttons"
         :key="index"
@@ -30,8 +30,7 @@
         no-caps
         :padding="$q.screen.lt.md ? 'sm' : undefined"
         size="1vw"
-        stretch
-        :to="`/${button}`"/>
+        stretch></q-btn-dropdown>
       <ProfileButton/>
       <q-btn
         v-show="$q.screen.gt.xs"
