@@ -130,6 +130,12 @@ export default {
     main: {}
   },
   pages: {
+    login: {
+      labels: {
+        header: "Welcome\n" +
+          "(Back)!",
+      }
+    },
     main: {
       labels: {
         header: "Welcome to\n" +
