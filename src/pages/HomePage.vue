@@ -1,7 +1,6 @@
 <template>
   <q-page class="flex column">
     <BackgroundImage
-      eager
       :img-style="{minHeight: '50vh'}"
       mask-position="top"
       :mask-start="$q.screen.xs ? {ratio: 1.0, control: [0.4, 0.9]} : undefined"

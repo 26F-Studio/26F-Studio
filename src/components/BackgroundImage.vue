@@ -36,7 +36,6 @@ export default defineComponent({
     },
     maskPosition: {
       type: String,
-      required: true,
       validator: (value) => {
         return ["bottom", "left", "right", "top"].includes(value);
       }
@@ -70,16 +69,17 @@ export default defineComponent({
       return $q.dark.isActive ? "#121212" : "#fff";
     }) : undefined;
 
-    const path = ref("");
-    const style = computed(() => ({
-      ...props.imgStyle,
-      clipPath: props.maskPosition ? `path('${path.value}')` : undefined,
-    }));
-
     const imgLoaded = ref(false);
     const onImgLoaded = () => {
       imgLoaded.value = true;
     };
+
+    const path = ref("");
+    const style = computed(() => ({
+      ...props.imgStyle,
+      clipPath: (props.maskPosition && imgLoaded.value) ? `path('${path.value}')` : undefined,
+    }));
+
 
     const calculatePath = (width, height) => {
       switch (props.maskPosition) {
@@ -112,7 +112,7 @@ export default defineComponent({
       }
     };
     const onResize = ({width, height}) => {
-      if (props.maskPosition && imgLoaded.value) {
+      if (props.maskPosition) {
         path.value = calculatePath(width, height);
       }
     };
