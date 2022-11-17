@@ -3,20 +3,15 @@
     v-if="horizontal"
     class="row items-center"
     :class="reversed ? 'justify-end' : 'justify-start'">
-    <q-img
-      v-if="!reversed"
+    <ProductImage
       class="cropped-image"
-      loading="lazy"
-      no-spinner
-      no-transition
-      :placeholder-src="require(`assets/icons/${product}-lite.webp`)"
-      position="100% 0"
-      :src="require(`assets/icons/${product}.webp`)"
-      style="margin-right: 5vw;"
-      :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]})`"/>
+      :class="reversed ? 'order-last' : 'order-first'"
+      :position="`${reversed ? '0' : '100%'} 0`"
+      :product="product"
+      :style="`margin-${reversed ? 'left' : 'right'}: 5vw; filter: drop-shadow(0 2vw 5vw ${shadowColors[product]})`"/>
     <div
       class="col-auto column"
-      :class="reversed ? 'text-right' : 'text-left'"
+      :class="`text-${reversed ? 'right' : 'left'}`"
       style="max-width: 65vw">
       <div class="product-text">
         {{ i18n(`products.${product}.name`) }}
@@ -26,7 +21,7 @@
       </div>
       <div
         class="row q-gutter-x-xl items-center"
-        :class="reversed ? 'justify-end' : 'justify-start'"
+        :class="`justify-${reversed ? 'end' : 'start'}`"
         style="margin-top:2vw">
         <DownloadButton
           :disable="product === 'techminoGalaxy'"
@@ -47,31 +42,18 @@
         </div>
       </div>
     </div>
-    <q-img
-      v-if="reversed"
-      class="cropped-image"
-      loading="lazy"
-      no-spinner
-      no-transition
-      :placeholder-src="require(`assets/icons/${product}-lite.webp`)"
-      position="0 0"
-      :src="require(`assets/icons/${product}.webp`)"
-      style="margin-left: 5vw;"
-      :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]});`"/>
   </div>
+  <!-- TODO: Merge two states -->
   <div
     v-if="!horizontal"
     class="row justify-center">
-    <div class="col-8 column items-center q-gutter-y-md">
-      <q-img
-        fit="contain"
-        height="35vw"
-        loading="lazy"
-        no-spinner
-        no-transition
-        :placeholder-src="require(`assets/icons/${product}-lite.webp`)"
-        :src="require(`assets/icons/${product}.webp`)"
-        style="margin-bottom: 5vw;"
+    <div class="col-10 column items-center q-gutter-y-md">
+      <ProductImage
+        class="cropped-image"
+        :position="`${reversed ? '0' : '100%'} 0`"
+        :product="product"
+        width="35vw"
+        style="margin-top: 5vw"
         :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]})`"/>
       <div class="product-text text-center">
         {{ i18n(`products.${product}.name`) }}
@@ -107,10 +89,11 @@ import {defineComponent} from "vue";
 import {useI18n} from "vue-i18n";
 
 import DownloadButton from "components/DownloadButton";
+import ProductImage from "components/ProductImage";
 
 export default defineComponent({
   name: "ProductPanel",
-  components: {DownloadButton},
+  components: {ProductImage, DownloadButton},
   props: {
     horizontal: {
       type: Boolean,

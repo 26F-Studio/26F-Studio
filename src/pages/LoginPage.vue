@@ -1,15 +1,11 @@
 <template>
   <q-page class="flex column">
-    <div
-      class="absolute full-width full-height"
-      style="height:fit-content">
-      <BackgroundImage class="full-width full-height"/>
-      <WaveCover
-        :end="{ratio: 0.3, control: [0.3, 0.2]}"
-        position="right"
-        :start="{ratio: 0.4, control: [0.4, 0.8]}"
-        svg-class="absolute-right full-width full-height"/>
-    </div>
+    <BackgroundImage
+      :img-style="{height: '100vh'}"
+      mask
+      mask-position="left"
+      :mask-start="{ratio: 0.3, control: [0.3, 0.2]}"
+      :mask-end="{ratio: 0.4, control: [0.4, 0.8]}"/>
   </q-page>
 </template>
 
@@ -18,11 +14,10 @@ import {defineComponent} from "vue";
 import {useI18n} from "vue-i18n";
 
 import BackgroundImage from "components/BackgroundImage";
-import WaveCover from "components/WaveCover";
 
 export default defineComponent({
   name: "LoginPage",
-  components: {BackgroundImage, WaveCover},
+  components: {BackgroundImage},
   setup() {
     const $i18n = useI18n({useScope: "global"});
 

@@ -1,18 +1,18 @@
 <template>
   <q-page class="flex column">
-    <div
-      class="relative-position full-width"
-      style="height:fit-content; overflow: hidden;">
-      <BackgroundImage
-        class="full-width"
-        style="min-height: 50vh" />
+    <BackgroundImage
+      eager
+      :img-style="{minHeight: '50vh'}"
+      mask-position="top"
+      :mask-start="$q.screen.xs ? {ratio: 1.0, control: [0.4, 0.9]} : undefined"
+      :mask-end="$q.screen.xs ? {ratio: 0.8, control: [0.6, 0.8]} : undefined">
       <div
-        class="header-icon absolute"
+        class="absolute header-icon"
         style="font-size: 80vw; right: -26vw; top:-42vw;">
         {{ "\u{0FFFFF}" }}
       </div>
       <div
-        class="row absolute-center full-width"
+        class="absolute-center bg-transparent full-width row"
         :class="$q.screen.xs ? 'justify-center' : 'justify-start'">
         <div
           class="header-text q-pb-xl"
@@ -20,10 +20,10 @@
           {{ i18n("labels.header") }}
         </div>
       </div>
-      <WaveCover
-        :end="$q.screen.xs ? {ratio: 0.8, control: [0.6, 0.8]} : undefined"
-        :start="$q.screen.xs ? {ratio: 1.0, control: [0.4, 0.9]} : undefined"
-        svg-class="absolute-bottom full-width" />
+    </BackgroundImage>
+    <div
+      class="relative-position full-width"
+      style="height:fit-content; overflow: hidden;">
     </div>
     <div class="title-text text-center" style="font-size: 10vw; line-height: 18vw;">
       {{ i18n("labels.title") }}
@@ -72,11 +72,10 @@ import { usePlayerStore } from "stores/player";
 
 import BackgroundImage from "components/BackgroundImage";
 import ProductPanel from "components/ProductPanel";
-import WaveCover from "components/WaveCover";
 
 export default defineComponent({
   name: "HomePage",
-  components: {BackgroundImage, ProductPanel, WaveCover},
+  components: {BackgroundImage, ProductPanel},
   setup() {
     const $i18n = useI18n({useScope: "global"});
 
