@@ -120,6 +120,11 @@ export default {
           about: "About",
           contact: "Contact"
         }
+      },
+      simple: {
+        labels: {
+          title: "26F Studio"
+        }
       }
     },
     main: {}

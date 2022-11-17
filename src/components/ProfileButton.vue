@@ -6,6 +6,7 @@
     no-caps
     :padding="$q.screen.xs ? 'sm' : undefined"
     round
+    :size="$q.screen.gt.sm ? '1vw' : 'md'"
     @click="loggedIn ? undefined : $router.push('/login')">
     <q-avatar
       v-if="loggedIn"

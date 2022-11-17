@@ -37,16 +37,16 @@ const routes = [
             }
           }
         ]
+      },
+      {
+        path: "/:catchAll(.*)*",
+        components: {
+          header: () => import("layouts/headers/SimpleHeader"),
+          default: () => import("pages/NotFoundPage")
+        }
       }
     ]
   },
-
-  // Always leave this as last one,
-  // but you can also remove it
-  {
-    path: "/:catchAll(.*)*",
-    component: () => import("pages/NotFoundPage")
-  }
 ];
 
 export default routes;

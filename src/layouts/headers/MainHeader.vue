@@ -1,9 +1,8 @@
 <template>
   <q-header class="bg-transparent" style="height: 0">
-    <q-toolbar style="background: linear-gradient(rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.0))">
+    <q-toolbar class="aero-toolbar">
       <q-btn
         aria-label="Menu"
-        dense
         flat
         :icon="$q.screen.xs ? 'menu' : undefined"
         no-caps
@@ -33,7 +32,7 @@
         size="1vw"
         stretch
         :to="`/${button}`"/>
-      <ProfileButton size="1vw"/>
+      <ProfileButton/>
       <q-btn
         v-show="$q.screen.gt.xs"
         aria-label="Language"
@@ -41,7 +40,7 @@
         flat
         icon="language"
         round
-        size="1vw">
+        :size="$q.screen.gt.sm ? '1vw' : 'md'">
         <LanguagesMenu/>
       </q-btn>
       <q-btn
@@ -51,7 +50,7 @@
         flat
         icon="settings"
         round
-        size="1vw">
+        :size="$q.screen.gt.sm ? '1vw' : 'md'">
         <SettingsMenu/>
       </q-btn>
     </q-toolbar>
@@ -96,6 +95,11 @@ export default defineComponent({
 
 <style scoped lang="scss">
 @import "src/css/app.scss";
+
+.aero-toolbar {
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(25px);
+}
 
 .button-text {
   font-family: 'inter', sans-serif;

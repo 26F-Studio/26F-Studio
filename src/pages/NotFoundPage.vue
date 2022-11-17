@@ -1,10 +1,9 @@
 <template>
   <div
-    class="fullscreen text-center flex flex-center"
+    class="flex column"
     style="background: #1a13ac">
-    <div class="relative-position full-width full-height" style="height:fit-content">
-      <BackgroundImage class="full-width full-height"/>
-      <div class="absolute-center full-width">
+    <BackgroundImage full-height>
+      <div class="absolute-center bg-transparent text-center">
         <div class="main-text" style="font-size: 50vmin; line-height: 50vmin">
           404
         </div>
@@ -20,7 +19,7 @@
           to="/home"
           style="padding: 0 5vmin"/>
       </div>
-    </div>
+    </BackgroundImage>
   </div>
 </template>
 
@@ -51,7 +50,7 @@ export default defineComponent({
 @import "src/css/app.scss";
 
 .main-text {
-  background: linear-gradient(100.71deg, rgba(130, 172, 255, 0.4) 14.61%, rgba(193, 130, 255, 0.4) 94.34%);;
+  background: linear-gradient(281.98deg, #7C4FFF 3.82%, #479EEE 90.68%);
   text-shadow: 0 3vw 4vw rgba(4, 0, 29, 0.15);
   font-family: 'galaxy-sans', sans-serif;
   font-weight: 600;

@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex column">
     <BackgroundImage
-      :img-style="{height: '100vh'}"
+      full-height
       mask
       mask-position="left"
       :mask-start="{ratio: 0.3, control: [0.3, 0.2]}"

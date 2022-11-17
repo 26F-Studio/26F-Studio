@@ -30,10 +30,6 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    imgStyle: {
-      type: Object,
-      default: () => ({})
-    },
     maskPosition: {
       type: String,
       validator: (value) => {
@@ -76,7 +72,7 @@ export default defineComponent({
 
     const path = ref("");
     const style = computed(() => ({
-      ...props.imgStyle,
+      height: props.fullHeight ? '100vh' : 'fit-content',
       clipPath: (props.maskPosition && imgLoaded.value) ? `path('${path.value}')` : undefined,
     }));
 

@@ -1,8 +1,8 @@
 <template>
   <q-header class="bg-transparent" style="height: 0">
-    <q-toolbar style="background: linear-gradient(rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.0))">
+    <q-toolbar>
       <q-btn
-        dense
+        aria-label="Menu"
         flat
         :icon="$q.screen.xs ? 'menu' : undefined"
         no-caps
@@ -15,12 +15,10 @@
         <div
           v-if="$q.screen.gt.xs"
           class="title-text self-center"
-          :class="$q.screen.gt.sm ? 'q-mb-sm' : 'q-mb-xs'"
           style="font-size: 3vw">
-          {{ '\u{0FFFFF}' }}
+          {{ `\u{0FFFFF}  ${i18n("labels.title")}` }}
         </div>
       </q-btn>
-      <q-space/>
     </q-toolbar>
   </q-header>
 </template>
