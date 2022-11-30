@@ -25,7 +25,7 @@ export default {
     languagesMenu: {},
     productPanel: {
       labels: {
-        learnMore: "Learn More",
+        learnMore: "Learn More"
       },
       notifications: {
         comingSoon: "Coming soon!"
@@ -87,7 +87,7 @@ export default {
     footers: {
       login: {
         labels: {
-          login: "Login",
+          login: "Login"
         }
       },
       main: {
@@ -134,6 +134,17 @@ export default {
       labels: {
         header: "Welcome\n" +
           "(Back)!",
+        login: "Login",
+        email: "Email",
+        password: "Password",
+        code: "Verification Code",
+        rememberMe: "Remember Me",
+        forgot: "Forgot your password?"
+      },
+      placeholders: {
+        email: "Input your email address",
+        password: "Input your password",
+        code: "Input your code received with email"
       }
     },
     main: {
