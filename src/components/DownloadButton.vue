@@ -15,7 +15,7 @@
           style="font-weight: 700; font-size: 2vw;">
           {{ disable ? i18n("labels.disable") : i18n("labels.download") }}
         </div>
-        <div class="row justify-center">
+        <div v-if="!disable" class="row justify-center">
           <div
             v-for="(icon, index) in platformIconMap[mainPlatform]"
             :key="index"
@@ -30,7 +30,6 @@
               size="1.5vw" />
           </div>
           <div
-            v-if="!disable"
             :class="$q.screen.xs ? 'q-pt-sm' : ''"
             style="font-weight: 400; font-size: 1vw">
             {{ i18n(`labels.platforms.${mainPlatform}`) }}
