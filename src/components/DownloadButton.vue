@@ -15,11 +15,26 @@
           style="font-weight: 700; font-size: 2vw;">
           {{ disable ? i18n("labels.disable") : i18n("labels.download") }}
         </div>
-        <div
-          v-if="!disable"
-          :class="$q.screen.xs ? 'q-pt-sm' : ''"
-          style="font-weight: 400; font-size: 1vw">
-          {{ i18n(`labels.platforms.${mainPlatform}`) }}
+        <div class="row justify-center">
+          <div
+            v-for="(icon, index) in platformIconMap[mainPlatform]"
+            :key="index"
+            class="row">
+            <q-separator
+              v-show="index !==0"
+              class="q-my-xs"
+              vertical />
+            <q-icon
+              :name="icon"
+              class="q-ma-sm"
+              size="1.5vw" />
+          </div>
+          <div
+            v-if="!disable"
+            :class="$q.screen.xs ? 'q-pt-sm' : ''"
+            style="font-weight: 400; font-size: 1vw">
+            {{ i18n(`labels.platforms.${mainPlatform}`) }}
+          </div>
         </div>
       </div>
     </template>
@@ -30,15 +45,33 @@
         clickable
         v-close-popup
         @click="downloadProduct(platform)">
-        <q-item-section avatar>
-          <q-avatar icon="folder" color="primary" text-color="white"/>
+        <q-item-section avatar class="row">
+          <div class="platform-card row">
+            <div
+              v-for="(icon, index) in platformIconMap[platform]"
+              :key="index"
+              class="row">
+              <q-separator
+                v-show="index !==0"
+                class="q-my-xs"
+                vertical />
+              <q-icon
+                :name="icon"
+                class="q-ma-sm"
+                size="1.5vw" />
+            </div>
+          </div>
         </q-item-section>
         <q-item-section>
           <q-item-label>{{ i18n(`labels.platforms.${platform}`) }}</q-item-label>
-          <q-item-label caption>February 22, 2016</q-item-label>
         </q-item-section>
         <q-item-section side>
-          <q-icon name="info" color="amber"/>
+          <q-icon
+            v-if="['appstore', 'testflight'].includes(platform)"
+            name="mdi-open-in-new" />
+          <q-icon
+            v-if="!['appstore', 'testflight'].includes(platform)"
+            name="mdi-download" />
         </q-item-section>
       </q-item>
     </q-list>
@@ -46,11 +79,11 @@
 </template>
 
 <script>
-import {useQuasar} from "quasar";
-import {defineComponent} from "vue";
+import { useQuasar } from "quasar";
+import { defineComponent } from "vue";
 
-import {getLatestDownloadLink, usePlatforms} from "boot/config";
-import {useI18n} from "vue-i18n";
+import { getLatestDownloadLink, usePlatforms } from "boot/config";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
   name: "DownloadButton",
@@ -66,10 +99,20 @@ export default defineComponent({
   },
   setup(props) {
     const $q = useQuasar();
-    const $i18n = useI18n({useScope: "global"});
+    const $i18n = useI18n({ useScope: "global" });
 
     let mainPlatform = "windows64";
     let platforms = usePlatforms();
+    const platformIconMap = {
+      android: ["mdi-android", "mdi-package-variant"],
+      appstore: ["mdi-apple", "mdi-store"],
+      linux: ["mdi-penguin", "mdi-package-variant-closed"],
+      macosDmg: ["mdi-apple", "mdi-harddisk"],
+      macosPkg: ["mdi-apple", "mdi-package-variant"],
+      testflight: ["mdi-apple", "mdi-airplane"],
+      windows32: ["mdi-microsoft-windows-classic", "mdi-cpu-32-bit"],
+      windows64: ["mdi-microsoft-windows", "mdi-cpu-64-bit"]
+    };
 
     if ($q.platform.is.android) {
       mainPlatform = "android";
@@ -79,7 +122,7 @@ export default defineComponent({
       mainPlatform = "linux";
     }
 
-    platforms = platforms.filter(function (platform) {
+    platforms = platforms.filter(function(platform) {
       return platform !== mainPlatform;
     });
 
@@ -103,6 +146,7 @@ export default defineComponent({
     return {
       mainPlatform,
       platforms,
+      platformIconMap,
       i18n,
       downloadProduct
     };
@@ -123,6 +167,11 @@ export default defineComponent({
   @extend #disabled-btn;
   font-family: 'inter', sans-serif;
   font-feature-settings: 'pnum' on, 'lnum' on;
+}
+
+.platform-card {
+  @extend #primary-btn;
+  border-radius: 0.75vw;
 }
 
 </style>

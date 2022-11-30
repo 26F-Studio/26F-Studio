@@ -1,9 +1,9 @@
-import {boot} from "quasar/wrappers";
+import { boot } from "quasar/wrappers";
 
 const repoMap = {
   techminoGalaxy: "Techmino_Galaxy",
   techmino: "Techmino",
-  quatrack: "Quatrack",
+  quatrack: "Quatrack"
 };
 const appStoreIdMap = {
   Techmino: 1590869403,
@@ -28,7 +28,7 @@ const useProject = () => "26f-studio";
 const useProducts = () => [
   "techmino",
   "quatrack",
-  "techminoGalaxy",
+  "techminoGalaxy"
 ];
 const usePlatforms = () => [
   "android",
@@ -58,7 +58,7 @@ const getLatestDownloadLink = (product, platform) => {
   return null;
 };
 
-export default boot(({app}) => {
+export default boot(({ app }) => {
   app.config.globalProperties.$project = useProject();
   app.config.globalProperties.$products = useProducts();
   app.config.globalProperties.$platforms = usePlatforms();
