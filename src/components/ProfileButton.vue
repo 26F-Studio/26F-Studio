@@ -86,7 +86,7 @@ export default defineComponent({
 
     const playerStore = usePlayerStore();
     const loggedIn = computed(() => {
-      return playerStore["id"] > 0;
+      return playerStore.id > 0;
     });
 
     onMounted(async () => {
@@ -107,6 +107,8 @@ export default defineComponent({
       playerStore.logout();
       $router.go(0);
     };
+
+    console.log(loggedIn.value);
 
     return {
       playerStore,

@@ -23,22 +23,42 @@ export default {
       }
     },
     languagesMenu: {},
-    loginPanel: {
-      labels: {
-        login: "Login",
-        email: "Email",
-        password: "Password",
-        code: "Verification Code",
-        rememberMe: "Remember Me",
-        loginWithPassword: "Login with password",
-        loginWithCode: "Login with code",
-        forgot: "Forgot your password?"
+    loginSteps: {
+      codePanel: {
+        labels: {
+          login: "Login",
+          email: "Email",
+          code: "Verification Code",
+          getCode: "Get code",
+          loginWithPassword: "Login with password",
+          notice: "We would create a new account for you if the verified email does not have an associated account."
+        },
+        placeholders: {
+          email: "Input your email address",
+          code: "Input your verification code"
+        },
+        notifications: {
+          getCodeSuccess: "Verification code has been sent to your mailbox",
+          loginSuccess: "Congratulations! You are now logged in"
+        }
       },
-      placeholders: {
-        email: "Input your email address",
-        password: "Input your password",
-        code: "Input your code received with email"
-      }
+      passwordPanel: {
+        labels: {
+          login: "Login",
+          email: "Email",
+          password: "Password",
+          rememberMe: "Remember Me",
+          loginWithCode: "Login with code",
+          forgot: "Forgot your password?"
+        },
+        placeholders: {
+          email: "Input your email address",
+          password: "Input your password",
+        },
+        notifications: {
+          loginSuccess: "Congratulations! You are now logged in"
+        }
+      },
     },
     productPanel: {
       labels: {
@@ -170,6 +190,13 @@ export default {
         notFound: "Oops! Nothing here...",
         home: "Go Home"
       }
+    }
+  },
+  Studio26F: {
+    PlayerManager: {
+      invalidEmail: "Invalid email",
+      invalidEmailPass: "Invalid email or password",
+      playerNotFound: "Player not found"
     }
   }
 };

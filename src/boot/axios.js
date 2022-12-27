@@ -1,5 +1,5 @@
-import {boot} from "quasar/wrappers";
 import axios from "axios";
+import {boot} from "quasar/wrappers";
 
 const METHOD = Object.freeze({
   GET: 'get', POST: 'post', PUT: 'put', DELETE: 'delete'
@@ -22,14 +22,13 @@ const genericHttp = (
       headers: headers,
       data: data,
     }).then(res => {
-      // console.log(res.data);
       if (res.data.code >= 200 && res.data.code < 300) {
         resolve(res.data);
       } else {
         reject(res.data);
       }
     }).catch(err => {
-      if (err.response) {
+      if (err.hasOwnProperty('response')) {
         reject(err.response);
       } else {
         reject(err);

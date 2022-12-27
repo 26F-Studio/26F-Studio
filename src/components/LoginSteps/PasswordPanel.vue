@@ -1,5 +1,5 @@
 <template>
-  <div class="column q-gutter-y-xl">
+  <div class="column q-gutter-y-lg">
     <div>
       <div class="label-text q-ml-lg q-mb-sm">
         {{ i18n("labels.email") }}
@@ -18,12 +18,12 @@
     </div>
     <div>
       <div class="label-text q-ml-lg q-mb-sm">
-        {{ i18n(`labels.${usePassword ? 'password' : 'code'}`) }}
+        {{ i18n('labels.password') }}
       </div>
       <q-input
         v-model="secondInput"
-        :placeholder="i18n(`placeholders.${usePassword ? 'password' : 'code'}`)"
-        :type="(usePassword && !showPassword) ? 'password' : 'text'"
+        :placeholder="i18n('placeholders.password')"
+        :type="showPassword ? 'text' : 'password'"
         class="full-width"
         outlined
         rounded>
@@ -32,25 +32,19 @@
         </template>
         <template v-slot:append>
           <q-icon
-            v-if="usePassword"
             :name="showPassword ? 'visibility' : 'visibility_off'"
             class="cursor-pointer"
             @click="showPassword = !showPassword"/>
         </template>
       </q-input>
     </div>
-    <div class="row justify-between">
-      <q-checkbox
-        v-model="rememberMe"
-        :label="i18n('labels.rememberMe')"
-        disable/>
+    <div class="row justify-end">
       <q-btn
-        dense
         flat
         no-caps
-        @click="usePassword = !usePassword">
+        @click="tabTo(+1)">
         <div class="btn-text">
-          {{ i18n(`labels.loginWith${usePassword ? 'Password' : 'Code'}`)}}
+          {{ i18n('labels.loginWithCode') }}
         </div>
       </q-btn>
     </div>
@@ -60,7 +54,8 @@
       :loading="isLoading"
       no-caps
       size="lg"
-      unelevated/>
+      unelevated
+      @click="login"/>
     <q-btn
       dense
       disable
@@ -74,41 +69,67 @@
 </template>
 
 <script>
+import {argon2id} from 'hash-wasm';
+import {useQuasar} from "quasar";
 import {defineComponent, ref} from "vue";
 import {useI18n} from "vue-i18n";
+
 import {useApi} from "boot/axios";
+import {errorHandler} from "src/scripts/axios";
 
 export default defineComponent({
-  name: "LoginPanel",
-  setup() {
-    const $i18n = useI18n({useScope: "global"});
+  name: "PasswordPanel",
+  props: {
+    modelValue: {
+      type: Number,
+    }
+  },
+  setup(props, {emit}) {
     const $api = useApi();
+    const $i18n = useI18n({useScope: "global"});
+    const $q = useQuasar();
 
-    const usePassword = ref(false);
     const firstInput = ref("");
     const secondInput = ref("");
     const showPassword = ref(false);
-    const rememberMe = ref(false);
     const isLoading = ref(false);
 
     const i18n = (relativePath) => {
-      return $i18n.t("components.loginPanel." + relativePath);
+      return $i18n.t("components.loginSteps.passwordPanel." + relativePath);
+    };
+
+    const tabTo = (delta) => {
+      if (props.modelValue) {
+        emit('update:modelValue', props.modelValue + delta);
+      }
     };
 
     const login = async () => {
       isLoading.value = true;
-      if (usePassword.value) {
-
-      }
+      await errorHandler(async () => {
+        const {data: seed} = await $api.auth.seedEmail(firstInput.value);
+        const hashedPassword = await argon2id({
+          password: secondInput.value.trim(),
+          salt: seed,
+          iterations: 256,
+          parallelism: 16,
+          memorySize: 512,
+          hashLength: 64,
+          outputType: 'hex',
+        });
+        const {accessToken, refreshToken} = (await $api.auth.loginEmailPassword(firstInput.value, hashedPassword)).data;
+        console.log(accessToken, refreshToken);
+      }, $q, $i18n.t);
+      isLoading.value = false;
     };
     return {
-      usePassword,
       firstInput,
       secondInput,
       showPassword,
-      rememberMe,
       isLoading,
-      i18n
+      i18n,
+      tabTo,
+      login
     };
   }
 });

@@ -15,29 +15,48 @@
         </div>
       </div>
     </BackgroundImage>
-    <div class="offset-4 col-grow row justify-center q-pa-md">
-      <LoginPanel class="col-6"/>
+    <div class="offset-4 col-grow row justify-center">
+      <q-tab-panels
+        class="col-6"
+        animated
+        keep-alive
+        v-model="tab">
+        <q-tab-panel :name="1">
+          <PasswordPanel class="q-ma-xl" v-model="tab"/>
+        </q-tab-panel>
+        <q-tab-panel :name="2">
+          <CodePanel class="q-ma-xl" v-model="tab"/>
+        </q-tab-panel>
+        <q-tab-panel :name="3">
+        </q-tab-panel>
+        <q-tab-panel :name="4">
+        </q-tab-panel>
+      </q-tab-panels>
     </div>
   </q-page>
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
-import { useI18n } from "vue-i18n";
+import {defineComponent, ref} from "vue";
+import {useI18n} from "vue-i18n";
 
 import BackgroundImage from "components/BackgroundImage";
-import LoginPanel from "components/LoginPanel.vue";
+import CodePanel from "components/LoginSteps/CodePanel.vue";
+import PasswordPanel from "components/LoginSteps/PasswordPanel.vue";
 
 export default defineComponent({
   name: "LoginPage",
-  components: {LoginPanel, BackgroundImage },
+  components: {BackgroundImage, CodePanel, PasswordPanel,},
   setup() {
-    const $i18n = useI18n({ useScope: "global" });
+    const $i18n = useI18n({useScope: "global"});
+
+    const tab = ref(2);
 
     const i18n = (relativePath) => {
       return $i18n.t("pages.login." + relativePath);
     };
     return {
+      tab,
       i18n
     };
   }
