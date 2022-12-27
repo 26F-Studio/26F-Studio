@@ -23,6 +23,23 @@ export default {
       }
     },
     languagesMenu: {},
+    loginPanel: {
+      labels: {
+        login: "Login",
+        email: "Email",
+        password: "Password",
+        code: "Verification Code",
+        rememberMe: "Remember Me",
+        loginWithPassword: "Login with password",
+        loginWithCode: "Login with code",
+        forgot: "Forgot your password?"
+      },
+      placeholders: {
+        email: "Input your email address",
+        password: "Input your password",
+        code: "Input your code received with email"
+      }
+    },
     productPanel: {
       labels: {
         learnMore: "Learn More"
@@ -134,17 +151,6 @@ export default {
       labels: {
         header: "Welcome\n" +
           "(Back)!",
-        login: "Login",
-        email: "Email",
-        password: "Password",
-        code: "Verification Code",
-        rememberMe: "Remember Me",
-        forgot: "Forgot your password?"
-      },
-      placeholders: {
-        email: "Input your email address",
-        password: "Input your password",
-        code: "Input your code received with email"
       }
     },
     main: {
