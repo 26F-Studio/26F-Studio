@@ -41,8 +41,8 @@ import {defineComponent, ref} from "vue";
 import {useI18n} from "vue-i18n";
 
 import BackgroundImage from "components/BackgroundImage";
-import CodePanel from "components/LoginSteps/CodePanel.vue";
-import PasswordPanel from "components/LoginSteps/PasswordPanel.vue";
+import CodePanel from "components/AuthPanels/CodePanel.vue";
+import PasswordPanel from "components/AuthPanels/PasswordPanel.vue";
 
 export default defineComponent({
   name: "LoginPage",

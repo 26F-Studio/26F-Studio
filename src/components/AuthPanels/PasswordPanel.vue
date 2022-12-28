@@ -12,13 +12,13 @@
         rounded
         type="email">
         <template v-slot:prepend>
-          <q-icon name="mail"/>
+          <q-icon name="mail" />
         </template>
       </q-input>
     </div>
     <div>
       <div class="label-text q-ml-lg q-mb-sm">
-        {{ i18n('labels.password') }}
+        {{ i18n("labels.password") }}
       </div>
       <q-input
         v-model="secondInput"
@@ -28,13 +28,13 @@
         outlined
         rounded>
         <template v-slot:prepend>
-          <q-icon name="mdi-form-textbox-password"/>
+          <q-icon name="mdi-form-textbox-password" />
         </template>
         <template v-slot:append>
           <q-icon
             :name="showPassword ? 'visibility' : 'visibility_off'"
             class="cursor-pointer"
-            @click="showPassword = !showPassword"/>
+            @click="showPassword = !showPassword" />
         </template>
       </q-input>
     </div>
@@ -42,9 +42,9 @@
       <q-btn
         flat
         no-caps
-        @click="tabTo(+1)">
+        @click="goTo(+1)">
         <div class="btn-text">
-          {{ i18n('labels.loginWithCode') }}
+          {{ i18n("labels.loginWithCode") }}
         </div>
       </q-btn>
     </div>
@@ -55,12 +55,11 @@
       no-caps
       size="lg"
       unelevated
-      @click="login"/>
+      @click="login" />
     <q-btn
-      dense
-      disable
       flat
-      no-caps>
+      no-caps
+      @click="resetPassword">
       <div class="btn-text">
         {{ i18n("labels.forgot") }}
       </div>
@@ -69,25 +68,30 @@
 </template>
 
 <script>
-import {argon2id} from 'hash-wasm';
-import {useQuasar} from "quasar";
-import {defineComponent, ref} from "vue";
-import {useI18n} from "vue-i18n";
+import { useQuasar } from "quasar";
+import { defineComponent, ref } from "vue";
+import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
 
-import {useApi} from "boot/axios";
-import {errorHandler} from "src/scripts/axios";
+import { useApi } from "boot/axios";
+import { errorHandler, getPasswordHash } from "src/scripts/axios";
+import { usePlayerStore } from "stores/player";
+
+import AuthDialog from "components/AuthDialog.vue";
 
 export default defineComponent({
   name: "PasswordPanel",
   props: {
     modelValue: {
-      type: Number,
+      type: Number
     }
   },
-  setup(props, {emit}) {
+  setup(props, { emit }) {
     const $api = useApi();
-    const $i18n = useI18n({useScope: "global"});
+    const $i18n = useI18n({ useScope: "global" });
+    const $player = usePlayerStore();
     const $q = useQuasar();
+    const $router = useRouter();
 
     const firstInput = ref("");
     const secondInput = ref("");
@@ -95,32 +99,43 @@ export default defineComponent({
     const isLoading = ref(false);
 
     const i18n = (relativePath) => {
-      return $i18n.t("components.loginSteps.passwordPanel." + relativePath);
+      return $i18n.t("components.authPanels.passwordPanel." + relativePath);
     };
 
-    const tabTo = (delta) => {
+    const goTo = (delta) => {
       if (props.modelValue) {
-        emit('update:modelValue', props.modelValue + delta);
+        emit("update:modelValue", props.modelValue + delta);
       }
     };
 
     const login = async () => {
       isLoading.value = true;
       await errorHandler(async () => {
-        const {data: seed} = await $api.auth.seedEmail(firstInput.value);
-        const hashedPassword = await argon2id({
-          password: secondInput.value.trim(),
-          salt: seed,
-          iterations: 256,
-          parallelism: 16,
-          memorySize: 512,
-          hashLength: 64,
-          outputType: 'hex',
+        const { accessToken, refreshToken } = (await $api.auth.loginEmailPassword(
+          firstInput.value,
+          await getPasswordHash(firstInput.value, secondInput.value)
+        )).data;
+        $player.setToken(accessToken, refreshToken);
+        await $player.update();
+        isLoading.value = false;
+        $q.notify({
+          type: "positive",
+          message: i18n("notifications.loginSuccess")
         });
-        const {accessToken, refreshToken} = (await $api.auth.loginEmailPassword(firstInput.value, hashedPassword)).data;
-        console.log(accessToken, refreshToken);
+        setTimeout(() => {
+          $router.go(-1);
+        }, 2000);
       }, $q, $i18n.t);
       isLoading.value = false;
+    };
+
+    const resetPassword = () => {
+      $q.dialog({
+        component: AuthDialog,
+        componentProps: {
+          type: "reset"
+        }
+      });
     };
     return {
       firstInput,
@@ -128,8 +143,9 @@ export default defineComponent({
       showPassword,
       isLoading,
       i18n,
-      tabTo,
-      login
+      goTo,
+      login,
+      resetPassword
     };
   }
 });

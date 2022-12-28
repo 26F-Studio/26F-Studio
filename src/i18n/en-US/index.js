@@ -1,6 +1,115 @@
 export default {
   app: {},
   components: {
+    authDialog: {
+      labels: {
+        cancel: "Cancel",
+        steps: {
+          verify: "Verify your account",
+          deactivate: "Confirm deactivation",
+          migrate: "Set new login method",
+          reset: "Set new password"
+        },
+        titles: {
+          deactivate: "Deactivate account",
+          migrate: "Migrate account",
+          reset: "Reset password"
+        }
+      }
+    },
+    authPanels: {
+      codePanel: {
+        labels: {
+          email: "Email",
+          code: "Verification Code",
+          getCode: "Get code",
+          loginWithPassword: "Login with password",
+          login: "Login",
+          notice: "We would create a new account for you if the verified email does not have an associated account."
+        },
+        placeholders: {
+          email: "Input your email address",
+          code: "Input your verification code"
+        },
+        notifications: {
+          getCodeSuccess: "Verification code has been sent to your mailbox",
+          loginSuccess: "Congratulations! You are now logged in"
+        }
+      },
+      deactivatePanel: {
+        labels: {
+          email: "Email",
+          cancel: "Let me think",
+          confirm: "Okay, go ahead",
+          code: "Verification Code",
+          getCode: "Get code",
+          verify: "Verify",
+          holdOn: "HOLD ON!",
+          warning: "This is a ONE-WAY ticket! You would no longer be able to login again!",
+          notice: "This action freezes the account and hides info to other players. \n" +
+            "We would KEEP your account data in the database for internal review purpose. \n" +
+            "If you REALLY want to delete your data, Please reach to support and contact us."
+        },
+        placeholders: {
+          email: "Input your email address",
+          code: "Input your verification code"
+        },
+        notifications: {
+          getCodeSuccess: "Verification code has been sent to your mailbox",
+          deactivateSuccess: "Your account has been deactivated"
+        }
+      },
+      passwordPanel: {
+        labels: {
+          email: "Email",
+          password: "Password",
+          loginWithCode: "Login with code",
+          login: "Login",
+          forgot: "Forgot your password?"
+        },
+        placeholders: {
+          email: "Input your email address",
+          password: "Input your password"
+        },
+        notifications: {
+          loginSuccess: "Congratulations! You are now logged in"
+        }
+      },
+      resetPanel: {
+        errors: {
+          firstInput: "Invalid email address",
+          secondInput: "Invalid verification code",
+          thirdInput: "Invalid password",
+          fourthInput: ""
+        },
+        labels: {
+          email: "Email",
+          code: "Verification Code",
+          getCode: "Get code",
+          password: "New Password",
+          passwordConstraints: "Constraints",
+          confirmPassword: "Confirm New Password",
+          verify: "Verify"
+        },
+        notifications: {
+          getCodeSuccess: "Verification code has been sent to your mailbox",
+          resetSuccess: "Password reset! You can login with your new password now"
+        },
+        placeholders: {
+          email: "Input your email address",
+          code: "Input your verification code",
+          password: "Input new password",
+          confirmPassword: "Input new password again"
+        },
+        tooltips: {
+          passwordConstraints: "Your new password should meet 3 of the following constraints: \n" +
+            "\t Contains at least 1 lowercase alphabetic character \n" +
+            "\t Contains at least 1 uppercase alphabetic character \n" +
+            "\t Contains at least 1 numeric character \n" +
+            "\t Contains at least 1 special character(#?!{'@'}$%^&*-)"
+        }
+      }
+    },
     downloadButton: {
       labels: {
         disable: "Coming soon...",
@@ -23,43 +132,6 @@ export default {
       }
     },
     languagesMenu: {},
-    loginSteps: {
-      codePanel: {
-        labels: {
-          login: "Login",
-          email: "Email",
-          code: "Verification Code",
-          getCode: "Get code",
-          loginWithPassword: "Login with password",
-          notice: "We would create a new account for you if the verified email does not have an associated account."
-        },
-        placeholders: {
-          email: "Input your email address",
-          code: "Input your verification code"
-        },
-        notifications: {
-          getCodeSuccess: "Verification code has been sent to your mailbox",
-          loginSuccess: "Congratulations! You are now logged in"
-        }
-      },
-      passwordPanel: {
-        labels: {
-          login: "Login",
-          email: "Email",
-          password: "Password",
-          rememberMe: "Remember Me",
-          loginWithCode: "Login with code",
-          forgot: "Forgot your password?"
-        },
-        placeholders: {
-          email: "Input your email address",
-          password: "Input your password",
-        },
-        notifications: {
-          loginSuccess: "Congratulations! You are now logged in"
-        }
-      },
-    },
     productPanel: {
       labels: {
         learnMore: "Learn More"
@@ -90,6 +162,11 @@ export default {
             "ever since the 1500s, when an unknown printer took a galley of type " +
             "and scrambled it to make a type specimen book."
         }
+      }
+    },
+    profileButton: {
+      labels: {
+        logout: "Logout"
       }
     },
     settingsMenu: {
@@ -170,7 +247,7 @@ export default {
     login: {
       labels: {
         header: "Welcome\n" +
-          "(Back)!",
+          "(Back)!"
       }
     },
     main: {
