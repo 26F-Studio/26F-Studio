@@ -7,10 +7,10 @@
       <q-card-section>
         <div class="text-h6">{{ i18n(`labels.titles.${type}`) }}</div>
       </q-card-section>
-      <q-separator/>
+      <q-separator />
       <q-card-section class="q-pa-xl q-my-lg">
-        <DeactivatePanel v-if="type === 'deactivate'"/>
-        <ResetPanel v-if="type === 'reset'"/>
+        <DeactivatePanel v-if="type === 'deactivate'" />
+        <ResetPanel v-if="type === 'reset'" />
       </q-card-section>
       <q-card-actions align="right">
         <q-btn
@@ -57,10 +57,10 @@ export default defineComponent({
 
     return {
       dialogRef,
+      onDialogCancel,
       onDialogHide,
       step,
-      i18n,
-      onDialogCancel
+      i18n
     };
   }
 });

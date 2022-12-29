@@ -86,6 +86,7 @@
         class="full-width"
         disable
         outlined
+        v-model="avatarFrame"
         rounded>
         <template v-slot:prepend>
           <q-icon name="mdi-account-box-outline" />
@@ -93,10 +94,9 @@
       </q-select>
     </div>
     <q-btn
-      :disable="!canSubmit"
+      class="login-btn full-width"
       :label="i18n(`labels.submit`)"
       :loading="isSubmitLoading"
-      class="login-btn"
       no-caps
       size="lg"
       unelevated
@@ -109,12 +109,13 @@
 import { useQuasar } from "quasar";
 import { defineComponent, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
-import { useRouter } from "vue-router";
 
 import { useApi } from "boot/axios";
 import { errorHandler } from "src/scripts/axios";
 import { flags } from "src/scripts/flags";
 import { usePlayerStore } from "stores/player";
+
+import CropperDialog from "components/CropperDialog.vue";
 
 export default defineComponent({
   name: "InfoPanel",
@@ -128,12 +129,12 @@ export default defineComponent({
     const $i18n = useI18n({ useScope: "global" });
     const $player = usePlayerStore();
     const $q = useQuasar();
-    const $router = useRouter();
 
     const avatar = ref("");
     const username = ref("");
     const motto = ref("");
     const region = ref(null);
+    const avatarFrame = ref(null);
     const isSubmitLoading = ref(false);
 
     const i18n = (relativePath) => {
@@ -147,7 +148,12 @@ export default defineComponent({
     };
 
     const editAvatar = () => {
-
+      $q.dialog({
+        component: CropperDialog,
+        componentProps: {}
+      }).onOk((image) => {
+        avatar.value = image;
+      });
     };
 
     watch(region, value => {
@@ -185,6 +191,7 @@ export default defineComponent({
       username,
       motto,
       region,
+      avatarFrame,
       isSubmitLoading,
       i18n,
       goTo,

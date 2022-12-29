@@ -40,22 +40,6 @@ export default {
           loginSuccess: "Congratulations! You are now logged in"
         }
       },
-      cropperDialog: {
-        labels: {
-          cancel: "Cancel",
-          steps: {
-            verify: "Verify your account",
-            deactivate: "Confirm deactivation",
-            migrate: "Set new login method",
-            reset: "Set new password"
-          },
-          titles: {
-            deactivate: "Deactivate account",
-            migrate: "Migrate account",
-            reset: "Reset password"
-          }
-        }
-      },
       deactivatePanel: {
         errors: {
           email: "Invalid email address",
@@ -154,6 +138,18 @@ export default {
             "\t Contains at least 1 numeric character \n" +
             "\t Contains at least 1 special character(#?!{'@'}$%^&*-)"
         }
+      }
+    },
+    cropperDialog: {
+      labels: {
+        title: "Crop Image",
+        chooseImage: "Choose Image",
+        noImage: "Please choose an image",
+        cancel: "Cancel",
+        confirm: "Confirm"
+      },
+      notifications: {
+        invalidFile: "Invalid file"
       }
     },
     downloadButton: {
