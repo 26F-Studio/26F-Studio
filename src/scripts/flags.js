@@ -1,505 +1,1253 @@
-const getFlag = (code) => {
-  switch (code) {
-    case 4:
-      return "fi-af";
-    case 8:
-      return "fi-al";
-    case 10:
-      return "fi-aq";
-    case 12:
-      return "fi-dz";
-    case 16:
-      return "fi-as";
-    case 20:
-      return "fi-ad";
-    case 24:
-      return "fi-ao";
-    case 28:
-      return "fi-ag";
-    case 31:
-      return "fi-az";
-    case 32:
-      return "fi-ar";
-    case 36:
-      return "fi-au";
-    case 40:
-      return "fi-at";
-    case 44:
-      return "fi-bs";
-    case 48:
-      return "fi-bh";
-    case 50:
-      return "fi-bd";
-    case 51:
-      return "fi-am";
-    case 52:
-      return "fi-bb";
-    case 56:
-      return "fi-be";
-    case 60:
-      return "fi-bm";
-    case 64:
-      return "fi-bt";
-    case 68:
-      return "fi-bo";
-    case 70:
-      return "fi-ba";
-    case 72:
-      return "fi-bw";
-    case 74:
-      return "fi-bv";
-    case 76:
-      return "fi-br";
-    case 84:
-      return "fi-bz";
-    case 86:
-      return "fi-io";
-    case 90:
-      return "fi-sb";
-    case 92:
-      return "fi-vg";
-    case 96:
-      return "fi-bn";
-    case 100:
-      return "fi-bg";
-    case 104:
-      return "fi-mm";
-    case 108:
-      return "fi-bi";
-    case 112:
-      return "fi-by";
-    case 116:
-      return "fi-kh";
-    case 120:
-      return "fi-cm";
-    case 124:
-      return "fi-ca";
-    case 132:
-      return "fi-cv";
-    case 136:
-      return "fi-ky";
-    case 140:
-      return "fi-cf";
-    case 144:
-      return "fi-lk";
-    case 148:
-      return "fi-td";
-    case 152:
-      return "fi-cl";
-    case 156:
-      return "fi-cn";
-    case 158:
-      return "fi-tw";
-    case 162:
-      return "fi-cx";
-    case 166:
-      return "fi-cc";
-    case 170:
-      return "fi-co";
-    case 174:
-      return "fi-km";
-    case 175:
-      return "fi-yt";
-    case 178:
-      return "fi-cg";
-    case 180:
-      return "fi-cd";
-    case 184:
-      return "fi-ck";
-    case 188:
-      return "fi-cr";
-    case 191:
-      return "fi-hr";
-    case 192:
-      return "fi-cu";
-    case 196:
-      return "fi-cy";
-    case 203:
-      return "fi-cz";
-    case 204:
-      return "fi-bj";
-    case 208:
-      return "fi-dk";
-    case 212:
-      return "fi-dm";
-    case 214:
-      return "fi-do";
-    case 218:
-      return "fi-ec";
-    case 222:
-      return "fi-sv";
-    case 226:
-      return "fi-gq";
-    case 231:
-      return "fi-et";
-    case 232:
-      return "fi-er";
-    case 233:
-      return "fi-ee";
-    case 234:
-      return "fi-fo";
-    case 238:
-      return "fi-fk";
-    case 239:
-      return "fi-gs";
-    case 242:
-      return "fi-fj";
-    case 246:
-      return "fi-fi";
-    case 248:
-      return "fi-ax";
-    case 250:
-      return "fi-fr";
-    case 254:
-      return "fi-gf";
-    case 258:
-      return "fi-pf";
-    case 260:
-      return "fi-tf";
-    case 262:
-      return "fi-dj";
-    case 266:
-      return "fi-ga";
-    case 268:
-      return "fi-ge";
-    case 270:
-      return "fi-gm";
-    case 275:
-      return "fi-ps";
-    case 276:
-      return "fi-de";
-    case 288:
-      return "fi-gh";
-    case 292:
-      return "fi-gi";
-    case 296:
-      return "fi-ki";
-    case 300:
-      return "fi-gr";
-    case 304:
-      return "fi-gl";
-    case 308:
-      return "fi-gd";
-    case 312:
-      return "fi-gp";
-    case 316:
-      return "fi-gu";
-    case 320:
-      return "fi-gt";
-    case 324:
-      return "fi-gn";
-    case 328:
-      return "fi-gy";
-    case 332:
-      return "fi-ht";
-    case 334:
-      return "fi-hm";
-    case 336:
-      return "fi-va";
-    case 340:
-      return "fi-hn";
-    case 344:
-      return "fi-hk";
-    case 348:
-      return "fi-hu";
-    case 352:
-      return "fi-is";
-    case 356:
-      return "fi-in";
-    case 360:
-      return "fi-id";
-    case 364:
-      return "fi-ir";
-    case 368:
-      return "fi-iq";
-    case 372:
-      return "fi-ie";
-    case 376:
-      return "fi-il";
-    case 380:
-      return "fi-it";
-    case 384:
-      return "fi-ci";
-    case 388:
-      return "fi-jm";
-    case 392:
-      return "fi-jp";
-    case 398:
-      return "fi-kz";
-    case 400:
-      return "fi-jo";
-    case 404:
-      return "fi-ke";
-    case 408:
-      return "fi-kp";
-    case 410:
-      return "fi-kr";
-    case 414:
-      return "fi-kw";
-    case 417:
-      return "fi-kg";
-    case 418:
-      return "fi-la";
-    case 422:
-      return "fi-lb";
-    case 426:
-      return "fi-ls";
-    case 428:
-      return "fi-lv";
-    case 430:
-      return "fi-lr";
-    case 434:
-      return "fi-ly";
-    case 438:
-      return "fi-li";
-    case 440:
-      return "fi-lt";
-    case 442:
-      return "fi-lu";
-    case 446:
-      return "fi-mo";
-    case 450:
-      return "fi-mg";
-    case 454:
-      return "fi-mw";
-    case 458:
-      return "fi-my";
-    case 462:
-      return "fi-mv";
-    case 466:
-      return "fi-ml";
-    case 470:
-      return "fi-mt";
-    case 474:
-      return "fi-mq";
-    case 478:
-      return "fi-mr";
-    case 480:
-      return "fi-mu";
-    case 484:
-      return "fi-mx";
-    case 492:
-      return "fi-mc";
-    case 496:
-      return "fi-mn";
-    case 498:
-      return "fi-md";
-    case 499:
-      return "fi-me";
-    case 500:
-      return "fi-ms";
-    case 504:
-      return "fi-ma";
-    case 508:
-      return "fi-mz";
-    case 512:
-      return "fi-om";
-    case 516:
-      return "fi-na";
-    case 520:
-      return "fi-nr";
-    case 524:
-      return "fi-np";
-    case 528:
-      return "fi-nl";
-    case 531:
-      return "fi-cw";
-    case 533:
-      return "fi-aw";
-    case 534:
-      return "fi-sx";
-    case 535:
-      return "fi-bq";
-    case 540:
-      return "fi-nc";
-    case 548:
-      return "fi-vu";
-    case 554:
-      return "fi-nz";
-    case 558:
-      return "fi-ni";
-    case 562:
-      return "fi-ne";
-    case 566:
-      return "fi-ng";
-    case 570:
-      return "fi-nu";
-    case 574:
-      return "fi-nf";
-    case 578:
-      return "fi-no";
-    case 580:
-      return "fi-mp";
-    case 581:
-      return "fi-um";
-    case 583:
-      return "fi-fm";
-    case 584:
-      return "fi-mh";
-    case 585:
-      return "fi-pw";
-    case 586:
-      return "fi-pk";
-    case 591:
-      return "fi-pa";
-    case 598:
-      return "fi-pg";
-    case 600:
-      return "fi-py";
-    case 604:
-      return "fi-pe";
-    case 608:
-      return "fi-ph";
-    case 612:
-      return "fi-pn";
-    case 616:
-      return "fi-pl";
-    case 620:
-      return "fi-pt";
-    case 624:
-      return "fi-gw";
-    case 626:
-      return "fi-tl";
-    case 630:
-      return "fi-pr";
-    case 634:
-      return "fi-qa";
-    case 638:
-      return "fi-re";
-    case 642:
-      return "fi-ro";
-    case 643:
-      return "fi-ru";
-    case 646:
-      return "fi-rw";
-    case 652:
-      return "fi-bl";
-    case 654:
-      return "fi-sh";
-    case 659:
-      return "fi-kn";
-    case 660:
-      return "fi-ai";
-    case 662:
-      return "fi-lc";
-    case 663:
-      return "fi-mf";
-    case 666:
-      return "fi-pm";
-    case 670:
-      return "fi-vc";
-    case 674:
-      return "fi-sm";
-    case 678:
-      return "fi-st";
-    case 682:
-      return "fi-sa";
-    case 686:
-      return "fi-sn";
-    case 688:
-      return "fi-rs";
-    case 690:
-      return "fi-sc";
-    case 694:
-      return "fi-sl";
-    case 702:
-      return "fi-sg";
-    case 703:
-      return "fi-sk";
-    case 704:
-      return "fi-vn";
-    case 705:
-      return "fi-si";
-    case 706:
-      return "fi-so";
-    case 710:
-      return "fi-za";
-    case 716:
-      return "fi-zw";
-    case 724:
-      return "fi-es";
-    case 728:
-      return "fi-ss";
-    case 729:
-      return "fi-sd";
-    case 732:
-      return "fi-eh";
-    case 740:
-      return "fi-sr";
-    case 744:
-      return "fi-sj";
-    case 748:
-      return "fi-sz";
-    case 752:
-      return "fi-se";
-    case 756:
-      return "fi-ch";
-    case 760:
-      return "fi-sy";
-    case 762:
-      return "fi-tj";
-    case 764:
-      return "fi-th";
-    case 768:
-      return "fi-tg";
-    case 772:
-      return "fi-tk";
-    case 776:
-      return "fi-to";
-    case 780:
-      return "fi-tt";
-    case 784:
-      return "fi-ae";
-    case 788:
-      return "fi-tn";
-    case 792:
-      return "fi-tr";
-    case 795:
-      return "fi-tm";
-    case 796:
-      return "fi-tc";
-    case 798:
-      return "fi-tv";
-    case 800:
-      return "fi-ug";
-    case 804:
-      return "fi-ua";
-    case 807:
-      return "fi-mk";
-    case 818:
-      return "fi-eg";
-    case 826:
-      return "fi-gb";
-    case 831:
-      return "fi-gg";
-    case 832:
-      return "fi-je";
-    case 833:
-      return "fi-im";
-    case 834:
-      return "fi-tz";
-    case 840:
-      return "fi-us";
-    case 850:
-      return "fi-vi";
-    case 854:
-      return "fi-bf";
-    case 858:
-      return "fi-uy";
-    case 860:
-      return "fi-uz";
-    case 862:
-      return "fi-ve";
-    case 876:
-      return "fi-wf";
-    case 882:
-      return "fi-ws";
-    case 887:
-      return "fi-ye";
-    case 894:
-      return "fi-zm";
-    default:
-      return "";
+import "/node_modules/flag-icons/css/flag-icons.min.css";
+
+const flags = Object.freeze([
+  {
+    class: "fi-af",
+    label: "Afghanistan",
+    value: 4
+  },
+  {
+    class: "fi-al",
+    label: "Albania",
+    value: 8
+  },
+  {
+    class: "fi-aq",
+    label: "Antarctica",
+    value: 10
+  },
+  {
+    class: "fi-dz",
+    label: "Algeria",
+    value: 12
+  },
+  {
+    class: "fi-as",
+    label: "American Samoa",
+    value: 16
+  },
+  {
+    class: "fi-ad",
+    label: "Andorra",
+    value: 20
+  },
+  {
+    class: "fi-ao",
+    label: "Angola",
+    value: 24
+  },
+  {
+    class: "fi-ag",
+    label: "Antigua and Barbuda",
+    value: 28
+  },
+  {
+    class: "fi-az",
+    label: "Azerbaijan",
+    value: 31
+  },
+  {
+    class: "fi-ar",
+    label: "Argentina",
+    value: 32
+  },
+  {
+    class: "fi-au",
+    label: "Australia",
+    value: 36
+  },
+  {
+    class: "fi-at",
+    label: "Austria",
+    value: 40
+  },
+  {
+    class: "fi-bs",
+    label: "Bahamas",
+    value: 44
+  },
+  {
+    class: "fi-bh",
+    label: "Bahrain",
+    value: 48
+  },
+  {
+    class: "fi-bd",
+    label: "Bangladesh",
+    value: 50
+  },
+  {
+    class: "fi-am",
+    label: "Armenia",
+    value: 51
+  },
+  {
+    class: "fi-bb",
+    label: "Barbados",
+    value: 52
+  },
+  {
+    class: "fi-be",
+    label: "Belgium",
+    value: 56
+  },
+  {
+    class: "fi-bm",
+    label: "Bermuda",
+    value: 60
+  },
+  {
+    class: "fi-bt",
+    label: "Bhutan",
+    value: 64
+  },
+  {
+    class: "fi-bo",
+    label: "Bolivia (Plurinational State of)",
+    value: 68
+  },
+  {
+    class: "fi-ba",
+    label: "Bosnia and Herzegovina",
+    value: 70
+  },
+  {
+    class: "fi-bw",
+    label: "Botswana",
+    value: 72
+  },
+  {
+    class: "fi-bv",
+    label: "Bouvet Island",
+    value: 74
+  },
+  {
+    class: "fi-br",
+    label: "Brazil",
+    value: 76
+  },
+  {
+    class: "fi-bz",
+    label: "Belize",
+    value: 84
+  },
+  {
+    class: "fi-io",
+    label: "British Indian Ocean Territory",
+    value: 86
+  },
+  {
+    class: "fi-sb",
+    label: "Solomon Islands",
+    value: 90
+  },
+  {
+    class: "fi-vg",
+    label: "Virgin Islands (British)",
+    value: 92
+  },
+  {
+    class: "fi-bn",
+    label: "Brunei Darussalam",
+    value: 96
+  },
+  {
+    class: "fi-bg",
+    label: "Bulgaria",
+    value: 100
+  },
+  {
+    class: "fi-mm",
+    label: "Myanmar",
+    value: 104
+  },
+  {
+    class: "fi-bi",
+    label: "Burundi",
+    value: 108
+  },
+  {
+    class: "fi-by",
+    label: "Belarus",
+    value: 112
+  },
+  {
+    class: "fi-kh",
+    label: "Cambodia",
+    value: 116
+  },
+  {
+    class: "fi-cm",
+    label: "Cameroon",
+    value: 120
+  },
+  {
+    class: "fi-ca",
+    label: "Canada",
+    value: 124
+  },
+  {
+    class: "fi-cv",
+    label: "Cabo Verde",
+    value: 132
+  },
+  {
+    class: "fi-ky",
+    label: "Cayman Islands",
+    value: 136
+  },
+  {
+    class: "fi-cf",
+    label: "Central African Republic",
+    value: 140
+  },
+  {
+    class: "fi-lk",
+    label: "Sri Lanka",
+    value: 144
+  },
+  {
+    class: "fi-td",
+    label: "Chad",
+    value: 148
+  },
+  {
+    class: "fi-cl",
+    label: "Chile",
+    value: 152
+  },
+  {
+    class: "fi-cn",
+    label: "China",
+    value: 156
+  },
+  {
+    class: "fi-tw",
+    label: "Taiwan, Province of China",
+    value: 158
+  },
+  {
+    class: "fi-cx",
+    label: "Christmas Island",
+    value: 162
+  },
+  {
+    class: "fi-cc",
+    label: "Cocos (Keeling) Islands",
+    value: 166
+  },
+  {
+    class: "fi-co",
+    label: "Colombia",
+    value: 170
+  },
+  {
+    class: "fi-km",
+    label: "Comoros",
+    value: 174
+  },
+  {
+    class: "fi-yt",
+    label: "Mayotte",
+    value: 175
+  },
+  {
+    class: "fi-cg",
+    label: "Congo",
+    value: 178
+  },
+  {
+    class: "fi-cd",
+    label: "Congo, Democratic Republic of the",
+    value: 180
+  },
+  {
+    class: "fi-ck",
+    label: "Cook Islands",
+    value: 184
+  },
+  {
+    class: "fi-cr",
+    label: "Costa Rica",
+    value: 188
+  },
+  {
+    class: "fi-hr",
+    label: "Croatia",
+    value: 191
+  },
+  {
+    class: "fi-cu",
+    label: "Cuba",
+    value: 192
+  },
+  {
+    class: "fi-cy",
+    label: "Cyprus",
+    value: 196
+  },
+  {
+    class: "fi-cz",
+    label: "Czechia",
+    value: 203
+  },
+  {
+    class: "fi-bj",
+    label: "Benin",
+    value: 204
+  },
+  {
+    class: "fi-dk",
+    label: "Denmark",
+    value: 208
+  },
+  {
+    class: "fi-dm",
+    label: "Dominica",
+    value: 212
+  },
+  {
+    class: "fi-do",
+    label: "Dominican Republic",
+    value: 214
+  },
+  {
+    class: "fi-ec",
+    label: "Ecuador",
+    value: 218
+  },
+  {
+    class: "fi-sv",
+    label: "El Salvador",
+    value: 222
+  },
+  {
+    class: "fi-gq",
+    label: "Equatorial Guinea",
+    value: 226
+  },
+  {
+    class: "fi-et",
+    label: "Ethiopia",
+    value: 231
+  },
+  {
+    class: "fi-er",
+    label: "Eritrea",
+    value: 232
+  },
+  {
+    class: "fi-ee",
+    label: "Estonia",
+    value: 233
+  },
+  {
+    class: "fi-fo",
+    label: "Faroe Islands",
+    value: 234
+  },
+  {
+    class: "fi-fk",
+    label: "Falkland Islands (Malvinas)",
+    value: 238
+  },
+  {
+    class: "fi-gs",
+    label: "South Georgia and the South Sandwich Islands",
+    value: 239
+  },
+  {
+    class: "fi-fj",
+    label: "Fiji",
+    value: 242
+  },
+  {
+    class: "fi-fi",
+    label: "Finland",
+    value: 246
+  },
+  {
+    class: "fi-ax",
+    label: "Åland Islands",
+    value: 248
+  },
+  {
+    class: "fi-fr",
+    label: "France",
+    value: 250
+  },
+  {
+    class: "fi-gf",
+    label: "French Guiana",
+    value: 254
+  },
+  {
+    class: "fi-pf",
+    label: "French Polynesia",
+    value: 258
+  },
+  {
+    class: "fi-tf",
+    label: "French Southern Territories",
+    value: 260
+  },
+  {
+    class: "fi-dj",
+    label: "Djibouti",
+    value: 262
+  },
+  {
+    class: "fi-ga",
+    label: "Gabon",
+    value: 266
+  },
+  {
+    class: "fi-ge",
+    label: "Georgia",
+    value: 268
+  },
+  {
+    class: "fi-gm",
+    label: "Gambia",
+    value: 270
+  },
+  {
+    class: "fi-ps",
+    label: "Palestine, State of",
+    value: 275
+  },
+  {
+    class: "fi-de",
+    label: "Germany",
+    value: 276
+  },
+  {
+    class: "fi-gh",
+    label: "Ghana",
+    value: 288
+  },
+  {
+    class: "fi-gi",
+    label: "Gibraltar",
+    value: 292
+  },
+  {
+    class: "fi-ki",
+    label: "Kiribati",
+    value: 296
+  },
+  {
+    class: "fi-gr",
+    label: "Greece",
+    value: 300
+  },
+  {
+    class: "fi-gl",
+    label: "Greenland",
+    value: 304
+  },
+  {
+    class: "fi-gd",
+    label: "Grenada",
+    value: 308
+  },
+  {
+    class: "fi-gp",
+    label: "Guadeloupe",
+    value: 312
+  },
+  {
+    class: "fi-gu",
+    label: "Guam",
+    value: 316
+  },
+  {
+    class: "fi-gt",
+    label: "Guatemala",
+    value: 320
+  },
+  {
+    class: "fi-gn",
+    label: "Guinea",
+    value: 324
+  },
+  {
+    class: "fi-gy",
+    label: "Guyana",
+    value: 328
+  },
+  {
+    class: "fi-ht",
+    label: "Haiti",
+    value: 332
+  },
+  {
+    class: "fi-hm",
+    label: "Heard Island and McDonald Islands",
+    value: 334
+  },
+  {
+    class: "fi-va",
+    label: "Holy See",
+    value: 336
+  },
+  {
+    class: "fi-hn",
+    label: "Honduras",
+    value: 340
+  },
+  {
+    class: "fi-hk",
+    label: "Hong Kong",
+    value: 344
+  },
+  {
+    class: "fi-hu",
+    label: "Hungary",
+    value: 348
+  },
+  {
+    class: "fi-is",
+    label: "Iceland",
+    value: 352
+  },
+  {
+    class: "fi-in",
+    label: "India",
+    value: 356
+  },
+  {
+    class: "fi-id",
+    label: "Indonesia",
+    value: 360
+  },
+  {
+    class: "fi-ir",
+    label: "Iran (Islamic Republic of)",
+    value: 364
+  },
+  {
+    class: "fi-iq",
+    label: "Iraq",
+    value: 368
+  },
+  {
+    class: "fi-ie",
+    label: "Ireland",
+    value: 372
+  },
+  {
+    class: "fi-il",
+    label: "Israel",
+    value: 376
+  },
+  {
+    class: "fi-it",
+    label: "Italy",
+    value: 380
+  },
+  {
+    class: "fi-ci",
+    label: "Côte d'Ivoire",
+    value: 384
+  },
+  {
+    class: "fi-jm",
+    label: "Jamaica",
+    value: 388
+  },
+  {
+    class: "fi-jp",
+    label: "Japan",
+    value: 392
+  },
+  {
+    class: "fi-kz",
+    label: "Kazakhstan",
+    value: 398
+  },
+  {
+    class: "fi-jo",
+    label: "Jordan",
+    value: 400
+  },
+  {
+    class: "fi-ke",
+    label: "Kenya",
+    value: 404
+  },
+  {
+    class: "fi-kp",
+    label: "Korea (Democratic People's Republic of)",
+    value: 408
+  },
+  {
+    class: "fi-kr",
+    label: "Korea, Republic of",
+    value: 410
+  },
+  {
+    class: "fi-kw",
+    label: "Kuwait",
+    value: 414
+  },
+  {
+    class: "fi-kg",
+    label: "Kyrgyzstan",
+    value: 417
+  },
+  {
+    class: "fi-la",
+    label: "Lao People's Democratic Republic",
+    value: 418
+  },
+  {
+    class: "fi-lb",
+    label: "Lebanon",
+    value: 422
+  },
+  {
+    class: "fi-ls",
+    label: "Lesotho",
+    value: 426
+  },
+  {
+    class: "fi-lv",
+    label: "Latvia",
+    value: 428
+  },
+  {
+    class: "fi-lr",
+    label: "Liberia",
+    value: 430
+  },
+  {
+    class: "fi-ly",
+    label: "Libya",
+    value: 434
+  },
+  {
+    class: "fi-li",
+    label: "Liechtenstein",
+    value: 438
+  },
+  {
+    class: "fi-lt",
+    label: "Lithuania",
+    value: 440
+  },
+  {
+    class: "fi-lu",
+    label: "Luxembourg",
+    value: 442
+  },
+  {
+    class: "fi-mo",
+    label: "Macao",
+    value: 446
+  },
+  {
+    class: "fi-mg",
+    label: "Madagascar",
+    value: 450
+  },
+  {
+    class: "fi-mw",
+    label: "Malawi",
+    value: 454
+  },
+  {
+    class: "fi-my",
+    label: "Malaysia",
+    value: 458
+  },
+  {
+    class: "fi-mv",
+    label: "Maldives",
+    value: 462
+  },
+  {
+    class: "fi-ml",
+    label: "Mali",
+    value: 466
+  },
+  {
+    class: "fi-mt",
+    label: "Malta",
+    value: 470
+  },
+  {
+    class: "fi-mq",
+    label: "Martinique",
+    value: 474
+  },
+  {
+    class: "fi-mr",
+    label: "Mauritania",
+    value: 478
+  },
+  {
+    class: "fi-mu",
+    label: "Mauritius",
+    value: 480
+  },
+  {
+    class: "fi-mx",
+    label: "Mexico",
+    value: 484
+  },
+  {
+    class: "fi-mc",
+    label: "Monaco",
+    value: 492
+  },
+  {
+    class: "fi-mn",
+    label: "Mongolia",
+    value: 496
+  },
+  {
+    class: "fi-md",
+    label: "Moldova, Republic of",
+    value: 498
+  },
+  {
+    class: "fi-me",
+    label: "Montenegro",
+    value: 499
+  },
+  {
+    class: "fi-ms",
+    label: "Montserrat",
+    value: 500
+  },
+  {
+    class: "fi-ma",
+    label: "Morocco",
+    value: 504
+  },
+  {
+    class: "fi-mz",
+    label: "Mozambique",
+    value: 508
+  },
+  {
+    class: "fi-om",
+    label: "Oman",
+    value: 512
+  },
+  {
+    class: "fi-na",
+    label: "Namibia",
+    value: 516
+  },
+  {
+    class: "fi-nr",
+    label: "Nauru",
+    value: 520
+  },
+  {
+    class: "fi-np",
+    label: "Nepal",
+    value: 524
+  },
+  {
+    class: "fi-nl",
+    label: "Netherlands",
+    value: 528
+  },
+  {
+    class: "fi-cw",
+    label: "Curaçao",
+    value: 531
+  },
+  {
+    class: "fi-aw",
+    label: "Aruba",
+    value: 533
+  },
+  {
+    class: "fi-sx",
+    label: "Sint Maarten (Dutch part)",
+    value: 534
+  },
+  {
+    class: "fi-bq",
+    label: "Bonaire, Sint Eustatius and Saba",
+    value: 535
+  },
+  {
+    class: "fi-nc",
+    label: "New Caledonia",
+    value: 540
+  },
+  {
+    class: "fi-vu",
+    label: "Vanuatu",
+    value: 548
+  },
+  {
+    class: "fi-nz",
+    label: "New Zealand",
+    value: 554
+  },
+  {
+    class: "fi-ni",
+    label: "Nicaragua",
+    value: 558
+  },
+  {
+    class: "fi-ne",
+    label: "Niger",
+    value: 562
+  },
+  {
+    class: "fi-ng",
+    label: "Nigeria",
+    value: 566
+  },
+  {
+    class: "fi-nu",
+    label: "Niue",
+    value: 570
+  },
+  {
+    class: "fi-nf",
+    label: "Norfolk Island",
+    value: 574
+  },
+  {
+    class: "fi-no",
+    label: "Norway",
+    value: 578
+  },
+  {
+    class: "fi-mp",
+    label: "Northern Mariana Islands",
+    value: 580
+  },
+  {
+    class: "fi-um",
+    label: "United States Minor Outlying Islands",
+    value: 581
+  },
+  {
+    class: "fi-fm",
+    label: "Micronesia (Federated States of)",
+    value: 583
+  },
+  {
+    class: "fi-mh",
+    label: "Marshall Islands",
+    value: 584
+  },
+  {
+    class: "fi-pw",
+    label: "Palau",
+    value: 585
+  },
+  {
+    class: "fi-pk",
+    label: "Pakistan",
+    value: 586
+  },
+  {
+    class: "fi-pa",
+    label: "Panama",
+    value: 591
+  },
+  {
+    class: "fi-pg",
+    label: "Papua New Guinea",
+    value: 598
+  },
+  {
+    class: "fi-py",
+    label: "Paraguay",
+    value: 600
+  },
+  {
+    class: "fi-pe",
+    label: "Peru",
+    value: 604
+  },
+  {
+    class: "fi-ph",
+    label: "Philippines",
+    value: 608
+  },
+  {
+    class: "fi-pn",
+    label: "Pitcairn",
+    value: 612
+  },
+  {
+    class: "fi-pl",
+    label: "Poland",
+    value: 616
+  },
+  {
+    class: "fi-pt",
+    label: "Portugal",
+    value: 620
+  },
+  {
+    class: "fi-gw",
+    label: "Guinea-Bissau",
+    value: 624
+  },
+  {
+    class: "fi-tl",
+    label: "Timor-Leste",
+    value: 626
+  },
+  {
+    class: "fi-pr",
+    label: "Puerto Rico",
+    value: 630
+  },
+  {
+    class: "fi-qa",
+    label: "Qatar",
+    value: 634
+  },
+  {
+    class: "fi-re",
+    label: "Réunion",
+    value: 638
+  },
+  {
+    class: "fi-ro",
+    label: "Romania",
+    value: 642
+  },
+  {
+    class: "fi-ru",
+    label: "Russian Federation",
+    value: 643
+  },
+  {
+    class: "fi-rw",
+    label: "Rwanda",
+    value: 646
+  },
+  {
+    class: "fi-bl",
+    label: "Saint Barthélemy",
+    value: 652
+  },
+  {
+    class: "fi-sh",
+    label: "Saint Helena, Ascension and Tristan da Cunha",
+    value: 654
+  },
+  {
+    class: "fi-kn",
+    label: "Saint Kitts and Nevis",
+    value: 659
+  },
+  {
+    class: "fi-ai",
+    label: "Anguilla",
+    value: 660
+  },
+  {
+    class: "fi-lc",
+    label: "Saint Lucia",
+    value: 662
+  },
+  {
+    class: "fi-mf",
+    label: "Saint Martin (French part)",
+    value: 663
+  },
+  {
+    class: "fi-pm",
+    label: "Saint Pierre and Miquelon",
+    value: 666
+  },
+  {
+    class: "fi-vc",
+    label: "Saint Vincent and the Grenadines",
+    value: 670
+  },
+  {
+    class: "fi-sm",
+    label: "San Marino",
+    value: 674
+  },
+  {
+    class: "fi-st",
+    label: "Sao Tome and Principe",
+    value: 678
+  },
+  {
+    class: "fi-sa",
+    label: "Saudi Arabia",
+    value: 682
+  },
+  {
+    class: "fi-sn",
+    label: "Senegal",
+    value: 686
+  },
+  {
+    class: "fi-rs",
+    label: "Serbia",
+    value: 688
+  },
+  {
+    class: "fi-sc",
+    label: "Seychelles",
+    value: 690
+  },
+  {
+    class: "fi-sl",
+    label: "Sierra Leone",
+    value: 694
+  },
+  {
+    class: "fi-sg",
+    label: "Singapore",
+    value: 702
+  },
+  {
+    class: "fi-sk",
+    label: "Slovakia",
+    value: 703
+  },
+  {
+    class: "fi-vn",
+    label: "Viet Nam",
+    value: 704
+  },
+  {
+    class: "fi-si",
+    label: "Slovenia",
+    value: 705
+  },
+  {
+    class: "fi-so",
+    label: "Somalia",
+    value: 706
+  },
+  {
+    class: "fi-za",
+    label: "South Africa",
+    value: 710
+  },
+  {
+    class: "fi-zw",
+    label: "Zimbabwe",
+    value: 716
+  },
+  {
+    class: "fi-es",
+    label: "Spain",
+    value: 724
+  },
+  {
+    class: "fi-ss",
+    label: "South Sudan",
+    value: 728
+  },
+  {
+    class: "fi-sd",
+    label: "Sudan",
+    value: 729
+  },
+  {
+    class: "fi-eh",
+    label: "Western Sahara",
+    value: 732
+  },
+  {
+    class: "fi-sr",
+    label: "Suriname",
+    value: 740
+  },
+  {
+    class: "fi-sj",
+    label: "Svalbard and Jan Mayen",
+    value: 744
+  },
+  {
+    class: "fi-sz",
+    label: "Eswatini",
+    value: 748
+  },
+  {
+    class: "fi-se",
+    label: "Sweden",
+    value: 752
+  },
+  {
+    class: "fi-ch",
+    label: "Switzerland",
+    value: 756
+  },
+  {
+    class: "fi-sy",
+    label: "Syrian Arab Republic",
+    value: 760
+  },
+  {
+    class: "fi-tj",
+    label: "Tajikistan",
+    value: 762
+  },
+  {
+    class: "fi-th",
+    label: "Thailand",
+    value: 764
+  },
+  {
+    class: "fi-tg",
+    label: "Togo",
+    value: 768
+  },
+  {
+    class: "fi-tk",
+    label: "Tokelau",
+    value: 772
+  },
+  {
+    class: "fi-to",
+    label: "Tonga",
+    value: 776
+  },
+  {
+    class: "fi-tt",
+    label: "Trinidad and Tobago",
+    value: 780
+  },
+  {
+    class: "fi-ae",
+    label: "United Arab Emirates",
+    value: 784
+  },
+  {
+    class: "fi-tn",
+    label: "Tunisia",
+    value: 788
+  },
+  {
+    class: "fi-tr",
+    label: "Turkey",
+    value: 792
+  },
+  {
+    class: "fi-tm",
+    label: "Turkmenistan",
+    value: 795
+  },
+  {
+    class: "fi-tc",
+    label: "Turks and Caicos Islands",
+    value: 796
+  },
+  {
+    class: "fi-tv",
+    label: "Tuvalu",
+    value: 798
+  },
+  {
+    class: "fi-ug",
+    label: "Uganda",
+    value: 800
+  },
+  {
+    class: "fi-ua",
+    label: "Ukraine",
+    value: 804
+  },
+  {
+    class: "fi-mk",
+    label: "North Macedonia",
+    value: 807
+  },
+  {
+    class: "fi-eg",
+    label: "Egypt",
+    value: 818
+  },
+  {
+    class: "fi-gb",
+    label: "United Kingdom of Great Britain and Northern Ireland",
+    value: 826
+  },
+  {
+    class: "fi-gg",
+    label: "Guernsey",
+    value: 831
+  },
+  {
+    class: "fi-je",
+    label: "Jersey",
+    value: 832
+  },
+  {
+    class: "fi-im",
+    label: "Isle of Man",
+    value: 833
+  },
+  {
+    class: "fi-tz",
+    label: "Tanzania, United Republic of",
+    value: 834
+  },
+  {
+    class: "fi-us",
+    label: "United States of America",
+    value: 840
+  },
+  {
+    class: "fi-vi",
+    label: "Virgin Islands (U.S.)",
+    value: 850
+  },
+  {
+    class: "fi-bf",
+    label: "Burkina Faso",
+    value: 854
+  },
+  {
+    class: "fi-uy",
+    label: "Uruguay",
+    value: 858
+  },
+  {
+    class: "fi-uz",
+    label: "Uzbekistan",
+    value: 860
+  },
+  {
+    class: "fi-ve",
+    label: "Venezuela (Bolivarian Republic of)",
+    value: 862
+  },
+  {
+    class: "fi-wf",
+    label: "Wallis and Futuna",
+    value: 876
+  },
+  {
+    class: "fi-ws",
+    label: "Samoa",
+    value: 882
+  },
+  {
+    class: "fi-ye",
+    label: "Yemen",
+    value: 887
+  },
+  {
+    class: "fi-zm",
+    label: "Zambia",
+    value: 894
   }
+]);
+const getFlag = (code) => {
+  return flags[code] ? flags[code].class : "";
 };
-export { getFlag };
+export { flags, getFlag };

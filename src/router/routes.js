@@ -3,16 +3,7 @@ const routes = [
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
-      {path: '', redirect: 'home'},
-      {
-        name: "login",
-        path: "login",
-        components: {
-          header: () => import("layouts/headers/SimpleHeader"),
-          drawer: () => import("layouts/drawers/MainDrawer"),
-          default: () => import("pages/LoginPage")
-        }
-      },
+      { path: "", redirect: "home" },
       {
         name: "home",
         path: "home",
@@ -24,10 +15,19 @@ const routes = [
         }
       },
       {
+        name: "login",
+        path: "login",
+        components: {
+          header: () => import("layouts/headers/SimpleHeader"),
+          drawer: () => import("layouts/drawers/MainDrawer"),
+          default: () => import("pages/LoginPage")
+        }
+      },
+      {
         path: "products",
         children: [
           {
-            name: "techmino-galaxy",
+            name: "techminoGalaxy",
             path: "techmino-galaxy",
             components: {
               header: () => import("layouts/headers/MainHeader"),
@@ -39,6 +39,16 @@ const routes = [
         ]
       },
       {
+        name: "profile",
+        path: "profile",
+        components: {
+          header: () => import("layouts/headers/MainHeader"),
+          drawer: () => import("layouts/drawers/MainDrawer"),
+          default: () => import("pages/ProfilePage"),
+          footer: () => import("layouts/footers/MainFooter")
+        }
+      },
+      {
         path: "/:catchAll(.*)*",
         components: {
           header: () => import("layouts/headers/SimpleHeader"),
@@ -46,7 +56,7 @@ const routes = [
         }
       }
     ]
-  },
+  }
 ];
 
 export default routes;

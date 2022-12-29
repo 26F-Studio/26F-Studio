@@ -5,11 +5,14 @@
         {{ i18n("labels.email") }}
       </div>
       <q-input
-        v-model="firstInput"
-        :placeholder="i18n('placeholders.email')"
         class="full-width"
+        v-model="emailInput.content"
+        :error="emailInput.error"
+        :error-message="i18n('errors.email')"
         outlined
+        :loading="emailInput.loading"
         rounded
+        :placeholder="i18n('placeholders.email')"
         type="email">
         <template v-slot:prepend>
           <q-icon name="mail" />
@@ -21,10 +24,13 @@
         {{ i18n("labels.code") }}
       </div>
       <q-input
-        v-model="secondInput"
-        :placeholder="i18n('placeholders.code')"
         class="full-width"
+        v-model="codeInput.content"
+        :error="codeInput.error"
+        :error-message="i18n('errors.code')"
         outlined
+        :loading="codeInput.loading"
+        :placeholder="i18n('placeholders.code')"
         rounded>
         <template v-slot:prepend>
           <q-icon name="mdi-form-textbox-password" />
@@ -46,6 +52,7 @@
     <q-btn
       :label="i18n(`labels.verify`)"
       class="login-btn"
+      :disable="!canSubmit"
       :loading="isSubmitLoading"
       no-caps
       size="lg"
@@ -91,7 +98,7 @@
 
 <script>
 import { useQuasar } from "quasar";
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, reactive, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 import { useApi } from "boot/axios";
@@ -108,8 +115,34 @@ export default defineComponent({
     const $q = useQuasar();
     const $router = useRouter();
 
-    const firstInput = ref("");
-    const secondInput = ref("");
+    const emailInput = reactive({
+      content: "",
+      error: null,
+      loading: false
+    });
+    emailInput.error = computed(() => {
+      if (!emailInput.content) {
+        return false;
+      }
+      return !emailInput.content.match(/^([a-zA-Z\d]+[-_.]?)+@([a-zA-Z\d]+[-_.]?)+\.[a-z]+$/);
+    });
+
+    const codeInput = reactive({
+      content: "",
+      error: null,
+      loading: false
+    });
+    codeInput.error = computed(() => {
+      if (!codeInput.content) {
+        return false;
+      }
+      return !codeInput.content.match(/^\d{8}$/);
+    });
+
+    const canSubmit = computed(() => {
+      return emailInput.content && !emailInput.error &&
+        codeInput.content && !codeInput.error;
+    });
     const isCodeLoading = ref(false);
     const showDialog = ref(false);
     const isSubmitLoading = ref(false);
@@ -121,7 +154,7 @@ export default defineComponent({
     const getCode = async () => {
       isCodeLoading.value = true;
       await errorHandler(async () => {
-        await $api.auth.verifyEmail(firstInput.value);
+        await $api.auth.verifyEmail(emailInput.content);
         isCodeLoading.value = false;
         $q.notify({
           type: "positive",
@@ -134,7 +167,7 @@ export default defineComponent({
     const submit = async () => {
       isSubmitLoading.value = true;
       await errorHandler(async () => {
-        const { code, data } = await $api.auth.loginEmailCode(firstInput.value, secondInput.value.trim());
+        const { code, data } = await $api.auth.loginEmailCode(emailInput.content, codeInput.content);
         const { accessToken, refreshToken } = data;
         console.log(code);
         console.log(accessToken);
@@ -154,8 +187,9 @@ export default defineComponent({
     };
 
     return {
-      firstInput,
-      secondInput,
+      emailInput,
+      codeInput,
+      canSubmit,
       isCodeLoading,
       showDialog,
       isSubmitLoading,

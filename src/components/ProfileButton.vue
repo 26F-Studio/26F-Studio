@@ -27,7 +27,7 @@
                 round
                 dense
                 flat
-                @click="goProfile()"
+                @click="goProfile"
                 style="z-index: 0">
                 <q-img
                   :src="playerStore.avatar"
@@ -39,7 +39,7 @@
                   round
                   unelevated
                   size="sm"
-                  @click="goProfile()"
+                  @click="goProfile"
                   style="margin-bottom: -0.25rem;margin-right: -0.5rem" />
               </q-btn>
             </q-responsive>
@@ -112,10 +112,10 @@ export default defineComponent({
       return $i18n.t("components.profileButton." + path);
     };
 
-    const goProfile = (query) => {
+    const goProfile = () => {
       $router.push({
         name: "profile",
-        query: query
+        query: { id: playerStore.id }
       });
     };
 
@@ -137,5 +137,4 @@ export default defineComponent({
 </script>
 
 <style scoped>
-@import "/node_modules/flag-icons/css/flag-icons.min.css";
 </style>

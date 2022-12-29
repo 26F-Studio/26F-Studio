@@ -1,5 +1,5 @@
 <template>
-  <div
+  <q-page
     class="flex column"
     style="background: #1a13ac">
     <BackgroundImage full-height>
@@ -17,15 +17,15 @@
           no-caps
           size="4vmin"
           to="/home"
-          style="padding: 0 5vmin"/>
+          style="padding: 0 5vmin" />
       </div>
     </BackgroundImage>
-  </div>
+  </q-page>
 </template>
 
 <script>
-import {defineComponent} from 'vue';
-import {useI18n} from "vue-i18n";
+import { defineComponent } from "vue";
+import { useI18n } from "vue-i18n";
 
 import BackgroundImage from "components/BackgroundImage";
 

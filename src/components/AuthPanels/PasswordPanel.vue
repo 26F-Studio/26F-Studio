@@ -5,11 +5,14 @@
         {{ i18n("labels.email") }}
       </div>
       <q-input
-        v-model="firstInput"
-        :placeholder="i18n('placeholders.email')"
         class="full-width"
+        v-model="emailInput.content"
+        :error="emailInput.error"
+        :error-message="i18n('errors.email')"
         outlined
+        :loading="emailInput.loading"
         rounded
+        :placeholder="i18n('placeholders.email')"
         type="email">
         <template v-slot:prepend>
           <q-icon name="mail" />
@@ -21,11 +24,14 @@
         {{ i18n("labels.password") }}
       </div>
       <q-input
-        v-model="secondInput"
-        :placeholder="i18n('placeholders.password')"
         :type="showPassword ? 'text' : 'password'"
         class="full-width"
+        v-model="passwordInput.content"
+        :error="passwordInput.error"
+        :error-message="i18n('errors.password')"
         outlined
+        :loading="passwordInput.loading"
+        :placeholder="i18n('placeholders.password')"
         rounded>
         <template v-slot:prepend>
           <q-icon name="mdi-form-textbox-password" />
@@ -51,7 +57,8 @@
     <q-btn
       :label="i18n('labels.login')"
       class="login-btn"
-      :loading="isLoading"
+      :disable="!canSubmit"
+      :loading="isSubmitLoading"
       no-caps
       size="lg"
       unelevated
@@ -69,7 +76,7 @@
 
 <script>
 import { useQuasar } from "quasar";
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, reactive, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 
@@ -93,10 +100,43 @@ export default defineComponent({
     const $q = useQuasar();
     const $router = useRouter();
 
-    const firstInput = ref("");
-    const secondInput = ref("");
+    const emailInput = reactive({
+      content: "",
+      error: null,
+      loading: false
+    });
+    emailInput.error = computed(() => {
+      if (!emailInput.content) {
+        return false;
+      }
+      return !emailInput.content.match(/^([a-zA-Z\d]+[-_.]?)+@([a-zA-Z\d]+[-_.]?)+\.[a-z]+$/);
+    });
+
+    const passwordInput = reactive({
+      content: "",
+      error: null,
+      loading: false
+    });
+    passwordInput.error = computed(() => {
+      if (!passwordInput.content) {
+        return false;
+      }
+      return !passwordInput.content.match(
+        RegExp("^(?!.*[^A-Za-z0-9#?!@$%^&*-]$)" +
+          "((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])|" +
+          "(?=.*[a-z])(?=.*[A-Z])(?=.*[#?!@$%^&*-])|" +
+          "(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@$%^&*-])|" +
+          "(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*-]))" +
+          ".{8,64}$")
+      );
+    });
+
+    const canSubmit = computed(() => {
+      return emailInput.content && !emailInput.error &&
+        passwordInput.content && !passwordInput.error;
+    });
     const showPassword = ref(false);
-    const isLoading = ref(false);
+    const isSubmitLoading = ref(false);
 
     const i18n = (relativePath) => {
       return $i18n.t("components.authPanels.passwordPanel." + relativePath);
@@ -109,15 +149,15 @@ export default defineComponent({
     };
 
     const login = async () => {
-      isLoading.value = true;
+      isSubmitLoading.value = true;
       await errorHandler(async () => {
         const { accessToken, refreshToken } = (await $api.auth.loginEmailPassword(
-          firstInput.value,
-          await getPasswordHash(firstInput.value, secondInput.value)
+          emailInput.content,
+          await getPasswordHash(emailInput.content, passwordInput.content)
         )).data;
         $player.setToken(accessToken, refreshToken);
         await $player.update();
-        isLoading.value = false;
+        isSubmitLoading.value = false;
         $q.notify({
           type: "positive",
           message: i18n("notifications.loginSuccess")
@@ -126,7 +166,7 @@ export default defineComponent({
           $router.go(-1);
         }, 2000);
       }, $q, $i18n.t);
-      isLoading.value = false;
+      isSubmitLoading.value = false;
     };
 
     const resetPassword = () => {
@@ -138,10 +178,11 @@ export default defineComponent({
       });
     };
     return {
-      firstInput,
-      secondInput,
+      emailInput,
+      passwordInput,
       showPassword,
-      isLoading,
+      canSubmit,
+      isSubmitLoading,
       i18n,
       goTo,
       login,

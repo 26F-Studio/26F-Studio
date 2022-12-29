@@ -6,14 +6,14 @@
       </div>
       <q-input
         class="full-width"
-        :error="firstInput.error"
-        :error-message="i18n('errors.firstInput')"
-        :loading="firstInput.loading"
+        v-model="emailInput.content"
+        :error="emailInput.error"
+        :error-message="i18n('errors.email')"
         outlined
         :placeholder="i18n('placeholders.email')"
         rounded
         type="email"
-        v-model="firstInput.content">
+        :loading="emailInput.loading">
         <template v-slot:prepend>
           <q-icon name="mail" />
         </template>
@@ -25,19 +25,19 @@
       </div>
       <q-input
         class="full-width"
-        :error="secondInput.error"
-        :error-message="i18n('errors.secondInput')"
-        :loading="secondInput.loading"
+        v-model="codeInput.content"
+        :error="codeInput.error"
+        :error-message="i18n('errors.code')"
         outlined
         :placeholder="i18n('placeholders.code')"
         rounded
-        v-model="secondInput.content">
+        :loading="codeInput.loading">
         <template v-slot:prepend>
           <q-icon name="mdi-form-textbox-password" />
         </template>
         <template v-slot:append>
           <q-btn
-            :disable="!firstInput.content || firstInput.error"
+            :disable="!emailInput.content || emailInput.error"
             flat
             :loading="isCodeLoading"
             no-caps
@@ -71,14 +71,14 @@
       </div>
       <q-input
         class="full-width"
-        :error="thirdInput.error"
-        :error-message="i18n('errors.thirdInput')"
-        :loading="thirdInput.loading"
+        v-model="passwordInput.content"
+        :error="passwordInput.error"
+        :error-message="i18n('errors.password')"
         outlined
         :placeholder="i18n('placeholders.password')"
         rounded
         :type="showPassword ? 'text' : 'password'"
-        v-model="thirdInput.content">
+        :loading="passwordInput.loading">
         <template v-slot:prepend>
           <q-icon name="mdi-form-textbox-password" />
         </template>
@@ -96,14 +96,14 @@
       </div>
       <q-input
         class="full-width"
-        :error="fourthInput.error"
-        :error-message="i18n('errors.fourthInput')"
-        :loading="fourthInput.loading"
+        v-model="passwordConfirmInput.content"
+        :error="passwordConfirmInput.error"
+        :error-message="i18n('errors.confirmPassword')"
         outlined
         :placeholder="i18n('placeholders.confirmPassword')"
         rounded
         :type="showPassword ? 'text' : 'password'"
-        v-model="fourthInput.content">
+        :loading="passwordConfirmInput.loading">
         <template v-slot:prepend>
           <q-icon name="mdi-form-textbox-password" />
         </template>
@@ -147,38 +147,40 @@ export default defineComponent({
     const $q = useQuasar();
     const $router = useRouter();
 
-    const firstInput = reactive({
+    const emailInput = reactive({
       content: "",
       error: null,
       loading: false
     });
-    firstInput.error = computed(() => {
-      if (!firstInput.content) {
+    emailInput.error = computed(() => {
+      if (!emailInput.content) {
         return false;
       }
-      return !firstInput.content.match(/^([a-zA-Z\d]+[-_.]?)+@([a-zA-Z\d]+[-_.]?)+\.[a-z]+$/);
+      return !emailInput.content.match(/^([a-zA-Z\d]+[-_.]?)+@([a-zA-Z\d]+[-_.]?)+\.[a-z]+$/);
     });
-    const secondInput = reactive({
+
+    const codeInput = reactive({
       content: "",
       error: null,
       loading: false
     });
-    secondInput.error = computed(() => {
-      if (!secondInput.content) {
+    codeInput.error = computed(() => {
+      if (!codeInput.content) {
         return false;
       }
-      return !secondInput.content.match(/^\d{8}$/);
+      return !codeInput.content.match(/^\d{8}$/);
     });
-    const thirdInput = reactive({
+
+    const passwordInput = reactive({
       content: "",
       error: null,
       loading: false
     });
-    thirdInput.error = computed(() => {
-      if (!thirdInput.content) {
+    passwordInput.error = computed(() => {
+      if (!passwordInput.content) {
         return false;
       }
-      return !thirdInput.content.match(
+      return !passwordInput.content.match(
         RegExp("^(?!.*[^A-Za-z0-9#?!@$%^&*-]$)" +
           "((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])|" +
           "(?=.*[a-z])(?=.*[A-Z])(?=.*[#?!@$%^&*-])|" +
@@ -187,23 +189,26 @@ export default defineComponent({
           ".{8,64}$")
       );
     });
-    const fourthInput = reactive({
+
+    const passwordConfirmInput = reactive({
       content: "",
       error: null,
       loading: false
     });
-    fourthInput.error = computed(() => {
-      if (!fourthInput.content) {
+    passwordConfirmInput.error = computed(() => {
+      if (!passwordConfirmInput.content) {
         return false;
       }
-      return fourthInput.content !== thirdInput.content;
+      return passwordConfirmInput.content !== passwordInput.content;
     });
+
     const canSubmit = computed(() => {
-      return firstInput.content && !firstInput.error &&
-        secondInput.content && !secondInput.error &&
-        thirdInput.content && !thirdInput.error &&
-        fourthInput.content && !fourthInput.error;
+      return emailInput.content && !emailInput.error &&
+        codeInput.content && !codeInput.error &&
+        passwordInput.content && !passwordInput.error &&
+        passwordConfirmInput.content && !passwordConfirmInput.error;
     });
+
     const showPassword = ref(false);
     const isCodeLoading = ref(false);
     const isSubmitLoading = ref(false);
@@ -215,7 +220,7 @@ export default defineComponent({
     const getCode = async () => {
       isCodeLoading.value = true;
       await errorHandler(async () => {
-        await $api.auth.verifyEmail(firstInput.content);
+        await $api.auth.verifyEmail(emailInput.content);
         isCodeLoading.value = false;
         $q.notify({
           type: "positive",
@@ -229,9 +234,9 @@ export default defineComponent({
       isSubmitLoading.value = true;
       await errorHandler(async () => {
         await $api.auth.resetEmail(
-          firstInput.content,
-          secondInput.content,
-          await getPasswordHash(firstInput.content, thirdInput.content)
+          emailInput.content,
+          codeInput.content,
+          await getPasswordHash(emailInput.content, passwordInput.content)
         );
         isSubmitLoading.value = false;
         $player.logout();
@@ -247,10 +252,10 @@ export default defineComponent({
     };
 
     return {
-      firstInput,
-      secondInput,
-      thirdInput,
-      fourthInput,
+      emailInput,
+      codeInput,
+      passwordInput,
+      passwordConfirmInput,
       canSubmit,
       showPassword,
       isCodeLoading,

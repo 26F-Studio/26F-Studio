@@ -1,32 +1,119 @@
 <template>
-  <div class="column q-gutter-y-lg">
+  <div class="q-gutter-y-lg">
+    <div class="row justify-center">
+      <q-responsive
+        :ratio="1/3"
+        class="col-4">
+        <q-btn
+          dense
+          flat
+          round
+          style="z-index: 0"
+          @click="editAvatar">
+          <q-img
+            :src="avatar"
+            class="bg-grey"
+            initial-ratio="1"
+            style="border-radius: 50%">
+            <q-icon v-if="!avatar" class="absolute-center" color="white" name="mdi-account-edit" size="7vw" />
+          </q-img>
+        </q-btn>
+      </q-responsive>
+    </div>
     <div>
       <div class="label-text q-ml-lg q-mb-sm">
-        {{ i18n("labels.email") }}
+        {{ i18n("labels.username") }}
       </div>
       <q-input
-        v-model="firstInput"
-        :placeholder="i18n('placeholders.email')"
         class="full-width"
         outlined
+        v-model="username"
         rounded
-        type="email">
+        :placeholder="i18n('placeholders.username')">
         <template v-slot:prepend>
-          <q-icon name="mail" />
+          <q-icon name="mdi-card-account-details" />
         </template>
       </q-input>
     </div>
+    <div>
+      <div class="label-text q-ml-lg q-mb-sm">
+        {{ i18n("labels.motto") }}
+      </div>
+      <q-input
+        v-model="motto"
+        :placeholder="i18n('placeholders.motto')"
+        class="full-width"
+        outlined
+        rounded>
+        <template v-slot:prepend>
+          <q-icon name="mdi-message-processing" />
+        </template>
+      </q-input>
+    </div>
+    <div>
+      <div class="label-text q-ml-lg q-mb-sm">
+        {{ i18n("labels.region") }}
+      </div>
+      <q-select
+        v-model="region"
+        :display-value="region ? region.label : i18n('placeholders.region')"
+        :options="flags"
+        class="full-width"
+        outlined
+        rounded>
+        <template v-slot:prepend>
+          <q-avatar v-if="region" :class="`fi ${region.class}`" rounded size="sm" />
+          <q-avatar v-if="!region" class="bg-grey text-white" icon="help" rounded size="sm" />
+        </template>
+        <template v-slot:option="scope">
+          <q-item v-bind="scope.itemProps">
+            <q-item-section avatar>
+              <q-avatar :class="`fi ${scope.opt.class}`" rounded size="sm" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>{{ scope.opt.label }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </template>
+      </q-select>
+    </div>
+    <div>
+      <div class="label-text q-ml-lg q-mb-sm">
+        {{ i18n("labels.avatarFrame") }}
+      </div>
+      <q-select
+        :display-value="i18n('placeholders.avatarFrame')"
+        class="full-width"
+        disable
+        outlined
+        rounded>
+        <template v-slot:prepend>
+          <q-icon name="mdi-account-box-outline" />
+        </template>
+      </q-select>
+    </div>
+    <q-btn
+      :disable="!canSubmit"
+      :label="i18n(`labels.submit`)"
+      :loading="isSubmitLoading"
+      class="login-btn"
+      no-caps
+      size="lg"
+      unelevated
+      @click="submit">
+    </q-btn>
   </div>
 </template>
 
 <script>
 import { useQuasar } from "quasar";
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 
 import { useApi } from "boot/axios";
-import { errorHandler, getPasswordHash } from "src/scripts/axios";
+import { errorHandler } from "src/scripts/axios";
+import { flags } from "src/scripts/flags";
 import { usePlayerStore } from "stores/player";
 
 export default defineComponent({
@@ -43,13 +130,14 @@ export default defineComponent({
     const $q = useQuasar();
     const $router = useRouter();
 
-    const firstInput = ref("");
-    const secondInput = ref("");
-    const showPassword = ref(false);
-    const isLoading = ref(false);
+    const avatar = ref("");
+    const username = ref("");
+    const motto = ref("");
+    const region = ref(null);
+    const isSubmitLoading = ref(false);
 
     const i18n = (relativePath) => {
-      return $i18n.t("components.authPanels.passwordPanel." + relativePath);
+      return $i18n.t("components.authPanels.infoPanel." + relativePath);
     };
 
     const goTo = (delta) => {
@@ -58,35 +146,50 @@ export default defineComponent({
       }
     };
 
-    const login = async () => {
-      isLoading.value = true;
+    const editAvatar = () => {
+
+    };
+
+    watch(region, value => {
+      console.log(value);
+    });
+
+    const submit = async () => {
+      isSubmitLoading.value = true;
       await errorHandler(async () => {
-        const { accessToken, refreshToken } = (await $api.auth.loginEmailPassword(
-          firstInput.value,
-          await getPasswordHash(firstInput.value, secondInput.value)
-        )).data;
-        $player.setToken(accessToken, refreshToken);
+        await $api.player.updateInfo(
+          $player.accessToken,
+          {
+            avatar: avatar.value ? avatar.value : undefined,
+            username: username.value ? username.value : undefined,
+            motto: motto.value ? motto.value : undefined,
+            region: region.value ? region.value : undefined
+          }
+        );
         await $player.update();
-        isLoading.value = false;
+        isSubmitLoading.value = false;
         $q.notify({
           type: "positive",
-          message: i18n("notifications.loginSuccess")
+          message: i18n("notifications.submitSuccess")
         });
         setTimeout(() => {
-          $router.go(-1);
+          goTo(+1);
         }, 2000);
       }, $q, $i18n.t);
-      isLoading.value = false;
+      isSubmitLoading.value = false;
     };
 
     return {
-      firstInput,
-      secondInput,
-      showPassword,
-      isLoading,
+      flags,
+      avatar,
+      username,
+      motto,
+      region,
+      isSubmitLoading,
       i18n,
       goTo,
-      login,
+      editAvatar,
+      submit
     };
   }
 });

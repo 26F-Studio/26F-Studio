@@ -86,7 +86,7 @@ export default defineComponent({
       return id > 0;
     });
     const i18n = (relativePath) => {
-      return $i18n.t("pages.main." + relativePath);
+      return $i18n.t("pages.home." + relativePath);
     };
 
     return {

@@ -19,12 +19,16 @@ export default {
     },
     authPanels: {
       codePanel: {
+        errors: {
+          email: "Invalid email address",
+          code: "Invalid verification code"
+        },
         labels: {
           email: "Email",
           code: "Verification Code",
           getCode: "Get code",
           loginWithPassword: "Login with password",
-          login: "Login",
+          login: "Sign In / Sign Up",
           notice: "We would create a new account for you if the verified email does not have an associated account."
         },
         placeholders: {
@@ -36,11 +40,29 @@ export default {
           loginSuccess: "Congratulations! You are now logged in"
         }
       },
+      cropperDialog: {
+        labels: {
+          cancel: "Cancel",
+          steps: {
+            verify: "Verify your account",
+            deactivate: "Confirm deactivation",
+            migrate: "Set new login method",
+            reset: "Set new password"
+          },
+          titles: {
+            deactivate: "Deactivate account",
+            migrate: "Migrate account",
+            reset: "Reset password"
+          }
+        }
+      },
       deactivatePanel: {
+        errors: {
+          email: "Invalid email address",
+          code: "Invalid verification code"
+        },
         labels: {
           email: "Email",
-          cancel: "Let me think",
-          confirm: "Okay, go ahead",
           code: "Verification Code",
           getCode: "Get code",
           verify: "Verify",
@@ -48,7 +70,9 @@ export default {
           warning: "This is a ONE-WAY ticket! You would no longer be able to login again!",
           notice: "This action freezes the account and hides info to other players. \n" +
             "We would KEEP your account data in the database for internal review purpose. \n" +
-            "If you REALLY want to delete your data, Please reach to support and contact us."
+            "If you REALLY want to delete your data, Please reach to support and contact us.",
+          cancel: "Let me think",
+          confirm: "Okay, go ahead"
         },
         placeholders: {
           email: "Input your email address",
@@ -59,12 +83,34 @@ export default {
           deactivateSuccess: "Your account has been deactivated"
         }
       },
+      infoPanel: {
+        labels: {
+          username: "Username",
+          motto: "Motto",
+          region: "Region",
+          avatarFrame: "Avatar Frame",
+          submit: "Submit"
+        },
+        placeholders: {
+          username: "Input your username",
+          motto: "Input your motto",
+          region: "Select your region",
+          avatarFrame: "Coming soon..."
+        },
+        notifications: {
+          submitSuccess: "Your account info has been updated"
+        }
+      },
       passwordPanel: {
+        errors: {
+          email: "Invalid email address",
+          password: "Invalid password"
+        },
         labels: {
           email: "Email",
           password: "Password",
           loginWithCode: "Login with code",
-          login: "Login",
+          login: "Sign In",
           forgot: "Forgot your password?"
         },
         placeholders: {
@@ -77,10 +123,10 @@ export default {
       },
       resetPanel: {
         errors: {
-          firstInput: "Invalid email address",
-          secondInput: "Invalid verification code",
-          thirdInput: "Invalid password",
-          fourthInput: ""
+          email: "Invalid email address",
+          code: "Invalid verification code",
+          password: "Invalid password",
+          confirmPassword: "Two inputs are not the same"
         },
         labels: {
           email: "Email",
@@ -244,13 +290,7 @@ export default {
     main: {}
   },
   pages: {
-    login: {
-      labels: {
-        header: "Welcome\n" +
-          "(Back)!"
-      }
-    },
-    main: {
+    home: {
       labels: {
         header: "Welcome to\n" +
           "26F Studio!",
@@ -262,12 +302,19 @@ export default {
         }
       }
     },
+    login: {
+      labels: {
+        header: "Welcome\n" +
+          "(Back)!"
+      }
+    },
     notFound: {
       labels: {
         notFound: "Oops! Nothing here...",
         home: "Go Home"
       }
-    }
+    },
+    profile: {}
   },
   Studio26F: {
     PlayerManager: {

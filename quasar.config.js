@@ -10,9 +10,9 @@
 
 const clc = require("cli-color");
 const ESLintPlugin = require("eslint-webpack-plugin");
-const {configure} = require("quasar/wrappers");
+const { configure } = require("quasar/wrappers");
 
-module.exports = configure(function (ctx) {
+module.exports = configure(function(ctx) {
   return {
     // https://v2.quasar.dev/quasar-cli-webpack/supporting-ts
     supportTS: false,
@@ -28,7 +28,7 @@ module.exports = configure(function (ctx) {
            function gtag(){dataLayer.push(arguments);}
            gtag('js', new Date());
            gtag('config', '{{GTAG_ID}}');
-         </script>`,
+         </script>`
     },
 
     // app boot file (/src/boot)
@@ -37,7 +37,8 @@ module.exports = configure(function (ctx) {
     boot: [
       "axios",
       "config",
-      "i18n"
+      "i18n",
+      "utils"
     ],
 
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-css
@@ -79,8 +80,8 @@ module.exports = configure(function (ctx) {
       // Options below are automatically set depending on the env, set them if you want to override
       // extractCSS: false,
 
-      beforeBuild({quasarConf}) {
-        if (typeof process.env.GITHUB_REF === 'string') {
+      beforeBuild({ quasarConf }) {
+        if (typeof process.env.GITHUB_REF === "string") {
           console.info(clc.green(" App • ") + "Build in development mode");
           quasarConf.htmlVariables.extraHeads = quasarConf.htmlVariables.extraHeads.replaceAll(
             "{{GTAG_ID}}",
@@ -109,7 +110,7 @@ module.exports = configure(function (ctx) {
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
       chainWebpack(chain) {
         chain.plugin("eslint-webpack-plugin")
-          .use(ESLintPlugin, [{extensions: ["js", "vue"]}]);
+          .use(ESLintPlugin, [{ extensions: ["js", "vue"] }]);
       }
     },
 
@@ -124,7 +125,7 @@ module.exports = configure(function (ctx) {
 
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-framework
     framework: {
-      config: {dark: "auto"},
+      config: { dark: "auto" },
 
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack
@@ -167,7 +168,7 @@ module.exports = configure(function (ctx) {
 
       chainWebpackWebserver(chain) {
         chain.plugin("eslint-webpack-plugin")
-          .use(ESLintPlugin, [{extensions: ["js"]}]);
+          .use(ESLintPlugin, [{ extensions: ["js"] }]);
       },
 
 
@@ -187,7 +188,7 @@ module.exports = configure(function (ctx) {
 
       chainWebpackCustomSW(chain) {
         chain.plugin("eslint-webpack-plugin")
-          .use(ESLintPlugin, [{extensions: ["js"]}]);
+          .use(ESLintPlugin, [{ extensions: ["js"] }]);
       },
 
 
@@ -266,13 +267,13 @@ module.exports = configure(function (ctx) {
 
       chainWebpackMain(chain) {
         chain.plugin("eslint-webpack-plugin")
-          .use(ESLintPlugin, [{extensions: ["js"]}]);
+          .use(ESLintPlugin, [{ extensions: ["js"] }]);
       },
 
 
       chainWebpackPreload(chain) {
         chain.plugin("eslint-webpack-plugin")
-          .use(ESLintPlugin, [{extensions: ["js"]}]);
+          .use(ESLintPlugin, [{ extensions: ["js"] }]);
       }
 
     }

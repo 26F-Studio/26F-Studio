@@ -1,21 +1,20 @@
 <template>
   <q-dialog
     ref="dialogRef"
-    @hide="onDialogHide"
-    style="min-width: 50vw">
+    style="min-width: 50vw"
+    @hide="onDialogHide">
     <q-card class="q-dialog-plugin hide-scrollbar full-width" style="min-width: 35vw">
       <q-card-section>
-        <div class="text-h6">{{ i18n(`labels.titles.${type}`) }}</div>
+        <div class="text-h6">{{ i18n("labels.title") }}</div>
       </q-card-section>
-      <q-separator/>
+      <q-separator />
       <q-card-section class="q-pa-xl q-my-lg">
-        <DeactivatePanel v-if="type === 'deactivate'"/>
-        <ResetPanel v-if="type === 'reset'"/>
+        <Cropper />
       </q-card-section>
       <q-card-actions align="right">
         <q-btn
-          flat
           :label="i18n('labels.cancel')"
+          flat
           @click="onDialogCancel" />
       </q-card-actions>
     </q-card>
@@ -24,41 +23,32 @@
 
 <script>
 import { useDialogPluginComponent } from "quasar";
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
+import { Cropper } from "vue-advanced-cropper";
 import { useI18n } from "vue-i18n";
-import DeactivatePanel from "components/AuthPanels/DeactivatePanel.vue";
-import ResetPanel from "components/AuthPanels/ResetPanel.vue";
+
+import "vue-advanced-cropper/dist/style.css";
 
 export default defineComponent({
-  name: "AuthDialog",
-  components: { ResetPanel, DeactivatePanel },
+  name: "CropperDialog",
+  components: { Cropper },
   emits: [...useDialogPluginComponent.emits],
   props: {
-    type: {
-      type: String,
-      options: ["deactivate", "migrate", "reset"],
-      required: true
-    },
-    finishCallback: {
-      type: Function,
-      default: () => {
-      }
+    image: {
+      type: String
     }
   },
-  setup() {
+  setup(props) {
     const { dialogRef, onDialogCancel, onDialogHide } = useDialogPluginComponent();
     const $i18n = useI18n({ useScope: "global" });
 
-    const step = ref(1);
-
     const i18n = (relativePath) => {
-      return $i18n.t("components.authDialog." + relativePath);
+      return $i18n.t("components.cropperDialog." + relativePath);
     };
 
     return {
       dialogRef,
       onDialogHide,
-      step,
       i18n,
       onDialogCancel
     };

@@ -22,12 +22,13 @@
         keep-alive
         v-model="tab">
         <q-tab-panel :name="1">
-          <PasswordPanel class="q-ma-xl" v-model="tab"/>
+          <PasswordPanel v-model="tab" class="q-ma-xl" />
         </q-tab-panel>
         <q-tab-panel :name="2">
-          <CodePanel class="q-ma-xl" v-model="tab"/>
+          <CodePanel v-model="tab" class="q-ma-xl" />
         </q-tab-panel>
         <q-tab-panel :name="3">
+          <InfoPanel v-model="tab" class="q-ma-xl" />
         </q-tab-panel>
         <q-tab-panel :name="4">
         </q-tab-panel>
@@ -37,20 +38,21 @@
 </template>
 
 <script>
-import {defineComponent, ref} from "vue";
-import {useI18n} from "vue-i18n";
+import { defineComponent, ref } from "vue";
+import { useI18n } from "vue-i18n";
 
 import BackgroundImage from "components/BackgroundImage";
 import CodePanel from "components/AuthPanels/CodePanel.vue";
 import PasswordPanel from "components/AuthPanels/PasswordPanel.vue";
+import InfoPanel from "components/AuthPanels/InfoPanel.vue";
 
 export default defineComponent({
   name: "LoginPage",
-  components: {BackgroundImage, CodePanel, PasswordPanel,},
+  components: { BackgroundImage, CodePanel, PasswordPanel, InfoPanel },
   setup() {
-    const $i18n = useI18n({useScope: "global"});
+    const $i18n = useI18n({ useScope: "global" });
 
-    const tab = ref(2);
+    const tab = ref(3);
 
     const i18n = (relativePath) => {
       return $i18n.t("pages.login." + relativePath);
