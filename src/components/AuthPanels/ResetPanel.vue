@@ -1,6 +1,6 @@
 <template>
   <div class="column q-gutter-y-lg">
-    <div>
+    <div v-if="!autoFill">
       <div class="label-text q-ml-lg q-mb-sm">
         {{ i18n("labels.email") }}
       </div>
@@ -19,7 +19,7 @@
         </template>
       </q-input>
     </div>
-    <div>
+    <div v-if="!autoFill">
       <div class="label-text q-ml-lg q-mb-sm">
         {{ i18n("labels.code") }}
       </div>
@@ -115,8 +115,45 @@
         </template>
       </q-input>
     </div>
+    <div v-if="modelValue" class="row justify-end">
+      <q-btn
+        flat
+        no-caps
+        @click="showDialog = true">
+        <div class="btn-text">
+          {{ i18n("labels.maybeLater") }}
+        </div>
+        <q-dialog
+          v-model="showDialog"
+          persistent>
+          <q-card
+            class="bg-warning text-white"
+            style="font-family: 'Inter', sans-serif;">
+            <q-card-section>
+              <div class="text-h6">{{ i18n("labels.holdOn") }}</div>
+            </q-card-section>
+            <q-card-section>
+              {{ i18n("labels.warning") }}
+            </q-card-section>
+            <q-card-actions class="row justify-end q-gutter-x-xl">
+              <q-btn
+                v-close-popup
+                :label="i18n('labels.confirm')"
+                flat
+                no-caps
+                @click="goTo(+2)" />
+              <q-btn
+                v-close-popup
+                :label="i18n('labels.cancel')"
+                color="primary"
+                no-caps />
+            </q-card-actions>
+          </q-card>
+        </q-dialog>
+      </q-btn>
+    </div>
     <q-btn
-      :label="i18n(`labels.verify`)"
+      :label="i18n('labels.submit')"
       class="login-btn"
       :disable="!canSubmit"
       :loading="isSubmitLoading"
@@ -137,10 +174,16 @@ import { useApi } from "boot/axios";
 import { errorHandler, getPasswordHash } from "src/scripts/axios";
 import { usePlayerStore } from "stores/player";
 import { useRouter } from "vue-router";
+import { useProject } from "boot/config";
 
 export default defineComponent({
   name: "ResetPanel",
-  setup() {
+  props: {
+    modelValue: {
+      type: Number
+    }
+  },
+  setup(props, { emit }) {
     const $api = useApi();
     const $i18n = useI18n({ useScope: "global" });
     const $player = usePlayerStore();
@@ -211,14 +254,38 @@ export default defineComponent({
 
     const showPassword = ref(false);
     const isCodeLoading = ref(false);
+    const showDialog = ref(false);
     const isSubmitLoading = ref(false);
+
+    const autoFill = computed(() => {
+      return props.modelValue &&
+        $q.sessionStorage.has(`${useProject()}.persist.email`) &&
+        $q.sessionStorage.has(`${useProject()}.persist.code`);
+    });
+    if (autoFill.value) {
+      emailInput.content = $q.sessionStorage.getItem(`${useProject()}.persist.email`);
+      codeInput.content = $q.sessionStorage.getItem(`${useProject()}.persist.code`);
+    }
 
     const i18n = (relativePath) => {
       return $i18n.t("components.authPanels.resetPanel." + relativePath);
     };
 
+    const removePersist = () => {
+      $q.sessionStorage.remove(`${useProject()}.persist.email`);
+      $q.sessionStorage.remove(`${useProject()}.persist.code`);
+    };
+
+    const goTo = (delta) => {
+      if (props.modelValue) {
+        removePersist();
+        emit("update:modelValue", props.modelValue + delta);
+      }
+    };
+
     const getCode = async () => {
       isCodeLoading.value = true;
+      removePersist();
       await errorHandler(async () => {
         await $api.auth.verifyEmail(emailInput.content);
         isCodeLoading.value = false;
@@ -232,6 +299,7 @@ export default defineComponent({
 
     const submit = async () => {
       isSubmitLoading.value = true;
+      removePersist();
       await errorHandler(async () => {
         await $api.auth.resetEmail(
           emailInput.content,
@@ -239,14 +307,18 @@ export default defineComponent({
           await getPasswordHash(emailInput.content, passwordInput.content)
         );
         isSubmitLoading.value = false;
-        $player.logout();
         $q.notify({
           type: "positive",
           message: i18n("notifications.resetSuccess")
         });
-        setTimeout(() => {
-          $router.go(0);
-        }, 2000);
+        if (props.modelValue) {
+          goTo(+1);
+        } else {
+          $player.logout();
+          setTimeout(() => {
+            $router.go(0);
+          }, 2000);
+        }
       }, $q, $i18n.t);
       isSubmitLoading.value = false;
     };
@@ -259,8 +331,11 @@ export default defineComponent({
       canSubmit,
       showPassword,
       isCodeLoading,
+      showDialog,
       isSubmitLoading,
+      autoFill,
       i18n,
+      goTo,
       getCode,
       submit
     };

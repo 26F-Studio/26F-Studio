@@ -67,12 +67,19 @@ export default {
           deactivateSuccess: "Your account has been deactivated"
         }
       },
+      finishPanel: {
+        labels: {
+          profile: "Go to profile",
+          home: "Go to home page"
+        }
+      },
       infoPanel: {
         labels: {
           username: "Username",
           motto: "Motto",
           region: "Region",
           avatarFrame: "Avatar Frame",
+          maybeLater: "Maybe later...",
           submit: "Submit"
         },
         placeholders: {
@@ -119,7 +126,13 @@ export default {
           password: "New Password",
           passwordConstraints: "Constraints",
           confirmPassword: "Confirm New Password",
-          verify: "Verify"
+          maybeLater: "Maybe later...",
+          holdOn: "HOLD ON!",
+          warning: "You won't be able to setup your account info if no password was set. \n" +
+            "But you can setup them later in the profile page.",
+          cancel: "Let me think",
+          confirm: "Okay, go ahead",
+          submit: "Submit"
         },
         notifications: {
           getCodeSuccess: "Verification code has been sent to your mailbox",
@@ -301,7 +314,12 @@ export default {
     login: {
       labels: {
         header: "Welcome\n" +
-          "(Back)!"
+          "(Back)!",
+        loginWithPassword: "Login With Password",
+        loginWithCode: "Login With Verification Code",
+        setupInfo: "Setup Your Account Info",
+        setupPassword: "Setup A New Password",
+        finish: "You Are All Set Now!"
       }
     },
     notFound: {

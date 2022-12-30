@@ -189,7 +189,12 @@ export default defineComponent({
           message: i18n("notifications.loginSuccess")
         });
         if (code === 201) {
-          $q.sessionStorage.set(`${useProject()}.persist.verificationCode`, codeInput.content);
+          $q.sessionStorage.set(`${useProject()}.persist.email`, emailInput.content);
+          $q.sessionStorage.set(`${useProject()}.persist.code`, codeInput.content);
+          setTimeout(() => {
+            $q.sessionStorage.remove(`${useProject()}.persist.email`);
+            $q.sessionStorage.remove(`${useProject()}.persist.code`);
+          }, 30 * 60 * 1000);
           setTimeout(() => {
             goTo(+1);
           }, 2000);

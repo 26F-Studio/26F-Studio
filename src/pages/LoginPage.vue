@@ -22,15 +22,39 @@
         keep-alive
         v-model="tab">
         <q-tab-panel :name="1">
+          <div class="title-text text-center" style="font-size: 2vw;">
+            {{ i18n("labels.loginWithPassword") }}
+          </div>
           <PasswordPanel v-model="tab" class="q-ma-xl" />
+          <q-skeleton class="no-pointer-events invisible q-ma-xl" type="QAvatar" />
         </q-tab-panel>
         <q-tab-panel :name="2">
+          <div class="title-text text-center" style="font-size: 2vw;">
+            {{ i18n("labels.loginWithCode") }}
+          </div>
           <CodePanel v-model="tab" class="q-ma-xl" />
+          <q-skeleton class="no-pointer-events invisible q-ma-xl" type="QAvatar" />
         </q-tab-panel>
         <q-tab-panel :name="3">
-          <InfoPanel v-model="tab" class="q-ma-xl" />
+          <div class="title-text text-center" style="font-size: 2vw;">
+            {{ i18n("labels.setupPassword") }}
+          </div>
+          <ResetPanel v-model="tab" class="q-ma-xl" />
+          <q-skeleton class="no-pointer-events invisible q-ma-xl" type="QAvatar" />
         </q-tab-panel>
         <q-tab-panel :name="4">
+          <div class="title-text text-center" style="font-size: 2vw;">
+            {{ i18n("labels.setupInfo") }}
+          </div>
+          <InfoPanel v-model="tab" class="q-ma-xl" />
+          <q-skeleton class="no-pointer-events invisible q-ma-xl" type="QAvatar" />
+        </q-tab-panel>
+        <q-tab-panel :name="5">
+          <div class="title-text text-center" style="font-size: 2vw;">
+            {{ i18n("labels.finish") }}
+          </div>
+          <FinishPanel class="q-ma-xl" />
+          <q-skeleton class="no-pointer-events invisible q-ma-xl" type="QAvatar" />
         </q-tab-panel>
       </q-tab-panels>
     </div>
@@ -45,14 +69,16 @@ import BackgroundImage from "components/BackgroundImage";
 import CodePanel from "components/AuthPanels/CodePanel.vue";
 import PasswordPanel from "components/AuthPanels/PasswordPanel.vue";
 import InfoPanel from "components/AuthPanels/InfoPanel.vue";
+import ResetPanel from "components/AuthPanels/ResetPanel.vue";
+import FinishPanel from "components/AuthPanels/FinishPanel.vue";
 
 export default defineComponent({
   name: "LoginPage",
-  components: { BackgroundImage, CodePanel, PasswordPanel, InfoPanel },
+  components: { FinishPanel, ResetPanel, BackgroundImage, CodePanel, PasswordPanel, InfoPanel },
   setup() {
     const $i18n = useI18n({ useScope: "global" });
 
-    const tab = ref(3);
+    const tab = ref(2);
 
     const i18n = (relativePath) => {
       return $i18n.t("pages.login." + relativePath);
@@ -76,5 +102,15 @@ export default defineComponent({
   line-height: 8vw;
   font-feature-settings: 'pnum' on, 'lnum' on;
   white-space: pre
+}
+
+.title-text {
+  background: linear-gradient(90.8deg, #BF55D4 26.21%, #6271CD 86.62%);
+  text-shadow: 0 2vw 4vw rgba(48, 0, 240, 0.31);
+  font-family: 'galaxy-sans', sans-serif;
+  font-weight: 800;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 </style>

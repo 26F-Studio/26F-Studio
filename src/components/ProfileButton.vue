@@ -47,17 +47,11 @@
           <div class="column items-center">
             <div class="row items-baseline q-gutter-x-sm">
               <q-icon v-if="!flag" name="mdi-help-rhombus-outline" />
-              <span
-                v-if="flag"
-                class="fi"
-                :class="flag" />
+              <span v-if="flag" :class="`fi ${flag}`" />
               <div class="text-body1 text-weight-bold">
                 {{ playerStore.username }}
               </div>
-              <span
-                v-if="flag"
-                class="fi invisible"
-                :class="flag" />
+              <span v-if="flag" :class="`fi invisible ${flag}`" />
               <q-icon v-if="!flag" class="invisible" name="mdi-help-rhombus-outline" />
             </div>
             <div :class="$q.dark.isActive ? 'text-grey' : 'text-grey-8'">

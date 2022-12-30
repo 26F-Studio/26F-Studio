@@ -2,8 +2,8 @@
   <div class="q-gutter-y-lg">
     <div class="row justify-center">
       <q-responsive
-        :ratio="1/3"
-        class="col-4">
+        :ratio="1/4"
+        class="col-3">
         <q-btn
           dense
           flat
@@ -15,7 +15,7 @@
             class="bg-grey"
             initial-ratio="1"
             style="border-radius: 50%">
-            <q-icon v-if="!avatar" class="absolute-center" color="white" name="mdi-account-edit" size="7vw" />
+            <q-icon v-if="!avatar" class="absolute-center" color="white" name="mdi-account-edit" size="6vw" />
           </q-img>
         </q-btn>
       </q-responsive>
@@ -93,6 +93,16 @@
         </template>
       </q-select>
     </div>
+    <div v-if="modelValue" class="row justify-end">
+      <q-btn
+        flat
+        no-caps
+        @click="goTo(+1)">
+        <div class="btn-text">
+          {{ i18n("labels.maybeLater") }}
+        </div>
+      </q-btn>
+    </div>
     <q-btn
       class="login-btn full-width"
       :label="i18n(`labels.submit`)"
@@ -107,7 +117,7 @@
 
 <script>
 import { useQuasar } from "quasar";
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 import { useApi } from "boot/axios";
@@ -156,10 +166,6 @@ export default defineComponent({
       });
     };
 
-    watch(region, value => {
-      console.log(value);
-    });
-
     const submit = async () => {
       isSubmitLoading.value = true;
       await errorHandler(async () => {
@@ -169,7 +175,7 @@ export default defineComponent({
             avatar: avatar.value ? avatar.value : undefined,
             username: username.value ? username.value : undefined,
             motto: motto.value ? motto.value : undefined,
-            region: region.value ? region.value : undefined
+            region: region.value ? region.value.value : undefined
           }
         );
         await $player.update();

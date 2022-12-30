@@ -1248,6 +1248,9 @@ const flags = Object.freeze([
   }
 ]);
 const getFlag = (code) => {
-  return flags[code] ? flags[code].class : "";
+  const flag = flags.find((item) => {
+    return item.value === code;
+  });
+  return flag ? flag.class : "";
 };
 export { flags, getFlag };
