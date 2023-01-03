@@ -344,6 +344,31 @@ export default {
         home: "Go Home"
       }
     },
+    oauth: {
+      labels: {
+        titles: {
+          techmino: "Authorize Techmino",
+          techminoGalaxy: "Authorize Techmino Galaxy",
+          quatrack: "Authorize Quatrack"
+        },
+        products: {
+          techmino: "Techmino",
+          techminoGalaxy: "Techmino Galaxy",
+          quatrack: "Quatrack"
+        },
+        platforms: {
+          android: "Android",
+          ios: "iOS",
+          linux: "Linux",
+          macos: "macOS",
+          windows: "Windows"
+        },
+        name: "{product} on {platform}",
+        caption: "wants to access your 26F account",
+        data: "Personal user data",
+        authorize: "Authorize"
+      }
+    },
     profile: {
       labels: {
         username: "Username",

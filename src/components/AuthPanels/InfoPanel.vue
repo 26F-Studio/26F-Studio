@@ -15,7 +15,12 @@
             class="bg-grey"
             initial-ratio="1"
             style="border-radius: 50%">
-            <q-icon v-if="!avatar" class="absolute-center" color="white" name="mdi-account-edit" size="6vw" />
+            <q-icon
+              v-if="!avatar"
+              class="absolute-center"
+              color="white"
+              name="mdi-account-edit"
+              size="6vw" />
           </q-img>
         </q-btn>
       </q-responsive>

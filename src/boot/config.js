@@ -30,16 +30,24 @@ const useProducts = () => [
   "quatrack",
   "techminoGalaxy"
 ];
-const usePlatforms = () => [
-  "android",
-  "appstore",
-  "linux",
-  "macosDmg",
-  "macosPkg",
-  "testflight",
-  "windows32",
-  "windows64"
-];
+const usePlatforms = (isPackage = true) => {
+  return isPackage ? [
+    "android",
+    "appstore",
+    "linux",
+    "macosDmg",
+    "macosPkg",
+    "testflight",
+    "windows32",
+    "windows64"
+  ] : [
+    "android",
+    "ios",
+    "linux",
+    "macos",
+    "windows"
+  ];
+};
 
 const getLatestDownloadLink = (product, platform) => {
   if (useProducts().includes(product)) {

@@ -24,6 +24,15 @@ const routes = [
         }
       },
       {
+        name: "oauth",
+        path: "oauth",
+        components: {
+          header: () => import("layouts/headers/SimpleHeader"),
+          drawer: () => import("layouts/drawers/MainDrawer"),
+          default: () => import("pages/AuthPage")
+        }
+      },
+      {
         path: "products",
         children: [
           {
