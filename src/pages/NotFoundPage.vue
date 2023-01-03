@@ -4,10 +4,8 @@
     style="background: #1a13ac">
     <BackgroundImage full-height>
       <div class="absolute-center bg-transparent text-center">
-        <div class="main-text" style="font-size: 50vmin; line-height: 50vmin">
-          404
-        </div>
-        <div class="q-mt-xl" style="font-size: 5vmin; opacity:.4; color: #e1e1e1">
+        <q-img :src="require('assets/notFound.svg')" width="60vmin" />
+        <div class="hint-text text-center">
           {{ i18n("labels.notFound") }}
         </div>
         <q-btn
@@ -30,10 +28,10 @@ import { useI18n } from "vue-i18n";
 import BackgroundImage from "components/BackgroundImage";
 
 export default defineComponent({
-  name: 'NotFoundPage',
-  components: {BackgroundImage},
+  name: "NotFoundPage",
+  components: { BackgroundImage },
   setup() {
-    const $i18n = useI18n({useScope: "global"});
+    const $i18n = useI18n({ useScope: "global" });
 
     const i18n = (relativePath) => {
       return $i18n.t("pages.notFound." + relativePath);
@@ -42,7 +40,7 @@ export default defineComponent({
       i18n
     };
   }
-})
+});
 </script>
 
 
@@ -57,6 +55,16 @@ export default defineComponent({
   font-feature-settings: 'pnum' on, 'lnum' on;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.hint-text {
+  color: #E1E1E1;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 5vmin;
+  line-height: 190%;
+  font-feature-settings: 'pnum' on, 'lnum' on;
 }
 
 .home-btn {

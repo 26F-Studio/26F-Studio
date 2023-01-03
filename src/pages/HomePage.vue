@@ -14,9 +14,7 @@
       <div
         class="absolute-center bg-transparent full-width row"
         :class="$q.screen.xs ? 'justify-center' : 'justify-start'">
-        <div
-          class="header-text q-pb-xl"
-          :class="$q.screen.xs ? undefined : 'offset-1'">
+        <div class="header-text q-pb-xl" style="margin-left: 4vw">
           {{ i18n("labels.header") }}
         </div>
       </div>
@@ -116,8 +114,8 @@ export default defineComponent({
   color: #F1F2F3;
   font-family: 'galaxy-sans-oblique', sans-serif;
   font-weight: 800;
-  font-size: 14vw;
-  line-height: 14vw;
+  font-size: 10vw;
+  line-height: 10vw;
   font-feature-settings: 'pnum' on, 'lnum' on;
   white-space: pre
 }

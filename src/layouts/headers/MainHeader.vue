@@ -19,10 +19,10 @@
           {{ `\u{0FFFFF}  ${i18n("labels.title")}` }}
         </div>
       </q-btn>
-      <q-space/>
+      <q-space />
       <q-btn-dropdown
         v-show="$q.screen.gt.xs"
-        v-for="(button, index) in buttons"
+        v-for="(list, button, index) in dropdownButtons"
         :key="index"
         class="button-text"
         flat
@@ -30,8 +30,24 @@
         no-caps
         :padding="$q.screen.lt.md ? 'sm' : undefined"
         size="1vw"
-        stretch></q-btn-dropdown>
-      <ProfileButton/>
+        stretch>
+        <q-list>
+          <q-item
+            v-for="(item, index) in list"
+            :key="index"
+            v-close-popup
+            :to="item.to"
+            class="q-py-lg"
+            clickable>
+            <q-item-section>
+              <q-item-label style="font-weight: 400; font-size: 0.75vw">
+                {{ i18n(`labels.${item.label}`) }}
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-btn-dropdown>
+      <ProfileButton />
       <q-btn
         v-show="$q.screen.gt.xs"
         aria-label="Language"
@@ -40,7 +56,7 @@
         icon="language"
         round
         :size="$q.screen.gt.sm ? '1vw' : 'md'">
-        <LanguagesMenu/>
+        <LanguagesMenu />
       </q-btn>
       <q-btn
         v-show="$q.screen.gt.xs"
@@ -50,16 +66,16 @@
         icon="settings"
         round
         :size="$q.screen.gt.sm ? '1vw' : 'md'">
-        <SettingsMenu/>
+        <SettingsMenu />
       </q-btn>
     </q-toolbar>
   </q-header>
 </template>
 
 <script>
-import {useQuasar} from "quasar";
-import {defineComponent} from "vue";
-import {useI18n} from "vue-i18n";
+import { useQuasar } from "quasar";
+import { defineComponent } from "vue";
+import { useI18n } from "vue-i18n";
 
 import LanguagesMenu from "components/LanguagesMenu";
 import ProfileButton from "components/ProfileButton";
@@ -67,27 +83,60 @@ import SettingsMenu from "components/SettingsMenu";
 
 export default defineComponent({
   name: "MainHeader",
-  components: {LanguagesMenu, ProfileButton, SettingsMenu},
-  setup(_, {emit}) {
+  components: { LanguagesMenu, ProfileButton, SettingsMenu },
+  setup(_, { emit }) {
     const $q = useQuasar();
-    const $i18n = useI18n({useScope: "global"});
-    const buttons = [
-      "products",
-      "support",
-      "about",
-      "contact"
-    ];
+    const $i18n = useI18n({ useScope: "global" });
+    const dropdownButtons = {
+      products: [{
+        label: "techminoGalaxy",
+        to: "/products/techmino-galaxy"
+      }, {
+        label: "techmino",
+        to: "/products/techmino"
+      }, {
+        label: "quatrack",
+        to: "/products/quatrack"
+      }, {
+        label: "miscellaneous",
+        to: "/products/miscellaneous"
+      }],
+      support: [{
+        label: "accountSettings",
+        to: "/account/settings"
+      }, {
+        label: "gameManuals",
+        to: "/support/manuals"
+      }, {
+        label: "glossary",
+        to: "/support/glossary"
+      }, {
+        label: "utilities",
+        to: "/support/utilities"
+      }],
+      about: [{
+        label: "whoWeAre",
+        to: "/about/us"
+      }, {
+        label: "brandingGuidelines",
+        to: "/about/guidelines"
+      }],
+      contact: [{
+        label: "joinUs",
+        to: "/contact/join"
+      }]
+    };
     const i18n = (relativePath) => {
       return $i18n.t("layouts.headers.main." + relativePath);
     };
     const onLogoClick = (event, go) => {
       if ($q.screen.lt.md) {
         event.preventDefault();
-        emit('click:drawer', 'left');
+        emit("click:drawer", "left");
       }
       go();
     };
-    return {buttons, i18n, onLogoClick};
+    return { dropdownButtons, i18n, onLogoClick };
   }
 });
 </script>

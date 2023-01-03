@@ -1,6 +1,7 @@
 <template>
   <q-btn-dropdown
     :class="disable ? 'unavailable-btn' : 'download-btn'"
+    content-style="border-radius: 1vw"
     toggle-aria-label="Download"
     :disable-main-btn="disable"
     :disable-dropdown="disable"
@@ -15,20 +16,11 @@
           style="font-weight: 700; font-size: 2vw;">
           {{ disable ? i18n("labels.disable") : i18n("labels.download") }}
         </div>
-        <div v-if="!disable" class="row justify-center">
-          <div
-            v-for="(icon, index) in platformIconMap[mainPlatform]"
-            :key="index"
-            class="row">
-            <q-separator
-              v-show="index !==0"
-              class="q-my-xs"
-              vertical />
-            <q-icon
-              :name="icon"
-              class="q-ma-sm"
-              size="1.5vw" />
-          </div>
+        <div v-if="!disable" class="row justify-center items-center">
+          <q-icon
+            :name="platformIconMap[mainPlatform]"
+            class="q-ma-sm"
+            size="1.5vw" />
           <div
             :class="$q.screen.xs ? 'q-pt-sm' : ''"
             style="font-weight: 400; font-size: 1vw">
@@ -46,31 +38,26 @@
         @click="downloadProduct(platform)">
         <q-item-section avatar class="row">
           <div class="platform-card row">
-            <div
-              v-for="(icon, index) in platformIconMap[platform]"
-              :key="index"
-              class="row">
-              <q-separator
-                v-show="index !==0"
-                class="q-my-xs"
-                vertical />
-              <q-icon
-                :name="icon"
-                class="q-ma-sm"
-                size="1.5vw" />
-            </div>
+            <q-icon
+              :name="platformIconMap[platform]"
+              class="q-ma-sm"
+              size="1.5vw" />
           </div>
         </q-item-section>
         <q-item-section>
-          <q-item-label>{{ i18n(`labels.platforms.${platform}`) }}</q-item-label>
+          <q-item-label style="font-weight: 400; font-size: 0.75vw">
+            {{ i18n(`labels.platforms.${platform}`) }}
+          </q-item-label>
         </q-item-section>
         <q-item-section side>
           <q-icon
             v-if="['appstore', 'testflight'].includes(platform)"
-            name="mdi-open-in-new" />
+            name="mdi-open-in-new"
+            size="1vw" />
           <q-icon
             v-if="!['appstore', 'testflight'].includes(platform)"
-            name="mdi-download" />
+            name="mdi-download"
+            size="1vw" />
         </q-item-section>
       </q-item>
     </q-list>
@@ -103,14 +90,14 @@ export default defineComponent({
     let mainPlatform = "windows64";
     let platforms = usePlatforms();
     const platformIconMap = {
-      android: ["mdi-android", "mdi-package-variant"],
-      appstore: ["mdi-apple", "mdi-store"],
-      linux: ["mdi-penguin", "mdi-package-variant-closed"],
-      macosDmg: ["mdi-apple", "mdi-harddisk"],
-      macosPkg: ["mdi-apple", "mdi-package-variant"],
-      testflight: ["mdi-apple", "mdi-airplane"],
-      windows32: ["mdi-microsoft-windows-classic", "mdi-cpu-32-bit"],
-      windows64: ["mdi-microsoft-windows", "mdi-cpu-64-bit"]
+      android: "mdi-android",
+      appstore: "mdi-apple",
+      linux: "mdi-penguin",
+      macosDmg: "mdi-apple",
+      macosPkg: "mdi-apple",
+      testflight: "mdi-apple",
+      windows32: "mdi-microsoft-windows-classic",
+      windows64: "mdi-microsoft-windows"
     };
 
     if ($q.platform.is.android) {

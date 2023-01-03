@@ -20,8 +20,23 @@
       </q-input>
     </div>
     <div>
-      <div class="label-text q-ml-lg q-mb-sm">
-        {{ i18n("labels.password") }}
+      <div class="row items-center q-ml-lg q-mb-sm">
+        <div class="label-text">
+          {{ i18n("labels.password") }}
+        </div>
+        <q-chip
+          class="q-ml-md"
+          color="primary"
+          outline>
+          <q-avatar
+            color="primary"
+            icon="mdi-help"
+            text-color="white" />
+          {{ i18n("labels.passwordConstraints") }}
+          <q-tooltip style="white-space: pre">
+            {{ i18n("tooltips.passwordConstraints") }}
+          </q-tooltip>
+        </q-chip>
       </div>
       <q-input
         :type="showPassword ? 'text' : 'password'"

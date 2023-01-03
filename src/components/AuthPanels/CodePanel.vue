@@ -1,5 +1,20 @@
 <template>
   <div class="column q-gutter-y-lg">
+    <q-slide-transition>
+      <q-banner
+        v-if="isBannerVisible"
+        class="bg-orange text-white"
+        inline-actions
+        rounded>
+        {{ i18n("labels.notice") }}
+        <template v-slot:action>
+          <q-icon
+            class="cursor-pointer"
+            name="close"
+            @click="dismissBanner" />
+        </template>
+      </q-banner>
+    </q-slide-transition>
     <div>
       <div class="label-text q-ml-lg q-mb-sm">
         {{ i18n("labels.email") }}
@@ -19,6 +34,11 @@
         </template>
       </q-input>
     </div>
+    <q-slide-transition>
+      <div v-show="isSent" class="q-ml-lg btn-text">
+        {{ i18n("notifications.getCodeSuccess") }}
+      </div>
+    </q-slide-transition>
     <div>
       <div class="label-text q-ml-lg q-mb-sm">
         {{ i18n("labels.code") }}
@@ -68,21 +88,6 @@
       size="lg"
       unelevated
       @click="login" />
-    <q-slide-transition>
-      <q-banner
-        v-if="isBannerVisible"
-        class="bg-orange text-white"
-        inline-actions
-        rounded>
-        {{ i18n("labels.notice") }}
-        <template v-slot:action>
-          <q-icon
-            class="cursor-pointer"
-            name="close"
-            @click="dismissBanner" />
-        </template>
-      </q-banner>
-    </q-slide-transition>
     <q-slide-transition>
       <q-skeleton
         v-if="!isBannerVisible"
@@ -146,6 +151,7 @@ export default defineComponent({
         codeInput.content && !codeInput.error;
     });
     const isCodeLoading = ref(false);
+    const isSent = ref(false);
     const isSubmitLoading = ref(false);
     const isBannerVisible = ref(true);
 
@@ -168,10 +174,7 @@ export default defineComponent({
       await errorHandler(async () => {
         await $api.auth.verifyEmail(emailInput.content);
         isCodeLoading.value = false;
-        $q.notify({
-          type: "positive",
-          message: i18n("notifications.getCodeSuccess")
-        });
+        isSent.value = true;
       }, $q, $i18n.t);
       isCodeLoading.value = false;
     };
@@ -216,6 +219,7 @@ export default defineComponent({
       codeInput,
       canSubmit,
       isCodeLoading,
+      isSent,
       isSubmitLoading,
       isBannerVisible,
       i18n,

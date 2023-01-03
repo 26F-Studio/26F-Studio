@@ -29,7 +29,7 @@ export default {
           getCode: "Get code",
           loginWithPassword: "Login with password",
           login: "Sign In / Sign Up",
-          notice: "We would create a new account for you if the verified email does not have an associated account."
+          notice: "If you enter an email address that isn't linked to an existing 26F account, we will create one for you."
         },
         placeholders: {
           email: "Input your email address",
@@ -100,16 +100,24 @@ export default {
         labels: {
           email: "Email",
           password: "Password",
+          passwordConstraints: "Constraints",
           loginWithCode: "Login with code",
           login: "Sign In",
           forgot: "Forgot your password?"
+        },
+        notifications: {
+          loginSuccess: "Congratulations! You are now logged in"
         },
         placeholders: {
           email: "Input your email address",
           password: "Input your password"
         },
-        notifications: {
-          loginSuccess: "Congratulations! You are now logged in"
+        tooltips: {
+          passwordConstraints: "Your password should meet 3 of the following constraints: \n" +
+            "\t Contains at least 1 lowercase alphabetic character \n" +
+            "\t Contains at least 1 uppercase alphabetic character \n" +
+            "\t Contains at least 1 numeric character \n" +
+            "\t Contains at least 1 special character(#?!{'@'}$%^&*-)"
         }
       },
       resetPanel: {
@@ -197,25 +205,22 @@ export default {
       products: {
         techminoGalaxy: {
           name: "Techmino Galaxy",
-          description: "Lorem Ipsum is simply dummy text of the printing and typesetting\n" +
-            "industry. Lorem Ipsum has been the industry's standard dummy text\n" +
-            "ever since the 1500s, when an unknown printer took a galley of type\n" +
-            "and scrambled it to make a type specimen book."
+          description: "The next generation of Techmino, with more features and more fun!"
         },
         techmino: {
           name: "Techmino",
-          description: "Welcome to Techmino, a block-stacking game by 26F Studio!\n" +
-            "Immerse yourself in more than 100 modes of this modern yet familiar game,\n" +
-            "with a variety of difficulties so everyone can have a great time!\n" +
-            "Hang out and challenge your friends and players around the world\n" +
-            "in the multiplayer modes, and discover some hidden easter eggs all over the game!\n"
+          description: "Welcome to Techmino, a block-stacking game by 26F Studio! \n" +
+            "Immerse yourself in more than 100 modes of this modern yet familiar game, \n" +
+            "with a variety of difficulties so everyone can have a great time! \n" +
+            "Hang out and challenge your friends and players around the world \n" +
+            "in the multiplayer modes, and discover some hidden easter eggs all over the game! \n"
         },
         quatrack: {
           name: "Quatrack",
-          description: "Lorem Ipsum is simply dummy text of the printing and typesetting " +
-            "industry. Lorem Ipsum has been the industry's standard dummy text " +
-            "ever since the 1500s, when an unknown printer took a galley of type " +
-            "and scrambled it to make a type specimen book."
+          description: "Welcome to Quatrack, the music game produced by 26F Studio! \n" +
+            "Hit the keyboard/click the screen with the music beat, \n" +
+            "enjoy the geometric style animation, get higher scores, \n" +
+            "and challenge your record!"
         }
       }
     },
@@ -285,9 +290,20 @@ export default {
         labels: {
           title: "26F Studio",
           products: "Products",
+          techminoGalaxy: "Techmino Galaxy",
+          techmino: "Techmino",
+          quatrack: "Quatrack",
+          miscellaneous: "Miscellaneous",
           support: "Support",
+          accountSettings: "Account Settings",
+          gameManuals: "Game Manuals",
+          glossary: "Glossary",
+          utilities: "Utilities",
           about: "About",
-          contact: "Contact"
+          whoWeAre: "Who We Are",
+          brandingGuidelines: "Branding Guidelines",
+          contact: "Contact",
+          joinUs: "Join Us"
         }
       },
       simple: {
@@ -328,10 +344,26 @@ export default {
         home: "Go Home"
       }
     },
-    profile: {}
+    profile: {
+      labels: {
+        username: "Username",
+        motto: "Motto",
+        region: "Region",
+        avatarFrame: "Avatar Frame",
+        maybeLater: "Maybe later...",
+        submit: "Submit"
+      },
+      placeholders: {
+        username: "Input your username",
+        motto: "Input your motto",
+        region: "Select your region",
+        avatarFrame: "Coming soon..."
+      }
+    }
   },
   Studio26F: {
     PlayerManager: {
+      emailSendError: "Failed to send email",
       invalidEmail: "Invalid email",
       invalidEmailPass: "Invalid email or password",
       playerNotFound: "Player not found"

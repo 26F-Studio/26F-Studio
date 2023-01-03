@@ -17,7 +17,7 @@
         :src="playerStore.avatar" />
     </q-avatar>
     <q-menu :offset="[0, 10]" style="min-width:22rem">
-      <q-card bordered>
+      <q-card bordered style="border-radius: 1vw;">
         <q-card-section class="q-gutter-sm">
           <div class="row justify-center">
             <q-responsive
