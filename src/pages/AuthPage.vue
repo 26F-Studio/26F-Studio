@@ -52,7 +52,10 @@
           <q-separator />
           <q-card-section>
             <vue-h-captcha
+              ref="hCaptcha"
               sitekey="1c44f708-6b62-4b69-b733-7abbdb1f5add"
+              :theme="$q.dark.isActive ? 'dark' : 'light'"
+              size="invisible"
               @error="logger('error', $event)"
               @expired="logger('expired', $event)"
               @verify="logger('verify', $event)"
@@ -70,7 +73,7 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 
@@ -98,22 +101,24 @@ export default defineComponent({
       windows: "mdi-microsoft-windows"
     };
 
+    const hCaptcha = ref(null);
+
     const i18n = (relativePath, params) => {
       return $i18n.t("pages.oauth." + relativePath, params);
     };
     const authorize = () => {
-
+      hCaptcha.value.execute();
     };
 
-    const logger = (a, b) => {
-      console.log(a);
-      console.log(b);
+    const logger = (type, event) => {
+      console.log(type, event);
     };
 
     return {
       product: query.product,
       platform: query.platform,
       platformIconMap,
+      hCaptcha,
       i18n,
       authorize,
       logger
