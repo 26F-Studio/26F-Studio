@@ -51,6 +51,7 @@
           </q-card-section>
           <q-separator />
           <q-card-section>
+            <vue-h-captcha sitekey="1c44f708-6b62-4b69-b733-7abbdb1f5add" />
             <q-btn
               :label="i18n('labels.authorize')"
               class="full-width"
@@ -65,15 +66,17 @@
 
 <script>
 import { defineComponent } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 
-import BackgroundImage from "components/BackgroundImage.vue";
-import { useI18n } from "vue-i18n";
 import { usePlatforms, useProducts } from "boot/config";
+
+import VueHCaptcha from "@hcaptcha/vue3-hcaptcha";
+import BackgroundImage from "components/BackgroundImage.vue";
 
 export default defineComponent({
   name: "AuthPage",
-  components: { BackgroundImage },
+  components: { VueHCaptcha, BackgroundImage },
   setup() {
     const $i18n = useI18n({ useScope: "global" });
     const { query } = useRoute();
