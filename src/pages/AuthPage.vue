@@ -51,7 +51,12 @@
           </q-card-section>
           <q-separator />
           <q-card-section>
-            <vue-h-captcha sitekey="1c44f708-6b62-4b69-b733-7abbdb1f5add" />
+            <vue-h-captcha
+              sitekey="1c44f708-6b62-4b69-b733-7abbdb1f5add"
+              @error="logger('error', $event)"
+              @expired="logger('expired', $event)"
+              @verify="logger('verify', $event)"
+              @challenge-expired="logger('challenge-expired', $event)" />
             <q-btn
               :label="i18n('labels.authorize')"
               class="full-width"
@@ -100,12 +105,18 @@ export default defineComponent({
 
     };
 
+    const logger = (a, b) => {
+      console.log(a);
+      console.log(b);
+    };
+
     return {
       product: query.product,
       platform: query.platform,
       platformIconMap,
       i18n,
-      authorize
+      authorize,
+      logger
     };
   }
 });
