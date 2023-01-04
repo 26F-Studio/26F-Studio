@@ -53,10 +53,11 @@
           <q-card-section>
             <vue-recaptcha
               sitekey="6LcwWwceAAAAAMBMVVWHO05T2fxdKncts2e7aflQ"
+              size="invisible"
               :theme="$q.dark.isActive ? 'dark' : 'light'"
               @error="logger('error', $event)"
               @expired="logger('expired', $event)"
-              @verify="logger('verify', $event)"
+              @verify="authorize"
               @challenge-expired="logger('challenge-expired', $event)">
               <q-btn
                 :label="i18n('labels.authorize')"
@@ -64,15 +65,6 @@
                 color="positive"
                 @click="authorize" />
             </vue-recaptcha>
-            <!--            <vue-h-captcha-->
-            <!--              ref="hCaptcha"-->
-            <!--              sitekey="1c44f708-6b62-4b69-b733-7abbdb1f5add"-->
-            <!--              :theme="$q.dark.isActive ? 'dark' : 'light'"-->
-            <!--              size="invisible"-->
-            <!--              @error="logger('error', $event)"-->
-            <!--              @expired="logger('expired', $event)"-->
-            <!--              @verify="logger('verify', $event)"-->
-            <!--              @challenge-expired="logger('challenge-expired', $event)" />-->
           </q-card-section>
         </q-card>
       </div>
@@ -112,7 +104,8 @@ export default defineComponent({
     const i18n = (relativePath, params) => {
       return $i18n.t("pages.oauth." + relativePath, params);
     };
-    const authorize = () => {
+    const authorize = (response) => {
+      console.log(response);
     };
 
     const logger = (type, event) => {

@@ -1,11 +1,11 @@
 import axios from "axios";
-import {boot} from "quasar/wrappers";
+import { boot } from "quasar/wrappers";
 
 const METHOD = Object.freeze({
-  GET: 'get', POST: 'post', PUT: 'put', DELETE: 'delete'
-})
+  GET: "get", POST: "post", PUT: "put", DELETE: "delete"
+});
 
-const baseApi = axios.create({baseURL: "https://cafuuchino.the26f.org:8443/studio26f/api/v1"});
+const baseApi = axios.create({ baseURL: "https://cafuuchino.the26f.org:8443/studio26f/api/v1" });
 
 const genericHttp = (
   url,
@@ -20,7 +20,7 @@ const genericHttp = (
       method: method,
       params: params,
       headers: headers,
-      data: data,
+      data: data
     }).then(res => {
       if (res.data.code >= 200 && res.data.code < 300) {
         resolve(res.data);
@@ -28,7 +28,7 @@ const genericHttp = (
         reject(res.data);
       }
     }).catch(err => {
-      if (err.hasOwnProperty('response')) {
+      if (err.hasOwnProperty("response")) {
         reject(err.response);
       } else {
         reject(err);
@@ -39,24 +39,36 @@ const genericHttp = (
 
 const useApi = () => ({
   auth: {
+    oauth: (accessToken, product, recaptcha) => genericHttp(
+      "/auth/oauth",
+      METHOD.POST,
+      null,
+      {
+        "x-access-token": accessToken
+      },
+      {
+        "product": product,
+        "recaptcha": recaptcha
+      }
+    ),
     check: (accessToken) => genericHttp(
-      '/auth/check',
+      "/auth/check",
       METHOD.GET,
       null,
       {
-        'x-access-token': accessToken
+        "x-access-token": accessToken
       }
     ),
     refresh: (refreshToken) => genericHttp(
-      '/auth/refresh',
+      "/auth/refresh",
       METHOD.GET,
       null,
       {
-        'x-refresh-token': refreshToken
+        "x-refresh-token": refreshToken
       }
     ),
     verifyEmail: (email) => genericHttp(
-      '/auth/verify/email',
+      "/auth/verify/email",
       METHOD.POST,
       null,
       null,
@@ -65,7 +77,7 @@ const useApi = () => ({
       }
     ),
     seedEmail: (email) => genericHttp(
-      '/auth/seed/email',
+      "/auth/seed/email",
       METHOD.POST,
       null,
       null,
@@ -74,7 +86,7 @@ const useApi = () => ({
       }
     ),
     loginEmailPassword: (email, password) => genericHttp(
-      '/auth/login/email',
+      "/auth/login/email",
       METHOD.POST,
       null,
       null,
@@ -84,7 +96,7 @@ const useApi = () => ({
       }
     ),
     loginEmailCode: (email, code) => genericHttp(
-      '/auth/login/email',
+      "/auth/login/email",
       METHOD.POST,
       null,
       null,
@@ -94,7 +106,7 @@ const useApi = () => ({
       }
     ),
     resetEmail: (email, code, newPassword) => genericHttp(
-      '/auth/reset/email',
+      "/auth/reset/email",
       METHOD.PUT,
       null,
       null,
@@ -105,11 +117,11 @@ const useApi = () => ({
       }
     ),
     migrateEmail: (accessToken, newEmail, code) => genericHttp(
-      '/auth/migrate/email',
+      "/auth/migrate/email",
       METHOD.PUT,
       null,
       {
-        'x-access-token': accessToken
+        "x-access-token": accessToken
       },
       {
         newEmail: newEmail,
@@ -117,54 +129,54 @@ const useApi = () => ({
       }
     ),
     deactivateEmail: (accessToken, code) => genericHttp(
-      '/auth/deactivate/email',
+      "/auth/deactivate/email",
       METHOD.DELETE,
       null,
       {
-        'x-access-token': accessToken
+        "x-access-token": accessToken
       },
       {
         code: code
       }
-    ),
+    )
   },
   player: {
     getInfo: (accessToken, playerId) => genericHttp(
-      '/player/info',
+      "/player/info",
       METHOD.GET,
       {
         playerId: playerId
       },
       {
-        'x-access-token': accessToken
+        "x-access-token": accessToken
       }
     ),
     updateInfo: (accessToken, data) => genericHttp(
-      '/player/info',
+      "/player/info",
       METHOD.PUT,
       null,
       {
-        'x-access-token': accessToken
+        "x-access-token": accessToken
       },
       data
     ),
     getAvatar: (accessToken, playerId) => genericHttp(
-      '/player/avatar',
+      "/player/avatar",
       METHOD.GET,
       {
         playerId: playerId
       },
       {
-        'x-access-token': accessToken
+        "x-access-token": accessToken
       }
     )
   }
 });
 
-export default boot(({app}) => {
+export default boot(({ app }) => {
   app.config.globalProperties.$axios = axios;
-  app.config.globalProperties.$http = genericHttp
+  app.config.globalProperties.$http = genericHttp;
   app.config.globalProperties.$api = useApi;
 });
 
-export {genericHttp, useApi};
+export { genericHttp, useApi };
