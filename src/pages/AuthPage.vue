@@ -51,20 +51,28 @@
           </q-card-section>
           <q-separator />
           <q-card-section>
-            <vue-h-captcha
-              ref="hCaptcha"
-              sitekey="1c44f708-6b62-4b69-b733-7abbdb1f5add"
+            <vue-recaptcha
+              sitekey="6LcwWwceAAAAAMBMVVWHO05T2fxdKncts2e7aflQ"
               :theme="$q.dark.isActive ? 'dark' : 'light'"
-              size="invisible"
               @error="logger('error', $event)"
               @expired="logger('expired', $event)"
               @verify="logger('verify', $event)"
-              @challenge-expired="logger('challenge-expired', $event)" />
-            <q-btn
-              :label="i18n('labels.authorize')"
-              class="full-width"
-              color="positive"
-              @click="authorize" />
+              @challenge-expired="logger('challenge-expired', $event)">
+              <q-btn
+                :label="i18n('labels.authorize')"
+                class="full-width"
+                color="positive"
+                @click="authorize" />
+            </vue-recaptcha>
+            <!--            <vue-h-captcha-->
+            <!--              ref="hCaptcha"-->
+            <!--              sitekey="1c44f708-6b62-4b69-b733-7abbdb1f5add"-->
+            <!--              :theme="$q.dark.isActive ? 'dark' : 'light'"-->
+            <!--              size="invisible"-->
+            <!--              @error="logger('error', $event)"-->
+            <!--              @expired="logger('expired', $event)"-->
+            <!--              @verify="logger('verify', $event)"-->
+            <!--              @challenge-expired="logger('challenge-expired', $event)" />-->
           </q-card-section>
         </q-card>
       </div>
@@ -73,18 +81,18 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
+import { VueRecaptcha } from "vue-recaptcha";
 import { useRoute, useRouter } from "vue-router";
 
 import { usePlatforms, useProducts } from "boot/config";
 
-import VueHCaptcha from "@hcaptcha/vue3-hcaptcha";
 import BackgroundImage from "components/BackgroundImage.vue";
 
 export default defineComponent({
   name: "AuthPage",
-  components: { VueHCaptcha, BackgroundImage },
+  components: { VueRecaptcha, BackgroundImage },
   setup() {
     const $i18n = useI18n({ useScope: "global" });
     const { query } = useRoute();
@@ -101,13 +109,10 @@ export default defineComponent({
       windows: "mdi-microsoft-windows"
     };
 
-    const hCaptcha = ref(null);
-
     const i18n = (relativePath, params) => {
       return $i18n.t("pages.oauth." + relativePath, params);
     };
     const authorize = () => {
-      hCaptcha.value.execute();
     };
 
     const logger = (type, event) => {
@@ -118,7 +123,6 @@ export default defineComponent({
       product: query.product,
       platform: query.platform,
       platformIconMap,
-      hCaptcha,
       i18n,
       authorize,
       logger
