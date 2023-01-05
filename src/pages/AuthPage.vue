@@ -13,7 +13,7 @@
           <q-icon name="mdi-dots-horizontal" size="lg" />
           <q-avatar size="5rem">
             <img
-              alt="app"
+              alt="26f-studio"
               src="favicon.ico" />
           </q-avatar>
         </div>
@@ -23,19 +23,20 @@
         <q-card>
           <q-card-section>
             <q-item>
-              <q-item-section avatar top>
-                <q-avatar :icon="platformIconMap[platform]" color="primary" />
+              <q-item-section avatar>
+                <q-avatar>
+                  <img
+                    :src="product ? require(`assets/products/${product}.png`) : null"
+                    alt="app" />
+                </q-avatar>
               </q-item-section>
               <q-item-section>
                 <q-item-label class="text-black">
-                  {{
-                    i18n("labels.name", {
-                      product: i18n(`labels.products.${product}`),
-                      platform: i18n(`labels.platforms.${platform}`)
-                    })
-                  }}
+                  {{ i18n(`labels.products.${product}`) }}
                 </q-item-label>
-                <q-item-label caption>{{ i18n("labels.caption") }}</q-item-label>
+                <q-item-label caption>
+                  {{ i18n("labels.caption") }}
+                </q-item-label>
               </q-item-section>
             </q-item>
             <q-expansion-item>
@@ -51,20 +52,12 @@
           </q-card-section>
           <q-separator />
           <q-card-section>
-            <vue-recaptcha
-              sitekey="6LcwWwceAAAAAMBMVVWHO05T2fxdKncts2e7aflQ"
-              size="invisible"
-              :theme="$q.dark.isActive ? 'dark' : 'light'"
-              @error="logger('error', $event)"
-              @expired="logger('expired', $event)"
-              @verify="authorize"
-              @challenge-expired="logger('challenge-expired', $event)">
-              <q-btn
-                :label="i18n('labels.authorize')"
-                class="full-width"
-                color="positive"
-                @click="authorize" />
-            </vue-recaptcha>
+            <q-btn
+              :label="i18n('labels.authorize')"
+              :loading="isSubmitLoading"
+              class="full-width"
+              color="positive"
+              @click="authorize" />
           </q-card-section>
         </q-card>
       </div>
@@ -73,39 +66,71 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { useQuasar } from "quasar";
+import { defineComponent, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { VueRecaptcha } from "vue-recaptcha";
+import { useReCaptcha } from "vue-recaptcha-v3";
 import { useRoute, useRouter } from "vue-router";
 
-import { usePlatforms, useProducts } from "boot/config";
+import { useApi } from "boot/axios";
+import { useProducts } from "boot/config";
+import { usePlayerStore } from "stores/player";
 
 import BackgroundImage from "components/BackgroundImage.vue";
+import { errorHandler } from "src/scripts/axios";
 
 export default defineComponent({
   name: "AuthPage",
-  components: { VueRecaptcha, BackgroundImage },
+  components: { BackgroundImage },
   setup() {
+    const $api = useApi();
     const $i18n = useI18n({ useScope: "global" });
+    const $player = usePlayerStore();
+    const $q = useQuasar();
+    const $reCaptcha = useReCaptcha();
+    const $router = useRouter();
     const { query } = useRoute();
-    if (!useProducts().includes(query.product) ||
-      !usePlatforms(false).includes(query.platform)) {
-      useRouter().replace("404");
+
+    if (!useProducts().includes(query.product)) {
+      $router.replace({ name: "notFound" });
     }
 
-    const platformIconMap = {
-      android: "mdi-android",
-      ios: "mdi-apple",
-      linux: "mdi-penguin",
-      macos: "mdi-apple",
-      windows: "mdi-microsoft-windows"
-    };
+    onMounted(async () => {
+      if ($player.noToken) {
+        return;
+      }
+      await $player.check();
+      console.log($player.loggedIn);
+      if (!$player.loggedIn) {
+        await $router.push({ name: "login" });
+      }
+    });
+
+    const isSubmitLoading = ref(false);
 
     const i18n = (relativePath, params) => {
       return $i18n.t("pages.oauth." + relativePath, params);
     };
-    const authorize = (response) => {
-      console.log(response);
+
+    const authorize = async () => {
+      isSubmitLoading.value = true;
+      await $reCaptcha.recaptchaLoaded();
+      const token = await $reCaptcha.executeRecaptcha("login");
+      console.log(token);
+      await errorHandler(async () => {
+        const body = await $api.auth.oauth(
+          $player.accessToken,
+          query.product,
+          token
+        );
+        console.log(body);
+        isSubmitLoading.value = false;
+        $q.notify({
+          type: "positive",
+          message: i18n("notifications.submitSuccess")
+        });
+      }, $q, $i18n.t);
+      isSubmitLoading.value = false;
     };
 
     const logger = (type, event) => {
@@ -115,7 +140,7 @@ export default defineComponent({
     return {
       product: query.product,
       platform: query.platform,
-      platformIconMap,
+      isSubmitLoading,
       i18n,
       authorize,
       logger

@@ -58,6 +58,7 @@ const routes = [
         }
       },
       {
+        name: "notFound",
         path: "/:catchAll(.*)*",
         components: {
           header: () => import("layouts/headers/SimpleHeader"),

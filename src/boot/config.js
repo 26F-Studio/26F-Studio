@@ -1,4 +1,5 @@
 import { boot } from "quasar/wrappers";
+import { VueReCaptcha } from "vue-recaptcha-v3";
 
 const repoMap = {
   techminoGalaxy: "Techmino_Galaxy",
@@ -30,24 +31,16 @@ const useProducts = () => [
   "quatrack",
   "techminoGalaxy"
 ];
-const usePlatforms = (isPackage = true) => {
-  return isPackage ? [
-    "android",
-    "appstore",
-    "linux",
-    "macosDmg",
-    "macosPkg",
-    "testflight",
-    "windows32",
-    "windows64"
-  ] : [
-    "android",
-    "ios",
-    "linux",
-    "macos",
-    "windows"
-  ];
-};
+const usePlatforms = () => [
+  "android",
+  "appstore",
+  "linux",
+  "macosDmg",
+  "macosPkg",
+  "testflight",
+  "windows32",
+  "windows64"
+];
 
 const getLatestDownloadLink = (product, platform) => {
   if (useProducts().includes(product)) {
@@ -67,6 +60,13 @@ const getLatestDownloadLink = (product, platform) => {
 };
 
 export default boot(({ app }) => {
+  app.use(VueReCaptcha, {
+    siteKey: "6LcwWwceAAAAAMBMVVWHO05T2fxdKncts2e7aflQ",
+    loaderOptions: {
+      autoHideBadge: true,
+      size: "invisible"
+    }
+  });
   app.config.globalProperties.$project = useProject();
   app.config.globalProperties.$products = useProducts();
   app.config.globalProperties.$platforms = usePlatforms();

@@ -356,14 +356,6 @@ export default {
           techminoGalaxy: "Techmino Galaxy",
           quatrack: "Quatrack"
         },
-        platforms: {
-          android: "Android",
-          ios: "iOS",
-          linux: "Linux",
-          macos: "macOS",
-          windows: "Windows"
-        },
-        name: "{product} on {platform}",
         caption: "wants to access your 26F account",
         data: "Personal user data",
         authorize: "Authorize"
@@ -391,7 +383,9 @@ export default {
       emailSendError: "Failed to send email",
       invalidEmail: "Invalid email",
       invalidEmailPass: "Invalid email or password",
-      playerNotFound: "Player not found"
+      networkError: "Network error",
+      playerNotFound: "Player not found",
+      recaptchaFailed: "Failed to verify reCAPTCHA"
     }
   }
 };

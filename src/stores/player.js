@@ -38,6 +38,7 @@ export const usePlayerStore = defineStore("player", {
       try {
         await $api.auth.check(this.accessToken);
       } catch (err) {
+        console.log(err);
         if (err.hasOwnProperty("data") && err.data.hasOwnProperty("code")) {
           try {
             console.log("Refreshing tokens");

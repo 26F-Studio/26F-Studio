@@ -25,7 +25,7 @@
     "vue": "^3.2.45",
     "vue-advanced-cropper": "^2.8.6",
     "vue-i18n": "^9.2.2",
-    "vue-recaptcha": "^2.0.3",
+    "vue-recaptcha-v3": "^2.0.1",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
