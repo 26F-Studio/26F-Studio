@@ -96,9 +96,6 @@ export default defineComponent({
     }
 
     onMounted(async () => {
-      if ($player.noToken) {
-        return;
-      }
       await $player.check();
       console.log($player.loggedIn);
       if (!$player.loggedIn) {
