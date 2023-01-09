@@ -226,7 +226,7 @@ export default {
     },
     profileButton: {
       labels: {
-        logout: "Logout"
+        signOut: "Sign Out"
       }
     },
     settingsMenu: {
@@ -317,7 +317,8 @@ export default {
   pages: {
     home: {
       labels: {
-        header: "Welcome to\n" +
+        header: "Welcome \n" +
+          "to \n" +
           "26F Studio!",
         title: "Our products",
         invite: {
@@ -359,6 +360,9 @@ export default {
         caption: "wants to access your 26F account",
         data: "Personal user data",
         authorize: "Authorize"
+      },
+      notifications: {
+        submitSuccess: "Authorization granted successfully"
       }
     },
     profile: {

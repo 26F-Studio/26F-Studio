@@ -8,7 +8,7 @@
       :class="reversed ? 'order-last' : 'order-first'"
       :position="`${reversed ? '0' : '100%'} 0`"
       :product="product"
-      :style="`margin-${reversed ? 'left' : 'right'}: 5vw; filter: drop-shadow(0 2vw 5vw ${shadowColors[product]})`"/>
+      :style="`margin-${reversed ? 'left' : 'right'}: 5vw; filter: drop-shadow(0 2vw 5vw ${shadowColors[product]})`" />
     <div
       class="col-auto column"
       :class="`text-${reversed ? 'right' : 'left'}`"
@@ -25,16 +25,17 @@
         style="margin-top:2vw">
         <DownloadButton
           :disable="product === 'techminoGalaxy'"
-          :product="product"/>
+          :product="product" />
         <div>
           <q-btn
-            class="product-btn q-px-xl"
+            :to="`/products/${paramCase(product)}`"
             :label="i18n('labels.learnMore')"
             flat
             no-caps
             size="1.5vw"
             :title="`about-${product}`"
-            :to="`/products/${paramCase(product)}`">
+            class="secondary-btn q-px-xl"
+            style="font-size: 1.5vw; font-weight: 700">
             <div hidden>
               {{ `about-${product}` }}
             </div>
@@ -54,7 +55,7 @@
         :product="product"
         width="35vw"
         style="margin-top: 5vw"
-        :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]})`"/>
+        :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]})`" />
       <div class="product-text text-center">
         {{ i18n(`products.${product}.name`) }}
       </div>
@@ -65,15 +66,16 @@
         <DownloadButton
           class="col-auto col-10"
           :disable="product === 'techminoGalaxy'"
-          :product="product"/>
+          :product="product" />
         <q-btn
-          class="product-btn col-8"
+          :to="`/products/${paramCase(product)}`"
           :label="i18n('labels.learnMore')"
           flat
           no-caps
           padding="3vw 0"
           size="1.5vw"
-          :to="`/products/${paramCase(product)}`">
+          class="secondary-btn col-8"
+          style="font-size: 1.5vw; font-weight: 700">
           <div hidden>
             {{ `about-${product}` }}
           </div>
@@ -84,16 +86,16 @@
 </template>
 
 <script>
-import {paramCase} from "change-case-all";
-import {defineComponent} from "vue";
-import {useI18n} from "vue-i18n";
+import { paramCase } from "change-case-all";
+import { defineComponent } from "vue";
+import { useI18n } from "vue-i18n";
 
 import DownloadButton from "components/DownloadButton";
 import ProductImage from "components/ProductImage";
 
 export default defineComponent({
   name: "ProductPanel",
-  components: {ProductImage, DownloadButton},
+  components: { ProductImage, DownloadButton },
   props: {
     horizontal: {
       type: Boolean,
@@ -109,7 +111,7 @@ export default defineComponent({
     }
   },
   setup() {
-    const $i18n = useI18n({useScope: "global"});
+    const $i18n = useI18n({ useScope: "global" });
 
     const shadowColors = {
       techminoGalaxy: "rgba(0, 14, 143, 0.65)",
@@ -151,14 +153,6 @@ export default defineComponent({
   line-height: 3.5vw;
   font-feature-settings: 'pnum' on, 'lnum' on;
   word-wrap: break-word;
-}
-
-.product-btn {
-  @extend #secondary-btn;
-  font-family: 'inter', sans-serif;
-  font-size: 1.5vw;
-  font-weight: 700;
-  font-feature-settings: 'pnum' on, 'lnum' on;
 }
 
 $length: 35vw;

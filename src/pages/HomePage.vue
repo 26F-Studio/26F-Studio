@@ -5,10 +5,11 @@
       :img-style="{minHeight: '50vh'}"
       mask-position="top"
       :mask-start="$q.screen.xs ? {ratio: 1.0, control: [0.4, 0.9]} : undefined"
-      :mask-end="$q.screen.xs ? {ratio: 0.8, control: [0.6, 0.8]} : undefined">
+      :mask-end="$q.screen.xs ? {ratio: 0.8, control: [0.6, 0.8]} : undefined"
+      style="margin-top: -6vw">
       <div
         class="absolute header-icon"
-        style="font-size: 80vw; right: -26vw; top:-42vw;">
+        style="font-size: 64vw; right: -6vw; top:-27vw;">
         {{ "\u{0FFFFF}" }}
       </div>
       <div
@@ -21,9 +22,11 @@
     </BackgroundImage>
     <div
       class="relative-position full-width"
-      style="height:fit-content; overflow: hidden;">
+      style="height:fit-content; overflow: hidden">
     </div>
-    <div class="title-text text-center" style="font-size: 10vw; line-height: 18vw;">
+    <div
+      class="primary-text-bold text-center"
+      style="font-size: 8vw; padding-bottom: 3vw;">
       {{ i18n("labels.title") }}
     </div>
     <div
@@ -33,24 +36,27 @@
       <ProductPanel
         :horizontal="$q.screen.gt.xs"
         :reversed="index % 2 === 1"
-        :product="product"/>
+        :product="product" />
     </div>
     <div class="column" v-if="!loggedIn">
       <div
-        class="title-text text-center"
-        style="font-size: 7vw;"
+        class="primary-text-bold text-center"
+        style="font-size: 5vw;"
         :style="`white-space: ${$q.screen.xs ? 'pre' : 'normal'}`">
         {{ i18n("labels.invite.interested") }}
       </div>
-      <div class="hint-text text-center q-pt-md">
+      <div
+        class="primary-text-flat text-center q-pt-md"
+        style="font-size: 2.5vw;line-height: 3vw">
         {{ i18n("labels.invite.account") }}
       </div>
       <div class="row justify-center q-py-xl q-mb-xl">
         <q-btn
-          class="account-btn q-px-xl"
+          class="primary-btn q-px-xl"
           size="1.5vw"
           flat
           no-caps
+          style="font-size: 1.5vw; font-weight: 700"
           to="login">
           {{ i18n("labels.invite.button") }}
         </q-btn>
@@ -73,13 +79,13 @@ import ProductPanel from "components/ProductPanel";
 
 export default defineComponent({
   name: "HomePage",
-  components: {BackgroundImage, ProductPanel},
+  components: { BackgroundImage, ProductPanel },
   setup() {
-    const $i18n = useI18n({useScope: "global"});
+    const $i18n = useI18n({ useScope: "global" });
 
     const products = useProducts();
 
-    const {id} = storeToRefs(usePlayerStore());
+    const { id } = storeToRefs(usePlayerStore());
     const loggedIn = computed(() => {
       return id > 0;
     });
@@ -101,51 +107,31 @@ export default defineComponent({
 @import "src/css/app.scss";
 
 .header-icon {
-  background: linear-gradient(168.41deg, rgba(130, 142, 255, 0.7) 6.5%, rgba(130, 142, 255, 0.3) 96.66%);
+  background: radial-gradient(100% 100% at 98.5% 96.94%, #7C4FFF 40%, #479EEE 100%);
   font-family: 'galaxy-sans', sans-serif;
-  font-weight: 200;
+  font-weight: 180;
   font-feature-settings: 'pnum' on, 'lnum' on;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  rotate: 5deg;
 }
 
 .header-text {
   color: #F1F2F3;
   font-family: 'galaxy-sans-oblique', sans-serif;
-  font-weight: 800;
-  font-size: 10vw;
-  line-height: 10vw;
+  font-weight: 300;
+  font-size: 9vw;
+  line-height: 8vw;
   font-feature-settings: 'pnum' on, 'lnum' on;
   white-space: pre
-}
-
-.title-text {
-  background: linear-gradient(90.8deg, #BF55D4 26.21%, #6271CD 86.62%);
-  text-shadow: 0 2vw 4vw rgba(48, 0, 240, 0.31);
-  font-family: 'galaxy-sans', sans-serif;
-  font-weight: 800;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .hint-text {
   background: linear-gradient(90.8deg, #BF55D4 26.21%, #6271CD 86.62%);
   font-family: 'inter', sans-serif;
   font-weight: 700;
-  font-size: 2.5vw;
-  line-height: 3vw;
+
   font-feature-settings: 'pnum' on, 'lnum' on;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.account-btn {
-  @extend #primary-btn;
-  font-family: 'inter', sans-serif;
-  font-size: 1.5vw;
-  font-weight: 700;
-  font-feature-settings: 'pnum' on, 'lnum' on;
 }
 </style>

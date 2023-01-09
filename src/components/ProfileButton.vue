@@ -7,7 +7,7 @@
     :padding="$q.screen.xs ? 'sm' : undefined"
     round
     :size="$q.screen.gt.sm ? '1vw' : 'md'"
-    @click="playerStore.loggedIn ? undefined : $router.push('/login')">
+    @click.prevent="playerStore.loggedIn ? undefined : $router.push('/login')">
     <q-avatar
       v-if="playerStore.loggedIn"
       :icon="playerStore.avatar ? undefined : 'mdi-account-circle'"
@@ -16,13 +16,17 @@
         v-if="playerStore.avatar"
         :src="playerStore.avatar" />
     </q-avatar>
-    <q-menu :offset="[0, 10]" style="min-width:22rem">
-      <q-card bordered style="border-radius: 1vw;">
+    <q-menu
+      :offset="[0, 15]"
+      anchor="bottom middle"
+      self="top middle"
+      style="border-radius: 1vw; min-width:14rem">
+      <q-card bordered>
         <q-card-section class="q-gutter-sm">
           <div class="row justify-center">
             <q-responsive
-              class="col-4"
-              :ratio="1/3">
+              :ratio="1/2"
+              class="col-6">
               <q-btn
                 round
                 dense
@@ -32,44 +36,45 @@
                 <q-img
                   :src="playerStore.avatar"
                   style="border-radius: 50%" />
-                <q-btn
+                <q-avatar
                   class="absolute-bottom-right"
                   color="primary"
-                  icon="mdi-pencil"
+                  :icon="flag ? undefined : 'mdi-help'"
                   round
-                  unelevated
                   size="sm"
+                  style="margin-bottom: -0.1rem; margin-right: -0.3rem"
                   @click="goProfile"
-                  style="margin-bottom: -0.25rem;margin-right: -0.5rem" />
+                  text-color="white">
+                  <span v-if="flag" :class="`fi ${flag}`" />
+                </q-avatar>
               </q-btn>
             </q-responsive>
           </div>
-          <div class="column items-center">
-            <div class="row items-baseline q-gutter-x-sm">
-              <q-icon v-if="!flag" name="mdi-help-rhombus-outline" />
-              <span v-if="flag" :class="`fi ${flag}`" />
-              <div class="text-body1 text-weight-bold">
-                {{ playerStore.username }}
-              </div>
-              <span v-if="flag" :class="`fi invisible ${flag}`" />
-              <q-icon v-if="!flag" class="invisible" name="mdi-help-rhombus-outline" />
+          <div class="column items-center q-gutter-y-sm">
+            <div class="label-text-username">
+              {{ playerStore.username }}
             </div>
             <div :class="$q.dark.isActive ? 'text-grey' : 'text-grey-8'">
               {{ playerStore.motto }}
             </div>
           </div>
         </q-card-section>
-        <q-separator />
-        <q-card-actions class="column items-center">
+        <q-card-section class="column items-center q-gutter-y-md">
           <q-btn
-            :color="$q.dark.isActive ? 'grey' : 'grey-9'"
+            class="primary-btn"
+            flat
+            label="Account Settings"
             no-caps
-            outline
-            v-close-popup
+            @click="goProfile" />
+          <q-btn
+            flat
+            no-caps
             @click="logout">
-            {{ i18n("labels.logout") }}
+            <div class="btn-text">
+              {{ i18n("labels.signOut") }}
+            </div>
           </q-btn>
-        </q-card-actions>
+        </q-card-section>
       </q-card>
     </q-menu>
   </q-btn>
@@ -130,5 +135,35 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "src/css/app.scss";
+
+.label-text {
+  color: #636365;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+
+  &-username {
+    @extend .label-text;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  &-motto {
+    @extend .label-text;
+    font-weight: 400;
+    font-size: 0.9rem;
+  }
+}
+
+.btn-text {
+  background: linear-gradient(90.8deg, #BF55D4 26.21%, #6271CD 86.62%);
+  text-shadow: 0 2vw 4vw rgba(48, 0, 240, 0.31);
+  font-family: 'inter', sans-serif;
+  font-weight: 800;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 </style>

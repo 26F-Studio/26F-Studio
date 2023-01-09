@@ -20,21 +20,45 @@
   src: url(src/css/fonts/26FGalaxySans-ObliqueVF.woff2);
 }
 
-#primary-btn {
+.primary-btn {
   color: #F1F2F3;
-  background: linear-gradient(81.97deg, #B14FFF -3.99%, #474EEE 90.36%);
+  background: linear-gradient(82deg, #479EEE 0%, #7C4FFF 100%);
   box-shadow: 0 1vw 2vw rgba(36, 0, 182, 0.21);
   border-radius: 1vw;
+  font-family: 'inter', sans-serif;
+  font-feature-settings: 'pnum' on, 'lnum' on;
 }
 
-#secondary-btn {
+.secondary-btn {
   color: #4d59d5;
   background: #d6ddfd;
   border-radius: 1vw;
 }
 
-#disabled-btn {
+.disabled-btn {
   color: $grey-8;
   background: $grey-4;
   border-radius: 1vw;
+  font-family: 'inter', sans-serif;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+}
+
+.primary-text {
+  background: linear-gradient(82deg, #479EEE 25%, #7C4FFF 70%);
+  font-family: 'galaxy-sans', sans-serif;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  text-shadow: 0 2vw 4vw rgba(48, 0, 240, 0.31);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  &-bold {
+    @extend .primary-text;
+    font-weight: 300;
+  }
+
+  &-flat {
+    @extend .primary-text;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+  }
 }

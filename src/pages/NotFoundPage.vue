@@ -9,7 +9,7 @@
           {{ i18n("labels.notFound") }}
         </div>
         <q-btn
-          class="home-btn q-mt-xl"
+          class="primary-btn q-mt-xl"
           flat
           :label="i18n('labels.home')"
           no-caps
@@ -64,12 +64,6 @@ export default defineComponent({
   font-weight: 500;
   font-size: 5vmin;
   line-height: 190%;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-}
-
-.home-btn {
-  @extend #primary-btn;
-  font-family: 'inter', sans-serif;
   font-feature-settings: 'pnum' on, 'lnum' on;
 }
 </style>

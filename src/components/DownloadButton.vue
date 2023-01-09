@@ -1,6 +1,6 @@
 <template>
   <q-btn-dropdown
-    :class="disable ? 'unavailable-btn' : 'download-btn'"
+    :class="disable ? 'disabled-btn' : 'primary-btn'"
     content-style="border-radius: 1vw"
     toggle-aria-label="Download"
     :disable-main-btn="disable"
@@ -37,7 +37,7 @@
         v-close-popup
         @click="downloadProduct(platform)">
         <q-item-section avatar class="row">
-          <div class="platform-card row">
+          <div class="primary-btn" style="border-radius: 0.75vw">
             <q-icon
               :name="platformIconMap[platform]"
               class="q-ma-sm"
@@ -142,22 +142,4 @@ export default defineComponent({
 
 <style scoped lang="scss">
 @use "src/css/app.scss";
-
-.download-btn {
-  @extend #primary-btn;
-  font-family: 'inter', sans-serif;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-}
-
-.unavailable-btn {
-  @extend #disabled-btn;
-  font-family: 'inter', sans-serif;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-}
-
-.platform-card {
-  @extend #primary-btn;
-  border-radius: 0.75vw;
-}
-
 </style>

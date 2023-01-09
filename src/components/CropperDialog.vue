@@ -33,37 +33,37 @@
       <q-separator />
       <q-card-actions align="between">
         <q-btn
-          class="confirm-btn"
+          class="primary-btn"
           icon="mdi-flip-horizontal"
           round
           unelevated
           @click="flip(true,false)" />
         <q-btn
-          class="confirm-btn"
+          class="primary-btn"
           icon="mdi-flip-vertical"
           round
           unelevated
           @click="flip(false,true)" />
         <q-btn
-          class="confirm-btn"
+          class="primary-btn"
           icon="mdi-rotate-left"
           round
           unelevated
           @click="rotate(-90)" />
         <q-btn
-          class="confirm-btn"
+          class="primary-btn"
           icon="mdi-rotate-right"
           round
           unelevated
           @click="rotate(90)" />
         <q-btn
-          class="confirm-btn"
+          class="primary-btn"
           icon="mdi-magnify-minus-outline"
           round
           unelevated
           @click="zoom(0.5)" />
         <q-btn
-          class="confirm-btn"
+          class="primary-btn"
           icon="mdi-magnify-plus-outline"
           round
           unelevated
@@ -76,7 +76,7 @@
           @click="onDialogCancel" />
         <q-btn
           :label="i18n('labels.confirm')"
-          class="confirm-btn"
+          class="primary-btn"
           no-caps
           unelevated
           @click="onDialogOK(cropper.getResult().canvas.toDataURL(), null)" />
@@ -168,12 +168,6 @@ export default defineComponent({
   font-style: italic;
   font-weight: 700;
   font-size: 1.5vw;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-}
-
-.confirm-btn {
-  @extend #primary-btn;
-  font-family: 'inter', sans-serif;
   font-feature-settings: 'pnum' on, 'lnum' on;
 }
 

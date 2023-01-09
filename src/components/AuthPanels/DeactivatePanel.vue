@@ -51,7 +51,7 @@
     </div>
     <q-btn
       :label="i18n(`labels.verify`)"
-      class="login-btn"
+      class="primary-btn"
       :disable="!canSubmit"
       :loading="isSubmitLoading"
       no-caps
@@ -213,12 +213,6 @@ export default defineComponent({
   font-feature-settings: 'pnum' on, 'lnum' on;
 }
 
-.login-btn {
-  @extend #primary-btn;
-  font-family: 'inter', sans-serif;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-}
-
 .btn-text {
   background: linear-gradient(90.8deg, #BF55D4 26.21%, #6271CD 86.62%);
   text-shadow: 0 2vw 4vw rgba(48, 0, 240, 0.31);
@@ -227,11 +221,5 @@ export default defineComponent({
   font-feature-settings: 'pnum' on, 'lnum' on;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.unavailable-btn {
-  @extend #disabled-btn;
-  font-family: 'inter', sans-serif;
-  font-feature-settings: 'pnum' on, 'lnum' on;
 }
 </style>
