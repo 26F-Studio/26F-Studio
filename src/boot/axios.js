@@ -1,15 +1,34 @@
 import axios from "axios";
 import { boot } from "quasar/wrappers";
 
-const METHOD = Object.freeze({
+const Method = Object.freeze({
   GET: "get", POST: "post", PUT: "put", DELETE: "delete"
+});
+
+const ResultCode = Object.freeze({
+  Unknown: 0,
+  Completed: 200,
+  Continued: 201,
+  InvalidFormat: 400,
+  InvalidArguments: 401,
+  NotAvailable: 402,
+  NoPermission: 403,
+  NotFound: 404,
+  NullValue: 405,
+  NotAcceptable: 406,
+  Conflict: 409,
+  TooFrequent: 429,
+  InternalError: 500,
+  DatabaseError: 501,
+  NetworkError: 502,
+  EmailError: 503
 });
 
 const baseApi = axios.create({ baseURL: "https://cafuuchino.the26f.org:8443/studio26f/api/v1" });
 
 const genericHttp = (
   url,
-  method = METHOD.GET,
+  method = Method.GET,
   params = null,
   headers = null,
   data = null
@@ -41,7 +60,7 @@ const useApi = () => ({
   auth: {
     oauth: (accessToken, product, recaptcha) => genericHttp(
       "/auth/oauth",
-      METHOD.POST,
+      Method.POST,
       null,
       {
         "x-access-token": accessToken
@@ -53,23 +72,15 @@ const useApi = () => ({
     ),
     check: (accessToken) => genericHttp(
       "/auth/check",
-      METHOD.GET,
+      Method.GET,
       null,
       {
         "x-access-token": accessToken
       }
     ),
-    refresh: (refreshToken) => genericHttp(
-      "/auth/refresh",
-      METHOD.GET,
-      null,
-      {
-        "x-refresh-token": refreshToken
-      }
-    ),
     verifyEmail: (email) => genericHttp(
       "/auth/verify/email",
-      METHOD.POST,
+      Method.POST,
       null,
       null,
       {
@@ -78,7 +89,7 @@ const useApi = () => ({
     ),
     seedEmail: (email) => genericHttp(
       "/auth/seed/email",
-      METHOD.POST,
+      Method.POST,
       null,
       null,
       {
@@ -87,7 +98,7 @@ const useApi = () => ({
     ),
     loginEmailPassword: (email, password) => genericHttp(
       "/auth/login/email",
-      METHOD.POST,
+      Method.POST,
       null,
       null,
       {
@@ -97,7 +108,7 @@ const useApi = () => ({
     ),
     loginEmailCode: (email, code) => genericHttp(
       "/auth/login/email",
-      METHOD.POST,
+      Method.POST,
       null,
       null,
       {
@@ -107,7 +118,7 @@ const useApi = () => ({
     ),
     resetEmail: (email, code, newPassword) => genericHttp(
       "/auth/reset/email",
-      METHOD.PUT,
+      Method.PUT,
       null,
       null,
       {
@@ -118,7 +129,7 @@ const useApi = () => ({
     ),
     migrateEmail: (accessToken, newEmail, code) => genericHttp(
       "/auth/migrate/email",
-      METHOD.PUT,
+      Method.PUT,
       null,
       {
         "x-access-token": accessToken
@@ -130,7 +141,7 @@ const useApi = () => ({
     ),
     deactivateEmail: (accessToken, code) => genericHttp(
       "/auth/deactivate/email",
-      METHOD.DELETE,
+      Method.DELETE,
       null,
       {
         "x-access-token": accessToken
@@ -143,7 +154,7 @@ const useApi = () => ({
   player: {
     getInfo: (accessToken, playerId) => genericHttp(
       "/player/info",
-      METHOD.GET,
+      Method.GET,
       {
         playerId: playerId
       },
@@ -153,7 +164,7 @@ const useApi = () => ({
     ),
     updateInfo: (accessToken, data) => genericHttp(
       "/player/info",
-      METHOD.PUT,
+      Method.PUT,
       null,
       {
         "x-access-token": accessToken
@@ -162,7 +173,7 @@ const useApi = () => ({
     ),
     getAvatar: (accessToken, playerId) => genericHttp(
       "/player/avatar",
-      METHOD.GET,
+      Method.GET,
       {
         playerId: playerId
       },
@@ -179,4 +190,4 @@ export default boot(({ app }) => {
   app.config.globalProperties.$api = useApi;
 });
 
-export { genericHttp, useApi };
+export { Method, ResultCode, genericHttp, useApi };

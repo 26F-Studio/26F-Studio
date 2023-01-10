@@ -166,11 +166,10 @@ export default defineComponent({
     const login = async () => {
       isSubmitLoading.value = true;
       await errorHandler(async () => {
-        const { accessToken, refreshToken } = (await $api.auth.loginEmailPassword(
+        $player.accessToken = (await $api.auth.loginEmailPassword(
           emailInput.content,
           await getPasswordHash(emailInput.content, passwordInput.content)
-        )).data;
-        $player.setToken(accessToken, refreshToken);
+        )).data.accessToken;
         await $player.update();
         isSubmitLoading.value = false;
         $q.notify({

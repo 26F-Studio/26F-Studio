@@ -125,7 +125,7 @@ import { useQuasar } from "quasar";
 import { defineComponent, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
-import { useApi } from "boot/axios";
+import { ResultCode, useApi } from "boot/axios";
 import { errorHandler } from "src/scripts/axios";
 import { flags } from "src/scripts/flags";
 import { usePlayerStore } from "stores/player";
@@ -174,7 +174,7 @@ export default defineComponent({
     const submit = async () => {
       isSubmitLoading.value = true;
       await errorHandler(async () => {
-        await $api.player.updateInfo(
+        const { code, data } = await $api.player.updateInfo(
           $player.accessToken,
           {
             avatar: avatar.value ? avatar.value : undefined,
@@ -183,6 +183,9 @@ export default defineComponent({
             region: region.value ? region.value.value : undefined
           }
         );
+        if (code === ResultCode.Continued) {
+          this.accessToken = data.accessToken;
+        }
         await $player.update();
         isSubmitLoading.value = false;
         $q.notify({

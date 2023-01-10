@@ -103,7 +103,7 @@ import { computed, defineComponent, reactive, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 
-import { useApi } from "boot/axios";
+import { ResultCode, useApi } from "boot/axios";
 import { useProject } from "boot/config";
 import { errorHandler } from "src/scripts/axios";
 import { usePlayerStore } from "stores/player";
@@ -183,15 +183,14 @@ export default defineComponent({
       isSubmitLoading.value = true;
       await errorHandler(async () => {
         const { code, data } = await $api.auth.loginEmailCode(emailInput.content, codeInput.content);
-        const { accessToken, refreshToken } = data;
-        $player.setToken(accessToken, refreshToken);
+        $player.accessToken = data.accessToken;
         await $player.update();
         isSubmitLoading.value = false;
         $q.notify({
           type: "positive",
           message: i18n("notifications.loginSuccess")
         });
-        if (code === 201) {
+        if (code === ResultCode.Continued) {
           $q.sessionStorage.set(`${useProject()}.persist.email`, emailInput.content);
           $q.sessionStorage.set(`${useProject()}.persist.code`, codeInput.content);
           setTimeout(() => {

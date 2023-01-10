@@ -72,7 +72,7 @@ import { useI18n } from "vue-i18n";
 import { useReCaptcha } from "vue-recaptcha-v3";
 import { useRoute, useRouter } from "vue-router";
 
-import { useApi } from "boot/axios";
+import { ResultCode, useApi } from "boot/axios";
 import { useProducts } from "boot/config";
 import { usePlayerStore } from "stores/player";
 
@@ -115,12 +115,15 @@ export default defineComponent({
       const token = await $reCaptcha.executeRecaptcha("login");
       console.log(token);
       await errorHandler(async () => {
-        const body = await $api.auth.oauth(
+        const { code, data } = await $api.auth.oauth(
           $player.accessToken,
           query.product,
           token
         );
-        console.log(body);
+        console.log(data);
+        if (code === ResultCode.Continued) {
+          this.accessToken = data.accessToken;
+        }
         isSubmitLoading.value = false;
         $q.notify({
           type: "positive",

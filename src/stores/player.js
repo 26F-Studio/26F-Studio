@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-import { useApi } from "boot/axios";
+import { ResultCode, useApi } from "boot/axios";
 import { useProject } from "boot/config";
 
 const $api = useApi();
@@ -8,7 +8,6 @@ const $api = useApi();
 export const usePlayerStore = defineStore("player", {
   state: () => ({
     accessToken: "",
-    refreshToken: "",
 
     id: 0,
     username: "Stacker",
@@ -26,31 +25,19 @@ export const usePlayerStore = defineStore("player", {
       return this.id > 0;
     },
     noToken() {
-      return this.accessToken.length === 0 || this.refreshToken.length === 0;
+      return this.accessToken.length === 0;
     }
   },
   actions: {
-    setToken(accessToken, refreshToken) {
-      this.accessToken = accessToken;
-      this.refreshToken = refreshToken;
-    },
     async check() {
       try {
-        await $api.auth.check(this.accessToken);
-      } catch (err) {
-        console.log(err);
-        if (err.hasOwnProperty("data") && err.data.hasOwnProperty("code")) {
-          try {
-            console.log("Refreshing tokens");
-            const body = await $api.auth.refresh(this.refreshToken);
-            this.accessToken = body.data.accessToken;
-            this.refreshToken = body.data.refreshToken;
-          } catch (refreshError) {
-            this.logout();
-          }
-        } else {
-          console.warn(err);
+        const { code, data } = await $api.auth.check(this.accessToken);
+        this.id = data.playerId;
+        if (code === ResultCode.Continued) {
+          this.accessToken = data.accessToken;
         }
+      } catch (err) {
+        this.logout();
       }
     },
     async update() {
@@ -75,7 +62,6 @@ export const usePlayerStore = defineStore("player", {
     },
     logout() {
       this.accessToken = "";
-      this.refreshToken = "";
       this.id = 0;
       this.username = "Stacker";
       this.motto = "";
