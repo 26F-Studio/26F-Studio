@@ -4,20 +4,18 @@
       <div class="absolute-center column items-center bg-transparent hide-scrollbar q-gutter-y-md">
         <div class="row items-center q-gutter-x-xs">
           <q-avatar size="5rem">
-            <img
-              :src="product ? require(`assets/products/${product}.png`) : null"
-              alt="app" />
+            <img :src="product ? require(`assets/products/${product}.png`) : null" alt="app" />
           </q-avatar>
           <q-icon name="mdi-dots-horizontal" size="lg" />
           <q-avatar color="positive" icon="check" size="xl" />
           <q-icon name="mdi-dots-horizontal" size="lg" />
           <q-avatar size="5rem">
-            <img
-              alt="26f-studio"
-              src="favicon.ico" />
+            <img alt="26f-studio" src="favicon.ico" />
           </q-avatar>
         </div>
-        <div class="title-text text-center" style="font-size: 3rem">
+        <div
+          class="text-color-white text-font-inter-bold text-center"
+          style="font-size: 3rem; line-height: 190%">
           {{ i18n(`labels.titles.${product}`) }}
         </div>
         <q-card style="max-width: 80vw">
@@ -31,7 +29,7 @@
                 </q-avatar>
               </q-item-section>
               <q-item-section>
-                <q-item-label class="text-black">
+                <q-item-label class="text-color-black">
                   {{ i18n(`labels.products.${product}`) }}
                 </q-item-label>
                 <q-item-label caption>
@@ -45,7 +43,7 @@
                   <q-icon color="grey" name="mdi-account-outline" size="lg" />
                 </q-item-section>
                 <q-item-section>
-                  <q-item-label class="text-black">{{ i18n("labels.data") }}</q-item-label>
+                  <q-item-label class="text-color-black">{{ i18n("labels.data") }}</q-item-label>
                 </q-item-section>
               </template>
             </q-expansion-item>
@@ -53,10 +51,10 @@
           <q-separator />
           <q-card-section class="q-gutter-y-md">
             <q-btn
-              :label="i18n('labels.authorize')"
-              :loading="isSubmitLoading"
               class="full-width"
               color="positive"
+              :label="i18n('labels.authorize')"
+              :loading="isSubmitLoading"
               @click="authorize" />
             <q-slide-transition>
               <q-expansion-item
@@ -67,11 +65,15 @@
                     <q-avatar color="positive" icon="check" text-color="white" />
                   </q-item-section>
                   <q-item-section>
-                    <q-item-label class="normal-text">{{ i18n("labels.copySuccess") }}</q-item-label>
-                    <q-item-label caption>{{ i18n("labels.manualCopy") }}</q-item-label>
+                    <q-item-label class="text-color-grey text-font-inter">
+                      {{ i18n("labels.copySuccess") }}
+                    </q-item-label>
+                    <q-item-label caption>
+                      {{ i18n("labels.manualCopy") }}
+                    </q-item-label>
                   </q-item-section>
                 </template>
-                <q-card class="text-dark">
+                <q-card class="text-color-black">
                   <q-card-section style="word-break: break-all">
                     {{ copyTokens }}
                   </q-card-section>
@@ -175,14 +177,4 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "src/css/app.scss";
-
-.title-text {
-  color: #E1E1E1;
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 3rem;
-  line-height: 190%;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-}
 </style>

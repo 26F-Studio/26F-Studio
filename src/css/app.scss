@@ -1,4 +1,5 @@
 @import "quasar/src/css/variables";
+
 @font-face {
   font-family: inter;
   font-weight: 1 1000;
@@ -20,51 +21,109 @@
   src: url(src/css/fonts/26FGalaxySans-ObliqueVF.woff2);
 }
 
-.primary-btn {
-  color: #F1F2F3;
-  background: linear-gradient(130deg, #479EEE 0%, #7C4FFF 100%);
-  box-shadow: 0 1vw 2vw rgba(36, 0, 182, 0.21);
-  border-radius: 1vw;
-  font-family: 'inter', sans-serif;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-}
+.text {
+  &-color {
+    &-black {
+      color: #1D1D1D;
+    }
 
-.secondary-btn {
-  color: #4d59d5;
-  background: #d6ddfd;
-  border-radius: 1vw;
-}
+    &-blue {
+      color: #3C76E8;
+    }
 
-.disabled-btn {
-  color: $grey-8;
-  background: $grey-4;
-  border-radius: 1vw;
-  font-family: 'inter', sans-serif;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-}
+    &-grey {
+      color: #636365;
+    }
 
-.primary-text {
-  background: linear-gradient(130deg, #479EEE 20%, #7C4FFF 80%);
-  font-family: 'galaxy-sans', sans-serif;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  text-shadow: 0 1vw 4vw rgba(48, 0, 240, 0.31);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+    &-primary {
+      background: linear-gradient(130deg, #479EEE 20%, #7C4FFF 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-  &-bold {
-    @extend .primary-text;
-    font-weight: 300;
+    &-white {
+      color: #F1F2F3;
+    }
   }
 
-  &-flat {
-    @extend .primary-text;
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
+  &-font {
+    font-feature-settings: 'pnum' on, 'lnum' on;
+
+    &-galaxy {
+      @extend .text-font;
+      font-family: 'galaxy-sans', sans-serif;
+
+      &-bold {
+        @extend .text-font-galaxy;
+        font-weight: 300;
+      }
+
+      &-slim {
+        @extend .text-font-galaxy;
+        font-weight: 206;
+      }
+    }
+
+    &-galaxy-oblique {
+      @extend .text-font;
+      font-family: 'galaxy-sans-oblique', sans-serif;
+
+      &-bold {
+        @extend .text-font-galaxy-oblique;
+        font-weight: 300;
+      }
+
+      &-slim {
+        @extend .text-font-galaxy-oblique;
+        font-weight: 206;
+      }
+    }
+
+    &-inter {
+      @extend .text-font;
+      font-family: 'inter', sans-serif;
+      font-weight: 500;
+
+      &-bold {
+        @extend .text-font-inter;
+        font-weight: 700;
+      }
+
+      &-slim {
+        @extend .text-font-inter;
+        font-weight: 400;
+      }
+    }
+  }
+
+  &-shadow {
+    &-grey {
+      text-shadow: 0 0.5vw 3vw rgba(4, 0, 29, 0.15);
+    }
+
+    &-purple {
+      text-shadow: 0 0.5vw 3vw rgba(48, 0, 240, 0.31);
+    }
   }
 }
 
-.normal-text {
-  color: #636365;
-  font-family: 'Inter', sans-serif;
-  font-feature-settings: 'pnum' on, 'lnum' on;
+.btn {
+  border-radius: 1vw;
+
+  &-primary {
+    @extend .text-color-white, .text-font-inter-bold, .btn;
+    background: linear-gradient(130deg, #479EEE 0%, #7C4FFF 100%);
+    box-shadow: 0 1vw 2vw rgba(36, 0, 182, 0.21);
+  }
+
+  &-secondary {
+    @extend .text-color-blue, .text-font-inter-bold, .btn;
+    background: #CBDDFF;
+  }
+
+  &-disabled {
+    @extend .btn;
+    color: $grey-8;
+    background: $grey-4;
+  }
 }

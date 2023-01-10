@@ -226,6 +226,7 @@ export default {
     },
     profileButton: {
       labels: {
+        signIn: "Sign Up/Sign In",
         signOut: "Sign Out"
       }
     },

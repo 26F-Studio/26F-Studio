@@ -13,10 +13,14 @@
       class="col-auto column"
       :class="`text-${reversed ? 'right' : 'left'}`"
       style="max-width: 65vw">
-      <div class="product-text">
+      <div
+        class="text-color-primary text-font-galaxy-slim text-shadow-purple"
+        style="font-size: 5vw; line-height: 6vw">
         {{ i18n(`products.${product}.name`) }}
       </div>
-      <div class="description-text">
+      <div
+        class="text-color-grey text-font-inter"
+        style="font-size: 1.5vw; line-height: 3vw; word-wrap: break-word">
         {{ i18n(`products.${product}.description`) }}
       </div>
       <div
@@ -29,13 +33,12 @@
         <div>
           <q-btn
             :to="`/products/${paramCase(product)}`"
+            class="btn-secondary q-px-xl"
             :label="i18n('labels.learnMore')"
-            flat
             no-caps
             size="1.5vw"
-            :title="`about-${product}`"
-            class="secondary-btn q-px-xl"
-            style="font-size: 1.5vw; font-weight: 700">
+            flat
+            style="font-size: 1.5vw">
             <div hidden>
               {{ `about-${product}` }}
             </div>
@@ -56,10 +59,13 @@
         width="35vw"
         style="margin-top: 5vw"
         :style="`filter: drop-shadow(0 2vw 5vw ${shadowColors[product]})`" />
-      <div class="product-text text-center">
+      <div class="text-color-primary text-font-galaxy text-shadow-purple text-center"
+           style="font-size: 7vw; line-height: 8vw">
         {{ i18n(`products.${product}.name`) }}
       </div>
-      <div class="description-text text-center">
+      <div
+        class="text-color-grey text-font-inter text-center"
+        style="font-size: 1.5vw; line-height: 3vw; word-wrap: break-word">
         {{ i18n(`products.${product}.description`) }}
       </div>
       <div class="row justify-center q-gutter-y-sm">
@@ -68,14 +74,14 @@
           :disable="product === 'techminoGalaxy'"
           :product="product" />
         <q-btn
-          :to="`/products/${paramCase(product)}`"
           :label="i18n('labels.learnMore')"
           flat
+          :to="`/products/${paramCase(product)}`"
           no-caps
           padding="3vw 0"
           size="1.5vw"
-          class="secondary-btn col-8"
-          style="font-size: 1.5vw; font-weight: 700">
+          class="btn-secondary col-8"
+          style="font-size: 1.5vw">
           <div hidden>
             {{ `about-${product}` }}
           </div>
@@ -132,28 +138,6 @@ export default defineComponent({
 
 <style scoped lang="scss">
 @import "src/css/app.scss";
-
-.product-text {
-  background: linear-gradient(90.8deg, #5580D4 4.29%, #7162CD 97.82%);
-  text-shadow: 0 1vw 2vw rgba(48, 0, 240, 0.31);
-  font-family: 'galaxy-sans', sans-serif;
-  font-weight: 600;
-  font-size: 7vw;
-  line-height: 8vw;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.description-text {
-  color: #636365;
-  font-family: 'inter', sans-serif;
-  font-weight: 500;
-  font-size: 1.8vw;
-  line-height: 3.5vw;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  word-wrap: break-word;
-}
 
 $length: 35vw;
 

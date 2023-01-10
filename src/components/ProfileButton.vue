@@ -1,11 +1,14 @@
 <template>
   <q-btn
+    :label="playerStore.loggedIn ? undefined : i18n('labels.signIn')"
     aria-label="Profile"
     flat
-    :icon="playerStore.loggedIn ? undefined : 'login'"
+    :round="playerStore.loggedIn"
     no-caps
     :padding="$q.screen.xs ? 'sm' : undefined"
-    round
+    :square="!playerStore.loggedIn"
+    :stretch="!playerStore.loggedIn"
+    class="button-text"
     :size="$q.screen.gt.sm ? '1vw' : 'md'"
     @click.prevent="playerStore.loggedIn ? undefined : $router.push('/login')">
     <q-avatar

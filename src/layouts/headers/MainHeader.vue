@@ -24,13 +24,14 @@
         v-show="$q.screen.gt.xs"
         v-for="(list, button, index) in dropdownButtons"
         :key="index"
-        class="button-text"
+        class="normal-text-white"
         flat
         :label="i18n(`labels.${button}`)"
         no-caps
         :padding="$q.screen.lt.md ? 'sm' : undefined"
         size="1vw"
-        stretch>
+        stretch
+        style="font-weight: 700">
         <q-list>
           <q-item
             v-for="(item, index) in list"
@@ -147,12 +148,6 @@ export default defineComponent({
 .aero-toolbar {
   background: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(25px);
-}
-
-.button-text {
-  font-family: 'inter', sans-serif;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  font-weight: 700;
 }
 
 .title-text {

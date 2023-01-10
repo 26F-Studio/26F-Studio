@@ -8,14 +8,16 @@
       :mask-end="$q.screen.xs ? {ratio: 0.8, control: [0.6, 0.8]} : undefined"
       style="margin-top: -6vw">
       <div
-        class="absolute header-icon"
-        style="font-size: 64vw; right: -6vw; top:-27vw;">
+        class="text-color-primary text-font-galaxy text-shadow-grey absolute"
+        style="font-size: 64vw; font-weight: 180; right: -6vw; top:-27vw;">
         {{ "\u{0FFFFF}" }}
       </div>
       <div
         class="absolute-center bg-transparent full-width row"
         :class="$q.screen.xs ? 'justify-center' : 'justify-start'">
-        <div class="header-text q-pb-xl" style="margin-left: 4vw">
+        <div
+          class="text-color-white text-font-galaxy-oblique-bold q-pb-xl"
+          style="font-size: 9vw; line-height: 8vw; margin-left: 4vw; white-space: pre">
           {{ i18n("labels.header") }}
         </div>
       </div>
@@ -25,7 +27,7 @@
       style="height:fit-content; overflow: hidden">
     </div>
     <div
-      class="primary-text-bold text-center"
+      class="text-color-primary text-font-galaxy-bold text-center"
       style="font-size: 8vw; padding-bottom: 3vw;">
       {{ i18n("labels.title") }}
     </div>
@@ -40,23 +42,23 @@
     </div>
     <div class="column" v-if="!loggedIn">
       <div
-        class="primary-text-bold text-center"
+        class="text-color-primary text-font-galaxy-bold text-center"
         style="font-size: 5vw;"
         :style="`white-space: ${$q.screen.xs ? 'pre' : 'normal'}`">
         {{ i18n("labels.invite.interested") }}
       </div>
       <div
-        class="primary-text-flat text-center q-pt-md"
+        class="text-color-primary text-font-inter-bold text-center q-pt-md"
         style="font-size: 2.5vw;line-height: 3vw">
         {{ i18n("labels.invite.account") }}
       </div>
       <div class="row justify-center q-py-xl q-mb-xl">
         <q-btn
-          class="primary-btn q-px-xl"
+          class="text-font-inter-bold btn-primary q-px-xl"
           size="1.5vw"
           flat
           no-caps
-          style="font-size: 1.5vw; font-weight: 700"
+          style="font-size: 1.5vw"
           to="login">
           {{ i18n("labels.invite.button") }}
         </q-btn>
@@ -105,33 +107,4 @@ export default defineComponent({
 
 <style scoped lang="scss">
 @import "src/css/app.scss";
-
-.header-icon {
-  background: radial-gradient(100% 100% at 98.5% 96.94%, #7C4FFF 40%, #479EEE 100%);
-  font-family: 'galaxy-sans', sans-serif;
-  font-weight: 180;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.header-text {
-  color: #F1F2F3;
-  font-family: 'galaxy-sans-oblique', sans-serif;
-  font-weight: 300;
-  font-size: 9vw;
-  line-height: 8vw;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  white-space: pre
-}
-
-.hint-text {
-  background: linear-gradient(90.8deg, #BF55D4 26.21%, #6271CD 86.62%);
-  font-family: 'inter', sans-serif;
-  font-weight: 700;
-
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 </style>

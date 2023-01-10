@@ -1,6 +1,7 @@
 <template>
   <q-btn-dropdown
-    :class="disable ? 'disabled-btn' : 'primary-btn'"
+    :class="disable ? 'btn-disabled' : 'btn-primary'"
+    content-class="hide-scrollbar"
     content-style="border-radius: 1vw"
     toggle-aria-label="Download"
     :disable-main-btn="disable"
@@ -13,7 +14,8 @@
     <template v-slot:label>
       <div class="no-wrap q-ma-sm">
         <div
-          style="font-weight: 700; font-size: 2vw;">
+          class="text-color-white text-font-inter-bold"
+          style="font-size: 2vw">
           {{ disable ? i18n("labels.disable") : i18n("labels.download") }}
         </div>
         <div v-if="!disable" class="row justify-center items-center">
@@ -22,8 +24,9 @@
             class="q-ma-sm"
             size="1.5vw" />
           <div
+            class="text-color-white text-font-inter-slim"
             :class="$q.screen.xs ? 'q-pt-sm' : ''"
-            style="font-weight: 400; font-size: 1vw">
+            style="font-size: 1vw">
             {{ i18n(`labels.platforms.${mainPlatform}`) }}
           </div>
         </div>
@@ -37,7 +40,7 @@
         v-close-popup
         @click="downloadProduct(platform)">
         <q-item-section avatar class="row">
-          <div class="primary-btn" style="border-radius: 0.75vw">
+          <div class="btn-primary" style="border-radius: 0.75vw">
             <q-icon
               :name="platformIconMap[platform]"
               class="q-ma-sm"
@@ -45,19 +48,16 @@
           </div>
         </q-item-section>
         <q-item-section>
-          <q-item-label style="font-weight: 400; font-size: 0.75vw">
+          <q-item-label
+            class="text-color-grey text-font-inter-slim"
+            style="font-size: 0.75vw">
             {{ i18n(`labels.platforms.${platform}`) }}
           </q-item-label>
         </q-item-section>
         <q-item-section side>
           <q-icon
-            v-if="['appstore', 'testflight'].includes(platform)"
-            name="mdi-open-in-new"
-            size="1vw" />
-          <q-icon
-            v-if="!['appstore', 'testflight'].includes(platform)"
-            name="mdi-download"
-            size="1vw" />
+            :name="['appstore', 'testflight'].includes(platform) ? 'mdi-open-in-new' : 'mdi-download'"
+            size="1.5vw" />
         </q-item-section>
       </q-item>
     </q-list>
