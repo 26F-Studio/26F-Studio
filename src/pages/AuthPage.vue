@@ -20,7 +20,7 @@
         <div class="title-text text-center" style="font-size: 3rem">
           {{ i18n(`labels.titles.${product}`) }}
         </div>
-        <q-card>
+        <q-card style="max-width: 80vw">
           <q-card-section>
             <q-item>
               <q-item-section avatar>
@@ -72,7 +72,7 @@
                   </q-item-section>
                 </template>
                 <q-card class="text-dark">
-                  <q-card-section class="wrap">
+                  <q-card-section style="word-break: break-all">
                     {{ copyTokens }}
                   </q-card-section>
                 </q-card>
