@@ -22,7 +22,7 @@
 
 .primary-btn {
   color: #F1F2F3;
-  background: linear-gradient(82deg, #479EEE 0%, #7C4FFF 100%);
+  background: linear-gradient(130deg, #479EEE 0%, #7C4FFF 100%);
   box-shadow: 0 1vw 2vw rgba(36, 0, 182, 0.21);
   border-radius: 1vw;
   font-family: 'inter', sans-serif;
@@ -44,10 +44,10 @@
 }
 
 .primary-text {
-  background: linear-gradient(82deg, #479EEE 25%, #7C4FFF 70%);
+  background: linear-gradient(130deg, #479EEE 20%, #7C4FFF 80%);
   font-family: 'galaxy-sans', sans-serif;
   font-feature-settings: 'pnum' on, 'lnum' on;
-  text-shadow: 0 2vw 4vw rgba(48, 0, 240, 0.31);
+  text-shadow: 0 1vw 4vw rgba(48, 0, 240, 0.31);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
@@ -61,4 +61,10 @@
     font-family: 'Inter', sans-serif;
     font-weight: 700;
   }
+}
+
+.normal-text {
+  color: #636365;
+  font-family: 'Inter', sans-serif;
+  font-feature-settings: 'pnum' on, 'lnum' on;
 }

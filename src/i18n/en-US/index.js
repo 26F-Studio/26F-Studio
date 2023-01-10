@@ -359,7 +359,9 @@ export default {
         },
         caption: "wants to access your 26F account",
         data: "Personal user data",
-        authorize: "Authorize"
+        authorize: "Authorize",
+        copySuccess: "Tokens has been copied to your clipboard",
+        manualCopy: "Copy failed? Click here copy manually"
       },
       notifications: {
         submitSuccess: "Authorization granted successfully"

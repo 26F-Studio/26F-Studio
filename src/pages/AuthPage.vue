@@ -51,13 +51,33 @@
             </q-expansion-item>
           </q-card-section>
           <q-separator />
-          <q-card-section>
+          <q-card-section class="q-gutter-y-md">
             <q-btn
               :label="i18n('labels.authorize')"
               :loading="isSubmitLoading"
               class="full-width"
               color="positive"
               @click="authorize" />
+            <q-slide-transition>
+              <q-expansion-item
+                v-if="copyTokens"
+                hide-expand-icon>
+                <template v-slot:header>
+                  <q-item-section avatar>
+                    <q-avatar color="positive" icon="check" text-color="white" />
+                  </q-item-section>
+                  <q-item-section>
+                    <q-item-label class="normal-text">{{ i18n("labels.copySuccess") }}</q-item-label>
+                    <q-item-label caption>{{ i18n("labels.manualCopy") }}</q-item-label>
+                  </q-item-section>
+                </template>
+                <q-card class="text-dark">
+                  <q-card-section class="wrap">
+                    {{ copyTokens }}
+                  </q-card-section>
+                </q-card>
+              </q-expansion-item>
+            </q-slide-transition>
           </q-card-section>
         </q-card>
       </div>
@@ -66,7 +86,7 @@
 </template>
 
 <script>
-import { useQuasar } from "quasar";
+import { copyToClipboard, useQuasar } from "quasar";
 import { defineComponent, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useReCaptcha } from "vue-recaptcha-v3";
@@ -97,13 +117,13 @@ export default defineComponent({
 
     onMounted(async () => {
       await $player.check();
-      console.log($player.loggedIn);
       if (!$player.loggedIn) {
         await $router.push({ name: "login" });
       }
     });
 
     const isSubmitLoading = ref(false);
+    const copyTokens = ref("");
 
     const i18n = (relativePath, params) => {
       return $i18n.t("pages.oauth." + relativePath, params);
@@ -113,22 +133,25 @@ export default defineComponent({
       isSubmitLoading.value = true;
       await $reCaptcha.recaptchaLoaded();
       const token = await $reCaptcha.executeRecaptcha("login");
-      console.log(token);
       await errorHandler(async () => {
         const { code, data } = await $api.auth.oauth(
           $player.accessToken,
           query.product,
           token
         );
-        console.log(data);
         if (code === ResultCode.Continued) {
-          this.accessToken = data.accessToken;
+          $player.accessToken = data.accessToken;
         }
         isSubmitLoading.value = false;
         $q.notify({
           type: "positive",
           message: i18n("notifications.submitSuccess")
         });
+        copyTokens.value = JSON.stringify({
+          accessToken: $player.accessToken,
+          oauthToken: data.oauthToken
+        });
+        await copyToClipboard(copyTokens.value);
       }, $q, $i18n.t);
       isSubmitLoading.value = false;
     };
@@ -141,6 +164,7 @@ export default defineComponent({
       product: query.product,
       platform: query.platform,
       isSubmitLoading,
+      copyTokens,
       i18n,
       authorize,
       logger
