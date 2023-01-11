@@ -196,7 +196,6 @@ export default defineComponent({
 
     return {
       product: query.product,
-      platform: query.platform,
       isSubmitLoading,
       copyTokens,
       showTokens,
