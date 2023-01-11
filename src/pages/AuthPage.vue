@@ -1,7 +1,29 @@
 <template>
-  <q-page class="flex column">
-    <BackgroundImage full-height>
-      <div class="absolute-center column items-center bg-transparent hide-scrollbar q-gutter-y-md">
+  <q-page class="flex flex-center column">
+    <BackgroundImage
+      :mask-end="{ratio: 0.4, control: [0.4, 0.8]}"
+      :mask-start="{ratio: 0.3, control: [0.3, 0.2]}"
+      class="absolute-full"
+      full-height
+      mask
+      mask-position="left">
+      <div class="bg-transparent fit row">
+        <div class="col-4 row items-center q-pa-md">
+          <div
+            class="text-color-white text-font-galaxy-oblique-bold"
+            style="font-size: 8vw; line-height: 8vw; white-space: pre">
+            {{ i18n("labels.header") }}
+          </div>
+        </div>
+      </div>
+    </BackgroundImage>
+    <div class="row justify-center full-width">
+      <div class="offset-5 col-6 column items-center q-gutter-y-xl">
+        <div
+          class="text-color-primary text-font-inter text-shadow-purple text-center"
+          style="font-size: 2.5vw; font-weight: 800">
+          {{ i18n(`labels.title`, { product: i18n(`labels.products.${product}`) }) }}
+        </div>
         <div class="row items-center q-gutter-x-xs">
           <q-avatar size="5rem">
             <img :src="product ? require(`assets/products/${product}.png`) : null" alt="app" />
@@ -13,77 +35,86 @@
             <img alt="26f-studio" src="favicon.ico" />
           </q-avatar>
         </div>
-        <div
-          class="text-color-white text-font-inter-bold text-center"
-          style="font-size: 3rem; line-height: 190%">
-          {{ i18n(`labels.titles.${product}`) }}
+        <div class="column items-center q-gutter-y-md">
+          <div
+            class="text-color-grey text-font-inter-slim text-center"
+            style="font-size: 1.2vw; white-space: pre-line">
+            {{ i18n("labels.description", { product: i18n(`labels.products.${product}`) }) }}
+          </div>
+          <div class="row no-wrap">
+            <div
+              class="offset-2 text-color-grey text-font-inter-bold"
+              style="font-size: 1.2vw; white-space: pre">
+              {{ i18n("labels.permissions.common") }}
+            </div>
+            <div
+              class="col-7 text-color-grey text-font-inter-slim"
+              style="font-size: 1.2vw; white-space: pre-line">
+              {{ i18n("labels.permissionDescriptions.common") }}
+            </div>
+          </div>
         </div>
-        <q-card style="max-width: 80vw">
-          <q-card-section>
-            <q-item>
-              <q-item-section avatar>
-                <q-avatar>
-                  <img
-                    :src="product ? require(`assets/products/${product}.png`) : null"
-                    alt="app" />
-                </q-avatar>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label class="text-color-black">
-                  {{ i18n(`labels.products.${product}`) }}
-                </q-item-label>
-                <q-item-label caption>
-                  {{ i18n("labels.caption") }}
-                </q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-expansion-item>
-              <template v-slot:header>
-                <q-item-section avatar>
-                  <q-icon color="grey" name="mdi-account-outline" size="lg" />
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label class="text-color-black">{{ i18n("labels.data") }}</q-item-label>
-                </q-item-section>
-              </template>
-            </q-expansion-item>
-          </q-card-section>
-          <q-separator />
-          <q-card-section class="q-gutter-y-md">
-            <q-btn
-              class="full-width"
-              color="positive"
-              :label="i18n('labels.authorize')"
-              :loading="isSubmitLoading"
-              @click="authorize" />
-            <q-slide-transition>
-              <q-expansion-item
-                v-if="copyTokens"
-                hide-expand-icon>
-                <template v-slot:header>
-                  <q-item-section avatar>
-                    <q-avatar color="positive" icon="check" text-color="white" />
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label class="text-color-grey text-font-inter">
-                      {{ i18n("labels.copySuccess") }}
-                    </q-item-label>
-                    <q-item-label caption>
-                      {{ i18n("labels.manualCopy") }}
-                    </q-item-label>
-                  </q-item-section>
-                </template>
-                <q-card class="text-color-black">
-                  <q-card-section style="word-break: break-all">
-                    {{ copyTokens }}
-                  </q-card-section>
-                </q-card>
-              </q-expansion-item>
-            </q-slide-transition>
-          </q-card-section>
-        </q-card>
+        <div class="row justify-center q-gutter-x-xl">
+          <q-btn
+            :label="i18n(`labels.cancel`)"
+            class="btn-secondary"
+            no-caps
+            padding="0.75vw 2.5vw"
+            size="1.5vw"
+            unelevated
+            @click="$router.go(-1)" />
+          <q-btn
+            :label="i18n(`labels.confirm`)"
+            :loading="isSubmitLoading"
+            class="btn-primary"
+            no-caps
+            padding="0.75vw 2.5vw"
+            size="1.5vw"
+            unelevated
+            @click="authorize" />
+        </div>
+        <q-slide-transition>
+          <div v-if="copyTokens" class="column">
+            <div
+              class="text-color-grey text-font-inter"
+              style="font-size: 1.2vw; white-space: pre-line">
+              {{ i18n("labels.copySuccess") }}
+            </div>
+            <div class="row justify-center items-center">
+              <div
+                class="text-color-grey text-font-inter"
+                style="font-size: 1.2vw; white-space: pre">
+                {{ i18n("labels.manualCopyBefore") }}
+              </div>
+              <q-btn
+                dense
+                flat
+                no-caps
+                size="1.2vw"
+                @click="showTokens = true">
+                <div
+                  class="text-color-primary text-font-inter-bold">
+                  {{ i18n("labels.manualCopy") }}
+                </div>
+              </q-btn>
+              <div
+                class="text-color-grey text-font-inter"
+                style="font-size: 1.2vw; white-space: pre">
+                {{ i18n("labels.manualCopyAfter") }}
+              </div>
+            </div>
+          </div>
+        </q-slide-transition>
+        <q-slide-transition>
+          <div
+            v-if="showTokens"
+            class="text-color-blue text-font-inter"
+            style="font-size: 1vw; word-break: break-all">
+            {{ copyTokens }}
+          </div>
+        </q-slide-transition>
       </div>
-    </BackgroundImage>
+    </div>
   </q-page>
 </template>
 
@@ -126,6 +157,7 @@ export default defineComponent({
 
     const isSubmitLoading = ref(false);
     const copyTokens = ref("");
+    const showTokens = ref(false);
 
     const i18n = (relativePath, params) => {
       return $i18n.t("pages.oauth." + relativePath, params);
@@ -167,6 +199,7 @@ export default defineComponent({
       platform: query.platform,
       isSubmitLoading,
       copyTokens,
+      showTokens,
       i18n,
       authorize,
       logger

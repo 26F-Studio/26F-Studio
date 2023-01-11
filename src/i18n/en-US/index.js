@@ -359,21 +359,29 @@ export default {
     },
     oauth: {
       labels: {
-        titles: {
-          techmino: "Authorize Techmino",
-          techminoGalaxy: "Authorize Techmino Galaxy",
-          quatrack: "Authorize Quatrack"
+        header: "Welcome!",
+        title: "Authorizing {product}",
+        description: "Do you want to authorize {product} with your 26F account?\n" +
+          "By clicking on “Accept”, you hereby allow {product} to access your: ",
+        permissions: {
+          common: "Common Data: ",
+          sensitive: "Sensitive Data: "
+        },
+        permissionDescriptions: {
+          common: "Your personal profile, including your username, motto, avatar, and other public info.",
+          sensitive: "Your sensitive data, including your email address, phone number, and other private info."
         },
         products: {
           techmino: "Techmino",
           techminoGalaxy: "Techmino Galaxy",
           quatrack: "Quatrack"
         },
-        caption: "wants to access your 26F account",
-        data: "Personal user data",
-        authorize: "Authorize",
-        copySuccess: "Tokens has been copied to your clipboard",
-        manualCopy: "Copy failed? Click here copy manually"
+        cancel: "Decline",
+        confirm: "Accept",
+        copySuccess: "Tokens has been copied to your clipboard. You can now close this page.",
+        manualCopyBefore: "Copy failed?",
+        manualCopy: "Click here",
+        manualCopyAfter: "to copy manually."
       },
       notifications: {
         submitSuccess: "Authorization granted successfully"
