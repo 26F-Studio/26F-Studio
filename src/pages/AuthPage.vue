@@ -74,43 +74,46 @@
             @click="authorize" />
         </div>
         <q-slide-transition>
-          <div v-if="copyTokens" class="column">
-            <div
-              class="text-color-grey text-font-inter"
-              style="font-size: 1.2vw; white-space: pre-line">
-              {{ i18n("labels.copySuccess") }}
-            </div>
-            <div class="row justify-center items-center">
+          <div v-if="copyTokens" class="row justify-center items-center">
+            <div class="col-10 column">
               <div
-                class="text-color-grey text-font-inter"
+                class="text-color-grey text-font-inter text-center"
                 style="font-size: 1.2vw; white-space: pre">
-                {{ i18n("labels.manualCopyBefore") }}
+                {{ i18n("labels.copySuccess") }}
               </div>
-              <q-btn
-                dense
-                flat
-                no-caps
-                size="1.2vw"
-                @click="showTokens = true">
+              <div class="row justify-center items-center">
                 <div
-                  class="text-color-primary text-font-inter-bold">
-                  {{ i18n("labels.manualCopy") }}
+                  class="text-color-grey text-font-inter"
+                  style="font-size: 1.2vw; white-space: pre">
+                  {{ i18n("labels.manualCopyBefore") }}
                 </div>
-              </q-btn>
-              <div
-                class="text-color-grey text-font-inter"
-                style="font-size: 1.2vw; white-space: pre">
-                {{ i18n("labels.manualCopyAfter") }}
+                <q-btn
+                  dense
+                  flat
+                  no-caps
+                  size="1.2vw"
+                  @click="showTokens = true">
+                  <div
+                    class="text-color-primary text-font-inter-bold">
+                    {{ i18n("labels.manualCopy") }}
+                  </div>
+                </q-btn>
+                <div
+                  class="text-color-grey text-font-inter"
+                  style="font-size: 1.2vw; white-space: pre">
+                  {{ i18n("labels.manualCopyAfter") }}
+                </div>
               </div>
             </div>
           </div>
         </q-slide-transition>
         <q-slide-transition>
-          <div
-            v-if="showTokens"
-            class="text-color-blue text-font-inter"
-            style="font-size: 1vw; word-break: break-all">
-            {{ copyTokens }}
+          <div v-if="showTokens" class="row justify-center items-center">
+            <div
+              class="col-8 text-color-blue text-font-inter z-max"
+              style="font-size: 1vw; word-break: break-all">
+              {{ copyTokens }}
+            </div>
           </div>
         </q-slide-transition>
       </div>

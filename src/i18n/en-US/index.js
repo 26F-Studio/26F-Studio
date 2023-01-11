@@ -378,7 +378,8 @@ export default {
         },
         cancel: "Decline",
         confirm: "Accept",
-        copySuccess: "Tokens has been copied to your clipboard. You can now close this page.",
+        copySuccess: "Tokens has been copied to your clipboard. \n" +
+          "You can now close this page.",
         manualCopyBefore: "Copy failed?",
         manualCopy: "Click here",
         manualCopyAfter: "to copy manually."
