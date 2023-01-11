@@ -17,28 +17,7 @@ export default {
         }
       }
     },
-    infoPanels: {
-      codePanel: {
-        errors: {
-          code: "Invalid verification code"
-        },
-        labels: {
-          title: "Check your inboxes",
-          description: "We have sent a verification code to the email address {email}.\n" +
-            "Enter the code below within 30 minutes to continue. \n" +
-            "If this email address is not linked to an existing account, we will create one for you.",
-          resendBefore: "Did not receive the code? Check your junk inbox or",
-          resend: " resend the code",
-          resendAfter: ".",
-          code: "Verification Code",
-          submit: "Sign In / Sign Up",
-          loginWithPassword: "Sign in with password",
-          restart: "Start Over"
-        },
-        notifications: {
-          loginSuccess: "Congratulations! You are now logged in"
-        }
-      },
+    authPanels: {
       deactivatePanel: {
         errors: {
           email: "Invalid email address",
@@ -64,6 +43,53 @@ export default {
         notifications: {
           getCodeSuccess: "Verification code has been sent to your mailbox",
           deactivateSuccess: "Your account has been deactivated"
+        }
+      },
+      resetPanel: {
+        errors: {
+          email: "Invalid email address",
+          code: "Invalid verification code",
+          password: "Invalid password",
+          confirmPassword: "Two inputs are not the same"
+        },
+        labels: {
+          description: "Your password must have at least eight characters and meet 3 of the following constraints: ",
+          constraints: "Contains at least 1 lowercase alphabetic character \n" +
+            "Contains at least 1 uppercase alphabetic character \n" +
+            "Contains at least 1 numeric character \n" +
+            "Contains at least 1 special character(#?!{'@'}$%^&*-)",
+          email: "Email",
+          code: "Verification Code",
+          getCode: "Get Code",
+          password: "Password",
+          confirmPassword: "Confirm your Password",
+          submit: "Reset password"
+        },
+        notifications: {
+          resetSuccess: "Password reset! You can login with your new password now"
+        }
+      }
+    },
+    loginPanels: {
+      codePanel: {
+        errors: {
+          code: "Invalid verification code"
+        },
+        labels: {
+          title: "Check your inboxes",
+          description: "We have sent a verification code to the email address {email}.\n" +
+            "Enter the code below within 30 minutes to continue. \n" +
+            "If this email address is not linked to an existing account, we will create one for you.",
+          resendBefore: "Did not receive the code? Check your junk inbox or",
+          resend: " resend the code",
+          resendAfter: ".",
+          code: "Verification Code",
+          submit: "Sign In / Sign Up",
+          loginWithPassword: "Sign in with password",
+          restart: "Start Over"
+        },
+        notifications: {
+          loginSuccess: "Congratulations! You are now logged in"
         }
       },
       emailPanel: {

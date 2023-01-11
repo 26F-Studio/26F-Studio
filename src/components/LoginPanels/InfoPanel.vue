@@ -155,7 +155,7 @@ export default defineComponent({
     });
 
     const i18n = (relativePath) => {
-      return $i18n.t("components.infoPanels.infoPanel." + relativePath);
+      return $i18n.t("components.loginPanels.infoPanel." + relativePath);
     };
 
     const goTo = (delta) => {

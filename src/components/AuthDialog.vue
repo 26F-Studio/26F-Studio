@@ -1,9 +1,10 @@
 <template>
   <q-dialog
     ref="dialogRef"
-    @hide="onDialogHide"
-    style="min-width: 50vw">
-    <q-card class="q-dialog-plugin hide-scrollbar full-width" style="min-width: 35vw">
+    @hide="onDialogHide">
+    <q-card
+      class="q-dialog-plugin hide-scrollbar"
+      style="min-width: 50vw">
       <q-card-section>
         <div class="text-h6">{{ i18n(`labels.titles.${type}`) }}</div>
       </q-card-section>
@@ -27,11 +28,11 @@ import { useDialogPluginComponent } from "quasar";
 import { defineComponent, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import DeactivatePanel from "components/AuthPanels/DeactivatePanel.vue";
-import ResetPanel from "components/LoginPanels/SetupPanel.vue";
+import ResetPanel from "components/AuthPanels/ResetPanel.vue";
 
 export default defineComponent({
   name: "AuthDialog",
-  components: { ResetPanel, DeactivatePanel },
+  components: { DeactivatePanel, ResetPanel },
   emits: [...useDialogPluginComponent.emits],
   props: {
     type: {

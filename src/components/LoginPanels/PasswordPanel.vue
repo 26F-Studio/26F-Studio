@@ -154,7 +154,7 @@ export default defineComponent({
     const isCodeLoading = ref(false);
 
     const i18n = (relativePath) => {
-      return $i18n.t("components.infoPanels.passwordPanel." + relativePath);
+      return $i18n.t("components.loginPanels.passwordPanel." + relativePath);
     };
 
     const login = async () => {

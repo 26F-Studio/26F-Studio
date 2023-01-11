@@ -121,7 +121,7 @@ export default defineComponent({
     });
 
     const i18n = (relativePath) => {
-      return $i18n.t("components.infoPanels.emailPanel." + relativePath);
+      return $i18n.t("components.loginPanels.emailPanel." + relativePath);
     };
 
     return {
