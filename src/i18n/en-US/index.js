@@ -17,26 +17,25 @@ export default {
         }
       }
     },
-    authPanels: {
+    infoPanels: {
       codePanel: {
         errors: {
-          email: "Invalid email address",
           code: "Invalid verification code"
         },
         labels: {
-          email: "Email",
+          title: "Check your inboxes",
+          description: "We have sent a verification code to the email address {email}.\n" +
+            "Enter the code below within 30 minutes to continue. \n" +
+            "If this email address is not linked to an existing account, we will create one for you.",
+          resendBefore: "Did not receive the code? Check your junk inbox or",
+          resend: " resend the code",
+          resendAfter: ".",
           code: "Verification Code",
-          getCode: "Get code",
-          loginWithPassword: "Login with password",
-          login: "Sign In / Sign Up",
-          notice: "If you enter an email address that isn't linked to an existing 26F account, we will create one for you."
-        },
-        placeholders: {
-          email: "Input your email address",
-          code: "Input your verification code"
+          submit: "Sign In / Sign Up",
+          loginWithPassword: "Sign in with password",
+          restart: "Start Over"
         },
         notifications: {
-          getCodeSuccess: "Verification code has been sent to your mailbox",
           loginSuccess: "Congratulations! You are now logged in"
         }
       },
@@ -67,6 +66,20 @@ export default {
           deactivateSuccess: "Your account has been deactivated"
         }
       },
+      emailPanel: {
+        errors: {
+          email: "Invalid email address"
+        },
+        labels: {
+          title: "Sign in or Sign up",
+          description: "Sign in to your 26F account to sync your game progress and achievements across devices, " +
+            "as well as play with your friends online in our games. \n\n" +
+            "Does not have an account yet? Sign up by entering your email address or use one of the sign-in options.",
+          email: "Email",
+          submit: "Continue",
+          other: "Or use one of the following sign in options:"
+        }
+      },
       finishPanel: {
         labels: {
           profile: "Go to profile",
@@ -75,18 +88,17 @@ export default {
       },
       infoPanel: {
         labels: {
+          title: "Finishing up the details",
+          description: "Please, feel free to spend a few minutes completing the following info about you.",
           username: "Username",
-          motto: "Motto",
           region: "Region",
-          avatarFrame: "Avatar Frame",
-          maybeLater: "Maybe later...",
-          submit: "Submit"
-        },
-        placeholders: {
-          username: "Input your username",
-          motto: "Input your motto",
-          region: "Select your region",
-          avatarFrame: "Coming soon..."
+          regionHint: "Select region",
+          motto: "About me",
+          avatar: "Avatar",
+          upload: "Upload",
+          submit: "Continue",
+          maybeLater: "Set up later in profile",
+          restart: "Start Over"
         },
         notifications: {
           submitSuccess: "Your account info has been updated"
@@ -94,70 +106,42 @@ export default {
       },
       passwordPanel: {
         errors: {
-          email: "Invalid email address",
           password: "Invalid password"
         },
         labels: {
-          email: "Email",
+          title: "Enter your password",
+          email: "Email: ",
           password: "Password",
-          passwordConstraints: "Constraints",
-          loginWithCode: "Login with code",
-          login: "Sign In",
-          forgot: "Forgot your password?"
+          forgot: "Forgot your password?",
+          submit: "Sign In",
+          loginWithCode: "Sign in / Sign up with email",
+          sendingCode: "Sending email...",
+          restart: "Start Over"
         },
         notifications: {
           loginSuccess: "Congratulations! You are now logged in"
-        },
-        placeholders: {
-          email: "Input your email address",
-          password: "Input your password"
-        },
-        tooltips: {
-          passwordConstraints: "Your password should meet 3 of the following constraints: \n" +
-            "\t Contains at least 1 lowercase alphabetic character \n" +
-            "\t Contains at least 1 uppercase alphabetic character \n" +
-            "\t Contains at least 1 numeric character \n" +
-            "\t Contains at least 1 special character(#?!{'@'}$%^&*-)"
         }
       },
-      resetPanel: {
+      setupPanel: {
         errors: {
-          email: "Invalid email address",
-          code: "Invalid verification code",
           password: "Invalid password",
           confirmPassword: "Two inputs are not the same"
         },
         labels: {
-          email: "Email",
-          code: "Verification Code",
-          getCode: "Get code",
-          password: "New Password",
-          passwordConstraints: "Constraints",
-          confirmPassword: "Confirm New Password",
-          maybeLater: "Maybe later...",
-          holdOn: "HOLD ON!",
-          warning: "You won't be able to setup your account info if no password was set. \n" +
-            "But you can setup them later in the profile page.",
-          cancel: "Let me think",
-          confirm: "Okay, go ahead",
-          submit: "Submit"
+          title: "Welcome aboard!",
+          description: "Let’s first create a password. \n\n" +
+            "Your password must have at least eight characters and meet 3 of the following constraints: ",
+          constraints: "Contains at least 1 lowercase alphabetic character \n" +
+            "Contains at least 1 uppercase alphabetic character \n" +
+            "Contains at least 1 numeric character \n" +
+            "Contains at least 1 special character(#?!{'@'}$%^&*-)",
+          password: "Password",
+          confirmPassword: "Confirm your Password",
+          submit: "Continue",
+          maybeLater: "Set up later in profile"
         },
         notifications: {
-          getCodeSuccess: "Verification code has been sent to your mailbox",
-          resetSuccess: "Password reset! You can login with your new password now"
-        },
-        placeholders: {
-          email: "Input your email address",
-          code: "Input your verification code",
-          password: "Input new password",
-          confirmPassword: "Input new password again"
-        },
-        tooltips: {
-          passwordConstraints: "Your new password should meet 3 of the following constraints: \n" +
-            "\t Contains at least 1 lowercase alphabetic character \n" +
-            "\t Contains at least 1 uppercase alphabetic character \n" +
-            "\t Contains at least 1 numeric character \n" +
-            "\t Contains at least 1 special character(#?!{'@'}$%^&*-)"
+          setupSuccess: "Password set! You can login with your new password now"
         }
       }
     },
@@ -333,6 +317,7 @@ export default {
       labels: {
         header: "Welcome\n" +
           "(Back)!",
+        headerNew: "Welcome!",
         loginWithPassword: "Login With Password",
         loginWithCode: "Login With Verification Code",
         setupInfo: "Setup Your Account Info",
@@ -386,6 +371,9 @@ export default {
     }
   },
   Studio26F: {
+    LimitVerifyEmail: {
+      tooFrequent: "Sending email too frequently, please try again later"
+    },
     PlayerManager: {
       emailSendError: "Failed to send email",
       invalidEmail: "Invalid email",

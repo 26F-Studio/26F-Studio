@@ -27,7 +27,7 @@ import { useDialogPluginComponent } from "quasar";
 import { defineComponent, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import DeactivatePanel from "components/AuthPanels/DeactivatePanel.vue";
-import ResetPanel from "components/AuthPanels/ResetPanel.vue";
+import ResetPanel from "components/LoginPanels/SetupPanel.vue";
 
 export default defineComponent({
   name: "AuthDialog",

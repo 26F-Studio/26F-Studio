@@ -64,7 +64,7 @@
         </q-card-section>
         <q-card-section class="column items-center q-gutter-y-md">
           <q-btn
-            class="primary-btn"
+            class="btn-primary"
             flat
             label="Account Settings"
             no-caps

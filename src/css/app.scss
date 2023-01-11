@@ -122,8 +122,7 @@
   }
 
   &-disabled {
-    @extend .btn;
-    color: $grey-8;
+    @extend .text-color-grey, .text-font-inter-bold, .btn;
     background: $grey-4;
   }
 }

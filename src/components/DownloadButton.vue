@@ -14,7 +14,8 @@
     <template v-slot:label>
       <div class="no-wrap q-ma-sm">
         <div
-          class="text-color-white text-font-inter-bold"
+          :class="`text-color-${disable ? 'grey' : 'white'}`"
+          class="text-font-inter-bold"
           style="font-size: 2vw">
           {{ disable ? i18n("labels.disable") : i18n("labels.download") }}
         </div>
