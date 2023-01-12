@@ -184,10 +184,7 @@ export default defineComponent({
           type: "positive",
           message: i18n("notifications.submitSuccess")
         });
-        copyTokens.value = JSON.stringify({
-          accessToken: $player.accessToken,
-          oauthToken: data.oauthToken
-        });
+        copyTokens.value = $player.accessToken + data["oauthToken"];
         await copyToClipboard(copyTokens.value);
       }, $q, $i18n.t);
       isSubmitLoading.value = false;
