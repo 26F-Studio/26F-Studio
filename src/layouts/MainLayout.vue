@@ -1,17 +1,17 @@
 <template>
   <q-layout view="hHh lpR fff">
-    <router-view name="header" @click:drawer="toggleDrawer($event)"/>
+    <router-view name="header" style="z-index: 101" @click:drawer="toggleDrawer($event)" />
     <router-view name="drawer" v-model="leftDrawer"/>
     <q-page-container>
       <router-view/>
     </q-page-container>
-    <router-view name="footer"/>
+    <router-view name="footer" style="z-index: 99" />
   </q-layout>
 </template>
 
 <script>
-import {defineComponent, ref} from "vue";
-import {useI18n} from "vue-i18n";
+import { defineComponent, ref } from "vue";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
   name: "MainLayout",
