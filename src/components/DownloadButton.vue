@@ -2,32 +2,36 @@
   <q-btn-dropdown
     :class="disable ? 'btn-disabled' : 'btn-primary'"
     content-class="hide-scrollbar"
-    content-style="border-radius: 1vw"
+    content-style="border-radius: 0.75rem"
     toggle-aria-label="Download"
     :disable-main-btn="disable"
     :disable-dropdown="disable"
     flat
+    menu-anchor="bottom middle"
+    menu-self="top middle"
     no-caps
+    padding="0.3rem 1.2rem"
     split
-    size="1.5vw"
+    size="0.8rem"
+    style="border-radius: 0.75rem"
     @click="downloadProduct(mainPlatform)">
     <template v-slot:label>
       <div class="no-wrap q-ma-sm">
         <div
           :class="`text-color-${disable ? 'grey' : 'white'}`"
           class="text-font-inter-bold"
-          style="font-size: 2vw">
+          style="font-size: 1.1rem">
           {{ disable ? i18n("labels.disable") : i18n("labels.download") }}
         </div>
         <div v-if="!disable" class="row justify-center items-center">
           <q-icon
             :name="platformIconMap[mainPlatform]"
             class="q-ma-sm"
-            size="1.5vw" />
+            size="1rem" />
           <div
             class="text-color-white text-font-inter-slim"
             :class="$q.screen.xs ? 'q-pt-sm' : ''"
-            style="font-size: 1vw">
+            style="font-size: 0.8rem">
             {{ i18n(`labels.platforms.${mainPlatform}`) }}
           </div>
         </div>
@@ -40,25 +44,28 @@
         clickable
         v-close-popup
         @click="downloadProduct(platform)">
-        <q-item-section avatar class="row">
-          <div class="btn-primary" style="border-radius: 0.75vw">
+        <q-item-section
+          avatar
+          class="row"
+          style="min-width: unset">
+          <div class="btn-primary" style="border-radius: 0.75rem">
             <q-icon
               :name="platformIconMap[platform]"
-              class="q-ma-sm"
-              size="1.5vw" />
+              class="q-ma-xs"
+              size="1rem" />
           </div>
         </q-item-section>
         <q-item-section>
           <q-item-label
             class="text-color-grey text-font-inter-slim"
-            style="font-size: 0.75vw">
+            style="font-size: 0.7rem">
             {{ i18n(`labels.platforms.${platform}`) }}
           </q-item-label>
         </q-item-section>
         <q-item-section side>
           <q-icon
             :name="['appstore', 'testflight'].includes(platform) ? 'mdi-open-in-new' : 'mdi-download'"
-            size="1.5vw" />
+            size="1rem" />
         </q-item-section>
       </q-item>
     </q-list>

@@ -341,8 +341,7 @@ export default {
     },
     login: {
       labels: {
-        header: "Welcome\n" +
-          "(Back)!",
+        header: "Welcome (Back)!",
         headerNew: "Welcome!",
         loginWithPassword: "Login With Password",
         loginWithCode: "Login With Verification Code",

@@ -9,15 +9,14 @@
       :src="typeof src === 'string' ? src : require('assets/background.png')"
       :style="style"
       @load="onImgLoaded">
-      <slot/>
-      <q-resize-observer v-if="maskPosition" @resize="onResize" debounce="50"/>
+      <slot />
     </q-img>
   </div>
 </template>
 
 <script>
-import {useQuasar} from "quasar";
-import {computed, defineComponent, ref} from "vue";
+import { useQuasar } from "quasar";
+import { computed, defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "BackgroundImage",
@@ -49,10 +48,11 @@ export default defineComponent({
         ratio: 0.7,
         control: [0.6, 0.7]
       })
-    },
+    }
   },
   setup(props) {
     const $q = useQuasar();
+
     const src = computed(() => {
       for (const key of Object.keys($q.screen.sizes)) {
         if ($q.screen[key]) {
@@ -70,14 +70,10 @@ export default defineComponent({
       imgLoaded.value = true;
     };
 
-    const path = ref("");
-    const style = computed(() => ({
-      height: props.fullHeight ? '100vh' : 'fit-content',
-      clipPath: (props.maskPosition && imgLoaded.value) ? `path('${path.value}')` : undefined,
-    }));
+    const path = computed(() => {
+      const width = $q.screen.width;
+      const height = props.fullHeight ? $q.screen.height : width / 8 * 5;
 
-
-    const calculatePath = (width, height) => {
       switch (props.maskPosition) {
         case "bottom":
           return `M0,${height} L0,${height * props.maskStart.ratio} C` +
@@ -106,19 +102,18 @@ export default defineComponent({
         default:
           return "";
       }
-    };
-    const onResize = ({width, height}) => {
-      if (props.maskPosition) {
-        path.value = calculatePath(width, height);
-      }
-    };
+    });
+
+    const style = computed(() => ({
+      height: props.fullHeight ? "100vh" : "fit-content",
+      clipPath: (props.maskPosition && imgLoaded.value) ? `path('${path.value}')` : undefined
+    }));
+
     return {
       src,
       fill,
-      calculatePath,
       style,
-      onImgLoaded,
-      onResize,
+      onImgLoaded
     };
   }
 });

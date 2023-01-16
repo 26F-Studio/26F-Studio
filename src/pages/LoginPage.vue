@@ -1,21 +1,18 @@
 <template>
   <q-page
-    :class="$q.screen.gt.sm ? 'flex-center' : 'flex-block'"
+    :class="$q.screen.gt.md ? 'flex-center' : 'flex-block'"
     class="flex column">
     <BackgroundImage
-      :class="$q.screen.gt.sm ? 'absolute-full' : undefined"
-      :full-height="$q.screen.gt.sm"
+      :class="$q.screen.gt.md ? 'absolute-full' : undefined"
+      :full-height="$q.screen.gt.md"
       mask
-      :mask-end="$q.screen.gt.sm ? {ratio: 0.4, control: [0.4, 0.8]} : {ratio: 0.8, control: [0.6, 0.8]}"
-      :mask-position="$q.screen.gt.sm ? 'left' : 'top'"
-      :mask-start="$q.screen.gt.sm ? {ratio: 0.3, control: [0.3, 0.2]} : {ratio: 1.0, control: [0.4, 0.9]}">
-      <div class="bg-transparent fit row">
-        <div class="col-4 row items-center q-pa-md">
-          <div
-            class="text-color-white text-font-galaxy-oblique-bold"
-            style="font-size: 8vw; line-height: 8vw; white-space: pre">
-            {{ tabIndex > 3 ? i18n("labels.headerNew") : i18n("labels.header") }}
-          </div>
+      :mask-end="maskEnd"
+      :mask-position="$q.screen.gt.md ? 'left' : 'top'"
+      :mask-start="maskStart">
+      <div class="bg-transparent fit row items-center">
+        <div class="col-grow col-lg-4 text-center text-color-white text-font-galaxy-oblique-bold"
+             style="font-size: 5rem; line-height: 5rem; white-space: pre-wrap">
+          {{ tabIndex > 3 ? i18n("labels.headerNew") : i18n("labels.header") }}
         </div>
       </div>
     </BackgroundImage>
@@ -24,7 +21,7 @@
         v-model="tabIndex"
         animated
         keep-alive
-        :class="$q.screen.gt.sm ? 'offset-5 col-6' : 'col-grow'">
+        :class="$q.screen.gt.md ? 'offset-4 offset-lg-5 col-6' : 'col-grow'">
         <q-tab-panel :name="1">
           <EmailPanel
             :email="email"
@@ -64,7 +61,8 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { useQuasar } from "quasar";
+import { computed, defineComponent, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 import BackgroundImage from "components/BackgroundImage";
@@ -79,10 +77,41 @@ export default defineComponent({
   components: { BackgroundImage, EmailPanel, PasswordPanel, CodePanel, SetupPanel, InfoPanel },
   setup() {
     const $i18n = useI18n({ useScope: "global" });
+    const $q = useQuasar();
 
     const tabIndex = ref(1);
     const email = ref("");
     const code = ref("");
+
+    const maskEnd = computed(() => {
+      switch ($q.screen.name) {
+        case "xs":
+          return { ratio: 0.8, control: [0.6, 0.8] };
+        case "sm":
+          return { ratio: 0.8, control: [0.6, 0.8] };
+        case "md":
+          return { ratio: 0.8, control: [0.6, 0.8] };
+        case "lg":
+          return { ratio: 0.45, control: [0.45, 0.8] };
+        default:
+          return { ratio: 0.4, control: [0.4, 0.8] };
+      }
+    });
+
+    const maskStart = computed(() => {
+      switch ($q.screen.name) {
+        case "xs":
+          return { ratio: 1.0, control: [0.4, 0.9] };
+        case "sm":
+          return { ratio: 1.0, control: [0.4, 0.9] };
+        case "md":
+          return { ratio: 1.0, control: [0.4, 0.9] };
+        case "lg":
+          return { ratio: 0.35, control: [0.35, 0.2] };
+        default:
+          return { ratio: 0.3, control: [0.3, 0.2] };
+      }
+    });
 
     const i18n = (relativePath) => {
       return $i18n.t("pages.login." + relativePath);
@@ -91,6 +120,8 @@ export default defineComponent({
       tabIndex,
       email,
       code,
+      maskEnd,
+      maskStart,
       i18n
     };
   }

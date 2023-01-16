@@ -1,14 +1,14 @@
 <template>
   <q-page
-    :class="$q.screen.gt.sm ? 'flex-center' : 'flex-block'"
+    :class="$q.screen.gt.md ? 'flex-center' : 'flex-block'"
     class="flex column">
     <BackgroundImage
-      :class="$q.screen.gt.sm ? 'absolute-full' : undefined"
-      :full-height="$q.screen.gt.sm"
+      :class="$q.screen.gt.md ? 'absolute-full' : undefined"
+      :full-height="$q.screen.gt.md"
       mask
-      :mask-end="$q.screen.gt.sm ? {ratio: 0.4, control: [0.4, 0.8]} : {ratio: 0.8, control: [0.6, 0.8]}"
-      :mask-position="$q.screen.gt.sm ? 'left' : 'top'"
-      :mask-start="$q.screen.gt.sm ? {ratio: 0.3, control: [0.3, 0.2]} : {ratio: 1.0, control: [0.4, 0.9]}">
+      :mask-end="maskEnd"
+      :mask-position="$q.screen.gt.md ? 'left' : 'top'"
+      :mask-start="maskStart">
       <div class="bg-transparent fit row">
         <div class="col-4 row items-center q-pa-md">
           <div
@@ -21,7 +21,7 @@
     </BackgroundImage>
     <div class="row justify-center full-width">
       <div
-        :class="$q.screen.gt.sm ? 'offset-5 col-6' : 'col-grow'"
+        :class="$q.screen.gt.md ? 'offset-4 offset-lg-5 col-6' : 'col-grow'"
         class="column items-center q-gutter-y-xl">
         <div
           class="text-color-primary text-font-inter text-shadow-purple text-center"
@@ -127,7 +127,7 @@
 
 <script>
 import { copyToClipboard, useQuasar } from "quasar";
-import { defineComponent, onMounted, ref } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useReCaptcha } from "vue-recaptcha-v3";
 import { useRoute, useRouter } from "vue-router";
@@ -166,6 +166,37 @@ export default defineComponent({
     const copyTokens = ref("");
     const showTokens = ref(false);
 
+    const maskEnd = computed(() => {
+      switch ($q.screen.name) {
+        case "xs":
+          return { ratio: 0.8, control: [0.6, 0.8] };
+        case "sm":
+          return { ratio: 0.8, control: [0.6, 0.8] };
+        case "md":
+          return { ratio: 0.8, control: [0.6, 0.8] };
+        case "lg":
+          return { ratio: 0.45, control: [0.45, 0.8] };
+        default:
+          return { ratio: 0.4, control: [0.4, 0.8] };
+      }
+    });
+
+    const maskStart = computed(() => {
+      switch ($q.screen.name) {
+        case "xs":
+          return { ratio: 1.0, control: [0.4, 0.9] };
+        case "sm":
+          return { ratio: 1.0, control: [0.4, 0.9] };
+        case "md":
+          return { ratio: 1.0, control: [0.4, 0.9] };
+        case "lg":
+          return { ratio: 0.35, control: [0.35, 0.2] };
+        default:
+          return { ratio: 0.3, control: [0.3, 0.2] };
+      }
+    });
+
+
     const i18n = (relativePath, params) => {
       return $i18n.t("pages.oauth." + relativePath, params);
     };
@@ -203,6 +234,8 @@ export default defineComponent({
       isSubmitLoading,
       copyTokens,
       showTokens,
+      maskEnd,
+      maskStart,
       i18n,
       authorize,
       logger
