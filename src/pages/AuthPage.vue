@@ -1,12 +1,14 @@
 <template>
-  <q-page class="flex flex-center column">
+  <q-page
+    :class="$q.screen.gt.sm ? 'flex-center' : 'flex-block'"
+    class="flex column">
     <BackgroundImage
-      :mask-end="{ratio: 0.4, control: [0.4, 0.8]}"
-      :mask-start="{ratio: 0.3, control: [0.3, 0.2]}"
-      class="absolute-full"
-      full-height
+      :class="$q.screen.gt.sm ? 'absolute-full' : undefined"
+      :full-height="$q.screen.gt.sm"
       mask
-      mask-position="left">
+      :mask-end="$q.screen.gt.sm ? {ratio: 0.4, control: [0.4, 0.8]} : {ratio: 0.8, control: [0.6, 0.8]}"
+      :mask-position="$q.screen.gt.sm ? 'left' : 'top'"
+      :mask-start="$q.screen.gt.sm ? {ratio: 0.3, control: [0.3, 0.2]} : {ratio: 1.0, control: [0.4, 0.9]}">
       <div class="bg-transparent fit row">
         <div class="col-4 row items-center q-pa-md">
           <div
@@ -18,7 +20,9 @@
       </div>
     </BackgroundImage>
     <div class="row justify-center full-width">
-      <div class="offset-5 col-6 column items-center q-gutter-y-xl">
+      <div
+        :class="$q.screen.gt.sm ? 'offset-5 col-6' : 'col-grow'"
+        class="column items-center q-gutter-y-xl">
         <div
           class="text-color-primary text-font-inter text-shadow-purple text-center"
           style="font-size: 2.5vw; font-weight: 800">

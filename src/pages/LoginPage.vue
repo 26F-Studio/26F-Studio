@@ -1,12 +1,14 @@
 <template>
-  <q-page class="flex flex-center row">
+  <q-page
+    :class="$q.screen.gt.sm ? 'flex-center' : 'flex-block'"
+    class="flex column">
     <BackgroundImage
-      class="absolute-full"
-      full-height
+      :class="$q.screen.gt.sm ? 'absolute-full' : undefined"
+      :full-height="$q.screen.gt.sm"
       mask
-      mask-position="left"
-      :mask-start="{ratio: 0.3, control: [0.3, 0.2]}"
-      :mask-end="{ratio: 0.4, control: [0.4, 0.8]}">
+      :mask-end="$q.screen.gt.sm ? {ratio: 0.4, control: [0.4, 0.8]} : {ratio: 0.8, control: [0.6, 0.8]}"
+      :mask-position="$q.screen.gt.sm ? 'left' : 'top'"
+      :mask-start="$q.screen.gt.sm ? {ratio: 0.3, control: [0.3, 0.2]} : {ratio: 1.0, control: [0.4, 0.9]}">
       <div class="bg-transparent fit row">
         <div class="col-4 row items-center q-pa-md">
           <div
@@ -22,25 +24,25 @@
         v-model="tabIndex"
         animated
         keep-alive
-        class="offset-5 col-6">
+        :class="$q.screen.gt.sm ? 'offset-5 col-6' : 'col-grow'">
         <q-tab-panel :name="1">
           <EmailPanel
             :email="email"
-            class="q-ma-xl"
+            class="q-ma-xl q-ma-xs-sm q-ma-sm-md q-ma-md-md"
             @go="tabIndex += $event"
             @update:email="email = $event" />
         </q-tab-panel>
         <q-tab-panel :name="2">
           <PasswordPanel
             :email="email"
-            class="q-ma-xl"
+            class="q-ma-xl q-ma-xs-sm q-ma-sm-md q-ma-md-md"
             @go="tabIndex += $event" />
         </q-tab-panel>
         <q-tab-panel :name="3">
           <CodePanel
             :code="code"
             :email="email"
-            class="q-ma-xl"
+            class="q-ma-xl q-ma-xs-sm q-ma-sm-md q-ma-md-md"
             @go="tabIndex += $event"
             @update:code="code = $event" />
         </q-tab-panel>
@@ -48,12 +50,12 @@
           <SetupPanel
             :code="code"
             :email="email"
-            class="q-ma-xl"
+            class="q-ma-xl q-ma-xs-sm q-ma-sm-md q-ma-md-md"
             @go="tabIndex += $event" />
         </q-tab-panel>
         <q-tab-panel :name="5">
           <InfoPanel
-            class="q-ma-xl"
+            class="q-ma-xl q-ma-xs-sm q-ma-sm-md q-ma-md-md"
             @go="tabIndex += $event" />
         </q-tab-panel>
       </q-tab-panels>
