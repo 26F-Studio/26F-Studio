@@ -4,8 +4,6 @@
       eager
       :img-style="{minHeight: '50vh'}"
       mask-position="top"
-      :mask-start="$q.screen.xs ? {ratio: 1.0, control: [0.4, 0.9]} : undefined"
-      :mask-end="$q.screen.xs ? {ratio: 0.8, control: [0.6, 0.8]} : undefined"
       style="margin-top: -6vw">
       <div
         class="text-color-primary text-font-galaxy text-shadow-grey absolute"
@@ -36,7 +34,7 @@
       :key="index"
       style="margin-bottom: 10vw">
       <ProductPanel
-        :horizontal="$q.screen.gt.xs"
+        :horizontal="$q.screen.gt.sm"
         :reversed="index % 2 === 1"
         :product="product" />
     </div>

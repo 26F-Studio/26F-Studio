@@ -4,7 +4,7 @@
     @hide="onDialogHide">
     <q-card
       class="q-dialog-plugin hide-scrollbar"
-      style="min-width: 50vw">
+      style="min-width: 50vw; max-width: 90vw">
       <q-card-section>
         <div class="text-h6">{{ i18n(`labels.titles.${type}`) }}</div>
       </q-card-section>

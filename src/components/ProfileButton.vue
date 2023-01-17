@@ -10,7 +10,7 @@
     :stretch="!playerStore.loggedIn"
     class="button-text"
     :size="$q.screen.gt.sm ? '1vw' : 'md'"
-    @click.prevent="playerStore.loggedIn ? undefined : $router.push('/login')">
+    @click="onButtonClick">
     <q-avatar
       v-if="playerStore.loggedIn"
       :icon="playerStore.avatar ? undefined : 'mdi-account-circle'"
@@ -20,8 +20,10 @@
         :src="playerStore.avatar" />
     </q-avatar>
     <q-menu
+      ref="menu"
       :offset="[0, 15]"
       anchor="bottom middle"
+      no-parent-event
       self="top middle"
       style="border-radius: 1vw; min-width:14rem">
       <q-card bordered>
@@ -84,7 +86,7 @@
 </template>
 
 <script>
-import { computed, defineComponent, onMounted } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 
@@ -98,6 +100,9 @@ export default defineComponent({
     const $router = useRouter();
 
     const playerStore = usePlayerStore();
+
+    const menu = ref(null);
+
     const flag = computed(() => {
       return getFlag(playerStore.region);
     });
@@ -112,6 +117,14 @@ export default defineComponent({
 
     const i18n = (path) => {
       return $i18n.t("components.profileButton." + path);
+    };
+
+    const onButtonClick = () => {
+      if (playerStore.loggedIn) {
+        menu.value.toggle();
+      } else {
+        $router.push({ name: "login" });
+      }
     };
 
     const goProfile = () => {
@@ -129,8 +142,10 @@ export default defineComponent({
 
     return {
       playerStore,
+      menu,
       flag,
       i18n,
+      onButtonClick,
       goProfile,
       logout
     };
