@@ -204,7 +204,7 @@ export default {
         success: "Succeeded"
       }
     },
-    languagesMenu: {},
+    languageList: {},
     productPanel: {
       labels: {
         learnMore: "Learn More"
@@ -240,7 +240,7 @@ export default {
         signOut: "Sign Out"
       }
     },
-    settingsMenu: {
+    settingList: {
       labels: {
         darkMode: "Dark Mode"
       }
@@ -265,7 +265,9 @@ export default {
           whoWeAre: "Who We Are",
           brandingGuidelines: "Branding Guidelines",
           contact: "Contact",
-          joinUs: "Join Us"
+          joinUs: "Join Us",
+          languageMenu: "Language",
+          settingsMenu: "Settings"
         }
       }
     },

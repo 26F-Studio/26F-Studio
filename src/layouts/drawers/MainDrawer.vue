@@ -5,7 +5,7 @@
     overlay>
     <BackgroundImage>
       <div class="absolute-bottom bg-transparent">
-        <q-avatar size="56px" class="q-mb-sm" icon="person"/>
+        <q-avatar class="q-mb-sm" icon="person" size="56px" />
         <div class="text-weight-bold">Razvan Stoenescu</div>
         <div>@rstoenescu</div>
       </div>
@@ -14,7 +14,6 @@
       <template v-for="(category, categoryIndex) in categories" :key="categoryIndex">
         <q-expansion-item
           :content-inset-level="1"
-          expand-separator
           group="drawer_categories"
           :icon="category.icon"
           :label="i18n(`labels.${category.label}`)">
@@ -32,36 +31,52 @@
           </q-list>
         </q-expansion-item>
       </template>
+      <q-separator />
+      <q-expansion-item
+        :label="i18n('labels.languageMenu')"
+        group="drawer_extras"
+        icon="language">
+        <LanguageList />
+      </q-expansion-item>
+      <q-expansion-item
+        :content-inset-level="1"
+        :label="i18n('labels.settingsMenu')"
+        group="drawer_extras"
+        icon="settings">
+        <SettingList />
+      </q-expansion-item>
     </q-list>
   </q-drawer>
 </template>
 
 <script>
-import {computed, defineComponent} from 'vue'
-import {useI18n} from "vue-i18n";
+import { computed, defineComponent } from "vue";
+import { useI18n } from "vue-i18n";
 
 import BackgroundImage from "components/BackgroundImage";
+import LanguageList from "components/LanguageList.vue";
+import SettingList from "components/SettingList.vue";
 
 export default defineComponent({
-  name: 'MainDrawer',
-  components: {BackgroundImage},
+  name: "MainDrawer",
+  components: { BackgroundImage, LanguageList, SettingList },
   props: {
     modelValue: {
       type: Boolean,
-      default: () => false,
+      default: () => false
     }
   },
-  setup(props, {emit}) {
-    const $i18n = useI18n({useScope: "global"});
+  setup(props, { emit }) {
+    const $i18n = useI18n({ useScope: "global" });
 
     const isOpen = computed({
       get: () => props.modelValue,
-      set: (value) => emit('update:modelValue', value),
+      set: (value) => emit("update:modelValue", value)
     });
     const categories = [
       {
-        label: 'products',
-        icon: 'mdi-apps',
+        label: "products",
+        icon: "mdi-apps",
         list: [{
           label: "techminoGalaxy",
           to: "/products/techmino-galaxy"
@@ -77,8 +92,8 @@ export default defineComponent({
         }]
       },
       {
-        label: 'support',
-        icon: 'mdi-help-circle-outline',
+        label: "support",
+        icon: "mdi-help-circle-outline",
         list: [{
           label: "accountSettings",
           to: "/account/settings"
@@ -94,8 +109,8 @@ export default defineComponent({
         }]
       },
       {
-        label: 'about',
-        icon: 'mdi-information-outline',
+        label: "about",
+        icon: "mdi-information-outline",
         list: [{
           label: "whoWeAre",
           to: "/about/us"
@@ -105,21 +120,21 @@ export default defineComponent({
         }]
       },
       {
-        label: 'contact',
-        icon: 'mdi-face-agent',
+        label: "contact",
+        icon: "mdi-face-agent",
         list: [{
           label: "joinUs",
           to: "/contact/join"
         }]
-      },
+      }
     ];
 
     const i18n = (relativePath) => {
-      return $i18n.t('layouts.drawers.main.' + relativePath);
+      return $i18n.t("layouts.drawers.main." + relativePath);
     };
-    return {isOpen, categories, i18n};
+    return { isOpen, categories, i18n };
   }
-})
+});
 </script>
 
 <style scoped>

@@ -4,7 +4,7 @@
       eager
       :img-style="{minHeight: '50vh'}"
       mask-position="top"
-      style="margin-top: -6vw">
+      style="margin-top: -6vw; padding-top: 3vw">
       <div
         class="text-color-primary text-font-galaxy text-shadow-grey absolute"
         style="font-size: 64vw; font-weight: 180; right: -6vw; top:-27vw;">
@@ -12,9 +12,10 @@
       </div>
       <div
         class="absolute-center bg-transparent full-width row"
-        :class="$q.screen.xs ? 'justify-center' : 'justify-start'">
+        :class="$q.screen.gt.sm ? 'justify-start' : 'justify-center'">
         <div
-          class="text-color-white text-font-galaxy-oblique-bold q-pb-xl"
+          :class="$q.screen.gt.sm ? undefined : 'text-center'"
+          class="text-color-white text-font-galaxy-oblique-bold"
           style="font-size: 9vw; line-height: 8vw; margin-left: 4vw; white-space: pre">
           {{ i18n("labels.header") }}
         </div>

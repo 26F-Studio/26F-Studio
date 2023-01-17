@@ -10,9 +10,8 @@
     menu-anchor="bottom middle"
     menu-self="top middle"
     no-caps
-    padding="0.3rem 1.2rem"
+    padding="0.4rem 1.2rem"
     split
-    size="0.8rem"
     style="border-radius: 0.75rem"
     @click="downloadProduct(mainPlatform)">
     <template v-slot:label>

@@ -5,27 +5,27 @@
     flat
     :round="playerStore.loggedIn"
     no-caps
-    :padding="$q.screen.xs ? 'sm' : undefined"
     :square="!playerStore.loggedIn"
     :stretch="!playerStore.loggedIn"
     class="button-text"
-    :size="$q.screen.gt.sm ? '1vw' : 'md'"
+    :size="$q.screen.gt.sm ? '0.7rem' : 'md'"
     @click="onButtonClick">
     <q-avatar
       v-if="playerStore.loggedIn"
       :icon="playerStore.avatar ? undefined : 'mdi-account-circle'"
-      :size="$q.screen.gt.sm ? '2vw' : 'md'">
+      :size="$q.screen.gt.sm ? '1.7rem' : 'md'">
       <q-img
         v-if="playerStore.avatar"
         :src="playerStore.avatar" />
     </q-avatar>
     <q-menu
       ref="menu"
+      class="q-ma-md"
       :offset="[0, 15]"
       anchor="bottom middle"
       no-parent-event
       self="top middle"
-      style="border-radius: 1vw; min-width:14rem">
+      style="border-radius: 0.75rem; min-width: 11rem">
       <q-card bordered>
         <q-card-section class="q-gutter-sm">
           <div class="row justify-center">
@@ -70,10 +70,12 @@
             flat
             label="Account Settings"
             no-caps
+            size="0.75rem"
             @click="goProfile" />
           <q-btn
             flat
             no-caps
+            size="0.65rem"
             @click="logout">
             <div class="btn-text">
               {{ i18n("labels.signOut") }}
@@ -135,10 +137,10 @@ export default defineComponent({
     };
 
     const logout = () => {
+      menu.value.hide();
       playerStore.logout();
       $router.go(0);
     };
-
 
     return {
       playerStore,
