@@ -1,6 +1,8 @@
 <template>
   <q-header class="bg-transparent" style="height: 0">
-    <q-toolbar class="aero-toolbar no-padding">
+    <q-toolbar
+      class="aero-toolbar no-padding"
+      style="background: rgba(0, 0, 0, 0.25); backdrop-filter: blur(25px);">
       <q-btn
         aria-label="Menu"
         flat
@@ -14,7 +16,7 @@
         @click="onLogoClick">
         <div
           v-if="$q.screen.gt.sm"
-          class="title-text self-center"
+          class="text-color-white text-font-galaxy-slim self-center"
           style="font-size: 2rem; margin-bottom: 0.3rem">
           {{ `\u{0FFFFF}  ${i18n("labels.title")}` }}
         </div>
@@ -32,7 +34,7 @@
         :square="$q.screen.gt.xs"
         to="/home">
         <div
-          class="title-text self-center"
+          class="text-color-white text-font-galaxy-slim self-center"
           style="font-size: 1.75rem; margin-bottom: 0.25rem">
           {{ "\u{0FFFFF}" + ($q.screen.gt.xs ? `  ${i18n("labels.title")}` : "") }}
         </div>
@@ -45,8 +47,10 @@
         class="normal-text-white"
         flat
         :label="i18n(`labels.${button}`)"
+        menu-anchor="bottom middle"
+        menu-self="top middle"
         no-caps
-        size="0.75rem"
+        size="0.7rem"
         stretch
         style="font-weight: 700">
         <q-list>
@@ -58,7 +62,7 @@
             class="q-py-lg"
             clickable>
             <q-item-section>
-              <q-item-label style="font-weight: 400; font-size: 0.75vw">
+              <q-item-label style="font-weight: 400; font-size: 0.7rem">
                 {{ i18n(`labels.${item.label}`) }}
               </q-item-label>
             </q-item-section>
@@ -166,16 +170,4 @@ export default defineComponent({
 
 <style scoped lang="scss">
 @import "src/css/app.scss";
-
-.aero-toolbar {
-  background: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(25px);
-}
-
-.title-text {
-  font-family: 'galaxy-sans', sans-serif;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  font-weight: 206;
-  -webkit-font-smoothing: antialiased;
-}
 </style>

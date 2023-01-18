@@ -1,9 +1,9 @@
 <template>
   <q-layout view="hHh lpR fff">
     <router-view name="header" style="z-index: 101" @click:drawer="toggleDrawer($event)" />
-    <router-view name="drawer" v-model="leftDrawer"/>
+    <router-view name="drawer" v-model="leftDrawer" />
     <q-page-container>
-      <router-view/>
+      <router-view @scrollTo="$emit('scrollTo', $event)" />
     </q-page-container>
     <router-view name="footer" style="z-index: 99" />
   </q-layout>
@@ -16,7 +16,7 @@ import { useI18n } from "vue-i18n";
 export default defineComponent({
   name: "MainLayout",
   setup() {
-    const $i18n = useI18n({useScope: "global"});
+    const $i18n = useI18n({ useScope: "global" });
 
     const leftDrawer = ref(false);
     const i18n = (relativePath) => {
@@ -24,11 +24,15 @@ export default defineComponent({
     };
     const toggleDrawer = (position) => {
       switch (position) {
-        case 'left':
+        case "left":
           leftDrawer.value = !leftDrawer.value;
       }
     };
-    return {leftDrawer, i18n, toggleDrawer};
+    return {
+      leftDrawer,
+      i18n,
+      toggleDrawer
+    };
   }
 });
 </script>

@@ -1,35 +1,34 @@
 <template>
-  <q-footer class="row justify-center bg-dark text-light q-py-xl q-px-xs-md q-px-sm-xl">
+  <q-footer class="row justify-center bg-dark text-color-white q-py-xl q-px-xs-md q-px-sm-xl">
     <q-btn
-      class="col-xs-12 col-sm-auto"
       flat
       no-caps
       no-wrap
-      :size="$q.screen.gt.sm ? '1.5vw' : undefined"
+      :padding="$q.screen.gt.sm ? '0.25rem' : '1.5rem'"
       square
       to="/home"
       :stretch="$q.screen.gt.sm">
       <div
-        class="title-text self-center"
-        :style="`font-size: ${$q.screen.xs ? '10vw' : '3vw'}`">
-        {{ '\u{0FFFFF}' + ($q.screen.sm ? '' : '  ' + i18n("labels.title")) }}
+        class="text-font-galaxy-slim self-center"
+        :style="`font-size: ${$q.screen.gt.sm ? '2rem' : '4rem'}; margin-bottom: ${$q.screen.gt.sm ? '0.3rem' : '0.6rem'}`">
+        {{ "\u{0FFFFF}" + "  " + i18n("labels.title") }}
       </div>
     </q-btn>
-    <q-space v-if="$q.screen.gt.xs"/>
-    <div class="row col-xs-12 col-sm-auto q-py-xs-lg">
+    <q-space v-if="$q.screen.gt.sm" />
+    <div class="row col-12 col-md-auto q-py-lg">
       <div
         v-for="(column, columnIndex) in columns"
         :key="columnIndex"
-        class="column col-xs-6 col-sm-auto q-pl-xs-lg q-gutter-sm-y-md">
+        class="column col-6 col-md-auto items-center items-md-start q-pl-none q-pl-md-lg q-gutter-y-md">
         <div
-          class="label-text text-capitalize q-pt-xs-lg q-pl-xs"
-          style="font-weight: 700; font-size: 1.5rem">
+          class="text-font-inter-bold q-pt-lg q-pl-md-xs"
+          style="font-size: 1.25rem">
           {{ i18n(`labels.${column.category}`) }}
         </div>
         <q-btn
           v-for="(item, itemIndex) in column.list"
           :key="itemIndex"
-          class="ellipsis label-text q-py-xs-sm"
+          class="text-font-inter-slim ellipsis"
           align="left"
           dense
           flat
@@ -38,20 +37,20 @@
           no-wrap
           square
           :to="item.to"
-          style="font-weight: 400"/>
+          style="font-size: 0.75rem" />
       </div>
     </div>
   </q-footer>
 </template>
 
 <script>
-import {defineComponent} from "vue";
-import {useI18n} from "vue-i18n";
+import { defineComponent } from "vue";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
   name: "MainFooter",
   setup() {
-    const $i18n = useI18n({useScope: "global"});
+    const $i18n = useI18n({ useScope: "global" });
     const columns = [
       {
         category: "products",
@@ -108,23 +107,11 @@ export default defineComponent({
       return $i18n.t("layouts.footers.main." + relativePath);
     };
 
-    return {columns, i18n};
+    return { columns, i18n };
   }
 });
 </script>
 
 <style scoped lang="scss">
 @import "src/css/app.scss";
-
-.label-text {
-  font-family: 'inter', sans-serif;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-}
-
-.title-text {
-  font-family: 'galaxy-sans', sans-serif;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  font-weight: 206;
-  -webkit-font-smoothing: antialiased;
-}
 </style>

@@ -74,7 +74,7 @@ export default defineComponent({
     const $i18n = useI18n({ useScope: "global" });
     const $q = useQuasar();
 
-    const tabIndex = ref(5);
+    const tabIndex = ref(1);
     const email = ref("");
     const code = ref("");
 

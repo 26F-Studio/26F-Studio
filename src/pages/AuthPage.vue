@@ -9,13 +9,10 @@
       :mask-end="maskEnd"
       :mask-position="$q.screen.gt.md ? 'left' : 'top'"
       :mask-start="maskStart">
-      <div class="bg-transparent fit row">
-        <div class="col-4 row items-center q-pa-md">
-          <div
-            class="text-color-white text-font-galaxy-oblique-bold"
-            style="font-size: 8vw; line-height: 8vw; white-space: pre">
-            {{ i18n("labels.header") }}
-          </div>
+      <div class="bg-transparent fit row items-center">
+        <div class="col-grow col-lg-4 text-center text-color-white text-font-galaxy-oblique-bold"
+             style="font-size: 5rem; line-height: 5rem; white-space: pre-wrap">
+          {{ i18n("labels.header") }}
         </div>
       </div>
     </BackgroundImage>
@@ -24,8 +21,8 @@
         :class="$q.screen.gt.md ? 'offset-4 offset-lg-5 col-6' : 'col-grow'"
         class="column items-center q-gutter-y-xl">
         <div
-          class="text-color-primary text-font-inter text-shadow-purple text-center"
-          style="font-size: 2.5vw; font-weight: 800">
+          class="text-color-primary text-font-inter-bolder text-shadow-purple text-center"
+          style="font-size: 2rem; line-height: 200%">
           {{ i18n(`labels.title`, { product: i18n(`labels.products.${product}`) }) }}
         </div>
         <div class="row items-center q-gutter-x-xs">
@@ -42,18 +39,18 @@
         <div class="column items-center q-gutter-y-md">
           <div
             class="text-color-grey text-font-inter-slim text-center"
-            style="font-size: 1.2vw; white-space: pre-line">
+            style="font-size: 0.75rem; white-space: pre-line">
             {{ i18n("labels.description", { product: i18n(`labels.products.${product}`) }) }}
           </div>
           <div class="row no-wrap">
             <div
               class="offset-2 text-color-grey text-font-inter-bold"
-              style="font-size: 1.2vw; white-space: pre">
+              style="font-size: 0.75rem; white-space: pre">
               {{ i18n("labels.permissions.common") }}
             </div>
             <div
-              class="col-7 text-color-grey text-font-inter-slim"
-              style="font-size: 1.2vw; white-space: pre-line">
+              class="col-6 text-color-grey text-font-inter-slim"
+              style="font-size: 0.75rem; white-space: pre-line">
               {{ i18n("labels.permissionDescriptions.common") }}
             </div>
           </div>
@@ -63,8 +60,8 @@
             :label="i18n(`labels.cancel`)"
             class="btn-secondary"
             no-caps
-            padding="0.75vw 2.5vw"
-            size="1.5vw"
+            padding="0.4rem 1.25rem"
+            size="1rem"
             unelevated
             @click="$router.go(-1)" />
           <q-btn
@@ -72,50 +69,48 @@
             :loading="isSubmitLoading"
             class="btn-primary"
             no-caps
-            padding="0.75vw 2.5vw"
-            size="1.5vw"
+            padding="0.4rem 1.25rem"
+            size="1rem"
             unelevated
             @click="authorize" />
         </div>
         <q-slide-transition>
-          <div v-if="copyTokens" class="row justify-center items-center">
-            <div class="col-10 column">
+          <div v-if="copyTokens" class="column items-center q-gutter-y-md">
+            <div
+              class="text-color-grey text-font-inter text-center"
+              style="font-size: 0.75rem; white-space: pre">
+              {{ i18n("labels.copySuccess") }}
+            </div>
+            <div class="row justify-center items-center">
               <div
-                class="text-color-grey text-font-inter text-center"
-                style="font-size: 1.2vw; white-space: pre">
-                {{ i18n("labels.copySuccess") }}
+                class="text-color-grey text-font-inter"
+                style="font-size: 0.75rem; white-space: pre">
+                {{ i18n("labels.manualCopyBefore") }}
               </div>
-              <div class="row justify-center items-center">
+              <q-btn
+                dense
+                flat
+                no-caps
+                size="0.75rem"
+                @click="showTokens">
                 <div
-                  class="text-color-grey text-font-inter"
-                  style="font-size: 1.2vw; white-space: pre">
-                  {{ i18n("labels.manualCopyBefore") }}
+                  class="text-color-primary text-font-inter-bolder">
+                  {{ i18n("labels.manualCopy") }}
                 </div>
-                <q-btn
-                  dense
-                  flat
-                  no-caps
-                  size="1.2vw"
-                  @click="showTokens = true">
-                  <div
-                    class="text-color-primary text-font-inter-bold">
-                    {{ i18n("labels.manualCopy") }}
-                  </div>
-                </q-btn>
-                <div
-                  class="text-color-grey text-font-inter"
-                  style="font-size: 1.2vw; white-space: pre">
-                  {{ i18n("labels.manualCopyAfter") }}
-                </div>
+              </q-btn>
+              <div
+                class="text-color-grey text-font-inter"
+                style="font-size: 0.75rem; white-space: pre">
+                {{ i18n("labels.manualCopyAfter") }}
               </div>
             </div>
           </div>
         </q-slide-transition>
         <q-slide-transition>
-          <div v-if="showTokens" class="row justify-center items-center">
+          <div v-if="isTokensVisible" class="row justify-center q-mb-xl q-mb-lg-none z-max">
             <div
-              class="col-8 text-color-blue text-font-inter z-max"
-              style="font-size: 1vw; word-break: break-all">
+              class="col-10 col-sm-8 col-md-6 text-color-blue text-font-inter"
+              style="font-size: 0.75rem; word-break: break-all">
               {{ copyTokens }}
             </div>
           </div>
@@ -142,7 +137,8 @@ import { errorHandler } from "src/scripts/axios";
 export default defineComponent({
   name: "AuthPage",
   components: { BackgroundImage },
-  setup() {
+  emits: ["scrollTo"],
+  setup(_, { emit }) {
     const $api = useApi();
     const $i18n = useI18n({ useScope: "global" });
     const $player = usePlayerStore();
@@ -163,8 +159,8 @@ export default defineComponent({
     });
 
     const isSubmitLoading = ref(false);
-    const copyTokens = ref("");
-    const showTokens = ref(false);
+    const copyTokens = ref("tef76g8h9ijgyf7r5er76t729yh10981239021uj90e0921je9sd012jue091234567812uje9012ujedh1203h210euj0d912e02joiwshd09sahndio12h0dhjnost");
+    const isTokensVisible = ref(false);
 
     const maskEnd = computed(() => {
       switch ($q.screen.name) {
@@ -225,20 +221,21 @@ export default defineComponent({
       isSubmitLoading.value = false;
     };
 
-    const logger = (type, event) => {
-      console.log(type, event);
+    const showTokens = () => {
+      isTokensVisible.value = true;
+      setTimeout(() => emit("scrollTo", { percentage: 1.0, duration: 200 }), 500);
     };
 
     return {
       product: query.product,
       isSubmitLoading,
       copyTokens,
-      showTokens,
+      isTokensVisible,
       maskEnd,
       maskStart,
       i18n,
       authorize,
-      logger
+      showTokens
     };
   }
 });
