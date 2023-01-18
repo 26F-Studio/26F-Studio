@@ -4,7 +4,7 @@
       <q-btn
         aria-label="Menu"
         flat
-        :icon="$q.screen.gt.sm ? 'menu' : undefined"
+        :icon="$q.screen.gt.sm ? undefined : 'menu'"
         no-caps
         no-wrap
         padding="0.7rem"

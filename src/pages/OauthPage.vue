@@ -76,7 +76,7 @@
             padding="0.4rem 1.25rem"
             size="1rem"
             unelevated
-            @click="$router.go(-1)" />
+            @click="window.close()" />
           <q-btn
             :label="i18n(`labels.confirm`)"
             :loading="isSubmitLoading"
