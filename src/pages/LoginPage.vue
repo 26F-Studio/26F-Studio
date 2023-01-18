@@ -18,42 +18,37 @@
     </BackgroundImage>
     <div class="row justify-center full-width">
       <q-tab-panels
-        v-model="tabIndex"
+        class="full-height"
+        :class="$q.screen.gt.md ? 'offset-4 offset-lg-5 col-6' : 'col-grow'"
         animated
         keep-alive
-        :class="$q.screen.gt.md ? 'offset-4 offset-lg-5 col-6' : 'col-grow'">
+        v-model="tabIndex">
         <q-tab-panel :name="1">
           <EmailPanel
             :email="email"
-            class="q-ma-xl q-ma-xs-sm q-ma-sm-md q-ma-md-md"
-            @go="tabIndex += $event"
-            @update:email="email = $event" />
+            @go="updateTabIndex"
+            @update:email="updateEmail" />
         </q-tab-panel>
         <q-tab-panel :name="2">
           <PasswordPanel
             :email="email"
-            class="q-ma-xl q-ma-xs-sm q-ma-sm-md q-ma-md-md"
-            @go="tabIndex += $event" />
+            @go="updateTabIndex" />
         </q-tab-panel>
         <q-tab-panel :name="3">
           <CodePanel
             :code="code"
             :email="email"
-            class="q-ma-xl q-ma-xs-sm q-ma-sm-md q-ma-md-md"
-            @go="tabIndex += $event"
-            @update:code="code = $event" />
+            @go="updateTabIndex"
+            @update:code="updateCode" />
         </q-tab-panel>
         <q-tab-panel :name="4">
           <SetupPanel
             :code="code"
             :email="email"
-            class="q-ma-xl q-ma-xs-sm q-ma-sm-md q-ma-md-md"
-            @go="tabIndex += $event" />
+            @go="updateTabIndex" />
         </q-tab-panel>
         <q-tab-panel :name="5">
-          <InfoPanel
-            class="q-ma-xl q-ma-xs-sm q-ma-sm-md q-ma-md-md"
-            @go="tabIndex += $event" />
+          <InfoPanel @go="updateTabIndex" />
         </q-tab-panel>
       </q-tab-panels>
     </div>
@@ -79,7 +74,7 @@ export default defineComponent({
     const $i18n = useI18n({ useScope: "global" });
     const $q = useQuasar();
 
-    const tabIndex = ref(1);
+    const tabIndex = ref(5);
     const email = ref("");
     const code = ref("");
 
@@ -116,13 +111,29 @@ export default defineComponent({
     const i18n = (relativePath) => {
       return $i18n.t("pages.login." + relativePath);
     };
+
+    const updateTabIndex = (delta) => {
+      tabIndex.value += delta;
+    };
+
+    const updateEmail = (value) => {
+      email.value = value;
+    };
+
+    const updateCode = (value) => {
+      code.value = value;
+    };
+
     return {
       tabIndex,
       email,
       code,
       maskEnd,
       maskStart,
-      i18n
+      i18n,
+      updateTabIndex,
+      updateEmail,
+      updateCode
     };
   }
 });

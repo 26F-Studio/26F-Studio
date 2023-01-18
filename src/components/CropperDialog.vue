@@ -3,10 +3,10 @@
     ref="dialogRef"
     @hide="onDialogHide">
     <q-card
-      class="q-dialog-plugin hide-scrollbar full-width"
-      style="min-width: 50vw; max-width: 90vw">
+      class="q-dialog-plugin hide-scrollbar"
+      style="min-width: 35vw; max-width: 90vw">
       <q-card-section>
-        <q-card-section class="justify-between" horizontal>
+        <q-card-section class="justify-between items-center" horizontal>
           <div class="text-h6">{{ i18n("labels.title") }}</div>
           <q-file
             v-model="imageFiles"
@@ -31,43 +31,47 @@
         </div>
         <Cropper
           ref="cropper"
+          :default-size="({ imageSize }) => ({
+            width: Math.min(imageSize.width, imageSize.height),
+            height: Math.min(imageSize.width, imageSize.height)
+          })"
           :src="image"
           :stencil-component="CircleStencil" />
       </q-responsive>
       <q-separator />
       <q-card-actions align="between">
         <q-btn
-          class="btn-primary"
+          class="btn-secondary"
           icon="mdi-flip-horizontal"
           round
           unelevated
           @click="flip(true,false)" />
         <q-btn
-          class="btn-primary"
+          class="btn-secondary"
           icon="mdi-flip-vertical"
           round
           unelevated
           @click="flip(false,true)" />
         <q-btn
-          class="btn-primary"
+          class="btn-secondary"
           icon="mdi-rotate-left"
           round
           unelevated
           @click="rotate(-90)" />
         <q-btn
-          class="btn-primary"
+          class="btn-secondary"
           icon="mdi-rotate-right"
           round
           unelevated
           @click="rotate(90)" />
         <q-btn
-          class="btn-primary"
+          class="btn-secondary"
           icon="mdi-magnify-minus-outline"
           round
           unelevated
           @click="zoom(0.5)" />
         <q-btn
-          class="btn-primary"
+          class="btn-secondary"
           icon="mdi-magnify-plus-outline"
           round
           unelevated

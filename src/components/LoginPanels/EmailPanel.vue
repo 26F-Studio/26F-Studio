@@ -1,31 +1,38 @@
 <template>
-  <div class="column q-gutter-y-lg">
+  <div class="column q-gutter-y-lg" style="margin-bottom: 2.25rem">
     <div
-      class="text-color-primary text-font-inter text-shadow-purple text-center"
-      style="font-size: 2.5vw; font-weight: 800">
+      class="text-color-primary text-font-inter-bolder text-shadow-purple text-center"
+      style="font-size: 2rem">
       {{ i18n("labels.title") }}
     </div>
     <div
       class="text-color-grey text-font-inter-slim text-center"
-      style="font-size: 1.1vw; white-space: pre-line">
+      style="font-size: 0.75rem; white-space: pre-line">
       {{ i18n("labels.description") }}
     </div>
     <div class="row justify-center">
-      <div class="col-8 column q-gutter-y-md">
+      <div class="col-10 col-md-8 column q-gutter-y-md">
         <div
           class="text-color-grey text-font-inter-bold q-ml-md"
-          style="font-size: 1.5vw">
+          style="font-size: 1rem">
           {{ i18n("labels.email") }}
         </div>
         <q-input
           v-model="emailInput.content"
-          :error="emailInput.error"
-          :error-message="i18n('errors.email')"
-          :loading="emailInput.loading"
           clearable
+          :dense="!$q.screen.gt.sm"
+          :error="emailInput.error"
+          :loading="emailInput.loading"
           outlined
           rounded
-          type="email" />
+          type="email"
+          style="font-size: 0.7rem">
+          <template v-slot:error>
+            <div class="text-font-inter" style="font-size: 0.5rem">
+              {{ i18n("errors.email") }}
+            </div>
+          </template>
+        </q-input>
       </div>
     </div>
     <div class="row justify-center">
@@ -34,15 +41,15 @@
         :label="i18n(`labels.submit`)"
         class="btn-primary"
         no-caps
-        padding="0.75vw 2.5vw"
-        size="1.5vw"
+        padding="0.4rem 1.25rem"
+        size="1rem"
         unelevated
         @click="$emit('go', +1)" />
     </div>
     <div v-if="false" class="column q-gutter-y-md">
       <div
         class="text-color-grey text-font-inter-slim text-center"
-        style="font-size: 1.1vw; white-space: pre-line">
+        style="font-size: 0.75rem; white-space: pre-line">
         {{ i18n("labels.other") }}
       </div>
       <div class="row justify-center q-gutter-x-md">
@@ -52,7 +59,7 @@
           flat
           round
           @click="$router.push(item.to)">
-          <q-avatar size="4vw">
+          <q-avatar size="2.75rem">
             <q-img :src="item.file" />
           </q-avatar>
         </q-btn>

@@ -1,52 +1,54 @@
 <template>
-  <div class="column q-gutter-y-lg">
+  <div class="column q-gutter-y-lg" style="margin-bottom: 2.25rem">
     <div
-      class="text-color-primary text-font-inter text-shadow-purple text-center"
-      style="font-size: 2.5vw; font-weight: 800">
+      class="text-color-primary text-font-inter-bolder text-shadow-purple text-center"
+      style="font-size: 2rem">
       {{ i18n("labels.title") }}
     </div>
     <div
       class="text-color-grey text-font-inter-slim text-center"
-      style="font-size: 1.1vw; white-space: pre-line">
+      style="font-size: 0.75rem; white-space: pre-line">
       {{ i18n("labels.description") }}
     </div>
     <div class="row justify-center">
-      <div class="col-9 column q-gutter-y-md">
+      <div class="col-11 col-md-9 column q-gutter-y-md">
         <div class="row">
           <div class="col-6 column q-pr-md q-gutter-y-md">
             <div
-              class="text-color-grey text-font-inter-bold q-ml-md"
-              style="font-size: 1.5vw">
+              class="text-color-grey text-font-inter-bolder q-ml-md"
+              style="font-size: 1rem">
               {{ i18n("labels.username") }}
             </div>
             <q-input
-              v-model="username"
               class="full-width"
               clearable
               outlined
-              rounded />
+              rounded
+              v-model="username"
+              style="font-size: 0.7rem" />
           </div>
           <div class="col-6 column q-pl-md q-gutter-y-md">
             <div
-              class="text-color-grey text-font-inter-bold q-ml-md"
-              style="font-size: 1.5vw">
+              class="text-color-grey text-font-inter-bolder q-ml-md"
+              style="font-size: 1rem">
               {{ i18n("labels.region") }}
             </div>
             <q-select
-              v-model="region"
-              :display-value="region ? region.label : i18n('labels.regionHint')"
-              :options="flags"
               class="full-width"
               clearable
+              :display-value="region ? region.label : i18n('labels.regionHint')"
+              :options="flags"
               outlined
-              rounded>
+              rounded
+              v-model="region"
+              style="font-size: 0.7rem">
               <template v-slot:option="scope">
                 <q-item v-bind="scope.itemProps">
                   <q-item-section avatar>
                     <q-avatar :class="`fi ${scope.opt.class}`" rounded size="sm" />
                   </q-item-section>
                   <q-item-section>
-                    <q-item-label>{{ scope.opt.label }}</q-item-label>
+                    <q-item-label style="font-size: 0.5rem">{{ scope.opt.label }}</q-item-label>
                   </q-item-section>
                 </q-item>
               </template>
@@ -55,8 +57,8 @@
         </div>
         <div class="column q-gutter-y-md">
           <div
-            class="text-color-grey text-font-inter-bold q-ml-md"
-            style="font-size: 1.5vw">
+            class="text-color-grey text-font-inter-bolder q-ml-md"
+            style="font-size: 1rem">
             {{ i18n("labels.motto") }}
           </div>
           <q-input
@@ -70,21 +72,24 @@
             type="textarea" />
         </div>
         <div
-          class="text-color-grey text-font-inter-bold text-center"
-          style="font-size: 1.5vw">
+          class="text-color-grey text-font-inter-bolder text-center"
+          style="font-size: 1rem">
           {{ i18n("labels.avatar") }}
         </div>
         <div class="row justify-center">
           <q-avatar
             class="cursor-pointer"
-            size="10vw"
+            size="6.75rem"
             style="border-radius: 25%; border: 1px solid #c2c2c2"
             text-color="white"
             @click="editAvatar">
             <q-img
               v-if="avatar"
               :src="avatar" />
-            <div v-if="!avatar" class="text-color-grey text-font-inter" style="font-size: 1.5vw">
+            <div
+              v-if="!avatar"
+              class="text-color-grey text-font-inter"
+              style="font-size: 1rem">
               {{ i18n("labels.upload") }}
             </div>
           </q-avatar>
@@ -97,8 +102,8 @@
         :loading="isSubmitLoading"
         class="btn-primary"
         no-caps
-        padding="0.75vw 2.5vw"
-        size="1.5vw"
+        padding="0.4rem 1.25rem"
+        size="1rem"
         unelevated
         @click="submit" />
     </div>
@@ -106,7 +111,7 @@
       <q-btn
         flat
         no-caps
-        size="1.25vw"
+        size="0.75rem"
         @click="$emit('go', +1)">
         <div class="text-color-primary text-font-inter-bold">
           {{ i18n("labels.maybeLater") }}

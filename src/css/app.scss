@@ -84,36 +84,41 @@
       font-family: 'inter', sans-serif;
       font-weight: 500;
 
+      &-slim {
+        @extend .text-font-inter;
+        font-weight: 400;
+      }
+
       &-bold {
         @extend .text-font-inter;
         font-weight: 700;
       }
 
-      &-slim {
+      &-bolder {
         @extend .text-font-inter;
-        font-weight: 400;
+        font-weight: 800;
       }
     }
   }
 
   &-shadow {
     &-grey {
-      text-shadow: 0 0.5vw 3vw rgba(4, 0, 29, 0.15);
+      text-shadow: 0 0.2rem 1.5rem rgba(4, 0, 29, 0.15);
     }
 
     &-purple {
-      text-shadow: 0 0.5vw 3vw rgba(48, 0, 240, 0.31);
+      text-shadow: 0 0.2rem 1.5rem rgba(48, 0, 240, 0.31);
     }
   }
 }
 
 .btn {
-  border-radius: 1vw;
+  border-radius: 0.75rem;
 
   &-primary {
     @extend .text-color-white, .text-font-inter-bold, .btn;
     background: linear-gradient(130deg, #479EEE 0%, #7C4FFF 100%);
-    box-shadow: 0 1vw 2vw rgba(36, 0, 182, 0.21);
+    box-shadow: 0 0.5rem 1.5rem rgba(36, 0, 182, 0.21);
   }
 
   &-secondary {

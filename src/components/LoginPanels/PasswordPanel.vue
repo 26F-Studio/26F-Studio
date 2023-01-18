@@ -1,15 +1,15 @@
 <template>
-  <div class="row justify-center">
-    <div class="col-8 column q-gutter-y-lg">
-      <div
-        class="text-color-primary text-font-inter text-shadow-purple text-center"
-        style="font-size: 2.5vw; font-weight: 800">
-        {{ i18n("labels.title") }}
-      </div>
-      <div class="column q-gutter-y-md">
+  <div class="column q-gutter-y-lg" style="margin-bottom: 2.25rem">
+    <div
+      class="text-color-primary text-font-inter-bolder text-shadow-purple text-center"
+      style="font-size: 2rem">
+      {{ i18n("labels.title") }}
+    </div>
+    <div class="full-width row justify-center">
+      <div class="col-10 col-md-8 column q-gutter-y-md">
         <div
           class="row q-ml-md text-color-grey"
-          style="font-size: 1.5vw; white-space: pre">
+          style="font-size: 1rem; white-space: pre">
           <div class="text-font-inter-bold">
             {{ i18n("labels.email") }}
           </div>
@@ -20,7 +20,7 @@
         <div class="row items-center q-ml-md">
           <div
             class="text-color-grey text-font-inter-bold"
-            style="font-size: 1.5vw">
+            style="font-size: 1rem">
             {{ i18n("labels.password") }}
           </div>
           <q-space />
@@ -28,73 +28,79 @@
             dense
             flat
             no-caps
-            size="0.75vw"
+            size="0.65rem"
             @click="resetPassword">
-            <div class="text-color-primary text-font-inter-bold">
+            <div class="text-color-primary text-font-inter-bolder">
               {{ i18n("labels.forgot") }}
             </div>
           </q-btn>
         </div>
         <q-input
           v-model="passwordInput.content"
+          :dense="!$q.screen.gt.sm"
           :error="passwordInput.error"
-          :error-message="i18n('errors.password')"
           :loading="passwordInput.loading"
           :type="showPassword ? 'text' : 'password'"
           outlined
-          rounded>
+          rounded
+          style="font-size: 0.7rem">
           <template v-slot:append>
             <q-icon
               :name="showPassword ? 'visibility' : 'visibility_off'"
               class="cursor-pointer"
               @click="showPassword = !showPassword" />
           </template>
-        </q-input>
-      </div>
-      <div class="row justify-center">
-        <q-btn
-          :disable="!canSubmit"
-          :label="i18n('labels.submit')"
-          :loading="isSubmitLoading"
-          class="btn-primary"
-          no-caps
-          padding="0.75vw 2.5vw"
-          size="1.5vw"
-          unelevated
-          @click="login" />
-      </div>
-      <div class="row justify-center q-mt-xl">
-        <q-btn
-          :loading="isCodeLoading"
-          dense
-          flat
-          no-caps
-          no-wrap
-          size="1.25vw"
-          @click="loginWithCode">
-          <template v-slot:loading>
-            <div class="row justify-center items-center text-color-primary text-font-inter-bold">
-              <q-spinner class="on-left" color="primary" />
-              {{ i18n("labels.sendingCode") }}
+          <template v-slot:error>
+            <div class="text-font-inter" style="font-size: 0.5rem">
+              {{ i18n("errors.password") }}
             </div>
           </template>
-          <div class="text-color-primary text-font-inter-bold">
-            {{ i18n("labels.loginWithCode") }}
-          </div>
-        </q-btn>
+        </q-input>
       </div>
-      <div class="row justify-center">
-        <q-btn
-          dense
-          flat
-          no-caps
-          size="1.25vw"
-          @click="$emit('go', -1)">
-          <div class="text-color-primary text-font-inter-bold">
-            {{ i18n("labels.restart") }}
+    </div>
+    <div class="row justify-center">
+      <q-btn
+        :disable="!canSubmit"
+        :label="i18n('labels.submit')"
+        :loading="isSubmitLoading"
+        class="btn-primary"
+        no-caps
+        padding="0.4rem 1.25rem"
+        size="1rem"
+        unelevated
+        @click="login" />
+    </div>
+    <div class="row justify-center q-mt-xl">
+      <q-btn
+        :loading="isCodeLoading"
+        dense
+        flat
+        no-caps
+        no-wrap
+        size="0.75rem"
+        @click="loginWithCode">
+        <template v-slot:loading>
+          <div class="row justify-center items-center text-color-primary text-font-inter-bolder">
+            <q-spinner class="on-left" color="primary" />
+            {{ i18n("labels.sendingCode") }}
           </div>
-        </q-btn>
-      </div>
+        </template>
+        <div class="text-color-primary text-font-inter-bolder">
+          {{ i18n("labels.loginWithCode") }}
+        </div>
+      </q-btn>
+    </div>
+    <div class="row justify-center">
+      <q-btn
+        dense
+        flat
+        no-caps
+        size="0.75rem"
+        @click="$emit('go', -1)">
+        <div class="text-color-primary text-font-inter-bolder">
+          {{ i18n("labels.restart") }}
+        </div>
+      </q-btn>
     </div>
   </div>
 </template>
@@ -136,14 +142,7 @@ export default defineComponent({
       if (!passwordInput.content) {
         return false;
       }
-      return !passwordInput.content.match(
-        RegExp("^(?!.*[^A-Za-z0-9#?!@$%^&*-]$)" +
-          "((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])|" +
-          "(?=.*[a-z])(?=.*[A-Z])(?=.*[#?!@$%^&*-])|" +
-          "(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@$%^&*-])|" +
-          "(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*-]))" +
-          ".{8,64}$")
-      );
+      return passwordInput.content.length < 8;
     });
 
     const canSubmit = computed(() => {

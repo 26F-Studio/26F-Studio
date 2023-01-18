@@ -55,11 +55,11 @@
               </q-btn>
             </q-responsive>
           </div>
-          <div class="column items-center q-gutter-y-sm">
-            <div class="label-text-username">
+          <div class="column items-center q-gutter-y-sm text-color-grey">
+            <div class="text-font-inter-bold" style="font-size: 1rem">
               {{ playerStore.username }}
             </div>
-            <div :class="$q.dark.isActive ? 'text-grey' : 'text-grey-8'">
+            <div class="text-font-inter-slim" style="font-size: 0.75rem">
               {{ playerStore.motto }}
             </div>
           </div>
@@ -77,7 +77,7 @@
             no-caps
             size="0.65rem"
             @click="logout">
-            <div class="btn-text">
+            <div class="text-color-primary text-font-inter-bolder">
               {{ i18n("labels.signOut") }}
             </div>
           </q-btn>
@@ -157,33 +157,4 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "src/css/app.scss";
-
-.label-text {
-  color: #636365;
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-
-  &-username {
-    @extend .label-text;
-    font-weight: 700;
-    font-size: 1.1rem;
-  }
-
-  &-motto {
-    @extend .label-text;
-    font-weight: 400;
-    font-size: 0.9rem;
-  }
-}
-
-.btn-text {
-  background: linear-gradient(90.8deg, #BF55D4 26.21%, #6271CD 86.62%);
-  text-shadow: 0 2vw 4vw rgba(48, 0, 240, 0.31);
-  font-family: 'inter', sans-serif;
-  font-weight: 800;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 </style>

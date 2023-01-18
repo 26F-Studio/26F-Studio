@@ -19,6 +19,24 @@
           {{ `\u{0FFFFF}  ${i18n("labels.title")}` }}
         </div>
       </q-btn>
+      <q-btn
+        v-if="!$q.screen.gt.sm"
+        class="absolute-center"
+        :class="$q.screen.gt.xs ? 'full-height' : undefined"
+        aria-label="Home"
+        flat
+        no-caps
+        no-wrap
+        :round="!$q.screen.gt.xs"
+        :size="$q.screen.gt.xs ? undefined : 'md'"
+        :square="$q.screen.gt.xs"
+        to="/home">
+        <div
+          class="title-text self-center"
+          style="font-size: 1.75rem; margin-bottom: 0.25rem">
+          {{ "\u{0FFFFF}" + ($q.screen.gt.xs ? `  ${i18n("labels.title")}` : "") }}
+        </div>
+      </q-btn>
       <q-space />
       <q-btn-dropdown
         v-show="$q.screen.gt.sm"
@@ -47,11 +65,11 @@
           </q-item>
         </q-list>
       </q-btn-dropdown>
-      <ProfileButton class="q-mr-sm q-mr-md-none" />
+      <ProfileButton class="q-ml-sm q-mr-sm q-mr-md-none" />
       <q-btn
         v-show="$q.screen.gt.sm"
+        class="q-ml-sm"
         aria-label="Language"
-        class="q-ml-sm q-ml-md-xs"
         flat
         icon="language"
         round
@@ -62,12 +80,12 @@
       </q-btn>
       <q-btn
         v-show="$q.screen.gt.sm"
-        :size="$q.screen.gt.sm ? '0.7rem' : 'md'"
+        class="q-mx-sm"
         aria-label="Settings"
         flat
         icon="settings"
         round
-        class="q-mx-sm q-mx-md-xs">
+        :size="$q.screen.gt.sm ? '0.7rem' : 'md'">
         <q-menu anchor="bottom middle" self="top middle">
           <SettingList />
         </q-menu>
@@ -134,11 +152,12 @@ export default defineComponent({
       return $i18n.t("layouts.headers.main." + relativePath);
     };
     const onLogoClick = (event, go) => {
-      if ($q.screen.lt.md) {
+      if ($q.screen.gt.sm) {
+        go();
+      } else {
         event.preventDefault();
         emit("click:drawer", "left");
       }
-      go();
     };
     return { dropdownButtons, i18n, onLogoClick };
   }

@@ -1,16 +1,18 @@
 <template>
-  <div class="column q-gutter-y-lg">
+  <div class="column q-gutter-y-lg" style="margin-bottom: 2.25rem">
     <div
-      class="text-color-primary text-font-inter text-shadow-purple text-center"
-      style="font-size: 2.5vw; font-weight: 800">
+      class="text-color-primary text-font-inter-bolder text-shadow-purple text-center"
+      style="font-size: 2rem">
       {{ i18n("labels.title") }}
     </div>
     <div
       class="text-color-grey text-font-inter-slim text-center"
-      style="font-size: 1.1vw; white-space: pre-line">
+      style="font-size: 0.75rem; white-space: pre-line">
       {{ i18n("labels.description", { email: email }) }}
     </div>
-    <div class="row text-center items-center justify-center" style="font-size: 1.1vw; white-space: pre-line">
+    <div
+      class="row text-center items-center justify-center"
+      style="font-size: 0.75rem; white-space: pre-line">
       <div class="text-color-grey text-font-inter-slim">
         {{ i18n("labels.resendBefore") }}
       </div>
@@ -19,7 +21,7 @@
         dense
         flat
         no-caps
-        size="1.1vw"
+        size="0.75rem"
         @click="getCode">
         <div class="text-color-primary text-font-inter-bold">
           {{ i18n("labels.resend") }}
@@ -30,20 +32,27 @@
       </div>
     </div>
     <div class="row justify-center">
-      <div class="col-8 column q-gutter-y-lg">
+      <div class="col-10 col-md-8 column q-gutter-y-lg">
         <div class="column q-gutter-y-md">
           <div
-            class="text-color-grey text-font-inter-bold q-ml-md"
-            style="font-size: 1.5vw">
+            class="text-color-grey text-font-inter-bolder q-ml-md"
+            style="font-size: 1rem">
             {{ i18n("labels.code") }}
           </div>
           <q-input
-            v-model="codeInput.content"
+            :dense="!$q.screen.gt.sm"
             :error="codeInput.error"
-            :error-message="i18n('errors.code')"
             :loading="codeInput.loading"
             outlined
-            rounded />
+            rounded
+            v-model="codeInput.content"
+            style="font-size: 0.7rem">
+            <template v-slot:error>
+              <div class="text-font-inter" style="font-size: 0.5rem">
+                {{ i18n("errors.code") }}
+              </div>
+            </template>
+          </q-input>
         </div>
         <div class="row justify-center q-my-lg">
           <q-btn
@@ -52,8 +61,8 @@
             :loading="isSubmitLoading"
             class="btn-primary"
             no-caps
-            padding="0.75vw 2.5vw"
-            size="1.5vw"
+            padding="0.4rem 1.25rem"
+            size="1rem"
             unelevated
             @click="login" />
         </div>
@@ -62,9 +71,9 @@
             dense
             flat
             no-caps
-            size="1.25vw"
+            size="0.75rem"
             @click="$emit('go', -1)">
-            <div class="text-color-primary text-font-inter-bold">
+            <div class="text-color-primary text-font-inter-bolder">
               {{ i18n("labels.loginWithPassword") }}
             </div>
           </q-btn>
@@ -74,9 +83,9 @@
             dense
             flat
             no-caps
-            size="1.25vw"
+            size="0.75rem"
             @click="$emit('go', -2)">
-            <div class="text-color-primary text-font-inter-bold">
+            <div class="text-color-primary text-font-inter-bolder">
               {{ i18n("labels.restart") }}
             </div>
           </q-btn>

@@ -1,61 +1,73 @@
 <template>
-  <div class="column q-gutter-y-lg">
+  <div class="column q-gutter-y-lg" style="margin-bottom: 2.25rem">
     <div
-      class="text-color-primary text-font-inter text-shadow-purple text-center"
-      style="font-size: 2.5vw; font-weight: 800">
+      class="text-color-primary text-font-inter-bolder text-shadow-purple text-center"
+      style="font-size: 2rem">
       {{ i18n("labels.title") }}
     </div>
     <div
       class="text-color-grey text-font-inter-slim text-center"
-      style="font-size: 1.1vw; white-space: pre-line">
+      style="font-size: 0.75rem; white-space: pre-line">
       {{ i18n("labels.description") }}
     </div>
     <div
       class="text-color-grey text-font-inter-slim self-center"
-      style="font-size: 0.9vw; white-space: pre-line">
+      style="font-size: 0.6rem; white-space: pre-line">
       {{ i18n("labels.constraints") }}
     </div>
     <div class="row justify-center">
-      <div class="col-8 column q-gutter-y-lg">
+      <div class="col-10 col-md-8 column q-gutter-y-lg">
         <div class="column q-gutter-y-md">
           <div
-            class="text-color-grey text-font-inter-bold q-ml-md"
-            style="font-size: 1.5vw">
+            class="text-color-grey text-font-inter-bolder q-ml-md"
+            style="font-size: 1rem">
             {{ i18n("labels.password") }}
           </div>
           <q-input
-            v-model="passwordInput.content"
+            :dense="!$q.screen.gt.sm"
             :error="passwordInput.error"
-            :error-message="i18n('errors.password')"
             :loading="passwordInput.loading"
             :type="showPassword ? 'text' : 'password'"
             outlined
-            rounded>
+            rounded
+            v-model="passwordInput.content"
+            style="font-size: 0.7rem">
             <template v-slot:append>
               <q-icon
                 :name="showPassword ? 'visibility' : 'visibility_off'"
                 class="cursor-pointer"
                 @click="showPassword = !showPassword" />
             </template>
+            <template v-slot:error>
+              <div class="text-font-inter" style="font-size: 0.5rem">
+                {{ i18n("errors.password") }}
+              </div>
+            </template>
           </q-input>
           <div
-            class="text-color-grey text-font-inter-bold q-ml-md"
-            style="font-size: 1.5vw">
+            class="text-color-grey text-font-inter-bolder q-ml-md"
+            style="font-size: 1rem">
             {{ i18n("labels.confirmPassword") }}
           </div>
           <q-input
-            v-model="passwordConfirmInput.content"
+            :dense="!$q.screen.gt.sm"
             :error="passwordConfirmInput.error"
-            :error-message="i18n('errors.confirmPassword')"
             :loading="passwordConfirmInput.loading"
             :type="showPassword ? 'text' : 'password'"
             outlined
-            rounded>
+            rounded
+            v-model="passwordConfirmInput.content"
+            style="font-size: 0.7rem">
             <template v-slot:append>
               <q-icon
                 :name="showPassword ? 'visibility' : 'visibility_off'"
                 class="cursor-pointer"
                 @click="showPassword = !showPassword" />
+            </template>
+            <template v-slot:error>
+              <div class="text-font-inter" style="font-size: 0.5rem">
+                {{ i18n("errors.confirmPassword") }}
+              </div>
             </template>
           </q-input>
         </div>
@@ -66,8 +78,8 @@
             :loading="isSubmitLoading"
             class="btn-primary"
             no-caps
-            padding="0.75vw 2.5vw"
-            size="1.5vw"
+            padding="0.4rem 1.25rem"
+            size="1rem"
             unelevated
             @click="submit" />
         </div>
@@ -75,9 +87,9 @@
           <q-btn
             flat
             no-caps
-            size="1.25vw"
+            size="0.75rem"
             @click="$emit('go', +1)">
-            <div class="text-color-primary text-font-inter-bold">
+            <div class="text-color-primary text-font-inter-bolder">
               {{ i18n("labels.maybeLater") }}
             </div>
           </q-btn>

@@ -1,3 +1,4 @@
+<!-- TODO: Update design -->
 <template>
   <div class="column q-gutter-y-lg">
     <div>
@@ -167,12 +168,12 @@ export default defineComponent({
     const submit = async () => {
       isSubmitLoading.value = true;
       await errorHandler(async () => {
-        const { code, data } = await $api.auth.loginEmailCode(emailInput.content, codeInput.content);
+        const { code, data } = await $api.auth.deactivateEmail($player.accessToken, codeInput.content);
         const { accessToken, refreshToken } = data;
         console.log(code);
         console.log(accessToken);
         console.log(refreshToken);
-        $player.setToken(accessToken, refreshToken);
+        $player.accessToken = accessToken;
         await $player.update();
         isSubmitLoading.value = false;
         $q.notify({

@@ -1,4 +1,4 @@
-# 26F Studio (26f-studio)
+io (26f-studio)
 
 The official website of the organization 26F Studio
 
