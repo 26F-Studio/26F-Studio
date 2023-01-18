@@ -76,7 +76,7 @@
             padding="0.4rem 1.25rem"
             size="1rem"
             unelevated
-            @click="window.close()" />
+            to="/home" />
           <q-btn
             :label="i18n(`labels.confirm`)"
             :loading="isSubmitLoading"
@@ -204,8 +204,6 @@ export default defineComponent({
           return { ratio: 0.3, control: [0.3, 0.2] };
       }
     });
-
-
     const i18n = (relativePath, params) => {
       return $i18n.t("pages.oauth." + relativePath, params);
     };
