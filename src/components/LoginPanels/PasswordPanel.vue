@@ -27,9 +27,16 @@
           <q-btn
             dense
             flat
+            :loading="isResetLoading"
             no-caps
             size="0.65rem"
             @click="resetPassword">
+            <template v-slot:loading>
+              <div class="row justify-center items-center text-color-primary text-font-inter-bolder">
+                <q-spinner class="on-left" color="primary" />
+                {{ i18n("labels.sendingCode") }}
+              </div>
+            </template>
             <div class="text-color-primary text-font-inter-bolder">
               {{ i18n("labels.forgot") }}
             </div>
@@ -148,6 +155,7 @@ export default defineComponent({
     const canSubmit = computed(() => {
       return passwordInput.content && !passwordInput.error;
     });
+    const isResetLoading = ref(false);
     const showPassword = ref(false);
     const isSubmitLoading = ref(false);
     const isCodeLoading = ref(false);
@@ -176,13 +184,20 @@ export default defineComponent({
       isSubmitLoading.value = false;
     };
 
-    const resetPassword = () => {
-      $q.dialog({
-        component: AuthDialog,
-        componentProps: {
-          type: "reset"
-        }
-      });
+    const resetPassword = async () => {
+      isResetLoading.value = true;
+      await errorHandler(async () => {
+        await $api.auth.verifyEmail(props.email);
+        isResetLoading.value = false;
+        $q.dialog({
+          component: AuthDialog,
+          componentProps: {
+            type: "reset",
+            email: props.email
+          }
+        });
+      }, $q, $i18n.t);
+      isResetLoading.value = false;
     };
 
     const loginWithCode = async () => {
@@ -199,6 +214,7 @@ export default defineComponent({
       passwordInput,
       showPassword,
       canSubmit,
+      isResetLoading,
       isSubmitLoading,
       isCodeLoading,
       i18n,

@@ -22,6 +22,7 @@ const errorHandler = async (mainFunction, $q, $t) => {
       });
     }
     console.log(err);
+    return err;
   }
 };
 

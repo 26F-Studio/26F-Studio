@@ -4,7 +4,7 @@
       <q-btn
         aria-label="Menu"
         flat
-        :icon="$q.screen.xs ? 'menu' : undefined"
+        :icon="$q.screen.gt.sm ? 'menu' : undefined"
         no-caps
         no-wrap
         padding="0.7rem"
@@ -13,7 +13,7 @@
         stretch
         @click="onLogoClick">
         <div
-          v-if="$q.screen.gt.xs"
+          v-if="$q.screen.gt.sm"
           class="text-color-white text-font-galaxy-slim self-center"
           style="font-size: 2rem; margin-bottom: 0.3rem">
           {{ `\u{0FFFFF}  ${i18n("labels.title")}` }}

@@ -25,16 +25,29 @@
           style="font-size: 2rem; line-height: 200%">
           {{ i18n(`labels.title`, { product: i18n(`labels.products.${product}`) }) }}
         </div>
-        <div class="row items-center q-gutter-x-xs">
-          <q-avatar size="5rem">
+        <div class="row items-center q-gutter-x-lg">
+          <q-avatar
+            size="5rem"
+            style="box-shadow: 0 1px 5px rgba(18, 20, 34, 0.8);">
             <img :src="product ? require(`assets/products/${product}.png`) : null" alt="app" />
           </q-avatar>
-          <q-icon name="mdi-dots-horizontal" size="lg" />
-          <q-avatar color="positive" icon="check" size="xl" />
-          <q-icon name="mdi-dots-horizontal" size="lg" />
-          <q-avatar size="5rem">
-            <img alt="26f-studio" src="favicon.ico" />
-          </q-avatar>
+          <svg width="4rem" viewBox="0 0 104 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M2 10.5C1.17157 10.5 0.5 11.1716 0.5 12C0.5 12.8284 1.17157 13.5 2 13.5V10.5ZM103.061 13.0607C103.646 12.4749 103.646 11.5251 103.061 10.9393L93.5147 1.3934C92.9289 0.807611 91.9792 0.807611 91.3934 1.3934C90.8076 1.97919 90.8076 2.92893 91.3934 3.51472L99.8787 12L91.3934 20.4853C90.8076 21.0711 90.8076 22.0208 91.3934 22.6066C91.9792 23.1924 92.9289 23.1924 93.5147 22.6066L103.061 13.0607ZM2 13.5H102V10.5H2V13.5Z"
+              fill="#C2C2C2" />
+            <path
+              d="M102 46.5C102.828 46.5 103.5 47.1716 103.5 48C103.5 48.8284 102.828 49.5 102 49.5V46.5ZM0.939339 49.0607C0.353554 48.4749 0.353554 47.5251 0.939339 46.9393L10.4853 37.3934C11.0711 36.8076 12.0208 36.8076 12.6066 37.3934C13.1924 37.9792 13.1924 38.9289 12.6066 39.5147L4.12132 48L12.6066 56.4853C13.1924 57.0711 13.1924 58.0208 12.6066 58.6066C12.0208 59.1924 11.0711 59.1924 10.4853 58.6066L0.939339 49.0607ZM102 49.5H2V46.5H102V49.5Z"
+              fill="#C2C2C2" />
+          </svg>
+          <q-card
+            class="q-mb-sm"
+            style="border-radius: 50%; height: 5rem; width: 5rem">
+            <div
+              class="text-color-primary text-font-galaxy-slim text-shadow-purple absolute-center"
+              style="font-size: 4.5rem; top: 2.125rem">
+              {{ "\u{0FFFFF}" }}
+            </div>
+          </q-card>
         </div>
         <div class="column items-center q-gutter-y-md">
           <div
@@ -135,7 +148,7 @@ import BackgroundImage from "components/BackgroundImage.vue";
 import { errorHandler } from "src/scripts/axios";
 
 export default defineComponent({
-  name: "AuthPage",
+  name: "OauthPage",
   components: { BackgroundImage },
   emits: ["scrollTo"],
   setup(_, { emit }) {
@@ -159,7 +172,7 @@ export default defineComponent({
     });
 
     const isSubmitLoading = ref(false);
-    const copyTokens = ref("tef76g8h9ijgyf7r5er76t729yh10981239021uj90e0921je9sd012jue091234567812uje9012ujedh1203h210euj0d912e02joiwshd09sahndio12h0dhjnost");
+    const copyTokens = ref("");
     const isTokensVisible = ref(false);
 
     const maskEnd = computed(() => {

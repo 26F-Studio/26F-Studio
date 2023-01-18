@@ -29,7 +29,7 @@ const routes = [
         components: {
           header: () => import("layouts/headers/SimpleHeader"),
           drawer: () => import("layouts/drawers/MainDrawer"),
-          default: () => import("pages/AuthPage")
+          default: () => import("pages/OauthPage.vue")
         }
       },
       {

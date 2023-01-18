@@ -5,9 +5,18 @@
     overlay>
     <BackgroundImage>
       <div class="absolute-bottom bg-transparent">
-        <q-avatar class="q-mb-sm" icon="person" size="56px" />
-        <div class="text-weight-bold">Razvan Stoenescu</div>
-        <div>@rstoenescu</div>
+        <div class="row">
+          <q-card
+            class="q-mb-sm"
+            style="border-radius: 0.75rem; height: 3rem; width: 3rem">
+            <div
+              class="text-color-primary text-font-galaxy-slim text-shadow-purple absolute-center"
+              style="font-size: 3rem; top: 1.25rem">
+              {{ "\u{0FFFFF}" }}
+            </div>
+          </q-card>
+        </div>
+        <div class="text-weight-bold">26F Studio</div>
       </div>
     </BackgroundImage>
     <q-list>

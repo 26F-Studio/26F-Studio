@@ -1,98 +1,117 @@
-<!-- TODO: Update design -->
 <template>
-  <div class="column q-gutter-y-lg">
+  <div class="column q-gutter-y-md" style="margin-bottom: 2.25rem">
     <div
       class="text-color-grey text-font-inter-slim text-center"
-      style="font-size: 1.1vw; white-space: pre-line">
+      style="font-size: 0.75rem; white-space: pre-line">
       {{ i18n("labels.description") }}
     </div>
     <div
-      class="text-color-grey text-font-inter-slim self-center"
-      style="font-size: 0.9vw; white-space: pre-line">
+      class="row text-center items-center justify-center"
+      style="font-size: 0.6rem; white-space: pre-line">
+      <div class="text-color-grey text-font-inter-slim">
+        {{ i18n("labels.resendBefore") }}
+      </div>
+      <q-btn
+        :loading="isCodeLoading"
+        dense
+        flat
+        no-caps
+        size="0.6rem"
+        @click="getCode">
+        <div class="text-color-primary text-font-inter-bold">
+          {{ i18n("labels.resend") }}
+        </div>
+      </q-btn>
+      <div class="text-color-grey text-font-inter-slim">
+        {{ i18n("labels.resendAfter") }}
+      </div>
+    </div>
+    <div class="row justify-center full-width">
+      <div class="col-10 col-md-8 column q-gutter-y-md">
+        <div
+          class="text-color-grey text-font-inter-bold q-ml-md"
+          style="font-size: 1rem">
+          {{ i18n("labels.code") }}
+        </div>
+        <q-input
+          :dense="!$q.screen.gt.sm"
+          :error="codeInput.error"
+          :loading="codeInput.loading"
+          outlined
+          rounded
+          v-model="codeInput.content"
+          style="font-size: 0.7rem">
+          <template v-slot:error>
+            <div class="text-font-inter" style="font-size: 0.5rem">
+              {{ i18n("errors.code") }}
+            </div>
+          </template>
+        </q-input>
+      </div>
+    </div>
+    <div
+      class="text-color-grey text-font-inter-slim text-center"
+      style="font-size: 0.6rem; white-space: pre-line">
+      {{ i18n("labels.reminder") }}
+    </div>
+    <div
+      class="text-color-grey text-font-inter self-center"
+      style="font-size: 0.5rem; white-space: pre-line">
       {{ i18n("labels.constraints") }}
     </div>
-    <div class="row justify-center">
-      <div class="col-8 column q-gutter-y-lg">
+    <div class="row justify-center full-width">
+      <div class="col-10 col-md-8 column q-gutter-y-lg">
         <div class="column q-gutter-y-md">
           <div
             class="text-color-grey text-font-inter-bold q-ml-md"
-            style="font-size: 1.5vw">
-            {{ i18n("labels.email") }}
-          </div>
-          <q-input
-            v-model="emailInput.content"
-            :error="emailInput.error"
-            :error-message="i18n('errors.email')"
-            :loading="emailInput.loading"
-            clearable
-            outlined
-            rounded
-            type="email">
-            <template v-slot:append>
-              <q-btn
-                :loading="isCodeLoading"
-                flat
-                no-caps
-                no-wrap
-                rounded
-                size="1vw"
-                @click="getCode">
-                <div class="text-color-primary text-font-inter-bold">
-                  {{ i18n("labels.getCode") }}
-                </div>
-              </q-btn>
-            </template>
-          </q-input>
-          <div
-            class="text-color-grey text-font-inter-bold q-ml-md"
-            style="font-size: 1.5vw">
-            {{ i18n("labels.code") }}
-          </div>
-          <q-input
-            v-model="codeInput.content"
-            :error="codeInput.error"
-            :error-message="i18n('errors.code')"
-            :loading="codeInput.loading"
-            outlined
-            rounded />
-          <div
-            class="text-color-grey text-font-inter-bold q-ml-md"
-            style="font-size: 1.5vw">
+            style="font-size: 1rem">
             {{ i18n("labels.password") }}
           </div>
           <q-input
-            v-model="passwordInput.content"
+            :dense="!$q.screen.gt.sm"
             :error="passwordInput.error"
-            :error-message="i18n('errors.password')"
             :loading="passwordInput.loading"
             :type="showPassword ? 'text' : 'password'"
             outlined
-            rounded>
+            rounded
+            v-model="passwordInput.content"
+            style="font-size: 0.7rem">
             <template v-slot:append>
               <q-icon
                 :name="showPassword ? 'visibility' : 'visibility_off'"
                 class="cursor-pointer"
                 @click="showPassword = !showPassword" />
             </template>
+            <template v-slot:error>
+              <div class="text-font-inter" style="font-size: 0.5rem">
+                {{ i18n("errors.password") }}
+              </div>
+            </template>
           </q-input>
           <div
             class="text-color-grey text-font-inter-bold q-ml-md"
-            style="font-size: 1.5vw">
+            style="font-size: 1rem">
             {{ i18n("labels.confirmPassword") }}
           </div>
           <q-input
-            v-model="passwordConfirmInput.content"
+            :dense="!$q.screen.gt.sm"
             :error="passwordConfirmInput.error"
-            :error-message="i18n('errors.confirmPassword')"
             :loading="passwordConfirmInput.loading"
             :type="showPassword ? 'text' : 'password'"
             outlined
-            rounded>
+            rounded
+            v-model="passwordConfirmInput.content"
+            style="font-size: 0.7rem">
             <template v-slot:append>
               <q-icon
                 :name="showPassword ? 'visibility' : 'visibility_off'"
                 class="cursor-pointer"
                 @click="showPassword = !showPassword" />
+            </template>
+            <template v-slot:error>
+              <div class="text-font-inter" style="font-size: 0.5rem">
+                {{ i18n("errors.confirmPassword") }}
+              </div>
             </template>
           </q-input>
         </div>
@@ -103,8 +122,8 @@
             :loading="isSubmitLoading"
             class="btn-primary"
             no-caps
-            padding="0.75vw 2.5vw"
-            size="1.5vw"
+            padding="0.4rem 1.25rem"
+            size="1rem"
             unelevated
             @click="submit" />
         </div>
@@ -124,23 +143,17 @@ import { errorHandler, getPasswordHash } from "src/scripts/axios";
 
 export default defineComponent({
   name: "SetupPanel",
-  setup() {
+  props: {
+    email: {
+      type: String,
+      required: true
+    }
+  },
+  setup(props) {
     const $api = useApi();
     const $i18n = useI18n({ useScope: "global" });
     const $q = useQuasar();
     const $router = useRouter();
-
-    const emailInput = reactive({
-      content: "",
-      error: null,
-      loading: false
-    });
-    emailInput.error = computed(() => {
-      if (!emailInput.content) {
-        return false;
-      }
-      return !emailInput.content.match(/^([a-zA-Z\d]+[-_.]?)+@([a-zA-Z\d]+[-_.]?)+\.[a-z]+$/);
-    });
 
     const codeInput = reactive({
       content: "",
@@ -186,8 +199,7 @@ export default defineComponent({
     });
 
     const canSubmit = computed(() => {
-      return emailInput.content && !emailInput.error &&
-        codeInput.content && !codeInput.error &&
+      return codeInput.content && !codeInput.error &&
         passwordInput.content && !passwordInput.error &&
         passwordConfirmInput.content && !passwordConfirmInput.error;
     });
@@ -203,8 +215,12 @@ export default defineComponent({
     const getCode = async () => {
       isCodeLoading.value = true;
       await errorHandler(async () => {
-        await $api.auth.verifyEmail(emailInput.content);
+        await $api.auth.verifyEmail(props.email);
         isCodeLoading.value = false;
+        $q.notify({
+          type: "positive",
+          message: i18n("notifications.codeSent")
+        });
       }, $q, $i18n.t);
       isCodeLoading.value = false;
     };
@@ -213,22 +229,23 @@ export default defineComponent({
       isSubmitLoading.value = true;
       await errorHandler(async () => {
         await $api.auth.resetEmail(
-          emailInput.content,
+          props.email,
           codeInput.content,
-          await getPasswordHash(emailInput.content, passwordInput.content)
+          await getPasswordHash(props.email, passwordInput.content)
         );
         isSubmitLoading.value = false;
         $q.notify({
           type: "positive",
           message: i18n("notifications.resetSuccess")
         });
-        $router.go(0);
+        setTimeout(() => {
+          $router.go(0);
+        }, 2000);
       }, $q, $i18n.t);
       isSubmitLoading.value = false;
     };
 
     return {
-      emailInput,
       codeInput,
       passwordInput,
       passwordConfirmInput,

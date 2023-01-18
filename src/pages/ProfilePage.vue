@@ -2,7 +2,7 @@
   <q-page class="flex column">
     <BackgroundImage full-height>
       <div
-        :style="{paddingTop: $q.screen.gt.md ? '4.5vw' : '4rem'}"
+        :style="{paddingTop: $q.screen.gt.md ? '3rem' : '4rem'}"
         class="row full-width bg-transparent hide-scrollbar">
         <q-card class="col-12 col-md-6 col-lg-4 col-xl-3">
           <q-card-section class="q-pa-xl q-my-lg">
@@ -11,7 +11,12 @@
                 <q-responsive
                   :ratio="1/4"
                   class="col-3">
+                  <q-skeleton
+                    v-if="!isLoaded"
+                    type="QAvatar"
+                    style="z-index: 0" />
                   <q-btn
+                    v-if="isLoaded"
                     dense
                     flat
                     round
@@ -32,44 +37,65 @@
                   </q-btn>
                 </q-responsive>
               </div>
-              <div>
-                <div class="label-text q-ml-lg q-mb-sm">
+              <div class="column q-gutter-y-sm">
+                <div
+                  class="text-color-grey text-font-inter-bold"
+                  style="font-size: 1rem">
                   {{ i18n("labels.username") }}
                 </div>
+                <q-skeleton
+                  v-if="!isLoaded"
+                  class="full-width"
+                  type="QInput" />
                 <q-input
-                  v-model="username"
+                  v-if="isLoaded"
+                  class="full-width"
                   :placeholder="i18n('placeholders.username')"
-                  class="full-width">
-                  <template v-slot:prepend>
-                    <q-icon name="mdi-card-account-details" />
-                  </template>
-                </q-input>
+                  v-model="username"
+                  style="font-size: 0.7rem" />
               </div>
-              <div>
-                <div class="label-text q-ml-lg q-mb-sm">
+              <div class="column q-gutter-y-sm">
+                <div
+                  class="text-color-grey text-font-inter-bold"
+                  style="font-size: 1rem">
                   {{ i18n("labels.motto") }}
                 </div>
+                <q-skeleton
+                  v-if="!isLoaded"
+                  class="full-width"
+                  type="QInput" />
                 <q-input
-                  v-model="motto"
+                  v-if="isLoaded"
+                  class="full-width"
                   :placeholder="i18n('placeholders.motto')"
-                  class="full-width">
-                  <template v-slot:prepend>
-                    <q-icon name="mdi-message-processing" />
-                  </template>
-                </q-input>
+                  v-model="motto"
+                  style="font-size: 0.7rem" />
               </div>
-              <div>
-                <div class="label-text q-ml-lg q-mb-sm">
+              <div class="column q-gutter-y-sm">
+                <div
+                  class="text-color-grey text-font-inter-bold"
+                  style="font-size: 1rem">
                   {{ i18n("labels.region") }}
                 </div>
+                <q-skeleton
+                  v-if="!isLoaded"
+                  class="full-width"
+                  type="QInput" />
                 <q-select
-                  v-model="region"
+                  v-if="isLoaded"
+                  class="full-width"
                   :display-value="region ? region.label : i18n('placeholders.region')"
                   :options="flags"
-                  class="full-width">
+                  v-model="region"
+                  style="font-size: 0.7rem">
                   <template v-slot:prepend>
-                    <q-avatar v-if="region" :class="`fi ${region.class}`" rounded size="sm" />
-                    <q-avatar v-if="!region" class="bg-grey text-white" icon="help" rounded size="sm" />
+                    <q-avatar
+                      :class="region ? `fi ${region.class}` : undefined"
+                      :color="region ? undefined : 'primary'"
+                      :icon="region ? undefined : 'mdi-help'"
+                      rounded
+                      size="1.25rem"
+                      text-color="white" />
                   </template>
                   <template v-slot:option="scope">
                     <q-item v-bind="scope.itemProps">
@@ -83,28 +109,43 @@
                   </template>
                 </q-select>
               </div>
-              <div>
-                <div class="label-text q-ml-lg q-mb-sm">
-                  {{ i18n("labels.avatarFrame") }}
-                </div>
-                <q-select
-                  v-model="avatarFrame"
-                  :display-value="i18n('placeholders.avatarFrame')"
-                  class="full-width"
-                  disable>
-                  <template v-slot:prepend>
-                    <q-icon name="mdi-account-box-outline" />
-                  </template>
-                </q-select>
-              </div>
+              <q-skeleton
+                v-if="!isLoaded"
+                class="btn-disabled full-width"
+                type="QBtn"
+                size="2.5rem" />
               <q-btn
-                :label="i18n(`labels.submit`)"
+                v-if="isLoaded"
+                :label="i18n('labels.submit')"
                 :loading="isSubmitLoading"
-                class="primary-btn full-width"
+                class="btn-primary full-width"
                 no-caps
-                size="lg"
+                padding="0.4rem"
+                size="1rem"
                 unelevated
                 @click="submit">
+              </q-btn>
+              <q-skeleton
+                v-if="!isLoaded"
+                class="btn-disabled full-width"
+                type="QBtn"
+                size="2rem" />
+              <q-btn
+                v-if="isLoaded"
+                class="btn-secondary full-width"
+                dense
+                flat
+                :label="i18n('labels.resetPassword')"
+                no-caps
+                padding="0.35rem"
+                size="0.75rem"
+                @click="resetPassword">
+                <template v-slot:loading>
+                  <div class="row justify-center items-center text-color-primary text-font-inter-bolder">
+                    <q-spinner class="on-left" color="primary" />
+                    {{ i18n("labels.sendingCode") }}
+                  </div>
+                </template>
               </q-btn>
             </div>
           </q-card-section>
@@ -119,9 +160,8 @@
 </template>
 
 <script>
-import { storeToRefs } from "pinia";
 import { useQuasar } from "quasar";
-import { defineComponent, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 import { useApi } from "boot/axios";
@@ -131,6 +171,8 @@ import { flags } from "src/scripts/flags";
 import BackgroundImage from "components/BackgroundImage.vue";
 import CropperDialog from "components/CropperDialog.vue";
 import { errorHandler } from "src/scripts/axios";
+import { useRoute, useRouter } from "vue-router";
+import AuthDialog from "components/AuthDialog.vue";
 
 export default defineComponent({
   name: "ProfilePage",
@@ -140,17 +182,39 @@ export default defineComponent({
     const $i18n = useI18n({ useScope: "global" });
     const $player = usePlayerStore();
     const $q = useQuasar();
+    const $router = useRouter();
+    const { query } = useRoute();
 
-    const {
-      accessToken,
-      avatar,
-      motto,
-      username,
-      region,
-      avatarFrame
-    } = storeToRefs(usePlayerStore());
-
+    const avatar = ref("");
+    const username = ref("");
+    const motto = ref("");
+    const region = ref(null);
+    const isLoaded = ref(false);
     const isSubmitLoading = ref(false);
+
+    onMounted(async () => {
+      let data;
+      if (!query.playerId) {
+        await $player.check();
+        if (!$player.loggedIn) {
+          await $router.push({ name: "login" });
+          return;
+        }
+        data = $player.info;
+      } else {
+        await errorHandler(async () => {
+          data = (await $api.player.getInfo(null, query.playerId)).data;
+          data.avatar = (await $api.player.getAvatar(null, query.playerId)).data;
+        }, $q, $i18n.t);
+      }
+      avatar.value = data.avatar;
+      username.value = data.username;
+      motto.value = data.motto;
+      region.value = flags.find((item) => {
+        return item.value === data.region;
+      });
+      isLoaded.value = true;
+    });
 
     const i18n = (relativePath) => {
       return $i18n.t("pages.profile." + relativePath);
@@ -167,9 +231,10 @@ export default defineComponent({
 
     const submit = async () => {
       isSubmitLoading.value = true;
+      console.log($player.accessToken);
       await errorHandler(async () => {
         await $api.player.updateInfo(
-          accessToken,
+          $player.accessToken,
           {
             avatar: avatar.value ? avatar.value : undefined,
             username: username.value ? username.value : undefined,
@@ -187,17 +252,29 @@ export default defineComponent({
       isSubmitLoading.value = false;
     };
 
+    const resetPassword = async () => {
+      await errorHandler(async () => {
+        $q.dialog({
+          component: AuthDialog,
+          componentProps: {
+            type: "reset"
+          }
+        });
+      }, $q, $i18n.t);
+    };
+
     return {
       flags,
       avatar,
       motto,
       username,
       region,
-      avatarFrame,
+      isLoaded,
       isSubmitLoading,
       i18n,
       editAvatar,
-      submit
+      submit,
+      resetPassword
     };
   }
 });
@@ -205,23 +282,4 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "src/css/app.scss";
-
-.label-text {
-  color: #636365;
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 1.5vw;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-}
-
-.btn-text {
-  background: linear-gradient(90.8deg, #BF55D4 26.21%, #6271CD 86.62%);
-  text-shadow: 0 2vw 4vw rgba(48, 0, 240, 0.31);
-  font-family: 'inter', sans-serif;
-  font-weight: 800;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 </style>

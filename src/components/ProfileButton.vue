@@ -41,17 +41,17 @@
                 <q-img
                   :src="playerStore.avatar"
                   style="border-radius: 50%" />
-                <q-avatar
-                  class="absolute-bottom-right"
-                  color="primary"
-                  :icon="flag ? undefined : 'mdi-help'"
-                  round
-                  size="sm"
-                  style="margin-bottom: -0.1rem; margin-right: -0.3rem"
-                  @click="goProfile"
-                  text-color="white">
-                  <span v-if="flag" :class="`fi ${flag}`" />
-                </q-avatar>
+                <div
+                  class="absolute-bottom-right no-pointer-events"
+                  style="margin-bottom: -0.1rem; margin-right: -0.3rem">
+                  <q-avatar
+                    :class="flag ? `fis ${flag}` : undefined"
+                    :color="flag ? undefined : 'primary'"
+                    :icon="flag ? undefined : 'mdi-help'"
+                    round
+                    size="1.5rem"
+                    text-color="white" />
+                </div>
               </q-btn>
             </q-responsive>
           </div>
@@ -130,10 +130,7 @@ export default defineComponent({
     };
 
     const goProfile = () => {
-      $router.push({
-        name: "profile",
-        query: { id: playerStore.id }
-      });
+      $router.push({ name: "profile" });
     };
 
     const logout = () => {

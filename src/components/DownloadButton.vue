@@ -10,26 +10,27 @@
     menu-anchor="bottom middle"
     menu-self="top middle"
     no-caps
-    padding="0.4rem 1.2rem"
+    padding="0.75rem 1.25rem"
     split
     style="border-radius: 0.75rem"
     @click="downloadProduct(mainPlatform)">
     <template v-slot:label>
-      <div class="no-wrap q-ma-sm">
+      <div class="no-wrap">
         <div
           :class="`text-color-${disable ? 'grey' : 'white'}`"
           class="text-font-inter-bold"
           style="font-size: 1.1rem">
           {{ disable ? i18n("labels.disable") : i18n("labels.download") }}
         </div>
-        <div v-if="!disable" class="row justify-center items-center">
+        <div
+          v-if="!disable"
+          class="row justify-center items-center"
+          style="margin-top: 0.5rem">
           <q-icon
             :name="platformIconMap[mainPlatform]"
-            class="q-ma-sm"
             size="1rem" />
           <div
             class="text-color-white text-font-inter-slim"
-            :class="$q.screen.xs ? 'q-pt-sm' : ''"
             style="font-size: 0.8rem">
             {{ i18n(`labels.platforms.${mainPlatform}`) }}
           </div>
@@ -47,7 +48,7 @@
           avatar
           class="row"
           style="min-width: unset">
-          <div class="btn-primary" style="border-radius: 0.75rem">
+          <div class="btn-primary">
             <q-icon
               :name="platformIconMap[platform]"
               class="q-ma-xs"

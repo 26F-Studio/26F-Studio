@@ -45,6 +45,18 @@ export default {
           deactivateSuccess: "Your account has been deactivated"
         }
       },
+      emailPanel: {
+        errors: {
+          email: "Invalid email address"
+        },
+        labels: {
+          title: "Verify your email address",
+          description: "Verify your 26F account by email to continue",
+          email: "Email",
+          submit: "Continue",
+          sendingCode: "Sending email..."
+        }
+      },
       resetPanel: {
         errors: {
           email: "Invalid email address",
@@ -53,7 +65,12 @@ export default {
           confirmPassword: "Two inputs are not the same"
         },
         labels: {
-          description: "Your password must have at least eight characters and meet 3 of the following constraints: ",
+          description: "We have sent a verification code to the email address {email}.\n" +
+            "Enter the code below within 30 minutes to continue. ",
+          resendBefore: "Did not receive the code? Check your junk inbox or",
+          resend: " resend the code",
+          resendAfter: ".",
+          reminder: "Your password must have at least eight characters and meet 3 of the following constraints: ",
           constraints: "Contains at least 1 lowercase alphabetic character \n" +
             "Contains at least 1 uppercase alphabetic character \n" +
             "Contains at least 1 numeric character \n" +
@@ -66,6 +83,7 @@ export default {
           submit: "Reset password"
         },
         notifications: {
+          codeSent: "Verification code has been sent to your mailbox",
           resetSuccess: "Password reset! You can login with your new password now"
         }
       }
@@ -330,9 +348,7 @@ export default {
   pages: {
     home: {
       labels: {
-        header: "Welcome \n" +
-          "to \n" +
-          "26F Studio!",
+        header: "Welcome to 26F Studio!",
         title: "Our products",
         invite: {
           interested: "Interested in \nwhat you see?",
@@ -394,15 +410,18 @@ export default {
         username: "Username",
         motto: "Motto",
         region: "Region",
-        avatarFrame: "Avatar Frame",
-        maybeLater: "Maybe later...",
-        submit: "Submit"
+        submit: "Update Profile",
+        resetPassword: "Reset Password",
+        sendingCode: "Sending email..."
       },
       placeholders: {
         username: "Input your username",
         motto: "Input your motto",
         region: "Select your region",
         avatarFrame: "Coming soon..."
+      },
+      notifications: {
+        submitSuccess: "Profile updated successfully"
       }
     }
   },
@@ -414,6 +433,7 @@ export default {
       emailSendError: "Failed to send email",
       invalidEmail: "Invalid email",
       invalidEmailPass: "Invalid email or password",
+      invalidAccessToken: "Invalid access token",
       networkError: "Network error",
       playerNotFound: "Player not found",
       recaptchaFailed: "Failed to verify reCAPTCHA"

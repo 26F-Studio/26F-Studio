@@ -26,6 +26,14 @@ export const usePlayerStore = defineStore("player", {
     },
     noToken() {
       return this.accessToken.length === 0;
+    },
+    info() {
+      return {
+        username: this.username,
+        motto: this.motto,
+        region: this.region,
+        avatar: this.avatar
+      };
     }
   },
   actions: {
