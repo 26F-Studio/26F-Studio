@@ -40,7 +40,7 @@
               fill="#C2C2C2" />
           </svg>
           <q-card
-            class="q-mb-sm"
+            class="bg-white"
             style="border-radius: 50%; height: 5rem; width: 5rem">
             <div
               class="text-color-primary text-font-galaxy-slim text-shadow-purple absolute-center"

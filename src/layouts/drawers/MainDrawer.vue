@@ -5,9 +5,9 @@
     overlay>
     <BackgroundImage>
       <div class="absolute-bottom bg-transparent">
-        <div class="row">
+        <div class="row q-gutter-x-lg q-mb-sm items-center">
           <q-card
-            class="q-mb-sm"
+            class="bg-white"
             style="border-radius: 0.75rem; height: 3rem; width: 3rem">
             <div
               class="text-color-primary text-font-galaxy-slim text-shadow-purple absolute-center"
@@ -15,8 +15,12 @@
               {{ "\u{0FFFFF}" }}
             </div>
           </q-card>
+          <div
+            class="text-color-white text-font-galaxy-bold"
+            style="font-size: 2.5rem; margin-bottom: 0.5rem">
+            {{ i18n("labels.title") }}
+          </div>
         </div>
-        <div class="text-weight-bold">26F Studio</div>
       </div>
     </BackgroundImage>
     <q-list>
