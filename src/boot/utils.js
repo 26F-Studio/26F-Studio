@@ -1,4 +1,5 @@
-import {boot} from "quasar/wrappers";
+import { EventBus } from "quasar";
+import { boot } from "quasar/wrappers";
 
 const useUtils = () => ({
   sleep: (ms) => {
@@ -36,8 +37,12 @@ const useUtils = () => ({
   }
 });
 
-export default boot(({app}) => {
+const bus = new EventBus();
+
+export default boot(({ app }) => {
   app.config.globalProperties.$u = useUtils();
+  app.config.globalProperties.$bus = bus;
+  app.provide("bus", bus);
 });
 
-export {useUtils};
+export { useUtils, bus };

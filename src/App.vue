@@ -4,13 +4,13 @@
     class="fullscreen"
     :dark="$q.dark.isActive"
     :thumb-style="thumbStyle">
-    <router-view @scrollTo="scrollTo" />
+    <router-view />
   </q-scroll-area>
 </template>
 
 <script>
 import { useQuasar } from "quasar";
-import { defineComponent, ref } from "vue";
+import { defineComponent, inject, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 import { useProject } from "boot/config";
@@ -18,6 +18,7 @@ import { useProject } from "boot/config";
 export default defineComponent({
   name: "App",
   setup() {
+    const $bus = inject("bus");
     const $q = useQuasar();
     const $i18n = useI18n({ useScope: "global" });
 
@@ -32,6 +33,10 @@ export default defineComponent({
     };
 
     const scrollArea = ref(null);
+
+    $bus.on("scrollTo", (percentage, duration) => {
+      scrollArea.value.setScrollPercentage("vertical", percentage, duration);
+    });
 
     if ($q.localStorage.has(`${useProject()}.settings.darkMode`)) {
       $q.dark.set($q.localStorage.getItem(`${useProject()}.settings.darkMode`));
@@ -48,10 +53,6 @@ export default defineComponent({
 
     const i18n = (relativePath) => {
       return $i18n.t("app." + relativePath);
-    };
-
-    const scrollTo = ({ percentage, duration }) => {
-      scrollArea.value.setScrollPercentage("vertical", percentage, duration);
     };
 
     return {

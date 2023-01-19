@@ -135,7 +135,7 @@
 
 <script>
 import { copyToClipboard, useQuasar } from "quasar";
-import { computed, defineComponent, onMounted, ref } from "vue";
+import { computed, defineComponent, inject, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useReCaptcha } from "vue-recaptcha-v3";
 import { useRoute, useRouter } from "vue-router";
@@ -151,8 +151,9 @@ export default defineComponent({
   name: "OauthPage",
   components: { BackgroundImage },
   emits: ["scrollTo"],
-  setup(_, { emit }) {
+  setup() {
     const $api = useApi();
+    const $bus = inject("bus");
     const $i18n = useI18n({ useScope: "global" });
     const $player = usePlayerStore();
     const $q = useQuasar();
@@ -172,7 +173,7 @@ export default defineComponent({
     });
 
     const isSubmitLoading = ref(false);
-    const copyTokens = ref("");
+    const copyTokens = ref("11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111");
     const isTokensVisible = ref(false);
 
     const maskEnd = computed(() => {
@@ -234,7 +235,7 @@ export default defineComponent({
 
     const showTokens = () => {
       isTokensVisible.value = true;
-      setTimeout(() => emit("scrollTo", { percentage: 1.0, duration: 200 }), 500);
+      setTimeout(() => $bus.emit("scrollTo", 1.0, 200), 500);
     };
 
     return {

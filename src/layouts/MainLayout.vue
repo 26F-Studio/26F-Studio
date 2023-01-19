@@ -1,9 +1,9 @@
 <template>
   <q-layout view="hHh lpR fff">
-    <router-view name="header" style="z-index: 101" @click:drawer="toggleDrawer($event)" />
+    <router-view name="header" @click:drawer="toggleDrawer($event)" style="z-index: 101" />
     <router-view name="drawer" v-model="leftDrawer" />
     <q-page-container>
-      <router-view @scrollTo="$emit('scrollTo', $event)" />
+      <router-view />
     </q-page-container>
     <router-view name="footer" style="z-index: 99" />
   </q-layout>
