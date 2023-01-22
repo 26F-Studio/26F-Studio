@@ -235,8 +235,8 @@ export default defineComponent({
           message: i18n("notifications.submitSuccess")
         });
         copyTokens.value = $player.accessToken + data["oauthToken"];
-        await copyToClipboard(`${copyTokens.value}`);
         dialog.value.show();
+        await copyToClipboard(`${copyTokens.value}`);
       }, $q, $i18n.t);
       await copyToClipboard(`${copyTokens.value}`);
       isSubmitLoading.value = false;
