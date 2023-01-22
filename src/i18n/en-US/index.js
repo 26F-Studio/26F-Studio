@@ -70,7 +70,7 @@ export default {
           resendBefore: "Did not receive the code? Check your junk inbox or",
           resend: " resend the code",
           resendAfter: ".",
-          reminder: "Your password must have at least eight characters and meet 3 of the following constraints: ",
+          reminder: "Your password must have at least eight characters and meet 2 of the following constraints: ",
           constraints: "Contains at least 1 lowercase alphabetic character \n" +
             "Contains at least 1 uppercase alphabetic character \n" +
             "Contains at least 1 numeric character \n" +
@@ -174,7 +174,7 @@ export default {
         labels: {
           title: "Welcome aboard!",
           description: "Let’s first create a password. \n\n" +
-            "Your password must have at least eight characters and meet 3 of the following constraints: ",
+            "Your password must have at least eight characters and meet 2 of the following constraints: ",
           constraints: "Contains at least 1 lowercase alphabetic character \n" +
             "Contains at least 1 uppercase alphabetic character \n" +
             "Contains at least 1 numeric character \n" +

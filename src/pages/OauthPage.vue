@@ -173,7 +173,7 @@ export default defineComponent({
     });
 
     const isSubmitLoading = ref(false);
-    const copyTokens = ref("11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111");
+    const copyTokens = ref("");
     const isTokensVisible = ref(false);
 
     const maskEnd = computed(() => {
@@ -228,8 +228,9 @@ export default defineComponent({
           message: i18n("notifications.submitSuccess")
         });
         copyTokens.value = $player.accessToken + data["oauthToken"];
-        await copyToClipboard(copyTokens.value);
+        await copyToClipboard(`${copyTokens.value}`);
       }, $q, $i18n.t);
+      await copyToClipboard(`${copyTokens.value}`);
       isSubmitLoading.value = false;
     };
 
