@@ -87,8 +87,14 @@
             unelevated
             @click="authorize" />
         </div>
-        <q-slide-transition>
-          <div v-if="copyTokens" class="column items-center q-gutter-y-md">
+      </div>
+    </div>
+    <q-dialog ref="dialog" persistent>
+      <q-card
+        class="q-dialog-plugin hide-scrollbar"
+        style="min-width: 20rem; max-width: 90vw">
+        <q-card-section>
+          <div class="column items-center q-gutter-y-md">
             <div
               class="text-color-grey text-font-inter text-center"
               style="font-size: 0.75rem; white-space: pre">
@@ -118,18 +124,18 @@
               </div>
             </div>
           </div>
-        </q-slide-transition>
-        <q-slide-transition>
-          <div v-if="isTokensVisible" class="row justify-center q-mb-xl q-mb-lg-none z-max">
-            <div
-              class="col-10 col-sm-8 col-md-6 text-color-blue text-font-inter"
-              style="font-size: 0.75rem; word-break: break-all">
-              {{ copyTokens }}
+          <q-slide-transition>
+            <div v-if="isTokensVisible" class="row justify-center q-mb-xl q-mb-lg-none z-max">
+              <div
+                class="col-12 col-sm-8 col-md-6 text-color-blue text-font-inter"
+                style="font-size: 0.75rem; word-break: break-all">
+                {{ copyTokens }}
+              </div>
             </div>
-          </div>
-        </q-slide-transition>
-      </div>
-    </div>
+          </q-slide-transition>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -175,6 +181,7 @@ export default defineComponent({
     const isSubmitLoading = ref(false);
     const copyTokens = ref("");
     const isTokensVisible = ref(false);
+    const dialog = ref(null);
 
     const maskEnd = computed(() => {
       switch ($q.screen.name) {
@@ -229,6 +236,7 @@ export default defineComponent({
         });
         copyTokens.value = $player.accessToken + data["oauthToken"];
         await copyToClipboard(`${copyTokens.value}`);
+        dialog.value.show();
       }, $q, $i18n.t);
       await copyToClipboard(`${copyTokens.value}`);
       isSubmitLoading.value = false;
@@ -244,6 +252,7 @@ export default defineComponent({
       isSubmitLoading,
       copyTokens,
       isTokensVisible,
+      dialog,
       maskEnd,
       maskStart,
       i18n,
