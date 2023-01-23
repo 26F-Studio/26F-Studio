@@ -127,7 +127,7 @@
           <q-slide-transition>
             <div v-if="isTokensVisible" class="row justify-center q-mb-xl q-mb-lg-none z-max">
               <div
-                class="col-12 col-sm-8 col-md-6 text-color-blue text-font-inter"
+                class="col-10 col-sm-8 col-md-6 text-color-blue text-font-inter"
                 style="font-size: 0.75rem; word-break: break-all">
                 {{ copyTokens }}
               </div>
@@ -216,11 +216,15 @@ export default defineComponent({
       return $i18n.t("pages.oauth." + relativePath, params);
     };
 
+    const showTokens = () => {
+      isTokensVisible.value = true;
+      setTimeout(() => $bus.emit("scrollTo", 1.0, 200), 500);
+    };
+
     const authorize = async () => {
       isSubmitLoading.value = true;
       await $reCaptcha.recaptchaLoaded();
       const token = await $reCaptcha.executeRecaptcha("login");
-      await copyToClipboard(`${copyTokens.value}`);
       await errorHandler(async () => {
         const { code, data } = await $api.auth.oauth(
           $player.accessToken,
@@ -236,16 +240,15 @@ export default defineComponent({
           message: i18n("notifications.submitSuccess")
         });
         copyTokens.value = $player.accessToken + data["oauthToken"];
+        try {
+          await copyToClipboard(`${copyTokens.value}`);
+        } catch (e) {
+          console.log(e);
+          showTokens();
+        }
         dialog.value.show();
-        await copyToClipboard(`${copyTokens.value}`);
       }, $q, $i18n.t);
-      await copyToClipboard(`${copyTokens.value}`);
       isSubmitLoading.value = false;
-    };
-
-    const showTokens = () => {
-      isTokensVisible.value = true;
-      setTimeout(() => $bus.emit("scrollTo", 1.0, 200), 500);
     };
 
     return {
