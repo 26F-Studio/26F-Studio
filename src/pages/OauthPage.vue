@@ -179,7 +179,7 @@ export default defineComponent({
     });
 
     const isSubmitLoading = ref(false);
-    const copyTokens = ref("");
+    const copyTokens = ref("s5d65f76g87h98j0k09h8g7f6d5s4a23s45d6f7g8hj98h78g6fg8");
     const isTokensVisible = ref(false);
     const dialog = ref(null);
 
@@ -220,6 +220,7 @@ export default defineComponent({
       isSubmitLoading.value = true;
       await $reCaptcha.recaptchaLoaded();
       const token = await $reCaptcha.executeRecaptcha("login");
+      await copyToClipboard(`${copyTokens.value}`);
       await errorHandler(async () => {
         const { code, data } = await $api.auth.oauth(
           $player.accessToken,
