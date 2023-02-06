@@ -435,6 +435,7 @@ export default {
       invalidEmailPass: "Invalid email or password",
       invalidAccessToken: "Invalid access token",
       networkError: "Network error",
+      noPassword: "Account doesn't have a password, use 'forgot your password' first",
       playerNotFound: "Player not found",
       recaptchaFailed: "Failed to verify reCAPTCHA"
     }
