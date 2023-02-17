@@ -2,11 +2,19 @@
 import PButton from "@/components/PButton.vue";
 </script>
 <template>
-  <div class="flex flex-row justify-center gap-5">
-    <p-button type="primary" outline />
-    <p-button type="secondary" outline />
-    <p-button type="positive" outline />
-    <p-button type="negative" outline />
+  <div class="flex flex-col items-center gap-3">
+    <div class="flex flex-row justify-center gap-5">
+      <p-button type="primary" outline />
+      <p-button type="secondary" outline />
+      <p-button type="positive" outline />
+      <p-button type="negative" outline />
+    </div>
+    <div class="flex flex-row justify-center gap-5">
+      <p-button type="primary" outline />
+      <p-button type="secondary" outline />
+      <p-button type="positive" outline />
+      <p-button type="negative" outline />
+    </div>
   </div>
 </template>
 
