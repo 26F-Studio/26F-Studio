@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.bg-gradient-200 {
+  background: linear-gradient(135deg, theme("colors.violet.400") 0%, theme("colors.indigo.200") 50.52%, theme("colors.blue.100") 100%); }
+.bg-gradient-300 {
+  background: linear-gradient(135deg, theme("colors.violet.500") 0%, theme("colors.indigo.300") 50.52%, theme("colors.blue.200") 100%); }
+.bg-gradient-400 {
+  background: linear-gradient(135deg, theme("colors.violet.600") 0%, theme("colors.indigo.400") 50.52%, theme("colors.blue.300") 100%); }
+.bg-gradient-500 {
+  background: linear-gradient(135deg, theme("colors.violet.700") 0%, theme("colors.indigo.500") 50.52%, theme("colors.blue.400") 100%); }
+.bg-gradient-600 {
+  background: linear-gradient(135deg, theme("colors.violet.800") 0%, theme("colors.indigo.600") 50.52%, theme("colors.blue.500") 100%); }
+.bg-gradient-700 {
+  background: linear-gradient(135deg, theme("colors.violet.900") 0%, theme("colors.indigo.700") 50.52%, theme("colors.blue.600") 100%); }
+
+/*# sourceMappingURL=main.css.map */

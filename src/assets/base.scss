@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-gradient {
+  @for $i from 2 through 7 {
+    $shade: 100 * $i ;
+    $violet: 200 + $shade;
+    $indigo: 0 + $shade;
+    $blue: -100 + $shade;
+    &-#{$shade} {
+      background: linear-gradient(
+                      135deg,
+                      theme('colors.violet.' + $violet) 0%,
+                      theme('colors.indigo.' + $indigo) 50.52%,
+                      theme('colors.blue.' + $blue) 100%,
+      );
+    }
+  }
+}
