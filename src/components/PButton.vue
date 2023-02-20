@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<Props>(), {
   dense: false,
   disabled: false,
   outline: false,
-  type: "primary",
+  type: "primary"
 });
 
 const buttonClass = computed(() => {
@@ -50,6 +50,18 @@ button {
 
 .dense {
   @include roundedButton($dense: true);
+}
+
+.primary {
+  &-normal {
+    @apply text-white border border-transparent;
+    @apply bg-purple-500 hover:bg-purple-600 focus:ring-purple-200;
+  }
+
+  &-outline {
+    @apply text-purple-500 border-2 border-purple-500;
+    @apply hover:text-white hover:bg-purple-600 focus:ring-purple-200;
+  }
 }
 
 .secondary {
