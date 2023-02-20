@@ -1,7 +1,9 @@
+<script lang="ts">
+export type ButtonType = "primary" | "secondary" | "positive" | "negative";
+</script>
+
 <script setup lang="ts">
 import { computed } from "vue";
-
-type ButtonType = "primary" | "secondary" | "positive" | "negative";
 
 export interface Props {
   dense?: boolean;

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.5.3",
+    "@vueuse/core": "^9.13.0",
     "pinia": "^2.0.28",
     "preline": "^1.6.0",
     "sass": "^1.57.1",
