@@ -6,8 +6,7 @@ on:
 
 env:
   HTML_404_URL: https://raw.githubusercontent.com/rafgraph/spa-github-pages/gh-pages/404.html
-  DIST_PATH: ./dist/spa
-  PACKAGE_PATH: ./spa.zip
+  DIST_PATH: ./dist
 
 jobs:
   deploy-gh-pages:
@@ -20,7 +19,7 @@ jobs:
           cache: 'npm'
       - name: Install packages and build the app
         run: |
-          npm install && npm run "spa release"
+          npm install && npm run "build-only"
       - name: Download and modify 404.html for github pages
         shell: python3 {0}
         run: |
