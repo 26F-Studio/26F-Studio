@@ -29,7 +29,7 @@ const buttonClass = computed(() => {
 </script>
 <template>
   <button :class="buttonClass" :disabled="disabled" type="button">
-    Button
+    <slot/>
   </button>
 </template>
 
@@ -68,13 +68,15 @@ button {
 
 .secondary {
   &-normal {
-    @apply text-white border border-transparent;
-    @apply bg-zinc-600 hover:bg-zinc-800 focus:ring-zinc-200;
+    @apply text-white dark:text-black border border-transparent;
+    @apply bg-zinc-600 dark:bg-zinc-200 hover:bg-zinc-800 dark:hover:bg-zinc-50;
+    @apply focus:ring-zinc-600 dark:focus:ring-zinc-600;
   }
 
   &-outline {
-    @apply text-zinc-600 border-2 border-zinc-600;
-    @apply hover:text-white hover:bg-zinc-800 focus:ring-zinc-200;
+    @apply text-zinc-600 dark:text-zinc-200 border-2 border-zinc-600 dark:border-zinc-200;
+    @apply hover:text-white dark:hover:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200;
+    @apply focus:ring-zinc-600 dark:focus:ring-zinc-600;
   }
 }
 

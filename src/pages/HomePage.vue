@@ -12,7 +12,7 @@ const buttonType = ref("primary");
   <div class="flex flex-col items-center gap-3">
     <div class="flex flex-row items-center gap-10">
       <div
-        class="flex flex-col items-center bg-white border shadow-sm rounded-xl p-4 md:p-5 dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7] dark:text-gray-400">
+        class="flex flex-col items-center bg-white shadow-sm rounded-xl p-4 md:p-5 dark:bg-zinc-600 dark:text-zinc-50">
         <div class="flex flex-col justify-center gap-5">
           <p-radio label="primary" value="primary" v-model="buttonType" />
           <p-radio label="secondary" value="secondary" v-model="buttonType" />
@@ -22,7 +22,9 @@ const buttonType = ref("primary");
         </div>
       </div>
       <div class="flex flex-row justify-center gap-5">
-        <p-button :type="buttonType" :outline="isOutlined" />
+        <p-button :type="buttonType" :outline="isOutlined">
+          Button
+        </p-button>
       </div>
     </div>
   </div>
