@@ -95,7 +95,7 @@ export default defineComponent({
     const $q = useQuasar();
     const $i18n = useI18n({ useScope: "global" });
 
-    let mainPlatform = "windows64";
+    let mainPlatform = "windowsInstaller";
     let platforms = usePlatforms();
     const platformIconMap = {
       android: "mdi-android",
@@ -105,7 +105,8 @@ export default defineComponent({
       macosPkg: "mdi-apple",
       testflight: "mdi-apple",
       windows32: "mdi-microsoft-windows-classic",
-      windows64: "mdi-microsoft-windows"
+      windows64: "mdi-microsoft-windows",
+      windowsInstaller: "mdi-microsoft-windows"
     };
 
     if ($q.platform.is.android) {

@@ -7,11 +7,21 @@
       :style="imageStyle"
       :width="horizontal ? undefined : '35vw'" />
     <div :class="groupClass" :style="horizontal ? 'max-width: 65vw' : undefined">
-      <div
-        class="text-color-primary text-font-galaxy-slim text-shadow-purple"
-        :class="horizontal ? undefined : 'col-10 text-center'"
-        style="font-size: 3rem; line-height: 175%">
-        {{ i18n(`products.${product}.name`) }}
+      <div :class="versionClass">
+        <div
+          class="text-color-primary text-font-galaxy-slim text-shadow-purple"
+          :class="horizontal ? undefined : 'text-center'"
+          style="font-size: 3rem; line-height: 175%">
+          {{ i18n(`products.${product}.name`) }}
+        </div>
+        <q-chip
+          :class="`btn-${latestVersion ? 'primary' : 'disabled'}`"
+          :icon="`${latestVersion ? 'mdi-tag-check' : 'mdi-tag-remove'}`"
+          size="0.75rem"
+          :text-color="`${latestVersion ? 'white' : 'grey'}`"
+          :style="{top: horizontal ? '2.05rem' : '-1rem'}">
+          {{ latestVersion ? latestVersion : "N/A" }}
+        </q-chip>
       </div>
       <div
         class="text-color-grey text-font-inter"
@@ -40,11 +50,12 @@
 
 <script>
 import { paramCase } from "change-case-all";
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 import DownloadButton from "components/DownloadButton";
 import ProductImage from "components/ProductImage";
+import { getLatestVersion } from "boot/config";
 
 export default defineComponent({
   name: "ProductPanel",
@@ -110,6 +121,16 @@ export default defineComponent({
       return classString;
     });
 
+    const versionClass = computed(() => {
+      let classString = "";
+      if (props.horizontal) {
+        classString += `row q-gutter-x-xl` + (props.reversed ? 'reverse' : '');
+      } else {
+        classString += `full-width column items-center q-gutter-y-lg`;
+      }
+      return classString;
+    });
+
     const buttonsClass = computed(() => {
       let classString = "";
       if (props.horizontal) {
@@ -121,6 +142,12 @@ export default defineComponent({
       return classString;
     });
 
+    const latestVersion = ref(null);
+
+    onMounted(async () => {
+      latestVersion.value = await getLatestVersion(props.product);
+    });
+
     const i18n = (relativePath) => {
       return $i18n.t("components.productPanel." + relativePath);
     };
@@ -130,7 +157,9 @@ export default defineComponent({
       imageClass,
       imageStyle,
       groupClass,
+      versionClass,
       buttonsClass,
+      latestVersion,
       i18n,
       paramCase
     };

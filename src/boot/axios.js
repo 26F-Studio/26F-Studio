@@ -24,6 +24,29 @@ const ResultCode = Object.freeze({
   EmailError: 503
 });
 
+const githubApi = axios.create({ baseURL: "https://api.github.com" });
+
+const getLatestRelease = (owner, repo) => {
+  return new Promise((resolve, reject) => {
+    githubApi({
+      url: `https://api.github.com/repos/${owner}/${repo}/releases/latest`,
+      method: Method.GET
+    }).then(res => {
+      if (res.status === 200) {
+        resolve(res.data);
+      } else {
+        reject(res.data);
+      }
+    }).catch(err => {
+      if (err.hasOwnProperty("response")) {
+        reject(err.response);
+      } else {
+        reject(err);
+      }
+    });
+  });
+};
+
 const baseApi = axios.create({ baseURL: "https://cafuuchino.the26f.org:8443/studio26f/api/v1" });
 
 const genericHttp = (
@@ -190,4 +213,4 @@ export default boot(({ app }) => {
   app.config.globalProperties.$api = useApi;
 });
 
-export { Method, ResultCode, genericHttp, useApi };
+export { Method, ResultCode, getLatestRelease, genericHttp, useApi };

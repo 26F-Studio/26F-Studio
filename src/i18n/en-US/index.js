@@ -213,7 +213,8 @@ export default {
           macosPkg: "macOS, Universal installer",
           testflight: "TestFlight, iOS & macOS",
           windows32: "Windows, x86",
-          windows64: "Windows, x64"
+          windows64: "Windows, x64",
+          windowsInstaller: "Windows, Universal installer"
         }
       },
       notifications: {

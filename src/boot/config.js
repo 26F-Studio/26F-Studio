@@ -1,5 +1,6 @@
 import { boot } from "quasar/wrappers";
 import { VueReCaptcha } from "vue-recaptcha-v3";
+import { getLatestRelease } from "boot/axios";
 
 const repoMap = {
   techminoGalaxy: "Techmino_Galaxy",
@@ -22,7 +23,8 @@ const extensionMap = {
   macosDmg: "macOS_portable.dmg",
   macosPkg: "macOS_portable.pkg",
   windows32: "Windows_x86.zip",
-  windows64: "Windows_x64.zip"
+  windows64: "Windows_x64.zip",
+  windowsInstaller: "Windows_installer.exe"
 };
 
 const useProject = () => "26f-studio";
@@ -41,6 +43,14 @@ const usePlatforms = () => [
   "windows32",
   "windows64"
 ];
+
+const getLatestVersion = async (product) => {
+  try {
+    return (await getLatestRelease("26F-Studio", repoMap[product]))["tag_name"];
+  } catch (e) {
+    return null;
+  }
+};
 
 const getLatestDownloadLink = (product, platform) => {
   if (useProducts().includes(product)) {
@@ -76,5 +86,6 @@ export {
   useProject,
   useProducts,
   usePlatforms,
+  getLatestVersion,
   getLatestDownloadLink
 };
