@@ -157,7 +157,7 @@ export default {
           password: "Password",
           forgot: "Forgot your password?",
           submit: "Sign In",
-          loginWithCode: "Sign in / Sign up with email",
+          loginWithCode: "Sign in / Sign up by verification code",
           sendingCode: "Sending email...",
           restart: "Start Over"
         },
@@ -254,7 +254,7 @@ export default {
     },
     profileButton: {
       labels: {
-        signIn: "Sign Up/Sign In",
+        signIn: "Sign In/Sign Up",
         signOut: "Sign Out"
       }
     },
@@ -353,7 +353,7 @@ export default {
         invite: {
           interested: "Interested in \nwhat you see?",
           account: "Create your account now!",
-          button: "Sign Up/Log In"
+          button: "Sign In/Sign Up"
         }
       }
     },

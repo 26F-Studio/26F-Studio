@@ -61,7 +61,7 @@ export default {
           email: "邮箱地址无效",
           code: "验证码无效",
           password: "密码无效",
-          confirmPassword: "密码确认不一致"
+          confirmPassword: "两次密码输入不一致"
         },
         labels: {
           description: "我们已经向您的邮箱 {email} 发送了验证码。\n" +
@@ -106,7 +106,7 @@ export default {
           restart: "重新开始"
         },
         notifications: {
-          loginSuccess: "恭喜！现在您已经登录了"
+          loginSuccess: "恭喜！您现在已经登录了"
         }
       },
       emailPanel: {
@@ -133,119 +133,118 @@ export default {
         labels: {
           title: "完善详细信息",
           description: "请您花几分钟完成以下关于您的信息。",
-          username: "Username",
-          region: "Region",
-          regionHint: "Select region",
-          motto: "About me",
-          avatar: "Avatar",
-          upload: "Upload",
-          submit: "Continue",
-          maybeLater: "Set up later in profile",
-          restart: "Start Over"
+          username: "用户名",
+          region: "区域",
+          regionHint: "选择区域",
+          motto: "个人简介",
+          avatar: "头像",
+          upload: "上传",
+          submit: "继续",
+          maybeLater: "之后在个人中心继续设置",
+          restart: "重新开始"
         },
         notifications: {
-          submitSuccess: "Your account info has been updated"
+          submitSuccess: "你的账号信息已被更新"
         }
       },
       passwordPanel: {
         errors: {
-          password: "Invalid password"
+          password: "密码无效"
         },
         labels: {
-          title: "Enter your password",
-          email: "Email: ",
-          password: "Password",
-          forgot: "Forgot your password?",
-          submit: "Sign In",
-          loginWithCode: "Sign in / Sign up with email",
-          sendingCode: "Sending email...",
-          restart: "Start Over"
+          title: "输入你的密码",
+          email: "邮箱：",
+          password: "密码",
+          forgot: "忘记密码？",
+          submit: "登录",
+          loginWithCode: "使用验证码登录/注册",
+          sendingCode: "发送验证码中……",
+          restart: "重新开始"
         },
         notifications: {
-          loginSuccess: "Congratulations! You are now logged in"
+          loginSuccess: "恭喜！您现在已经登录了"
         }
       },
       setupPanel: {
         errors: {
-          password: "Invalid password",
-          confirmPassword: "Two inputs are not the same"
+          password: "密码无效",
+          confirmPassword: "两次密码输入不一致"
         },
         labels: {
-          title: "Welcome aboard!",
-          description: "Let’s first create a password. \n\n" +
-            "Your password must have at least eight characters and meet 2 of the following constraints: ",
-          constraints: "Contains at least 1 lowercase alphabetic character \n" +
-            "Contains at least 1 uppercase alphabetic character \n" +
-            "Contains at least 1 numeric character \n" +
-            "Contains at least 1 special character(#?!{'@'}$%^&*-)",
-          password: "Password",
-          confirmPassword: "Confirm your Password",
-          submit: "Continue",
-          maybeLater: "Set up later in profile"
+          title: "欢迎加入！",
+          description: "首先让我们来设置您的密码\n\n" +
+            "您的密码长度必须至少8位并满足以下两种要求：",
+          constraints: "包含至少1个小写字母\n" +
+            "包含至少1个大写字母\n" +
+            "包含至少1个数字\n" +
+            "包含至少1个特殊符号（#?!{'@'}$%^&*-）",
+          password: "密码",
+          confirmPassword: "确认你的密码",
+          submit: "继续",
+          maybeLater: "之后在个人中心继续设置"
         },
         notifications: {
-          setupSuccess: "Password set! You can login with your new password now"
+          setupSuccess: "密码设置成功！现在您可以使用密码登录了"
         }
       }
     },
     cropperDialog: {
       labels: {
-        title: "Crop Image",
-        chooseImage: "Choose Image",
-        noImage: "Please choose an image",
-        cancel: "Cancel",
-        confirm: "Confirm"
+        title: "裁剪图片",
+        chooseImage: "选择图片",
+        noImage: "请选择一张图片",
+        cancel: "取消",
+        confirm: "确认"
       },
       notifications: {
-        invalidFile: "Invalid file"
+        invalidFile: "无效文件"
       }
     },
     downloadButton: {
       labels: {
-        disable: "Coming soon...",
-        download: "Download Now",
+        disable: "即将到来……",
+        download: "立刻下载",
         platforms: {
           android: "Android, arm64",
           appstore: "App Store, iOS & macOS",
           linux: "Linux, x64",
-          macosDmg: "macOS, Universal dmg",
-          macosPkg: "macOS, Universal installer",
-          testflight: "TestFlight, iOS & macOS",
+          macosDmg: "macOS, 通用磁盘映像",
+          macosPkg: "macOS, 通用安装包",
+          testflight: "TestFlight, iOS 和 macOS",
           windows32: "Windows, x86",
           windows64: "Windows, x64",
-          windowsInstaller: "Windows, Universal installer"
+          windowsInstaller: "Windows, 通用安装包"
         }
       },
       notifications: {
-        download: "Getting download link...",
-        error: "Not available",
-        success: "Succeeded"
+        download: "获取下载链接……",
+        error: "暂时不可用",
+        success: "成功"
       }
     },
     languageList: {},
     productPanel: {
       labels: {
-        learnMore: "Learn More"
+        learnMore: "了解更多"
       },
       notifications: {
-        comingSoon: "Coming soon!"
+        comingSoon: "即将到来！"
       },
       products: {
         techminoGalaxy: {
           name: "Techmino Galaxy",
-          description: "The next generation of Techmino, with more features and more fun!"
+          description: "下一代Techmino, 好玩！"
         },
         techmino: {
           name: "Techmino",
-          description: "Welcome to Techmino, a block-stacking game by 26F Studio! \n" +
-            "Immerse yourself in more than 100 modes of this modern yet familiar game, \n" +
-            "with a variety of difficulties so everyone can have a great time! \n" +
-            "Hang out and challenge your friends and players around the world \n" +
-            "in the multiplayer modes, and discover some hidden easter eggs all over the game! \n"
+          description: "欢迎来到Techmino，一款来自 26F Studio 的现代方块堆叠游戏！\n" +
+            "在这里，您可以在多达百种游戏模式与丰富多样的难度选项收获有趣的方块体验，\n" +
+            "在现代简约的风格中找回儿时游戏的味道。游戏模式难度不一，适合所有水平的玩家。\n" +
+            "在多人模式中，您可以向好友和全球玩家发起挑战。游戏中还隐藏着许多彩蛋，等待您的发掘。\n"
         },
         quatrack: {
           name: "Quatrack",
-          description: "Welcome to Quatrack, the music game produced by 26F Studio! \n" +
+          description: "欢迎来到Quatrack, 一款来自 26F Studio 的音乐节奏游戏！\n" +
             "Hit the keyboard/click the screen with the music beat, \n" +
             "enjoy the geometric style animation, get higher scores, \n" +
             "and challenge your record!"
@@ -254,13 +253,13 @@ export default {
     },
     profileButton: {
       labels: {
-        signIn: "Sign Up/Sign In",
-        signOut: "Sign Out"
+        signIn: "登录/注册",
+        signOut: "登出"
       }
     },
     settingList: {
       labels: {
-        darkMode: "Dark Mode"
+        darkMode: "暗色模式"
       }
     }
   },
@@ -268,78 +267,78 @@ export default {
     drawers: {
       main: {
         labels: {
-          title: "26F Studio",
-          products: "Products",
+          title: "26F 工作室",
+          products: "所有产品",
           techminoGalaxy: "Techmino Galaxy",
           techmino: "Techmino",
           quatrack: "Quatrack",
-          miscellaneous: "Miscellaneous",
-          support: "Support",
-          accountSettings: "Account Settings",
-          gameManuals: "Game Manuals",
-          glossary: "Glossary",
-          utilities: "Utilities",
-          about: "About",
-          whoWeAre: "Who We Are",
-          brandingGuidelines: "Branding Guidelines",
-          contact: "Contact",
-          joinUs: "Join Us",
-          languageMenu: "Language",
-          settingsMenu: "Settings"
+          miscellaneous: "杂项",
+          support: "支持中心",
+          accountSettings: "账号设置",
+          gameManuals: "游戏手册",
+          glossary: "游戏术语",
+          utilities: "工具",
+          about: "关于我们",
+          whoWeAre: "我们是谁？",
+          brandingGuidelines: "品牌指南",
+          contact: "联系我们",
+          joinUs: "加入我们",
+          languageMenu: "语言",
+          settingsMenu: "设置"
         }
       }
     },
     footers: {
       login: {
         labels: {
-          login: "Login"
+          login: "登录"
         }
       },
       main: {
         labels: {
-          title: "26F Studio",
-          products: "Products",
+          title: "26F 工作室",
+          products: "所有产品",
           techminoGalaxy: "Techmino Galaxy",
           techmino: "Techmino",
           quatrack: "Quatrack",
-          miscellaneous: "Miscellaneous",
-          support: "Support",
-          accountSettings: "Account Settings",
-          gameManuals: "Game Manuals",
-          glossary: "Glossary",
-          utilities: "Utilities",
-          about: "About",
-          whoWeAre: "Who We Are",
-          brandingGuidelines: "Branding Guidelines",
-          contact: "Contact",
-          joinUs: "Join Us"
+          miscellaneous: "杂项",
+          support: "支持中心",
+          accountSettings: "账号设置",
+          gameManuals: "游戏手册",
+          glossary: "游戏术语",
+          utilities: "工具",
+          about: "关于我们",
+          whoWeAre: "我们是谁？",
+          brandingGuidelines: "品牌指南",
+          contact: "联系我们",
+          joinUs: "加入我们",
         }
       }
     },
     headers: {
       main: {
         labels: {
-          title: "26F Studio",
-          products: "Products",
+          title: "26F 工作室",
+          products: "所有产品",
           techminoGalaxy: "Techmino Galaxy",
           techmino: "Techmino",
           quatrack: "Quatrack",
-          miscellaneous: "Miscellaneous",
-          support: "Support",
-          accountSettings: "Account Settings",
-          gameManuals: "Game Manuals",
-          glossary: "Glossary",
-          utilities: "Utilities",
-          about: "About",
-          whoWeAre: "Who We Are",
-          brandingGuidelines: "Branding Guidelines",
-          contact: "Contact",
-          joinUs: "Join Us"
+          miscellaneous: "杂项",
+          support: "支持中心",
+          accountSettings: "账号设置",
+          gameManuals: "游戏手册",
+          glossary: "游戏术语",
+          utilities: "工具",
+          about: "关于我们",
+          whoWeAre: "我们是谁？",
+          brandingGuidelines: "品牌指南",
+          contact: "联系我们",
+          joinUs: "加入我们",
         }
       },
       simple: {
         labels: {
-          title: "26F Studio"
+          title: "26F 工作室"
         }
       }
     },
@@ -348,19 +347,19 @@ export default {
   pages: {
     home: {
       labels: {
-        header: "Welcome to 26F Studio!",
-        title: "Our products",
+        header: "欢迎来到 26F 工作室！",
+        title: "我们的产品",
         invite: {
-          interested: "Interested in \nwhat you see?",
-          account: "Create your account now!",
-          button: "Sign Up/Log In"
+          interested: "对你看到的\n内容感兴趣？",
+          account: "立刻创建你的账号！",
+          button: "登录/注册"
         }
       }
     },
     login: {
       labels: {
-        header: "Welcome (Back)!",
-        headerNew: "Welcome!",
+        header: "欢迎（回来）！",
+        headerNew: "欢迎！",
         loginWithPassword: "Login With Password",
         loginWithCode: "Login With Verification Code",
         setupInfo: "Setup Your Account Info",
