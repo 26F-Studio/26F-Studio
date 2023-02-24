@@ -1,5 +1,4 @@
 export default {
-  app: {},
   components: {
     authDialog: {
       labels: {
@@ -7,7 +6,7 @@ export default {
         steps: {
           verify: "Verify your account",
           deactivate: "Confirm deactivation",
-          migrate: "Set new login method",
+          migrate: "Set new login email",
           reset: "Set new password"
         },
         titles: {
@@ -78,7 +77,7 @@ export default {
           email: "Email",
           code: "Verification Code",
           getCode: "Get Code",
-          password: "Password",
+          password: "New password",
           confirmPassword: "Confirm your Password",
           submit: "Reset password"
         },
@@ -115,13 +114,13 @@ export default {
           email: "Invalid email address"
         },
         labels: {
-          title: "Sign in or Sign up",
+          title: "Sign in / Sign up",
           description: "Sign in to your 26F account to sync your game progress and achievements across devices, " +
             "as well as play with your friends online in our games. \n\n" +
-            "Does not have an account yet? Sign up by entering your email address or use one of the sign-in options.",
+            "Does not have an account yet? Sign up by entering your email address: ",
           email: "Email",
           submit: "Continue",
-          other: "Or use one of the following sign in options:"
+          other: "Or use one of the following sign in options: "
         }
       },
       finishPanel: {
