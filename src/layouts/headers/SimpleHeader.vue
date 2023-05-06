@@ -11,11 +11,13 @@
         square
         to="/home"
         stretch
-        @click="onLogoClick">
+        @click="onLogoClick"
+      >
         <div
           v-if="$q.screen.gt.sm"
           class="text-color-white text-font-galaxy-slim self-center"
-          style="font-size: 2rem; margin-bottom: 0.3rem">
+          style="font-size: 2rem; margin-bottom: 0.3rem"
+        >
           {{ `\u{0FFFFF}  ${i18n("labels.title")}` }}
         </div>
       </q-btn>
@@ -45,7 +47,7 @@ export default defineComponent({
       go();
     };
     return { i18n, onLogoClick };
-  }
+  },
 });
 </script>
 

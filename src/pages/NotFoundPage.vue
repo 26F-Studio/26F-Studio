@@ -1,13 +1,9 @@
 <template>
-  <q-page
-    class="flex column"
-    style="background: #1a13ac">
+  <q-page class="flex column" style="background: #1a13ac">
     <BackgroundImage full-height>
       <div class="absolute-center bg-transparent text-center">
         <q-img :src="require('assets/notFound.svg')" width="60vmin" />
-        <div
-          class="text-color-white text-font-inter"
-          style="font-size: 5vmin">
+        <div class="text-color-white text-font-inter" style="font-size: 5vmin">
           {{ i18n("labels.notFound") }}
         </div>
         <q-btn
@@ -18,7 +14,8 @@
           size="1.5rem"
           to="/home"
           unelevated
-          style="margin-top: 2rem" />
+          style="margin-top: 2rem"
+        />
       </div>
     </BackgroundImage>
   </q-page>
@@ -40,12 +37,11 @@ export default defineComponent({
       return $i18n.t("pages.notFound." + relativePath);
     };
     return {
-      i18n
+      i18n,
     };
-  }
+  },
 });
 </script>
-
 
 <style scoped lang="scss">
 @import "src/css/app.scss";

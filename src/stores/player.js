@@ -18,7 +18,7 @@ export const usePlayerStore = defineStore("player", {
     avatar_frame: 0,
     permission: "Normal",
     email: "",
-    phone: ""
+    phone: "",
   }),
   getters: {
     loggedIn() {
@@ -32,9 +32,9 @@ export const usePlayerStore = defineStore("player", {
         username: this.username,
         motto: this.motto,
         region: this.region,
-        avatar: this.avatar
+        avatar: this.avatar,
       };
-    }
+    },
   },
   actions: {
     async check() {
@@ -80,9 +80,9 @@ export const usePlayerStore = defineStore("player", {
       this.permission = "Normal";
       this.email = "";
       this.phone = "";
-    }
+    },
   },
   persist: {
-    key: `${useProject()}.player`
-  }
+    key: `${useProject()}.player`,
+  },
 });

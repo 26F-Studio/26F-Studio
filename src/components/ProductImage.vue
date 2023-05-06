@@ -5,9 +5,12 @@
     no-spinner
     no-transition
     :position="position"
-    :src="typeof src === 'string' ? src : require(`assets/products/${product}.png`)"
-    :width="width">
-    <slot/>
+    :src="
+      typeof src === 'string' ? src : require(`assets/products/${product}.png`)
+    "
+    :width="width"
+  >
+    <slot />
   </q-img>
 </template>
 
@@ -20,18 +23,18 @@ export default defineComponent({
   props: {
     eager: {
       type: Boolean,
-      default: false
+      default: false,
     },
     position: {
       type: String,
-      default: "50% 50%"
+      default: "50% 50%",
     },
     product: {
       type: String,
-      required: true
+      required: true,
     },
     width: {
-      type: String
+      type: String,
     },
   },
   setup(props) {
@@ -44,11 +47,9 @@ export default defineComponent({
       }
       return require(`assets/products/${props.product}-xs.webp`);
     });
-    return {src};
-  }
+    return { src };
+  },
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

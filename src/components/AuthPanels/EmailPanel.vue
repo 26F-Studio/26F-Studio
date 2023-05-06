@@ -2,19 +2,22 @@
   <div class="column q-gutter-y-lg" style="margin-bottom: 2.25rem">
     <div
       class="text-color-primary text-font-inter-bolder text-shadow-purple text-center"
-      style="font-size: 2rem">
+      style="font-size: 2rem"
+    >
       {{ i18n("labels.title") }}
     </div>
     <div
       class="text-color-grey text-font-inter-slim text-center"
-      style="font-size: 0.75rem; white-space: pre-line">
+      style="font-size: 0.75rem; white-space: pre-line"
+    >
       {{ i18n("labels.description") }}
     </div>
     <div class="row justify-center">
       <div class="col-10 col-md-8 column q-gutter-y-md">
         <div
           class="text-color-grey text-font-inter-bold q-ml-md"
-          style="font-size: 1rem">
+          style="font-size: 1rem"
+        >
           {{ i18n("labels.email") }}
         </div>
         <q-input
@@ -26,7 +29,8 @@
           outlined
           rounded
           type="email"
-          style="font-size: 0.7rem">
+          style="font-size: 0.7rem"
+        >
           <template v-slot:error>
             <div class="text-font-inter" style="font-size: 0.5rem">
               {{ i18n("errors.email") }}
@@ -45,9 +49,12 @@
         padding="0.4rem 4rem"
         size="1rem"
         unelevated
-        @click="submit">
+        @click="submit"
+      >
         <template v-slot:loading>
-          <div class="row justify-center items-center text-color-white text-font-inter-bolder">
+          <div
+            class="row justify-center items-center text-color-white text-font-inter-bolder"
+          >
             <q-spinner class="on-left" color="white" />
             {{ i18n("labels.sendingCode") }}
           </div>
@@ -69,8 +76,8 @@ export default defineComponent({
   props: {
     email: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   emits: ["update:email", "submit"],
   setup(props, { emit }) {
@@ -80,18 +87,20 @@ export default defineComponent({
 
     const email = computed({
       get: () => props.email,
-      set: (value) => emit("update:email", value)
+      set: (value) => emit("update:email", value),
     });
     const emailInput = reactive({
       content: email,
       error: null,
-      loading: false
+      loading: false,
     });
     emailInput.error = computed(() => {
       if (!emailInput.content) {
         return false;
       }
-      return !emailInput.content.match(/^([a-zA-Z\d]+[-_.]?)+@([a-zA-Z\d]+[-_.]?)+\.[a-z]+$/);
+      return !emailInput.content.match(
+        /^([a-zA-Z\d]+[-_.]?)+@([a-zA-Z\d]+[-_.]?)+\.[a-z]+$/
+      );
     });
 
     const canSubmit = computed(() => {
@@ -105,11 +114,15 @@ export default defineComponent({
 
     const submit = async () => {
       isCodeLoading.value = true;
-      await errorHandler(async () => {
-        await $api.auth.verifyEmail(props.email);
-        isCodeLoading.value = false;
-        emit("submit");
-      }, $q, $i18n.t);
+      await errorHandler(
+        async () => {
+          await $api.auth.verifyEmail(props.email);
+          isCodeLoading.value = false;
+          emit("submit");
+        },
+        $q,
+        $i18n.t
+      );
       isCodeLoading.value = false;
     };
 
@@ -118,9 +131,9 @@ export default defineComponent({
       canSubmit,
       isCodeLoading,
       i18n,
-      submit
+      submit,
     };
-  }
+  },
 });
 </script>
 

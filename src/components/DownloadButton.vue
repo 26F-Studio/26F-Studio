@@ -13,25 +13,27 @@
     padding="0.75rem 1.25rem"
     split
     style="border-radius: 0.75rem"
-    @click="downloadProduct(mainPlatform)">
+    @click="downloadProduct(mainPlatform)"
+  >
     <template v-slot:label>
       <div class="no-wrap">
         <div
           :class="`text-color-${disable ? 'grey' : 'white'}`"
           class="text-font-inter-bold"
-          style="font-size: 1.1rem">
+          style="font-size: 1.1rem"
+        >
           {{ disable ? i18n("labels.disable") : i18n("labels.download") }}
         </div>
         <div
           v-if="!disable"
           class="row justify-center items-center"
-          style="margin-top: 0.5rem">
-          <q-icon
-            :name="platformIconMap[mainPlatform]"
-            size="1rem" />
+          style="margin-top: 0.5rem"
+        >
+          <q-icon :name="platformIconMap[mainPlatform]" size="1rem" />
           <div
             class="text-color-white text-font-inter-slim"
-            style="font-size: 0.8rem">
+            style="font-size: 0.8rem"
+          >
             {{ i18n(`labels.platforms.${mainPlatform}`) }}
           </div>
         </div>
@@ -43,29 +45,34 @@
         :key="index"
         clickable
         v-close-popup
-        @click="downloadProduct(platform)">
-        <q-item-section
-          avatar
-          class="row"
-          style="min-width: unset">
+        @click="downloadProduct(platform)"
+      >
+        <q-item-section avatar class="row" style="min-width: unset">
           <div class="btn-primary">
             <q-icon
               :name="platformIconMap[platform]"
               class="q-ma-xs"
-              size="1rem" />
+              size="1rem"
+            />
           </div>
         </q-item-section>
         <q-item-section>
           <q-item-label
             class="text-color-grey text-font-inter-slim"
-            style="font-size: 0.7rem">
+            style="font-size: 0.7rem"
+          >
             {{ i18n(`labels.platforms.${platform}`) }}
           </q-item-label>
         </q-item-section>
         <q-item-section side>
           <q-icon
-            :name="['appstore', 'testflight'].includes(platform) ? 'mdi-open-in-new' : 'mdi-download'"
-            size="1rem" />
+            :name="
+              ['appstore', 'testflight'].includes(platform)
+                ? 'mdi-open-in-new'
+                : 'mdi-download'
+            "
+            size="1rem"
+          />
         </q-item-section>
       </q-item>
     </q-list>
@@ -84,12 +91,12 @@ export default defineComponent({
   props: {
     disable: {
       type: Boolean,
-      default: false
+      default: false,
     },
     product: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   setup(props) {
     const $q = useQuasar();
@@ -106,7 +113,7 @@ export default defineComponent({
       testflight: "mdi-apple",
       windows32: "mdi-microsoft-windows-classic",
       windows64: "mdi-microsoft-windows",
-      windowsInstaller: "mdi-microsoft-windows"
+      windowsInstaller: "mdi-microsoft-windows",
     };
 
     if ($q.platform.is.android) {
@@ -117,7 +124,7 @@ export default defineComponent({
       mainPlatform = "linux";
     }
 
-    platforms = platforms.filter(function(platform) {
+    platforms = platforms.filter(function (platform) {
       return platform !== mainPlatform;
     });
 
@@ -133,7 +140,7 @@ export default defineComponent({
           message: i18n("notifications.error"),
           spinner: false,
           timeout: 1500,
-          type: "negative"
+          type: "negative",
         });
       }
     };
@@ -143,9 +150,9 @@ export default defineComponent({
       platforms,
       platformIconMap,
       i18n,
-      downloadProduct
+      downloadProduct,
     };
-  }
+  },
 });
 </script>
 

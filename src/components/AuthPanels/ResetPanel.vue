@@ -2,12 +2,14 @@
   <div class="column q-gutter-y-md" style="margin-bottom: 2.25rem">
     <div
       class="text-color-grey text-font-inter-slim text-center"
-      style="font-size: 0.75rem; white-space: pre-line">
+      style="font-size: 0.75rem; white-space: pre-line"
+    >
       {{ i18n("labels.description") }}
     </div>
     <div
       class="row text-center items-center justify-center"
-      style="font-size: 0.6rem; white-space: pre-line">
+      style="font-size: 0.6rem; white-space: pre-line"
+    >
       <div class="text-color-grey text-font-inter-slim">
         {{ i18n("labels.resendBefore") }}
       </div>
@@ -17,7 +19,8 @@
         flat
         no-caps
         size="0.6rem"
-        @click="getCode">
+        @click="getCode"
+      >
         <div class="text-color-primary text-font-inter-bold">
           {{ i18n("labels.resend") }}
         </div>
@@ -30,7 +33,8 @@
       <div class="col-10 col-md-8 column q-gutter-y-md">
         <div
           class="text-color-grey text-font-inter-bold q-ml-md"
-          style="font-size: 1rem">
+          style="font-size: 1rem"
+        >
           {{ i18n("labels.code") }}
         </div>
         <q-input
@@ -40,7 +44,8 @@
           outlined
           rounded
           v-model="codeInput.content"
-          style="font-size: 0.7rem">
+          style="font-size: 0.7rem"
+        >
           <template v-slot:error>
             <div class="text-font-inter" style="font-size: 0.5rem">
               {{ i18n("errors.code") }}
@@ -51,12 +56,14 @@
     </div>
     <div
       class="text-color-grey text-font-inter-slim text-center"
-      style="font-size: 0.6rem; white-space: pre-line">
+      style="font-size: 0.6rem; white-space: pre-line"
+    >
       {{ i18n("labels.reminder") }}
     </div>
     <div
       class="text-color-grey text-font-inter self-center"
-      style="font-size: 0.5rem; white-space: pre-line">
+      style="font-size: 0.5rem; white-space: pre-line"
+    >
       {{ i18n("labels.constraints") }}
     </div>
     <div class="row justify-center full-width">
@@ -64,7 +71,8 @@
         <div class="column q-gutter-y-md">
           <div
             class="text-color-grey text-font-inter-bold q-ml-md"
-            style="font-size: 1rem">
+            style="font-size: 1rem"
+          >
             {{ i18n("labels.password") }}
           </div>
           <q-input
@@ -75,12 +83,14 @@
             outlined
             rounded
             v-model="passwordInput.content"
-            style="font-size: 0.7rem">
+            style="font-size: 0.7rem"
+          >
             <template v-slot:append>
               <q-icon
                 :name="showPassword ? 'visibility' : 'visibility_off'"
                 class="cursor-pointer"
-                @click="showPassword = !showPassword" />
+                @click="showPassword = !showPassword"
+              />
             </template>
             <template v-slot:error>
               <div class="text-font-inter" style="font-size: 0.5rem">
@@ -90,7 +100,8 @@
           </q-input>
           <div
             class="text-color-grey text-font-inter-bold q-ml-md"
-            style="font-size: 1rem">
+            style="font-size: 1rem"
+          >
             {{ i18n("labels.confirmPassword") }}
           </div>
           <q-input
@@ -101,12 +112,14 @@
             outlined
             rounded
             v-model="passwordConfirmInput.content"
-            style="font-size: 0.7rem">
+            style="font-size: 0.7rem"
+          >
             <template v-slot:append>
               <q-icon
                 :name="showPassword ? 'visibility' : 'visibility_off'"
                 class="cursor-pointer"
-                @click="showPassword = !showPassword" />
+                @click="showPassword = !showPassword"
+              />
             </template>
             <template v-slot:error>
               <div class="text-font-inter" style="font-size: 0.5rem">
@@ -125,7 +138,8 @@
             padding="0.4rem 1.25rem"
             size="1rem"
             unelevated
-            @click="submit" />
+            @click="submit"
+          />
         </div>
       </div>
     </div>
@@ -146,8 +160,8 @@ export default defineComponent({
   props: {
     email: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   setup(props) {
     const $api = useApi();
@@ -158,7 +172,7 @@ export default defineComponent({
     const codeInput = reactive({
       content: "",
       error: null,
-      loading: false
+      loading: false,
     });
     codeInput.error = computed(() => {
       if (!codeInput.content) {
@@ -170,28 +184,30 @@ export default defineComponent({
     const passwordInput = reactive({
       content: "",
       error: null,
-      loading: false
+      loading: false,
     });
     passwordInput.error = computed(() => {
       if (!passwordInput.content) {
         return false;
       }
       return !passwordInput.content.match(
-        RegExp("^(?!.*[^A-Za-z0-9#?!@$%^&*-_]$)" +
-          "((?=.*[a-z])(?=.*[A-Z])|" +
-          "(?=.*[a-z])(?=.*[0-9])|" +
-          "(?=.*[a-z])(?=.*[#?!@$%^&*-_])|" +
-          "(?=.*[A-Z])(?=.*[0-9])|" +
-          "(?=.*[A-Z])(?=.*[#?!@$%^&*-_])|" +
-          "(?=.*[0-9])(?=.*[#?!@$%^&*-_]))" +
-          ".{8,64}$")
+        RegExp(
+          "^(?!.*[^A-Za-z0-9#?!@$%^&*-_]$)" +
+            "((?=.*[a-z])(?=.*[A-Z])|" +
+            "(?=.*[a-z])(?=.*[0-9])|" +
+            "(?=.*[a-z])(?=.*[#?!@$%^&*-_])|" +
+            "(?=.*[A-Z])(?=.*[0-9])|" +
+            "(?=.*[A-Z])(?=.*[#?!@$%^&*-_])|" +
+            "(?=.*[0-9])(?=.*[#?!@$%^&*-_]))" +
+            ".{8,64}$"
+        )
       );
     });
 
     const passwordConfirmInput = reactive({
       content: "",
       error: null,
-      loading: false
+      loading: false,
     });
     passwordConfirmInput.error = computed(() => {
       if (!passwordConfirmInput.content) {
@@ -201,9 +217,14 @@ export default defineComponent({
     });
 
     const canSubmit = computed(() => {
-      return codeInput.content && !codeInput.error &&
-        passwordInput.content && !passwordInput.error &&
-        passwordConfirmInput.content && !passwordConfirmInput.error;
+      return (
+        codeInput.content &&
+        !codeInput.error &&
+        passwordInput.content &&
+        !passwordInput.error &&
+        passwordConfirmInput.content &&
+        !passwordConfirmInput.error
+      );
     });
 
     const showPassword = ref(false);
@@ -216,34 +237,42 @@ export default defineComponent({
 
     const getCode = async () => {
       isCodeLoading.value = true;
-      await errorHandler(async () => {
-        await $api.auth.verifyEmail(props.email);
-        isCodeLoading.value = false;
-        $q.notify({
-          type: "positive",
-          message: i18n("notifications.codeSent")
-        });
-      }, $q, $i18n.t);
+      await errorHandler(
+        async () => {
+          await $api.auth.verifyEmail(props.email);
+          isCodeLoading.value = false;
+          $q.notify({
+            type: "positive",
+            message: i18n("notifications.codeSent"),
+          });
+        },
+        $q,
+        $i18n.t
+      );
       isCodeLoading.value = false;
     };
 
     const submit = async () => {
       isSubmitLoading.value = true;
-      await errorHandler(async () => {
-        await $api.auth.resetEmail(
-          props.email,
-          codeInput.content,
-          await getPasswordHash(props.email, passwordInput.content)
-        );
-        isSubmitLoading.value = false;
-        $q.notify({
-          type: "positive",
-          message: i18n("notifications.resetSuccess")
-        });
-        setTimeout(() => {
-          $router.go(0);
-        }, 2000);
-      }, $q, $i18n.t);
+      await errorHandler(
+        async () => {
+          await $api.auth.resetEmail(
+            props.email,
+            codeInput.content,
+            await getPasswordHash(props.email, passwordInput.content)
+          );
+          isSubmitLoading.value = false;
+          $q.notify({
+            type: "positive",
+            message: i18n("notifications.resetSuccess"),
+          });
+          setTimeout(() => {
+            $router.go(0);
+          }, 2000);
+        },
+        $q,
+        $i18n.t
+      );
       isSubmitLoading.value = false;
     };
 
@@ -257,9 +286,9 @@ export default defineComponent({
       isSubmitLoading,
       i18n,
       getCode,
-      submit
+      submit,
     };
-  }
+  },
 });
 </script>
 

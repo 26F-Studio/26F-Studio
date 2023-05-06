@@ -2,17 +2,20 @@
   <div class="column q-gutter-y-lg" style="margin-bottom: 2.25rem">
     <div
       class="text-color-primary text-font-inter-bolder text-shadow-purple text-center"
-      style="font-size: 2rem">
+      style="font-size: 2rem"
+    >
       {{ i18n("labels.title") }}
     </div>
     <div
       class="text-color-grey text-font-inter-slim text-center"
-      style="font-size: 0.75rem; white-space: pre-line">
+      style="font-size: 0.75rem; white-space: pre-line"
+    >
       {{ i18n("labels.description", { email: email }) }}
     </div>
     <div
       class="row text-center items-center justify-center"
-      style="font-size: 0.75rem; white-space: pre-line">
+      style="font-size: 0.75rem; white-space: pre-line"
+    >
       <div class="text-color-grey text-font-inter-slim">
         {{ i18n("labels.resendBefore") }}
       </div>
@@ -22,7 +25,8 @@
         flat
         no-caps
         size="0.75rem"
-        @click="getCode">
+        @click="getCode"
+      >
         <div class="text-color-primary text-font-inter-bold">
           {{ i18n("labels.resend") }}
         </div>
@@ -36,7 +40,8 @@
         <div class="column q-gutter-y-md">
           <div
             class="text-color-grey text-font-inter-bolder q-ml-md"
-            style="font-size: 1rem">
+            style="font-size: 1rem"
+          >
             {{ i18n("labels.code") }}
           </div>
           <q-input
@@ -46,7 +51,8 @@
             outlined
             rounded
             v-model="codeInput.content"
-            style="font-size: 0.7rem">
+            style="font-size: 0.7rem"
+          >
             <template v-slot:error>
               <div class="text-font-inter" style="font-size: 0.5rem">
                 {{ i18n("errors.code") }}
@@ -64,27 +70,18 @@
             padding="0.4rem 1.25rem"
             size="1rem"
             unelevated
-            @click="login" />
+            @click="login"
+          />
         </div>
         <div class="row justify-center">
-          <q-btn
-            dense
-            flat
-            no-caps
-            size="0.75rem"
-            @click="$emit('go', -1)">
+          <q-btn dense flat no-caps size="0.75rem" @click="$emit('go', -1)">
             <div class="text-color-primary text-font-inter-bolder">
               {{ i18n("labels.loginWithPassword") }}
             </div>
           </q-btn>
         </div>
         <div class="row justify-center">
-          <q-btn
-            dense
-            flat
-            no-caps
-            size="0.75rem"
-            @click="$emit('go', -2)">
+          <q-btn dense flat no-caps size="0.75rem" @click="$emit('go', -2)">
             <div class="text-color-primary text-font-inter-bolder">
               {{ i18n("labels.restart") }}
             </div>
@@ -110,12 +107,12 @@ export default defineComponent({
   props: {
     code: {
       type: String,
-      required: true
+      required: true,
     },
     email: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   emits: ["go"],
   setup(props, { emit }) {
@@ -127,12 +124,12 @@ export default defineComponent({
 
     const code = computed({
       get: () => props.code,
-      set: (value) => emit("update:code", value)
+      set: (value) => emit("update:code", value),
     });
     const codeInput = reactive({
       content: code,
       error: null,
-      loading: false
+      loading: false,
     });
     codeInput.error = computed(() => {
       if (!codeInput.content) {
@@ -153,34 +150,45 @@ export default defineComponent({
 
     const getCode = async () => {
       isCodeLoading.value = true;
-      await errorHandler(async () => {
-        await $api.auth.verifyEmail(props.email);
-        isCodeLoading.value = false;
-      }, $q, $i18n.t);
+      await errorHandler(
+        async () => {
+          await $api.auth.verifyEmail(props.email);
+          isCodeLoading.value = false;
+        },
+        $q,
+        $i18n.t
+      );
       isCodeLoading.value = false;
     };
 
     const login = async () => {
       isSubmitLoading.value = true;
-      await errorHandler(async () => {
-        const { code, data } = await $api.auth.loginEmailCode(props.email, codeInput.content);
-        $player.accessToken = data.accessToken;
-        await $player.update();
-        isSubmitLoading.value = false;
-        $q.notify({
-          type: "positive",
-          message: i18n("notifications.loginSuccess")
-        });
-        if (code === ResultCode.Continued) {
-          setTimeout(() => {
-            emit("go", +1);
-          }, 2000);
-        } else {
-          setTimeout(() => {
-            $router.go(-1);
-          }, 2000);
-        }
-      }, $q, $i18n.t);
+      await errorHandler(
+        async () => {
+          const { code, data } = await $api.auth.loginEmailCode(
+            props.email,
+            codeInput.content
+          );
+          $player.accessToken = data.accessToken;
+          await $player.update();
+          isSubmitLoading.value = false;
+          $q.notify({
+            type: "positive",
+            message: i18n("notifications.loginSuccess"),
+          });
+          if (code === ResultCode.Continued) {
+            setTimeout(() => {
+              emit("go", +1);
+            }, 2000);
+          } else {
+            setTimeout(() => {
+              $router.go(-1);
+            }, 2000);
+          }
+        },
+        $q,
+        $i18n.t
+      );
       isSubmitLoading.value = false;
     };
 
@@ -191,9 +199,9 @@ export default defineComponent({
       isCodeLoading,
       i18n,
       getCode,
-      login
+      login,
     };
-  }
+  },
 });
 </script>
 

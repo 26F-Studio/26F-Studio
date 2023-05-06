@@ -5,7 +5,8 @@
       :key="langOption['value']"
       v-close-popup
       clickable
-      @click="setLanguage(langOption['value'])">
+      @click="setLanguage(langOption['value'])"
+    >
       <q-item-section class="text-center">
         {{ langOption["label"] }}
       </q-item-section>
@@ -27,11 +28,12 @@ export default defineComponent({
     const $q = useQuasar();
     const $i18n = useI18n({ useScope: "global" });
 
-    const appLanguages = languages.filter(lang =>
+    const appLanguages = languages.filter((lang) =>
       ["en-US", "zh-CN"].includes(lang.isoName)
     );
-    const langOptions = appLanguages.map(lang => ({
-      label: lang.nativeName, value: lang.isoName
+    const langOptions = appLanguages.map((lang) => ({
+      label: lang.nativeName,
+      value: lang.isoName,
     }));
 
     const i18n = (relativePath) => {
@@ -39,10 +41,13 @@ export default defineComponent({
     };
     const setLanguage = (lang) => {
       $i18n.locale.value = lang;
-      $q.localStorage.set(`${useProject()}.settings.language`, $i18n.locale.value);
+      $q.localStorage.set(
+        `${useProject()}.settings.language`,
+        $i18n.locale.value
+      );
     };
 
     return { langOptions, i18n, setLanguage };
-  }
+  },
 });
 </script>

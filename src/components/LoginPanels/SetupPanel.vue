@@ -2,17 +2,20 @@
   <div class="column q-gutter-y-lg" style="margin-bottom: 2.25rem">
     <div
       class="text-color-primary text-font-inter-bolder text-shadow-purple text-center"
-      style="font-size: 2rem">
+      style="font-size: 2rem"
+    >
       {{ i18n("labels.title") }}
     </div>
     <div
       class="text-color-grey text-font-inter-slim text-center"
-      style="font-size: 0.75rem; white-space: pre-line">
+      style="font-size: 0.75rem; white-space: pre-line"
+    >
       {{ i18n("labels.description") }}
     </div>
     <div
       class="text-color-grey text-font-inter-slim self-center"
-      style="font-size: 0.6rem; white-space: pre-line">
+      style="font-size: 0.6rem; white-space: pre-line"
+    >
       {{ i18n("labels.constraints") }}
     </div>
     <div class="row justify-center">
@@ -20,7 +23,8 @@
         <div class="column q-gutter-y-md">
           <div
             class="text-color-grey text-font-inter-bolder q-ml-md"
-            style="font-size: 1rem">
+            style="font-size: 1rem"
+          >
             {{ i18n("labels.password") }}
           </div>
           <q-input
@@ -31,12 +35,14 @@
             outlined
             rounded
             v-model="passwordInput.content"
-            style="font-size: 0.7rem">
+            style="font-size: 0.7rem"
+          >
             <template v-slot:append>
               <q-icon
                 :name="showPassword ? 'visibility' : 'visibility_off'"
                 class="cursor-pointer"
-                @click="showPassword = !showPassword" />
+                @click="showPassword = !showPassword"
+              />
             </template>
             <template v-slot:error>
               <div class="text-font-inter" style="font-size: 0.5rem">
@@ -46,7 +52,8 @@
           </q-input>
           <div
             class="text-color-grey text-font-inter-bolder q-ml-md"
-            style="font-size: 1rem">
+            style="font-size: 1rem"
+          >
             {{ i18n("labels.confirmPassword") }}
           </div>
           <q-input
@@ -57,12 +64,14 @@
             outlined
             rounded
             v-model="passwordConfirmInput.content"
-            style="font-size: 0.7rem">
+            style="font-size: 0.7rem"
+          >
             <template v-slot:append>
               <q-icon
                 :name="showPassword ? 'visibility' : 'visibility_off'"
                 class="cursor-pointer"
-                @click="showPassword = !showPassword" />
+                @click="showPassword = !showPassword"
+              />
             </template>
             <template v-slot:error>
               <div class="text-font-inter" style="font-size: 0.5rem">
@@ -81,14 +90,11 @@
             padding="0.4rem 1.25rem"
             size="1rem"
             unelevated
-            @click="submit" />
+            @click="submit"
+          />
         </div>
         <div class="row justify-center q-mt-xl">
-          <q-btn
-            flat
-            no-caps
-            size="0.75rem"
-            @click="$emit('go', +1)">
+          <q-btn flat no-caps size="0.75rem" @click="$emit('go', +1)">
             <div class="text-color-primary text-font-inter-bolder">
               {{ i18n("labels.maybeLater") }}
             </div>
@@ -112,12 +118,12 @@ export default defineComponent({
   props: {
     code: {
       type: String,
-      required: true
+      required: true,
     },
     email: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   setup(props, { emit }) {
     const $api = useApi();
@@ -127,28 +133,30 @@ export default defineComponent({
     const passwordInput = reactive({
       content: "",
       error: null,
-      loading: false
+      loading: false,
     });
     passwordInput.error = computed(() => {
       if (!passwordInput.content) {
         return false;
       }
       return !passwordInput.content.match(
-        RegExp("^(?!.*[^A-Za-z0-9#?!@$%^&*-_]$)" +
-          "((?=.*[a-z])(?=.*[A-Z])|" +
-          "(?=.*[a-z])(?=.*[0-9])|" +
-          "(?=.*[a-z])(?=.*[#?!@$%^&*-_])|" +
-          "(?=.*[A-Z])(?=.*[0-9])|" +
-          "(?=.*[A-Z])(?=.*[#?!@$%^&*-_])|" +
-          "(?=.*[0-9])(?=.*[#?!@$%^&*-_]))" +
-          ".{8,64}$")
+        RegExp(
+          "^(?!.*[^A-Za-z0-9#?!@$%^&*-_]$)" +
+            "((?=.*[a-z])(?=.*[A-Z])|" +
+            "(?=.*[a-z])(?=.*[0-9])|" +
+            "(?=.*[a-z])(?=.*[#?!@$%^&*-_])|" +
+            "(?=.*[A-Z])(?=.*[0-9])|" +
+            "(?=.*[A-Z])(?=.*[#?!@$%^&*-_])|" +
+            "(?=.*[0-9])(?=.*[#?!@$%^&*-_]))" +
+            ".{8,64}$"
+        )
       );
     });
 
     const passwordConfirmInput = reactive({
       content: "",
       error: null,
-      loading: false
+      loading: false,
     });
     passwordConfirmInput.error = computed(() => {
       if (!passwordConfirmInput.content) {
@@ -158,8 +166,12 @@ export default defineComponent({
     });
 
     const canSubmit = computed(() => {
-      return passwordInput.content && !passwordInput.error &&
-        passwordConfirmInput.content && !passwordConfirmInput.error;
+      return (
+        passwordInput.content &&
+        !passwordInput.error &&
+        passwordConfirmInput.content &&
+        !passwordConfirmInput.error
+      );
     });
 
     const showPassword = ref(false);
@@ -171,19 +183,23 @@ export default defineComponent({
 
     const submit = async () => {
       isSubmitLoading.value = true;
-      await errorHandler(async () => {
-        await $api.auth.resetEmail(
-          props.email,
-          props.code,
-          await getPasswordHash(props.email, passwordInput.content)
-        );
-        isSubmitLoading.value = false;
-        $q.notify({
-          type: "positive",
-          message: i18n("notifications.setupSuccess")
-        });
-        emit("go", +1);
-      }, $q, $i18n.t);
+      await errorHandler(
+        async () => {
+          await $api.auth.resetEmail(
+            props.email,
+            props.code,
+            await getPasswordHash(props.email, passwordInput.content)
+          );
+          isSubmitLoading.value = false;
+          $q.notify({
+            type: "positive",
+            message: i18n("notifications.setupSuccess"),
+          });
+          emit("go", +1);
+        },
+        $q,
+        $i18n.t
+      );
       isSubmitLoading.value = false;
     };
 
@@ -194,9 +210,9 @@ export default defineComponent({
       showPassword,
       isSubmitLoading,
       i18n,
-      submit
+      submit,
     };
-  }
+  },
 });
 </script>
 

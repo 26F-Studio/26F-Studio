@@ -9,14 +9,14 @@
     :stretch="!playerStore.loggedIn"
     class="button-text"
     :size="$q.screen.gt.sm ? '0.7rem' : 'md'"
-    @click="onButtonClick">
+    @click="onButtonClick"
+  >
     <q-avatar
       v-if="playerStore.loggedIn"
       :icon="playerStore.avatar ? undefined : 'mdi-account-circle'"
-      :size="$q.screen.gt.sm ? '1.7rem' : 'md'">
-      <q-img
-        v-if="playerStore.avatar"
-        :src="playerStore.avatar" />
+      :size="$q.screen.gt.sm ? '1.7rem' : 'md'"
+    >
+      <q-img v-if="playerStore.avatar" :src="playerStore.avatar" />
     </q-avatar>
     <q-menu
       ref="menu"
@@ -25,32 +25,26 @@
       anchor="bottom middle"
       no-parent-event
       self="top middle"
-      style="border-radius: 0.75rem; min-width: 11rem">
+      style="border-radius: 0.75rem; min-width: 11rem"
+    >
       <q-card bordered>
         <q-card-section class="q-gutter-sm">
           <div class="row justify-center">
-            <q-responsive
-              :ratio="1/2"
-              class="col-6">
-              <q-btn
-                round
-                dense
-                flat
-                @click="goProfile"
-                style="z-index: 0">
-                <q-img
-                  :src="playerStore.avatar"
-                  style="border-radius: 50%" />
+            <q-responsive :ratio="1 / 2" class="col-6">
+              <q-btn round dense flat @click="goProfile" style="z-index: 0">
+                <q-img :src="playerStore.avatar" style="border-radius: 50%" />
                 <div
                   class="absolute-bottom-right no-pointer-events"
-                  style="margin-bottom: -0.1rem; margin-right: -0.3rem">
+                  style="margin-bottom: -0.1rem; margin-right: -0.3rem"
+                >
                   <q-avatar
                     :class="flag ? `fis ${flag}` : undefined"
                     :color="flag ? undefined : 'primary'"
                     :icon="flag ? undefined : 'mdi-help'"
                     round
                     size="1.5rem"
-                    text-color="white" />
+                    text-color="white"
+                  />
                 </div>
               </q-btn>
             </q-responsive>
@@ -71,12 +65,9 @@
             label="Account Settings"
             no-caps
             size="0.75rem"
-            @click="goProfile" />
-          <q-btn
-            flat
-            no-caps
-            size="0.65rem"
-            @click="logout">
+            @click="goProfile"
+          />
+          <q-btn flat no-caps size="0.65rem" @click="logout">
             <div class="text-color-primary text-font-inter-bolder">
               {{ i18n("labels.signOut") }}
             </div>
@@ -146,9 +137,9 @@ export default defineComponent({
       i18n,
       onButtonClick,
       goProfile,
-      logout
+      logout,
     };
-  }
+  },
 });
 </script>
 

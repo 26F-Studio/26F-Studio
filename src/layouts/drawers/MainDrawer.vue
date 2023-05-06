@@ -1,41 +1,45 @@
 <template>
-  <q-drawer
-    v-model="isOpen"
-    elevated
-    overlay>
+  <q-drawer v-model="isOpen" elevated overlay>
     <BackgroundImage>
       <div class="absolute-bottom bg-transparent">
         <div class="row q-gutter-x-lg q-mb-sm items-center">
           <q-card
             class="bg-white"
-            style="border-radius: 0.75rem; height: 3rem; width: 3rem">
+            style="border-radius: 0.75rem; height: 3rem; width: 3rem"
+          >
             <div
               class="text-color-primary text-font-galaxy-slim text-shadow-purple absolute-center"
-              style="font-size: 3rem; top: 1.25rem">
+              style="font-size: 3rem; top: 1.25rem"
+            >
               {{ "\u{0FFFFF}" }}
             </div>
           </q-card>
           <div
             class="text-color-white text-font-galaxy-bold"
-            style="font-size: 2.5rem; margin-bottom: 0.5rem">
+            style="font-size: 2.5rem; margin-bottom: 0.5rem"
+          >
             {{ i18n("labels.title") }}
           </div>
         </div>
       </div>
     </BackgroundImage>
     <q-list>
-      <template v-for="(category, categoryIndex) in categories" :key="categoryIndex">
+      <template
+        v-for="(category, categoryIndex) in categories"
+        :key="categoryIndex"
+      >
         <q-expansion-item
           :content-inset-level="1"
           group="drawer_categories"
           :icon="category.icon"
-          :label="i18n(`labels.${category.label}`)">
+          :label="i18n(`labels.${category.label}`)"
+        >
           <q-list>
-            <template v-for="(item, itemIndex) in category.list" :key="itemIndex">
-              <q-item
-                clickable
-                v-ripple
-                @click="$router.push(item.to)">
+            <template
+              v-for="(item, itemIndex) in category.list"
+              :key="itemIndex"
+            >
+              <q-item clickable v-ripple @click="$router.push(item.to)">
                 <q-item-section>
                   {{ i18n(`labels.${item.label}`) }}
                 </q-item-section>
@@ -48,14 +52,16 @@
       <q-expansion-item
         :label="i18n('labels.languageMenu')"
         group="drawer_extras"
-        icon="language">
+        icon="language"
+      >
         <LanguageList />
       </q-expansion-item>
       <q-expansion-item
         :content-inset-level="1"
         :label="i18n('labels.settingsMenu')"
         group="drawer_extras"
-        icon="settings">
+        icon="settings"
+      >
         <SettingList />
       </q-expansion-item>
     </q-list>
@@ -76,80 +82,93 @@ export default defineComponent({
   props: {
     modelValue: {
       type: Boolean,
-      default: () => false
-    }
+      default: () => false,
+    },
   },
   setup(props, { emit }) {
     const $i18n = useI18n({ useScope: "global" });
 
     const isOpen = computed({
       get: () => props.modelValue,
-      set: (value) => emit("update:modelValue", value)
+      set: (value) => emit("update:modelValue", value),
     });
     const categories = [
       {
         label: "products",
         icon: "mdi-apps",
-        list: [{
-          label: "techminoGalaxy",
-          to: "/products/techmino-galaxy"
-        }, {
-          label: "techmino",
-          to: "/products/techmino"
-        }, {
-          label: "quatrack",
-          to: "/products/quatrack"
-        }, {
-          label: "miscellaneous",
-          to: "/products/miscellaneous"
-        }]
+        list: [
+          {
+            label: "techminoGalaxy",
+            to: "/products/techmino-galaxy",
+          },
+          {
+            label: "techmino",
+            to: "/products/techmino",
+          },
+          {
+            label: "quatrack",
+            to: "/products/quatrack",
+          },
+          {
+            label: "miscellaneous",
+            to: "/products/miscellaneous",
+          },
+        ],
       },
       {
         label: "support",
         icon: "mdi-help-circle-outline",
-        list: [{
-          label: "accountSettings",
-          to: "/account/settings"
-        }, {
-          label: "gameManuals",
-          to: "/support/manuals"
-        }, {
-          label: "glossary",
-          to: "/support/glossary"
-        }, {
-          label: "utilities",
-          to: "/support/utilities"
-        }]
+        list: [
+          {
+            label: "accountSettings",
+            to: "/account/settings",
+          },
+          {
+            label: "gameManuals",
+            to: "/support/manuals",
+          },
+          {
+            label: "glossary",
+            to: "/support/glossary",
+          },
+          {
+            label: "utilities",
+            to: "/support/utilities",
+          },
+        ],
       },
       {
         label: "about",
         icon: "mdi-information-outline",
-        list: [{
-          label: "whoWeAre",
-          to: "/about/us"
-        }, {
-          label: "brandingGuidelines",
-          to: "/about/guidelines"
-        }]
+        list: [
+          {
+            label: "whoWeAre",
+            to: "/about/us",
+          },
+          {
+            label: "brandingGuidelines",
+            to: "/about/guidelines",
+          },
+        ],
       },
       {
         label: "contact",
         icon: "mdi-face-agent",
-        list: [{
-          label: "joinUs",
-          to: "/contact/join"
-        }]
-      }
+        list: [
+          {
+            label: "joinUs",
+            to: "/contact/join",
+          },
+        ],
+      },
     ];
 
     const i18n = (relativePath) => {
       return $i18n.t("layouts.drawers.main." + relativePath);
     };
     return { isOpen, categories, i18n };
-  }
+  },
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

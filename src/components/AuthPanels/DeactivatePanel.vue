@@ -14,7 +14,8 @@
         :loading="emailInput.loading"
         rounded
         :placeholder="i18n('placeholders.email')"
-        type="email">
+        type="email"
+      >
         <template v-slot:prepend>
           <q-icon name="mail" />
         </template>
@@ -32,17 +33,13 @@
         outlined
         :loading="codeInput.loading"
         :placeholder="i18n('placeholders.code')"
-        rounded>
+        rounded
+      >
         <template v-slot:prepend>
           <q-icon name="mdi-form-textbox-password" />
         </template>
         <template v-slot:append>
-          <q-btn
-            flat
-            :loading="isCodeLoading"
-            no-caps
-            rounded
-            @click="getCode">
+          <q-btn flat :loading="isCodeLoading" no-caps rounded @click="getCode">
             <div class="btn-text">
               {{ i18n(`labels.getCode`) }}
             </div>
@@ -58,13 +55,13 @@
       no-caps
       size="lg"
       unelevated
-      @click="showDialog = true">
-      <q-dialog
-        persistent
-        v-model="showDialog">
+      @click="showDialog = true"
+    >
+      <q-dialog persistent v-model="showDialog">
         <q-card
           class="bg-negative text-white"
-          style="font-family: 'Inter', sans-serif;">
+          style="font-family: 'Inter', sans-serif"
+        >
           <q-card-section>
             <div class="text-h6">{{ i18n("labels.holdOn") }}</div>
           </q-card-section>
@@ -84,12 +81,14 @@
               :label="i18n('labels.confirm')"
               no-caps
               v-close-popup
-              @click="submit" />
+              @click="submit"
+            />
             <q-btn
               color="primary"
               :label="i18n('labels.cancel')"
               no-caps
-              v-close-popup />
+              v-close-popup
+            />
           </q-card-actions>
         </q-card>
       </q-dialog>
@@ -119,19 +118,21 @@ export default defineComponent({
     const emailInput = reactive({
       content: "",
       error: null,
-      loading: false
+      loading: false,
     });
     emailInput.error = computed(() => {
       if (!emailInput.content) {
         return false;
       }
-      return !emailInput.content.match(/^([a-zA-Z\d]+[-_.]?)+@([a-zA-Z\d]+[-_.]?)+\.[a-z]+$/);
+      return !emailInput.content.match(
+        /^([a-zA-Z\d]+[-_.]?)+@([a-zA-Z\d]+[-_.]?)+\.[a-z]+$/
+      );
     });
 
     const codeInput = reactive({
       content: "",
       error: null,
-      loading: false
+      loading: false,
     });
     codeInput.error = computed(() => {
       if (!codeInput.content) {
@@ -141,8 +142,12 @@ export default defineComponent({
     });
 
     const canSubmit = computed(() => {
-      return emailInput.content && !emailInput.error &&
-        codeInput.content && !codeInput.error;
+      return (
+        emailInput.content &&
+        !emailInput.error &&
+        codeInput.content &&
+        !codeInput.error
+      );
     });
     const isCodeLoading = ref(false);
     const showDialog = ref(false);
@@ -154,36 +159,47 @@ export default defineComponent({
 
     const getCode = async () => {
       isCodeLoading.value = true;
-      await errorHandler(async () => {
-        await $api.auth.verifyEmail(emailInput.content);
-        isCodeLoading.value = false;
-        $q.notify({
-          type: "positive",
-          message: i18n("notifications.getCodeSuccess")
-        });
-      }, $q, $i18n.t);
+      await errorHandler(
+        async () => {
+          await $api.auth.verifyEmail(emailInput.content);
+          isCodeLoading.value = false;
+          $q.notify({
+            type: "positive",
+            message: i18n("notifications.getCodeSuccess"),
+          });
+        },
+        $q,
+        $i18n.t
+      );
       isCodeLoading.value = false;
     };
 
     const submit = async () => {
       isSubmitLoading.value = true;
-      await errorHandler(async () => {
-        const { code, data } = await $api.auth.deactivateEmail($player.accessToken, codeInput.content);
-        const { accessToken, refreshToken } = data;
-        console.log(code);
-        console.log(accessToken);
-        console.log(refreshToken);
-        $player.accessToken = accessToken;
-        await $player.update();
-        isSubmitLoading.value = false;
-        $q.notify({
-          type: "positive",
-          message: i18n("notifications.loginSuccess")
-        });
-        setTimeout(() => {
-          $router.go(-1);
-        }, 2000);
-      }, $q, $i18n.t);
+      await errorHandler(
+        async () => {
+          const { code, data } = await $api.auth.deactivateEmail(
+            $player.accessToken,
+            codeInput.content
+          );
+          const { accessToken, refreshToken } = data;
+          console.log(code);
+          console.log(accessToken);
+          console.log(refreshToken);
+          $player.accessToken = accessToken;
+          await $player.update();
+          isSubmitLoading.value = false;
+          $q.notify({
+            type: "positive",
+            message: i18n("notifications.loginSuccess"),
+          });
+          setTimeout(() => {
+            $router.go(-1);
+          }, 2000);
+        },
+        $q,
+        $i18n.t
+      );
       isSubmitLoading.value = false;
     };
 
@@ -196,9 +212,9 @@ export default defineComponent({
       isSubmitLoading,
       i18n,
       getCode,
-      submit
+      submit,
     };
-  }
+  },
 });
 </script>
 
@@ -207,19 +223,19 @@ export default defineComponent({
 
 .label-text {
   color: #636365;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 1.5vw;
-  font-feature-settings: 'pnum' on, 'lnum' on;
+  font-feature-settings: "pnum" on, "lnum" on;
 }
 
 .btn-text {
-  background: linear-gradient(90.8deg, #BF55D4 26.21%, #6271CD 86.62%);
+  background: linear-gradient(90.8deg, #bf55d4 26.21%, #6271cd 86.62%);
   text-shadow: 0 2vw 4vw rgba(48, 0, 240, 0.31);
-  font-family: 'inter', sans-serif;
+  font-family: "inter", sans-serif;
   font-weight: 800;
-  font-feature-settings: 'pnum' on, 'lnum' on;
+  font-feature-settings: "pnum" on, "lnum" on;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

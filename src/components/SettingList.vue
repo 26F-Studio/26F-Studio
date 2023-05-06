@@ -10,7 +10,8 @@
           checked-icon="dark_mode"
           color="primary"
           unchecked-icon="light_mode"
-          @update:model-value="toggleDarkMode" />
+          @update:model-value="toggleDarkMode"
+        />
       </q-item-section>
     </q-item>
   </q-list>
@@ -37,6 +38,6 @@ export default defineComponent({
     };
     return { i18n, toggleDarkMode };
   },
-  methods: {}
+  methods: {},
 });
 </script>

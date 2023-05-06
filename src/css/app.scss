@@ -31,11 +31,11 @@
 .text {
   &-color {
     &-black {
-      color: #1D1D1D;
+      color: #1d1d1d;
     }
 
     &-blue {
-      color: #3C76E8;
+      color: #3c76e8;
     }
 
     &-grey {
@@ -43,22 +43,22 @@
     }
 
     &-primary {
-      background: linear-gradient(130deg, #479EEE 20%, #7C4FFF 80%);
+      background: linear-gradient(130deg, #479eee 20%, #7c4fff 80%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     &-white {
-      color: #F1F2F3;
+      color: #f1f2f3;
     }
   }
 
   &-font {
-    font-feature-settings: 'pnum' on, 'lnum' on;
+    font-feature-settings: "pnum" on, "lnum" on;
 
     &-galaxy {
       @extend .text-font;
-      font-family: 'galaxy-sans', 'resource-han-rounded', sans-serif;
+      font-family: "galaxy-sans", "resource-han-rounded", sans-serif;
 
       &-bold {
         @extend .text-font-galaxy;
@@ -73,7 +73,7 @@
 
     &-galaxy-oblique {
       @extend .text-font;
-      font-family: 'galaxy-sans-oblique', 'resource-han-rounded', sans-serif;
+      font-family: "galaxy-sans-oblique", "resource-han-rounded", sans-serif;
 
       &-bold {
         @extend .text-font-galaxy-oblique;
@@ -88,7 +88,7 @@
 
     &-inter {
       @extend .text-font;
-      font-family: 'inter', 'resource-han-rounded', sans-serif;
+      font-family: "inter", "resource-han-rounded", sans-serif;
       font-weight: 500;
 
       &-slim {
@@ -124,13 +124,13 @@
 
   &-primary {
     @extend .text-color-white, .text-font-inter-bold, .btn;
-    background: linear-gradient(130deg, #479EEE 0%, #7C4FFF 100%);
+    background: linear-gradient(130deg, #479eee 0%, #7c4fff 100%);
     box-shadow: 0 0.5rem 1.5rem rgba(36, 0, 182, 0.21);
   }
 
   &-secondary {
     @extend .text-color-blue, .text-font-inter-bold, .btn;
-    background: #CBDDFF;
+    background: #cbddff;
   }
 
   &-disabled {

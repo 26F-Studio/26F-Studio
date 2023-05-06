@@ -12,13 +12,13 @@ const errorHandler = async (mainFunction, $q, $t) => {
       $q.notify({
         type: "warning",
         message: $t(err.data.message),
-        caption: err.data.reason
+        caption: err.data.reason,
       });
     } else if (err.hasOwnProperty("code")) {
       $q.notify({
         type: "negative",
         message: err.message,
-        caption: err.code
+        caption: err.code,
       });
     }
     console.log(err);
@@ -35,7 +35,7 @@ const getPasswordHash = async (email, password) => {
     parallelism: 16,
     memorySize: 512,
     hashLength: 64,
-    outputType: "hex"
+    outputType: "hex",
   });
 };
 

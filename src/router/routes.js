@@ -11,8 +11,8 @@ const routes = [
           header: () => import("layouts/headers/MainHeader"),
           drawer: () => import("layouts/drawers/MainDrawer"),
           default: () => import("pages/HomePage"),
-          footer: () => import("layouts/footers/MainFooter")
-        }
+          footer: () => import("layouts/footers/MainFooter"),
+        },
       },
       {
         name: "login",
@@ -20,8 +20,8 @@ const routes = [
         components: {
           header: () => import("layouts/headers/SimpleHeader"),
           drawer: () => import("layouts/drawers/MainDrawer"),
-          default: () => import("pages/LoginPage")
-        }
+          default: () => import("pages/LoginPage"),
+        },
       },
       {
         name: "oauth",
@@ -29,8 +29,8 @@ const routes = [
         components: {
           header: () => import("layouts/headers/SimpleHeader"),
           drawer: () => import("layouts/drawers/MainDrawer"),
-          default: () => import("pages/OauthPage.vue")
-        }
+          default: () => import("pages/OauthPage.vue"),
+        },
       },
       {
         path: "products",
@@ -42,10 +42,10 @@ const routes = [
               header: () => import("layouts/headers/MainHeader"),
               drawer: () => import("layouts/drawers/MainDrawer"),
               default: () => import("pages/products/TechminoGalaxyPage"),
-              footer: () => import("layouts/footers/MainFooter")
-            }
-          }
-        ]
+              footer: () => import("layouts/footers/MainFooter"),
+            },
+          },
+        ],
       },
       {
         name: "profile",
@@ -54,19 +54,19 @@ const routes = [
           header: () => import("layouts/headers/MainHeader"),
           drawer: () => import("layouts/drawers/MainDrawer"),
           default: () => import("pages/ProfilePage"),
-          footer: () => import("layouts/footers/MainFooter")
-        }
+          footer: () => import("layouts/footers/MainFooter"),
+        },
       },
       {
         name: "notFound",
         path: "/:catchAll(.*)*",
         components: {
           header: () => import("layouts/headers/SimpleHeader"),
-          default: () => import("pages/NotFoundPage")
-        }
-      }
-    ]
-  }
+          default: () => import("pages/NotFoundPage"),
+        },
+      },
+    ],
+  },
 ];
 
 export default routes;

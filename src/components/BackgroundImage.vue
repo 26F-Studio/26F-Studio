@@ -8,7 +8,8 @@
       no-transition
       :src="typeof src === 'string' ? src : require('assets/background.png')"
       :style="style"
-      @load="onImgLoaded">
+      @load="onImgLoaded"
+    >
       <slot />
     </q-img>
   </div>
@@ -23,32 +24,32 @@ export default defineComponent({
   props: {
     eager: {
       type: Boolean,
-      default: false
+      default: false,
     },
     fullHeight: {
       type: Boolean,
-      default: false
+      default: false,
     },
     maskPosition: {
       type: String,
       validator: (value) => {
         return ["bottom", "left", "right", "top"].includes(value);
-      }
+      },
     },
     maskStart: {
       type: Object,
       default: () => ({
         ratio: 0.9,
-        control: [0.4, 1.1]
-      })
+        control: [0.4, 1.1],
+      }),
     },
     maskEnd: {
       type: Object,
       default: () => ({
         ratio: 0.7,
-        control: [0.6, 0.7]
-      })
-    }
+        control: [0.6, 0.7],
+      }),
+    },
   },
   setup(props) {
     const $q = useQuasar();
@@ -61,9 +62,11 @@ export default defineComponent({
       }
       return require("assets/background-xs.webp");
     });
-    const fill = props.maskPosition ? computed(() => {
-      return $q.dark.isActive ? "#121212" : "#fff";
-    }) : undefined;
+    const fill = props.maskPosition
+      ? computed(() => {
+          return $q.dark.isActive ? "#121212" : "#fff";
+        })
+      : undefined;
 
     const imgLoaded = ref(false);
     const onImgLoaded = () => {
@@ -72,33 +75,57 @@ export default defineComponent({
 
     const path = computed(() => {
       const width = $q.screen.width;
-      const height = props.fullHeight ? $q.screen.height : width / 8 * 5;
+      const height = props.fullHeight ? $q.screen.height : (width / 8) * 5;
 
       switch (props.maskPosition) {
         case "bottom":
-          return `M0,${height} L0,${height * props.maskStart.ratio} C` +
-            `${width * props.maskStart.control[0]},${height * props.maskStart.control[1]} ` +
-            `${width * props.maskEnd.control[0]},${height * props.maskEnd.control[1]} ` +
+          return (
+            `M0,${height} L0,${height * props.maskStart.ratio} C` +
+            `${width * props.maskStart.control[0]},${
+              height * props.maskStart.control[1]
+            } ` +
+            `${width * props.maskEnd.control[0]},${
+              height * props.maskEnd.control[1]
+            } ` +
             `${width},${height * props.maskEnd.ratio} ` +
-            `L${width},${height} Z`;
+            `L${width},${height} Z`
+          );
         case "left":
-          return `M0,0 L${width * props.maskStart.ratio},0 ` +
-            `C${width * props.maskStart.control[0]},${height * props.maskStart.control[1]} ` +
-            `${width * props.maskEnd.control[0]},${height * props.maskEnd.control[1]} ` +
+          return (
+            `M0,0 L${width * props.maskStart.ratio},0 ` +
+            `C${width * props.maskStart.control[0]},${
+              height * props.maskStart.control[1]
+            } ` +
+            `${width * props.maskEnd.control[0]},${
+              height * props.maskEnd.control[1]
+            } ` +
             `${width * props.maskEnd.ratio},${height} ` +
-            `L0,${height} Z`;
+            `L0,${height} Z`
+          );
         case "right":
-          return `M${width},${height} L${width * props.maskStart.ratio},${height} ` +
-            `C${width * props.maskStart.control[0]},${height * props.maskStart.control[1]} ` +
-            `${width * props.maskEnd.control[0]},${height * props.maskEnd.control[1]} ` +
+          return (
+            `M${width},${height} L${width * props.maskStart.ratio},${height} ` +
+            `C${width * props.maskStart.control[0]},${
+              height * props.maskStart.control[1]
+            } ` +
+            `${width * props.maskEnd.control[0]},${
+              height * props.maskEnd.control[1]
+            } ` +
             `${width * props.maskEnd.ratio},0 ` +
-            `L${width},0 Z`;
+            `L${width},0 Z`
+          );
         case "top":
-          return `M0,0 L0,${height * props.maskStart.ratio} C` +
-            `${width * props.maskStart.control[0]},${height * props.maskStart.control[1]} ` +
-            `${width * props.maskEnd.control[0]},${height * props.maskEnd.control[1]} ` +
+          return (
+            `M0,0 L0,${height * props.maskStart.ratio} C` +
+            `${width * props.maskStart.control[0]},${
+              height * props.maskStart.control[1]
+            } ` +
+            `${width * props.maskEnd.control[0]},${
+              height * props.maskEnd.control[1]
+            } ` +
             `${width},${height * props.maskEnd.ratio} ` +
-            `L${width},0 Z`;
+            `L${width},0 Z`
+          );
         default:
           return "";
       }
@@ -106,19 +133,20 @@ export default defineComponent({
 
     const style = computed(() => ({
       height: props.fullHeight ? "100vh" : "fit-content",
-      clipPath: (props.maskPosition && imgLoaded.value) ? `path('${path.value}')` : undefined
+      clipPath:
+        props.maskPosition && imgLoaded.value
+          ? `path('${path.value}')`
+          : undefined,
     }));
 
     return {
       src,
       fill,
       style,
-      onImgLoaded
+      onImgLoaded,
     };
-  }
+  },
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,6 +1,10 @@
 <template>
   <q-layout view="hHh lpR fff">
-    <router-view name="header" @click:drawer="toggleDrawer($event)" style="z-index: 101" />
+    <router-view
+      name="header"
+      @click:drawer="toggleDrawer($event)"
+      style="z-index: 101"
+    />
     <router-view name="drawer" v-model="leftDrawer" />
     <q-page-container>
       <router-view />
@@ -31,8 +35,8 @@ export default defineComponent({
     return {
       leftDrawer,
       i18n,
-      toggleDrawer
+      toggleDrawer,
     };
-  }
+  },
 });
 </script>

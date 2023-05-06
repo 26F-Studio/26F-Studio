@@ -8,7 +8,8 @@
         no-caps
         outline
         rounded
-        to="/profile" />
+        to="/profile"
+      />
     </div>
     <div class="col-4 column q-gutter-y-lg">
       <q-btn
@@ -18,7 +19,8 @@
         no-caps
         outline
         rounded
-        to="/home" />
+        to="/home"
+      />
     </div>
   </div>
 </template>
@@ -37,12 +39,10 @@ export default defineComponent({
     };
 
     return {
-      i18n
+      i18n,
     };
-  }
+  },
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

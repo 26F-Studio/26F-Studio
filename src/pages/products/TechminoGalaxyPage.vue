@@ -16,12 +16,12 @@
       playsinline
       :show-big-play-button="false"
       type="video"
-      :sources="videoSources" />
+      :sources="videoSources"
+    />
     <div class="row q-gutter-md">
       <q-btn className="primary" label="Button" @click="copy" />
       <q-input />
     </div>
-
   </q-page>
 </template>
 
@@ -38,15 +38,17 @@ export default {
     const videoSources = [
       {
         src: "/videos/techmino_galaxy.webm",
-        type: "video/webm"
+        type: "video/webm",
       },
       {
         src: "/videos/techmino_galaxy.mov",
-        type: "video/quicktime"
-      }
+        type: "video/quicktime",
+      },
     ];
 
-    const string = ref("1237129847y83279yhrf82u938rq7efwyu932uq808r84gwfeawhou9r83ywresfuiouaw9r88gryiesbufw9r834hwtgyireuofaw9wrjw3h8griesuofewr928q3h74wguwafoi9jr823hq4wuei");
+    const string = ref(
+      "1237129847y83279yhrf82u938rq7efwyu932uq808r84gwfeawhou9r83ywresfuiouaw9r88gryiesbufw9r834hwtgyireuofaw9wrjw3h8griesuofewr928q3h74wguwafoi9jr823hq4wuei"
+    );
     const copy = async () => {
       await errorHandler(async () => {
         await copyToClipboard(string.value);
@@ -54,12 +56,10 @@ export default {
     };
     return {
       videoSources,
-      copy
+      copy,
     };
-  }
+  },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -5,13 +5,18 @@
       :position="`${reversed ? '0' : '100%'} 0`"
       :product="product"
       :style="imageStyle"
-      :width="horizontal ? undefined : '35vw'" />
-    <div :class="groupClass" :style="horizontal ? 'max-width: 65vw' : undefined">
+      :width="horizontal ? undefined : '35vw'"
+    />
+    <div
+      :class="groupClass"
+      :style="horizontal ? 'max-width: 65vw' : undefined"
+    >
       <div :class="versionClass">
         <div
           class="text-color-primary text-font-galaxy-slim text-shadow-purple"
           :class="horizontal ? undefined : 'text-center'"
-          style="font-size: 3rem; line-height: 175%">
+          style="font-size: 3rem; line-height: 175%"
+        >
           {{ i18n(`products.${product}.name`) }}
         </div>
         <q-chip
@@ -19,18 +24,26 @@
           :icon="`${latestVersion ? 'mdi-tag-check' : 'mdi-tag-remove'}`"
           size="0.75rem"
           :text-color="`${latestVersion ? 'white' : 'grey'}`"
-          :style="{top: horizontal ? '2.05rem' : '-1rem'}">
+          :style="{ top: horizontal ? '2.05rem' : '-1rem' }"
+        >
           {{ latestVersion ? latestVersion : "N/A" }}
         </q-chip>
       </div>
       <div
         class="text-color-grey text-font-inter"
         :class="horizontal ? undefined : 'col-10 text-center'"
-        style="font-size: 1rem; line-height: 200%; word-wrap: break-word">
+        style="font-size: 1rem; line-height: 200%; word-wrap: break-word"
+      >
         {{ i18n(`products.${product}.description`) }}
       </div>
-      <div :class="buttonsClass" :style="`margin-top: ${horizontal ? '1rem' : 'unset'}`">
-        <DownloadButton :disable="product === 'techminoGalaxy'" :product="product" />
+      <div
+        :class="buttonsClass"
+        :style="`margin-top: ${horizontal ? '1rem' : 'unset'}`"
+      >
+        <DownloadButton
+          :disable="product === 'techminoGalaxy'"
+          :product="product"
+        />
         <q-btn
           :label="i18n('labels.learnMore')"
           :to="`/products/${paramCase(product)}`"
@@ -38,7 +51,8 @@
           flat
           no-caps
           padding="0.4rem 1.2rem"
-          style="font-size: 1.1rem">
+          style="font-size: 1.1rem"
+        >
           <div hidden>
             {{ `about-${product}` }}
           </div>
@@ -63,16 +77,16 @@ export default defineComponent({
   props: {
     horizontal: {
       type: Boolean,
-      default: false
+      default: false,
     },
     reversed: {
       type: Boolean,
-      default: false
+      default: false,
     },
     product: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   setup(props) {
     const $i18n = useI18n({ useScope: "global" });
@@ -80,13 +94,15 @@ export default defineComponent({
     const shadowColors = {
       techminoGalaxy: "rgba(0, 14, 143, 0.65)",
       techmino: "rgba(18, 20, 34, 0.65)",
-      quatrack: "rgba(18, 20, 34, 0.65)"
+      quatrack: "rgba(18, 20, 34, 0.65)",
     };
 
     const divClass = computed(() => {
       let classString = "";
       if (props.horizontal) {
-        classString += `row ${props.reversed ? "justify-end" : "justify-start"} items-center`;
+        classString += `row ${
+          props.reversed ? "justify-end" : "justify-start"
+        } items-center`;
       } else {
         classString += "column items-center q-gutter-y-md";
       }
@@ -102,7 +118,9 @@ export default defineComponent({
     });
 
     const imageStyle = computed(() => {
-      let styleString = `filter: drop-shadow(0 2vw 5vw ${shadowColors[props.product]});`;
+      let styleString = `filter: drop-shadow(0 2vw 5vw ${
+        shadowColors[props.product]
+      });`;
       if (props.horizontal) {
         styleString += ` margin-${props.reversed ? "left" : "right"}: 5vw;`;
       } else {
@@ -114,7 +132,9 @@ export default defineComponent({
     const groupClass = computed(() => {
       let classString = "";
       if (props.horizontal) {
-        classString += `col-auto column text-${props.reversed ? "right" : "left"}`;
+        classString += `col-auto column text-${
+          props.reversed ? "right" : "left"
+        }`;
       } else {
         classString += `row justify-center`;
       }
@@ -124,7 +144,7 @@ export default defineComponent({
     const versionClass = computed(() => {
       let classString = "";
       if (props.horizontal) {
-        classString += `row q-gutter-x-xl` + (props.reversed ? 'reverse' : '');
+        classString += `row q-gutter-x-xl` + (props.reversed ? "reverse" : "");
       } else {
         classString += `full-width column items-center q-gutter-y-lg`;
       }
@@ -134,7 +154,8 @@ export default defineComponent({
     const buttonsClass = computed(() => {
       let classString = "";
       if (props.horizontal) {
-        classString += `row q-gutter-x-xl items-center ` +
+        classString +=
+          `row q-gutter-x-xl items-center ` +
           `justify-${props.reversed ? "end" : "start"}`;
       } else {
         classString += `column items-center q-gutter-y-lg`;
@@ -161,9 +182,9 @@ export default defineComponent({
       buttonsClass,
       latestVersion,
       i18n,
-      paramCase
+      paramCase,
     };
-  }
+  },
 });
 </script>
 

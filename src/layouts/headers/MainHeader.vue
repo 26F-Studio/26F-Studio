@@ -2,7 +2,8 @@
   <q-header class="bg-transparent" style="height: 0">
     <q-toolbar
       class="aero-toolbar no-padding"
-      style="background: rgba(0, 0, 0, 0.25); backdrop-filter: blur(25px);">
+      style="background: rgba(0, 0, 0, 0.25); backdrop-filter: blur(25px)"
+    >
       <q-btn
         aria-label="Menu"
         flat
@@ -13,11 +14,13 @@
         square
         to="/home"
         stretch
-        @click="onLogoClick">
+        @click="onLogoClick"
+      >
         <div
           v-if="$q.screen.gt.sm"
           class="text-color-white text-font-galaxy-slim self-center"
-          style="font-size: 2rem; margin-bottom: 0.3rem">
+          style="font-size: 2rem; margin-bottom: 0.3rem"
+        >
           {{ `\u{0FFFFF}  ${i18n("labels.title")}` }}
         </div>
       </q-btn>
@@ -32,11 +35,15 @@
         :round="!$q.screen.gt.xs"
         :size="$q.screen.gt.xs ? undefined : 'md'"
         :square="$q.screen.gt.xs"
-        to="/home">
+        to="/home"
+      >
         <div
           class="text-color-white text-font-galaxy-slim self-center"
-          style="font-size: 1.75rem; margin-bottom: 0.25rem">
-          {{ "\u{0FFFFF}" + ($q.screen.gt.xs ? `  ${i18n("labels.title")}` : "") }}
+          style="font-size: 1.75rem; margin-bottom: 0.25rem"
+        >
+          {{
+            "\u{0FFFFF}" + ($q.screen.gt.xs ? `  ${i18n("labels.title")}` : "")
+          }}
         </div>
       </q-btn>
       <q-space />
@@ -52,7 +59,8 @@
         no-caps
         size="0.7rem"
         stretch
-        style="font-weight: 700">
+        style="font-weight: 700"
+      >
         <q-list>
           <q-item
             v-for="(item, index) in list"
@@ -60,7 +68,8 @@
             v-close-popup
             :to="item.to"
             class="q-py-lg"
-            clickable>
+            clickable
+          >
             <q-item-section>
               <q-item-label style="font-weight: 400; font-size: 0.7rem">
                 {{ i18n(`labels.${item.label}`) }}
@@ -77,7 +86,8 @@
         flat
         icon="language"
         round
-        :size="$q.screen.gt.sm ? '0.7rem' : 'md'">
+        :size="$q.screen.gt.sm ? '0.7rem' : 'md'"
+      >
         <q-menu anchor="bottom middle" fit self="top middle">
           <LanguageList />
         </q-menu>
@@ -89,7 +99,8 @@
         flat
         icon="settings"
         round
-        :size="$q.screen.gt.sm ? '0.7rem' : 'md'">
+        :size="$q.screen.gt.sm ? '0.7rem' : 'md'"
+      >
         <q-menu anchor="bottom middle" self="top middle">
           <SettingList />
         </q-menu>
@@ -114,43 +125,58 @@ export default defineComponent({
     const $q = useQuasar();
     const $i18n = useI18n({ useScope: "global" });
     const dropdownButtons = {
-      products: [{
-        label: "techminoGalaxy",
-        to: "/products/techmino-galaxy"
-      }, {
-        label: "techmino",
-        to: "/products/techmino"
-      }, {
-        label: "quatrack",
-        to: "/products/quatrack"
-      }, {
-        label: "miscellaneous",
-        to: "/products/miscellaneous"
-      }],
-      support: [{
-        label: "accountSettings",
-        to: "/account/settings"
-      }, {
-        label: "gameManuals",
-        to: "/support/manuals"
-      }, {
-        label: "glossary",
-        to: "/support/glossary"
-      }, {
-        label: "utilities",
-        to: "/support/utilities"
-      }],
-      about: [{
-        label: "whoWeAre",
-        to: "/about/us"
-      }, {
-        label: "brandingGuidelines",
-        to: "/about/guidelines"
-      }],
-      contact: [{
-        label: "joinUs",
-        to: "/contact/join"
-      }]
+      products: [
+        {
+          label: "techminoGalaxy",
+          to: "/products/techmino-galaxy",
+        },
+        {
+          label: "techmino",
+          to: "/products/techmino",
+        },
+        {
+          label: "quatrack",
+          to: "/products/quatrack",
+        },
+        {
+          label: "miscellaneous",
+          to: "/products/miscellaneous",
+        },
+      ],
+      support: [
+        {
+          label: "accountSettings",
+          to: "/account/settings",
+        },
+        {
+          label: "gameManuals",
+          to: "/support/manuals",
+        },
+        {
+          label: "glossary",
+          to: "/support/glossary",
+        },
+        {
+          label: "utilities",
+          to: "/support/utilities",
+        },
+      ],
+      about: [
+        {
+          label: "whoWeAre",
+          to: "/about/us",
+        },
+        {
+          label: "brandingGuidelines",
+          to: "/about/guidelines",
+        },
+      ],
+      contact: [
+        {
+          label: "joinUs",
+          to: "/contact/join",
+        },
+      ],
     };
     const i18n = (relativePath) => {
       return $i18n.t("layouts.headers.main." + relativePath);
@@ -164,7 +190,7 @@ export default defineComponent({
       }
     };
     return { dropdownButtons, i18n, onLogoClick };
-  }
+  },
 });
 </script>
 

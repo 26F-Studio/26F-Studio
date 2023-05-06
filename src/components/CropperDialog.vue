@@ -1,10 +1,9 @@
 <template>
-  <q-dialog
-    ref="dialogRef"
-    @hide="onDialogHide">
+  <q-dialog ref="dialogRef" @hide="onDialogHide">
     <q-card
       class="q-dialog-plugin hide-scrollbar"
-      style="width: 30rem; max-width: 90vw">
+      style="width: 30rem; max-width: 90vw"
+    >
       <q-card-section>
         <q-card-section class="justify-between items-center" horizontal>
           <div class="text-h6">{{ i18n("labels.title") }}</div>
@@ -16,7 +15,8 @@
             outlined
             rounded
             @rejected="onRejected"
-            @update:model-value="onFileChange" />
+            @update:model-value="onFileChange"
+          />
         </q-card-section>
       </q-card-section>
       <q-separator />
@@ -25,64 +25,76 @@
           <div
             v-if="!image"
             class="text-color-grey text-font-inter-bold self-center"
-            style="font-style: italic; font-size: 1.5rem">
+            style="font-style: italic; font-size: 1.5rem"
+          >
             {{ i18n("labels.noImage") }}
           </div>
         </div>
         <Cropper
           ref="cropper"
-          :default-size="({ imageSize }) => ({
-            width: Math.min(imageSize.width, imageSize.height),
-            height: Math.min(imageSize.width, imageSize.height)
-          })"
+          :default-size="
+            ({ imageSize }) => ({
+              width: Math.min(imageSize.width, imageSize.height),
+              height: Math.min(imageSize.width, imageSize.height),
+            })
+          "
           :src="image"
-          :stencil-component="CircleStencil" />
+          :stencil-component="CircleStencil"
+        />
       </q-responsive>
       <q-separator />
       <div class="row justify-end full-width">
-        <div class="col-12 col-md-auto row justify-between q-gutter-md-x-sm q-pa-md">
+        <div
+          class="col-12 col-md-auto row justify-between q-gutter-md-x-sm q-pa-md"
+        >
           <q-btn
             class="btn-secondary"
             icon="mdi-flip-horizontal"
             padding="0.5rem"
             size="0.75rem"
             unelevated
-            @click="flip(true,false)" />
+            @click="flip(true, false)"
+          />
           <q-btn
             class="btn-secondary"
             icon="mdi-flip-vertical"
             padding="0.5rem"
             size="0.75rem"
             unelevated
-            @click="flip(false,true)" />
+            @click="flip(false, true)"
+          />
           <q-btn
             class="btn-secondary"
             icon="mdi-rotate-left"
             padding="0.5rem"
             size="0.75rem"
             unelevated
-            @click="rotate(-90)" />
+            @click="rotate(-90)"
+          />
           <q-btn
             class="btn-secondary"
             icon="mdi-rotate-right"
             padding="0.5rem"
             size="0.75rem"
             unelevated
-            @click="rotate(90)" />
+            @click="rotate(90)"
+          />
           <q-btn
             class="btn-secondary"
             icon="mdi-magnify-minus-outline"
             padding="0.5rem"
             size="0.75rem"
             unelevated
-            @click="zoom(0.5)" />
+            @click="zoom(0.5)"
+          />
           <q-btn
             class="btn-secondary"
             icon="mdi-magnify-plus-outline"
             padding="0.5rem"
             size="0.75rem"
             unelevated
-            @click="zoom(2)" />
+            @click="zoom(2)"
+          />
         </div>
         <q-separator v-if="!$q.screen.gt.sm" class="full-width" />
         <q-space />
@@ -93,7 +105,8 @@
           no-caps
           padding="0.25rem 0.5rem"
           size="0.75rem"
-          @click="onDialogCancel" />
+          @click="onDialogCancel"
+        />
         <q-btn
           class="q-ma-md btn-primary"
           :label="i18n('labels.confirm')"
@@ -101,7 +114,8 @@
           padding="0.25rem 0.5rem"
           size="0.75rem"
           unelevated
-          @click="onDialogOK(cropper.getResult().canvas.toDataURL(), null)" />
+          @click="onDialogOK(cropper.getResult().canvas.toDataURL(), null)"
+        />
       </div>
     </q-card>
   </q-dialog>
@@ -121,11 +135,12 @@ export default defineComponent({
   emits: [...useDialogPluginComponent.emits],
   props: {
     src: {
-      type: String
-    }
+      type: String,
+    },
   },
   setup(props) {
-    const { dialogRef, onDialogCancel, onDialogHide, onDialogOK } = useDialogPluginComponent();
+    const { dialogRef, onDialogCancel, onDialogHide, onDialogOK } =
+      useDialogPluginComponent();
     const $i18n = useI18n({ useScope: "global" });
     const $q = useQuasar();
 
@@ -148,7 +163,7 @@ export default defineComponent({
     const onRejected = () => {
       $q.notify({
         type: "negative",
-        message: i18n("notifications.invalidFile")
+        message: i18n("notifications.invalidFile"),
       });
     };
 
@@ -176,9 +191,9 @@ export default defineComponent({
       onRejected,
       flip,
       rotate,
-      zoom
+      zoom,
     };
-  }
+  },
 });
 </script>
 

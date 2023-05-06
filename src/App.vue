@@ -3,7 +3,8 @@
     ref="scrollArea"
     class="fullscreen"
     :dark="$q.dark.isActive"
-    :thumb-style="thumbStyle">
+    :thumb-style="thumbStyle"
+  >
     <router-view />
   </q-scroll-area>
 </template>
@@ -29,7 +30,7 @@ export default defineComponent({
       opacity: "0.75",
       right: "4px",
       width: "8px",
-      zIndex: "100"
+      zIndex: "100",
     };
 
     const scrollArea = ref(null);
@@ -59,8 +60,8 @@ export default defineComponent({
       thumbStyle,
       scrollArea,
       i18n,
-      scrollTo
+      scrollTo,
     };
-  }
+  },
 });
 </script>

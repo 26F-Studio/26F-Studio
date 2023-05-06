@@ -7,20 +7,20 @@ export default {
           verify: "Verify your account",
           deactivate: "Confirm deactivation",
           migrate: "Set new login email",
-          reset: "Set new password"
+          reset: "Set new password",
         },
         titles: {
           deactivate: "Deactivate account",
           migrate: "Migrate account",
-          reset: "Reset password"
-        }
-      }
+          reset: "Reset password",
+        },
+      },
     },
     authPanels: {
       deactivatePanel: {
         errors: {
           email: "Invalid email address",
-          code: "Invalid verification code"
+          code: "Invalid verification code",
         },
         labels: {
           email: "Email",
@@ -28,49 +28,54 @@ export default {
           getCode: "Get code",
           verify: "Verify",
           holdOn: "HOLD ON!",
-          warning: "This is a ONE-WAY ticket! You would no longer be able to login again!",
-          notice: "This action freezes the account and hides info to other players. \n" +
+          warning:
+            "This is a ONE-WAY ticket! You would no longer be able to login again!",
+          notice:
+            "This action freezes the account and hides info to other players. \n" +
             "We would KEEP your account data in the database for internal review purpose. \n" +
             "If you REALLY want to delete your data, Please reach to support and contact us.",
           cancel: "Let me think",
-          confirm: "Okay, go ahead"
+          confirm: "Okay, go ahead",
         },
         placeholders: {
           email: "Input your email address",
-          code: "Input your verification code"
+          code: "Input your verification code",
         },
         notifications: {
           getCodeSuccess: "Verification code has been sent to your mailbox",
-          deactivateSuccess: "Your account has been deactivated"
-        }
+          deactivateSuccess: "Your account has been deactivated",
+        },
       },
       emailPanel: {
         errors: {
-          email: "Invalid email address"
+          email: "Invalid email address",
         },
         labels: {
           title: "Verify your email address",
           description: "Verify your 26F account by email to continue",
           email: "Email",
           submit: "Continue",
-          sendingCode: "Sending email..."
-        }
+          sendingCode: "Sending email...",
+        },
       },
       resetPanel: {
         errors: {
           email: "Invalid email address",
           code: "Invalid verification code",
           password: "Invalid password",
-          confirmPassword: "Two inputs are not the same"
+          confirmPassword: "Two inputs are not the same",
         },
         labels: {
-          description: "We have sent a verification code to the email address {email}.\n" +
+          description:
+            "We have sent a verification code to the email address {email}.\n" +
             "Enter the code below within 30 minutes to continue. ",
           resendBefore: "Did not receive the code? Check your junk inbox or",
           resend: " resend the code",
           resendAfter: ".",
-          reminder: "Your password must have at least eight characters and meet 2 of the following constraints: ",
-          constraints: "Contains at least 1 lowercase alphabetic character \n" +
+          reminder:
+            "Your password must have at least eight characters and meet 2 of the following constraints: ",
+          constraints:
+            "Contains at least 1 lowercase alphabetic character \n" +
             "Contains at least 1 uppercase alphabetic character \n" +
             "Contains at least 1 numeric character \n" +
             "Contains at least 1 special character(#?!{'@'}$%^&*-)",
@@ -79,22 +84,24 @@ export default {
           getCode: "Get Code",
           password: "New password",
           confirmPassword: "Confirm your Password",
-          submit: "Reset password"
+          submit: "Reset password",
         },
         notifications: {
           codeSent: "Verification code has been sent to your mailbox",
-          resetSuccess: "Password reset! You can login with your new password now"
-        }
-      }
+          resetSuccess:
+            "Password reset! You can login with your new password now",
+        },
+      },
     },
     loginPanels: {
       codePanel: {
         errors: {
-          code: "Invalid verification code"
+          code: "Invalid verification code",
         },
         labels: {
           title: "Check your inboxes",
-          description: "We have sent a verification code to the email address {email}.\n" +
+          description:
+            "We have sent a verification code to the email address {email}.\n" +
             "Enter the code below within 30 minutes to continue. \n" +
             "If this email address is not linked to an existing account, we will create one for you.",
           resendBefore: "Did not receive the code? Check your junk inbox or",
@@ -103,36 +110,38 @@ export default {
           code: "Verification Code",
           submit: "Sign In / Sign Up",
           loginWithPassword: "Sign in with password",
-          restart: "Start Over"
+          restart: "Start Over",
         },
         notifications: {
-          loginSuccess: "Congratulations! You are now logged in"
-        }
+          loginSuccess: "Congratulations! You are now logged in",
+        },
       },
       emailPanel: {
         errors: {
-          email: "Invalid email address"
+          email: "Invalid email address",
         },
         labels: {
           title: "Sign in / Sign up",
-          description: "Sign in to your 26F account to sync your game progress and achievements across devices, " +
+          description:
+            "Sign in to your 26F account to sync your game progress and achievements across devices, " +
             "as well as play with your friends online in our games. \n\n" +
             "Does not have an account yet? Sign up by entering your email address: ",
           email: "Email",
           submit: "Continue",
-          other: "Or use one of the following sign in options: "
-        }
+          other: "Or use one of the following sign in options: ",
+        },
       },
       finishPanel: {
         labels: {
           profile: "Go to profile",
-          home: "Go to home page"
-        }
+          home: "Go to home page",
+        },
       },
       infoPanel: {
         labels: {
           title: "Finishing up the details",
-          description: "Please, feel free to spend a few minutes completing the following info about you.",
+          description:
+            "Please, feel free to spend a few minutes completing the following info about you.",
           username: "Username",
           region: "Region",
           regionHint: "Select region",
@@ -141,15 +150,15 @@ export default {
           upload: "Upload",
           submit: "Continue",
           maybeLater: "Set up later in profile",
-          restart: "Start Over"
+          restart: "Start Over",
         },
         notifications: {
-          submitSuccess: "Your account info has been updated"
-        }
+          submitSuccess: "Your account info has been updated",
+        },
       },
       passwordPanel: {
         errors: {
-          password: "Invalid password"
+          password: "Invalid password",
         },
         labels: {
           title: "Enter your password",
@@ -159,34 +168,37 @@ export default {
           submit: "Sign In",
           loginWithCode: "Sign in / Sign up by verification code",
           sendingCode: "Sending email...",
-          restart: "Start Over"
+          restart: "Start Over",
         },
         notifications: {
-          loginSuccess: "Congratulations! You are now logged in"
-        }
+          loginSuccess: "Congratulations! You are now logged in",
+        },
       },
       setupPanel: {
         errors: {
           password: "Invalid password",
-          confirmPassword: "Two inputs are not the same"
+          confirmPassword: "Two inputs are not the same",
         },
         labels: {
           title: "Welcome aboard!",
-          description: "Let’s first create a password. \n\n" +
+          description:
+            "Let’s first create a password. \n\n" +
             "Your password must have at least eight characters and meet 2 of the following constraints: ",
-          constraints: "Contains at least 1 lowercase alphabetic character \n" +
+          constraints:
+            "Contains at least 1 lowercase alphabetic character \n" +
             "Contains at least 1 uppercase alphabetic character \n" +
             "Contains at least 1 numeric character \n" +
             "Contains at least 1 special character(#?!{'@'}$%^&*-)",
           password: "Password",
           confirmPassword: "Confirm your Password",
           submit: "Continue",
-          maybeLater: "Set up later in profile"
+          maybeLater: "Set up later in profile",
         },
         notifications: {
-          setupSuccess: "Password set! You can login with your new password now"
-        }
-      }
+          setupSuccess:
+            "Password set! You can login with your new password now",
+        },
+      },
     },
     cropperDialog: {
       labels: {
@@ -194,11 +206,11 @@ export default {
         chooseImage: "Choose Image",
         noImage: "Please choose an image",
         cancel: "Cancel",
-        confirm: "Confirm"
+        confirm: "Confirm",
       },
       notifications: {
-        invalidFile: "Invalid file"
-      }
+        invalidFile: "Invalid file",
+      },
     },
     downloadButton: {
       labels: {
@@ -213,56 +225,59 @@ export default {
           testflight: "TestFlight, iOS & macOS",
           windows32: "Windows, x86",
           windows64: "Windows, x64",
-          windowsInstaller: "Windows, Universal installer"
-        }
+          windowsInstaller: "Windows, Universal installer",
+        },
       },
       notifications: {
         download: "Getting download link...",
         error: "Not available",
-        success: "Succeeded"
-      }
+        success: "Succeeded",
+      },
     },
     languageList: {},
     productPanel: {
       labels: {
-        learnMore: "Learn More"
+        learnMore: "Learn More",
       },
       notifications: {
-        comingSoon: "Coming soon!"
+        comingSoon: "Coming soon!",
       },
       products: {
         techminoGalaxy: {
           name: "Techmino Galaxy",
-          description: "The next generation of Techmino, with more features and more fun!"
+          description:
+            "The next generation of Techmino, with more features and more fun!",
         },
         techmino: {
           name: "Techmino",
-          description: "Welcome to Techmino, a block-stacking game by 26F Studio! \n" +
+          description:
+            "Welcome to Techmino, a block-stacking game by 26F Studio! \n" +
             "Immerse yourself in more than 100 modes of this modern yet familiar game, \n" +
             "with a variety of difficulties so everyone can have a great time! \n" +
             "Hang out and challenge your friends and players around the world \n" +
-            "in the multiplayer modes, and discover some hidden easter eggs all over the game! \n"
+            "in the multiplayer modes, and discover some hidden easter eggs all over the game! \n",
         },
         quatrack: {
           name: "Quatrack",
-          description: "Welcome to Quatrack, the music game produced by 26F Studio! \n" +
+          description:
+            "Welcome to Quatrack, the music game produced by 26F Studio! \n" +
             "Hit the keyboard/click the screen with the music beat, \n" +
             "enjoy the geometric style animation, get higher scores, \n" +
-            "and challenge your record!"
-        }
-      }
+            "and challenge your record!",
+        },
+      },
     },
     profileButton: {
       labels: {
         signIn: "Sign In/Sign Up",
-        signOut: "Sign Out"
-      }
+        signOut: "Sign Out",
+      },
     },
     settingList: {
       labels: {
-        darkMode: "Dark Mode"
-      }
-    }
+        darkMode: "Dark Mode",
+      },
+    },
   },
   layouts: {
     drawers: {
@@ -285,15 +300,15 @@ export default {
           contact: "Contact",
           joinUs: "Join Us",
           languageMenu: "Language",
-          settingsMenu: "Settings"
-        }
-      }
+          settingsMenu: "Settings",
+        },
+      },
     },
     footers: {
       login: {
         labels: {
-          login: "Login"
-        }
+          login: "Login",
+        },
       },
       main: {
         labels: {
@@ -312,9 +327,9 @@ export default {
           whoWeAre: "Who We Are",
           brandingGuidelines: "Branding Guidelines",
           contact: "Contact",
-          joinUs: "Join Us"
-        }
-      }
+          joinUs: "Join Us",
+        },
+      },
     },
     headers: {
       main: {
@@ -334,16 +349,16 @@ export default {
           whoWeAre: "Who We Are",
           brandingGuidelines: "Branding Guidelines",
           contact: "Contact",
-          joinUs: "Join Us"
-        }
+          joinUs: "Join Us",
+        },
       },
       simple: {
         labels: {
-          title: "26F Studio"
-        }
-      }
+          title: "26F Studio",
+        },
+      },
     },
-    main: {}
+    main: {},
   },
   pages: {
     home: {
@@ -353,9 +368,9 @@ export default {
         invite: {
           interested: "Interested in \nwhat you see?",
           account: "Create your account now!",
-          button: "Sign In/Sign Up"
-        }
-      }
+          button: "Sign In/Sign Up",
+        },
+      },
     },
     login: {
       labels: {
@@ -365,45 +380,49 @@ export default {
         loginWithCode: "Login With Verification Code",
         setupInfo: "Setup Your Account Info",
         setupPassword: "Setup A New Password",
-        finish: "You Are All Set Now!"
-      }
+        finish: "You Are All Set Now!",
+      },
     },
     notFound: {
       labels: {
         notFound: "Oops! Nothing here...",
-        home: "Go Home"
-      }
+        home: "Go Home",
+      },
     },
     oauth: {
       labels: {
         header: "Welcome!",
         title: "Authorizing {product}",
-        description: "Do you want to authorize {product} with your 26F account?\n" +
+        description:
+          "Do you want to authorize {product} with your 26F account?\n" +
           "By clicking on “Accept”, you hereby allow {product} to access your: ",
         permissions: {
           common: "Common Data: ",
-          sensitive: "Sensitive Data: "
+          sensitive: "Sensitive Data: ",
         },
         permissionDescriptions: {
-          common: "Your personal profile, including your username, motto, avatar, and other public info.",
-          sensitive: "Your sensitive data, including your email address, phone number, and other private info."
+          common:
+            "Your personal profile, including your username, motto, avatar, and other public info.",
+          sensitive:
+            "Your sensitive data, including your email address, phone number, and other private info.",
         },
         products: {
           techmino: "Techmino",
           techminoGalaxy: "Techmino Galaxy",
-          quatrack: "Quatrack"
+          quatrack: "Quatrack",
         },
         cancel: "Decline",
         confirm: "Accept",
-        copySuccess: "Tokens has been copied to your clipboard. \n" +
+        copySuccess:
+          "Tokens has been copied to your clipboard. \n" +
           "You can now close this page.",
         manualCopyBefore: "Copy failed?",
         manualCopy: "Click here",
-        manualCopyAfter: "to copy manually."
+        manualCopyAfter: "to copy manually.",
       },
       notifications: {
-        submitSuccess: "Authorization granted successfully"
-      }
+        submitSuccess: "Authorization granted successfully",
+      },
     },
     profile: {
       labels: {
@@ -412,22 +431,22 @@ export default {
         region: "Region",
         submit: "Update Profile",
         resetPassword: "Reset Password",
-        sendingCode: "Sending email..."
+        sendingCode: "Sending email...",
       },
       placeholders: {
         username: "Input your username",
         motto: "Input your motto",
         region: "Select your region",
-        avatarFrame: "Coming soon..."
+        avatarFrame: "Coming soon...",
       },
       notifications: {
-        submitSuccess: "Profile updated successfully"
-      }
-    }
+        submitSuccess: "Profile updated successfully",
+      },
+    },
   },
   Studio26F: {
     LimitVerifyEmail: {
-      tooFrequent: "Sending email too frequently, please try again later"
+      tooFrequent: "Sending email too frequently, please try again later",
     },
     PlayerManager: {
       emailSendError: "Failed to send email",
@@ -435,9 +454,10 @@ export default {
       invalidEmailPass: "Invalid email or password",
       invalidAccessToken: "Invalid access token",
       networkError: "Network error",
-      noPassword: "Account doesn't have a password, use 'forgot your password' first",
+      noPassword:
+        "Account doesn't have a password, use 'forgot your password' first",
       playerNotFound: "Player not found",
-      recaptchaFailed: "Failed to verify reCAPTCHA"
-    }
-  }
+      recaptchaFailed: "Failed to verify reCAPTCHA",
+    },
+  },
 };

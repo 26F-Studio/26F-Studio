@@ -2,37 +2,40 @@
   <q-page class="flex column">
     <BackgroundImage full-height>
       <div
-        :style="{paddingTop: $q.screen.gt.md ? '3rem' : '4rem'}"
-        class="row full-width bg-transparent hide-scrollbar">
+        :style="{ paddingTop: $q.screen.gt.md ? '3rem' : '4rem' }"
+        class="row full-width bg-transparent hide-scrollbar"
+      >
         <q-card class="col-12 col-md-6 col-lg-4 col-xl-3">
           <q-card-section class="q-pa-xl q-my-lg">
             <div class="q-gutter-y-lg">
               <div class="row justify-center">
-                <q-responsive
-                  :ratio="1/4"
-                  class="col-3">
+                <q-responsive :ratio="1 / 4" class="col-3">
                   <q-skeleton
                     v-if="!isLoaded"
                     type="QAvatar"
-                    style="z-index: 0" />
+                    style="z-index: 0"
+                  />
                   <q-btn
                     v-if="isLoaded"
                     dense
                     flat
                     round
                     style="z-index: 0"
-                    @click="editAvatar">
+                    @click="editAvatar"
+                  >
                     <q-img
                       :src="avatar ? avatar : null"
                       class="bg-grey"
                       initial-ratio="1"
-                      style="border-radius: 50%">
+                      style="border-radius: 50%"
+                    >
                       <q-icon
                         v-if="!avatar"
                         class="absolute-center"
                         color="white"
                         name="mdi-account-edit"
-                        size="6vw" />
+                        size="6vw"
+                      />
                     </q-img>
                   </q-btn>
                 </q-responsive>
@@ -40,54 +43,53 @@
               <div class="column q-gutter-y-sm">
                 <div
                   class="text-color-grey text-font-inter-bold"
-                  style="font-size: 1rem">
+                  style="font-size: 1rem"
+                >
                   {{ i18n("labels.username") }}
                 </div>
-                <q-skeleton
-                  v-if="!isLoaded"
-                  class="full-width"
-                  type="QInput" />
+                <q-skeleton v-if="!isLoaded" class="full-width" type="QInput" />
                 <q-input
                   v-if="isLoaded"
                   class="full-width"
                   :placeholder="i18n('placeholders.username')"
                   v-model="username"
-                  style="font-size: 0.7rem" />
+                  style="font-size: 0.7rem"
+                />
               </div>
               <div class="column q-gutter-y-sm">
                 <div
                   class="text-color-grey text-font-inter-bold"
-                  style="font-size: 1rem">
+                  style="font-size: 1rem"
+                >
                   {{ i18n("labels.motto") }}
                 </div>
-                <q-skeleton
-                  v-if="!isLoaded"
-                  class="full-width"
-                  type="QInput" />
+                <q-skeleton v-if="!isLoaded" class="full-width" type="QInput" />
                 <q-input
                   v-if="isLoaded"
                   class="full-width"
                   :placeholder="i18n('placeholders.motto')"
                   v-model="motto"
-                  style="font-size: 0.7rem" />
+                  style="font-size: 0.7rem"
+                />
               </div>
               <div class="column q-gutter-y-sm">
                 <div
                   class="text-color-grey text-font-inter-bold"
-                  style="font-size: 1rem">
+                  style="font-size: 1rem"
+                >
                   {{ i18n("labels.region") }}
                 </div>
-                <q-skeleton
-                  v-if="!isLoaded"
-                  class="full-width"
-                  type="QInput" />
+                <q-skeleton v-if="!isLoaded" class="full-width" type="QInput" />
                 <q-select
                   v-if="isLoaded"
                   class="full-width"
-                  :display-value="region ? region.label : i18n('placeholders.region')"
+                  :display-value="
+                    region ? region.label : i18n('placeholders.region')
+                  "
                   :options="flags"
                   v-model="region"
-                  style="font-size: 0.7rem">
+                  style="font-size: 0.7rem"
+                >
                   <template v-slot:prepend>
                     <q-avatar
                       :class="region ? `fi ${region.class}` : undefined"
@@ -95,12 +97,17 @@
                       :icon="region ? undefined : 'mdi-help'"
                       rounded
                       size="1.25rem"
-                      text-color="white" />
+                      text-color="white"
+                    />
                   </template>
                   <template v-slot:option="scope">
                     <q-item v-bind="scope.itemProps">
                       <q-item-section avatar>
-                        <q-avatar :class="`fi ${scope.opt.class}`" rounded size="sm" />
+                        <q-avatar
+                          :class="`fi ${scope.opt.class}`"
+                          rounded
+                          size="sm"
+                        />
                       </q-item-section>
                       <q-item-section>
                         <q-item-label>{{ scope.opt.label }}</q-item-label>
@@ -113,7 +120,8 @@
                 v-if="!isLoaded"
                 class="btn-disabled full-width"
                 type="QBtn"
-                size="2.5rem" />
+                size="2.5rem"
+              />
               <q-btn
                 v-if="isLoaded"
                 :label="i18n('labels.submit')"
@@ -123,13 +131,15 @@
                 padding="0.4rem"
                 size="1rem"
                 unelevated
-                @click="submit">
+                @click="submit"
+              >
               </q-btn>
               <q-skeleton
                 v-if="!isLoaded"
                 class="btn-disabled full-width"
                 type="QBtn"
-                size="2rem" />
+                size="2rem"
+              />
               <q-btn
                 v-if="isLoaded"
                 class="btn-secondary full-width"
@@ -139,9 +149,12 @@
                 no-caps
                 padding="0.35rem"
                 size="0.75rem"
-                @click="resetPassword">
+                @click="resetPassword"
+              >
                 <template v-slot:loading>
-                  <div class="row justify-center items-center text-color-primary text-font-inter-bolder">
+                  <div
+                    class="row justify-center items-center text-color-primary text-font-inter-bolder"
+                  >
                     <q-spinner class="on-left" color="primary" />
                     {{ i18n("labels.sendingCode") }}
                   </div>
@@ -151,8 +164,7 @@
           </q-card-section>
         </q-card>
         <q-card class="col-grow q-mt-md q-mt-md-none q-ml-md-md">
-          <q-card-section class="q-pa-xl q-my-lg">
-          </q-card-section>
+          <q-card-section class="q-pa-xl q-my-lg"></q-card-section>
         </q-card>
       </div>
     </BackgroundImage>
@@ -202,10 +214,16 @@ export default defineComponent({
         }
         data = $player.info;
       } else {
-        await errorHandler(async () => {
-          data = (await $api.player.getInfo(null, query.playerId)).data;
-          data.avatar = (await $api.player.getAvatar(null, query.playerId)).data;
-        }, $q, $i18n.t);
+        await errorHandler(
+          async () => {
+            data = (await $api.player.getInfo(null, query.playerId)).data;
+            data.avatar = (
+              await $api.player.getAvatar(null, query.playerId)
+            ).data;
+          },
+          $q,
+          $i18n.t
+        );
       }
       avatar.value = data.avatar;
       username.value = data.username;
@@ -223,7 +241,7 @@ export default defineComponent({
     const editAvatar = () => {
       $q.dialog({
         component: CropperDialog,
-        componentProps: {}
+        componentProps: {},
       }).onOk((image) => {
         avatar.value = image;
       });
@@ -232,35 +250,40 @@ export default defineComponent({
     const submit = async () => {
       isSubmitLoading.value = true;
       console.log($player.accessToken);
-      await errorHandler(async () => {
-        await $api.player.updateInfo(
-          $player.accessToken,
-          {
+      await errorHandler(
+        async () => {
+          await $api.player.updateInfo($player.accessToken, {
             avatar: avatar.value ? avatar.value : undefined,
             username: username.value ? username.value : undefined,
             motto: motto.value ? motto.value : undefined,
-            region: region.value ? region.value.value : undefined
-          }
-        );
-        await $player.update();
-        isSubmitLoading.value = false;
-        $q.notify({
-          type: "positive",
-          message: i18n("notifications.submitSuccess")
-        });
-      }, $q, $i18n.t);
+            region: region.value ? region.value.value : undefined,
+          });
+          await $player.update();
+          isSubmitLoading.value = false;
+          $q.notify({
+            type: "positive",
+            message: i18n("notifications.submitSuccess"),
+          });
+        },
+        $q,
+        $i18n.t
+      );
       isSubmitLoading.value = false;
     };
 
     const resetPassword = async () => {
-      await errorHandler(async () => {
-        $q.dialog({
-          component: AuthDialog,
-          componentProps: {
-            type: "reset"
-          }
-        });
-      }, $q, $i18n.t);
+      await errorHandler(
+        async () => {
+          $q.dialog({
+            component: AuthDialog,
+            componentProps: {
+              type: "reset",
+            },
+          });
+        },
+        $q,
+        $i18n.t
+      );
     };
 
     return {
@@ -274,9 +297,9 @@ export default defineComponent({
       i18n,
       editAvatar,
       submit,
-      resetPassword
+      resetPassword,
     };
-  }
+  },
 });
 </script>
 

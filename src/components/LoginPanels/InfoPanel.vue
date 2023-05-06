@@ -2,12 +2,14 @@
   <div class="column q-gutter-y-lg" style="margin-bottom: 2.25rem">
     <div
       class="text-color-primary text-font-inter-bolder text-shadow-purple text-center"
-      style="font-size: 2rem">
+      style="font-size: 2rem"
+    >
       {{ i18n("labels.title") }}
     </div>
     <div
       class="text-color-grey text-font-inter-slim text-center"
-      style="font-size: 0.75rem; white-space: pre-line">
+      style="font-size: 0.75rem; white-space: pre-line"
+    >
       {{ i18n("labels.description") }}
     </div>
     <div class="row justify-center">
@@ -16,7 +18,8 @@
           <div class="col-6 column q-pr-md q-gutter-y-md">
             <div
               class="text-color-grey text-font-inter-bolder q-ml-md"
-              style="font-size: 1rem">
+              style="font-size: 1rem"
+            >
               {{ i18n("labels.username") }}
             </div>
             <q-input
@@ -25,12 +28,14 @@
               outlined
               rounded
               v-model="username"
-              style="font-size: 0.7rem" />
+              style="font-size: 0.7rem"
+            />
           </div>
           <div class="col-6 column q-pl-md q-gutter-y-md">
             <div
               class="text-color-grey text-font-inter-bolder q-ml-md"
-              style="font-size: 1rem">
+              style="font-size: 1rem"
+            >
               {{ i18n("labels.region") }}
             </div>
             <q-select
@@ -41,14 +46,21 @@
               outlined
               rounded
               v-model="region"
-              style="font-size: 0.7rem">
+              style="font-size: 0.7rem"
+            >
               <template v-slot:option="scope">
                 <q-item v-bind="scope.itemProps">
                   <q-item-section avatar>
-                    <q-avatar :class="`fi ${scope.opt.class}`" rounded size="sm" />
+                    <q-avatar
+                      :class="`fi ${scope.opt.class}`"
+                      rounded
+                      size="sm"
+                    />
                   </q-item-section>
                   <q-item-section>
-                    <q-item-label style="font-size: 0.5rem">{{ scope.opt.label }}</q-item-label>
+                    <q-item-label style="font-size: 0.5rem"
+                      >{{ scope.opt.label }}
+                    </q-item-label>
                   </q-item-section>
                 </q-item>
               </template>
@@ -58,7 +70,8 @@
         <div class="column q-gutter-y-md">
           <div
             class="text-color-grey text-font-inter-bolder q-ml-md"
-            style="font-size: 1rem">
+            style="font-size: 1rem"
+          >
             {{ i18n("labels.motto") }}
           </div>
           <q-input
@@ -69,11 +82,13 @@
             maxlength="150"
             outlined
             rounded
-            type="textarea" />
+            type="textarea"
+          />
         </div>
         <div
           class="text-color-grey text-font-inter-bolder text-center"
-          style="font-size: 1rem">
+          style="font-size: 1rem"
+        >
           {{ i18n("labels.avatar") }}
         </div>
         <div class="row justify-center">
@@ -82,14 +97,14 @@
             size="6.75rem"
             style="border-radius: 25%; border: 1px solid #c2c2c2"
             text-color="white"
-            @click="editAvatar">
-            <q-img
-              v-if="avatar"
-              :src="avatar" />
+            @click="editAvatar"
+          >
+            <q-img v-if="avatar" :src="avatar" />
             <div
               v-if="!avatar"
               class="text-color-grey text-font-inter"
-              style="font-size: 1rem">
+              style="font-size: 1rem"
+            >
               {{ i18n("labels.upload") }}
             </div>
           </q-avatar>
@@ -105,14 +120,11 @@
         padding="0.4rem 1.25rem"
         size="1rem"
         unelevated
-        @click="submit" />
+        @click="submit"
+      />
     </div>
     <div class="row justify-center q-mt-xl">
-      <q-btn
-        flat
-        no-caps
-        size="0.75rem"
-        @click="$emit('go', +1)">
+      <q-btn flat no-caps size="0.75rem" @click="$emit('go', +1)">
         <div class="text-color-primary text-font-inter-bold">
           {{ i18n("labels.maybeLater") }}
         </div>
@@ -137,8 +149,8 @@ export default defineComponent({
   name: "InfoPanel",
   props: {
     modelValue: {
-      type: Number
-    }
+      type: Number,
+    },
   },
   setup(props, { emit }) {
     const $api = useApi();
@@ -172,7 +184,7 @@ export default defineComponent({
     const editAvatar = () => {
       $q.dialog({
         component: CropperDialog,
-        componentProps: {}
+        componentProps: {},
       }).onOk((image) => {
         avatar.value = image;
       });
@@ -180,29 +192,33 @@ export default defineComponent({
 
     const submit = async () => {
       isSubmitLoading.value = true;
-      await errorHandler(async () => {
-        const { code, data } = await $api.player.updateInfo(
-          $player.accessToken,
-          {
-            avatar: avatar.value ? avatar.value : undefined,
-            username: username.value ? username.value : undefined,
-            motto: motto.value ? motto.value : undefined,
-            region: region.value ? region.value.value : undefined
+      await errorHandler(
+        async () => {
+          const { code, data } = await $api.player.updateInfo(
+            $player.accessToken,
+            {
+              avatar: avatar.value ? avatar.value : undefined,
+              username: username.value ? username.value : undefined,
+              motto: motto.value ? motto.value : undefined,
+              region: region.value ? region.value.value : undefined,
+            }
+          );
+          if (code === ResultCode.Continued) {
+            this.accessToken = data.accessToken;
           }
-        );
-        if (code === ResultCode.Continued) {
-          this.accessToken = data.accessToken;
-        }
-        await $player.update();
-        isSubmitLoading.value = false;
-        $q.notify({
-          type: "positive",
-          message: i18n("notifications.submitSuccess")
-        });
-        setTimeout(() => {
-          goTo(+1);
-        }, 2000);
-      }, $q, $i18n.t);
+          await $player.update();
+          isSubmitLoading.value = false;
+          $q.notify({
+            type: "positive",
+            message: i18n("notifications.submitSuccess"),
+          });
+          setTimeout(() => {
+            goTo(+1);
+          }, 2000);
+        },
+        $q,
+        $i18n.t
+      );
       isSubmitLoading.value = false;
     };
 
@@ -216,9 +232,9 @@ export default defineComponent({
       i18n,
       goTo,
       editAvatar,
-      submit
+      submit,
     };
-  }
+  },
 });
 </script>
 
