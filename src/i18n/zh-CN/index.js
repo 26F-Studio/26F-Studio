@@ -267,7 +267,7 @@ export default {
     drawers: {
       main: {
         labels: {
-          title: "26F 工作室",
+          title: "26F Studio",
           products: "所有产品",
           techminoGalaxy: "Techmino Galaxy",
           techmino: "Techmino",
@@ -296,7 +296,7 @@ export default {
       },
       main: {
         labels: {
-          title: "26F 工作室",
+          title: "26F Studio",
           products: "所有产品",
           techminoGalaxy: "Techmino Galaxy",
           techmino: "Techmino",
@@ -318,7 +318,7 @@ export default {
     headers: {
       main: {
         labels: {
-          title: "26F 工作室",
+          title: "26F Studio",
           products: "所有产品",
           techminoGalaxy: "Techmino Galaxy",
           techmino: "Techmino",
@@ -338,7 +338,7 @@ export default {
       },
       simple: {
         labels: {
-          title: "26F 工作室"
+          title: "26F Studio"
         }
       }
     },
@@ -347,11 +347,11 @@ export default {
   pages: {
     home: {
       labels: {
-        header: "欢迎来到 26F 工作室！",
+        header: "欢迎来到 26F Studio！",
         title: "我们的产品",
         invite: {
           interested: "对你看到的\n内容感兴趣？",
-          account: "立刻创建你的账号！",
+          account: "立刻创建账号！",
           button: "登录/注册"
         }
       }
@@ -360,83 +360,83 @@ export default {
       labels: {
         header: "欢迎（回来）！",
         headerNew: "欢迎！",
-        loginWithPassword: "Login With Password",
-        loginWithCode: "Login With Verification Code",
-        setupInfo: "Setup Your Account Info",
-        setupPassword: "Setup A New Password",
-        finish: "You Are All Set Now!"
+        loginWithPassword: "使用密码登录",
+        loginWithCode: "使用验证码登录",
+        setupInfo: "设置你的账户信息",
+        setupPassword: "设置一个新密码",
+        finish: "一切都准备好了！"
       }
     },
     notFound: {
       labels: {
-        notFound: "Oops! Nothing here...",
-        home: "Go Home"
+        notFound: "啊哦！这里啥都没有……",
+        home: "返回主页"
       }
     },
     oauth: {
       labels: {
-        header: "Welcome!",
-        title: "Authorizing {product}",
-        description: "Do you want to authorize {product} with your 26F account?\n" +
-          "By clicking on “Accept”, you hereby allow {product} to access your: ",
+        header: "欢迎！",
+        title: "正在授权 {product}",
+        description: "你想要使用26F账户来授权 {product} 吗？\n" +
+          "点击“接受”将允许 {product} 访问你的：",
         permissions: {
-          common: "Common Data: ",
-          sensitive: "Sensitive Data: "
+          common: "常用数据：",
+          sensitive: "敏感数据："
         },
         permissionDescriptions: {
-          common: "Your personal profile, including your username, motto, avatar, and other public info.",
-          sensitive: "Your sensitive data, including your email address, phone number, and other private info."
+          common: "你的个人简介，包括用户名、个人签名、头像以及其他公开信息。",
+          sensitive: "你的敏感信息，包括你的邮箱地址、电话号码以及其他私密信息。"
         },
         products: {
           techmino: "Techmino",
           techminoGalaxy: "Techmino Galaxy",
           quatrack: "Quatrack"
         },
-        cancel: "Decline",
-        confirm: "Accept",
-        copySuccess: "Tokens has been copied to your clipboard. \n" +
-          "You can now close this page.",
-        manualCopyBefore: "Copy failed?",
-        manualCopy: "Click here",
-        manualCopyAfter: "to copy manually."
+        cancel: "拒绝",
+        confirm: "接受",
+        copySuccess: "授权令牌已复制到你的剪贴板。\n" +
+          "现在你可以关闭此页面了。",
+        manualCopyBefore: "复制失败？",
+        manualCopy: "点击此处",
+        manualCopyAfter: "以手动复制。"
       },
       notifications: {
-        submitSuccess: "Authorization granted successfully"
+        submitSuccess: "授权成功"
       }
     },
     profile: {
       labels: {
-        username: "Username",
-        motto: "Motto",
-        region: "Region",
-        submit: "Update Profile",
-        resetPassword: "Reset Password",
-        sendingCode: "Sending email..."
+        username: "用户名",
+        motto: "个人签名",
+        region: "地区",
+        submit: "更新个人信息",
+        resetPassword: "重置密码",
+        sendingCode: "正在发送验证码……"
       },
       placeholders: {
-        username: "Input your username",
-        motto: "Input your motto",
-        region: "Select your region",
-        avatarFrame: "Coming soon..."
+        username: "输入你的用户名",
+        motto: "输入你的个人签名",
+        region: "选择你所在的地区",
+        avatarFrame: "即将到来……"
       },
       notifications: {
-        submitSuccess: "Profile updated successfully"
+        submitSuccess: "个人信息已成功更新"
       }
     }
   },
   Studio26F: {
     LimitVerifyEmail: {
-      tooFrequent: "Sending email too frequently, please try again later"
+      tooFrequent: "验证码发送过于频繁，请稍后再试"
     },
     PlayerManager: {
-      emailSendError: "Failed to send email",
-      invalidEmail: "Invalid email",
-      invalidEmailPass: "Invalid email or password",
-      invalidAccessToken: "Invalid access token",
-      networkError: "Network error",
-      noPassword: "Account doesn't have a password, use 'forgot your password' first",
-      playerNotFound: "Player not found",
-      recaptchaFailed: "Failed to verify reCAPTCHA"
+      emailSendError: "发送验证码失败",
+      invalidEmail: "邮箱无效",
+      invalidEmailPass: "邮箱或密码无效",
+      invalidAccessToken: "访问令牌无效",
+      networkError: "网络错误",
+      noPassword: "当前账号尚未设置密码，请先通过“忘记密码”重置密码",
+      playerNotFound: "找不到玩家",
+      recaptchaFailed: "reCAPTCHA 验证失败"
     }
   }
 };
