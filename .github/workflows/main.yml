@@ -2,9 +2,8 @@ name: 26F Studio CI
 
 on:
   push:
-    tags: [ v* ]
-  pull_request:
     branches: [ main ]
+    tags: [ v* ]
 
 jobs:
   deploy:
