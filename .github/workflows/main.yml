@@ -16,8 +16,8 @@ jobs:
           node-version: 18
           cache: 'npm'
           cache-dependency-path: package-lock.json
-      - name: Build
-        run: npm run build
+      - name: Install Dependencies and Build
+        run: npm i && npm run build
       - name: Deploy to AliYun
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
