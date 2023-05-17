@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Dependencies & Build
-        run: npm i && quasar build -m spa
+        run: npm i && npm run build
       - name: Deploy to AliYun
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
