@@ -18,8 +18,8 @@ jobs:
         run: npm i && npm run build
       - name: Download and modify 404.html for github pages
         env:
-          HTML_404_URL: https://raw.githubusercontent.com/rafgraph/spa-github-pages/gh-pages/404.html
           DIST_PATH: ./dist/spa
+          HTML_404_URL: https://raw.githubusercontent.com/rafgraph/spa-github-pages/gh-pages/404.html
         shell: python3 {0}
         run: |
           import json
@@ -39,6 +39,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v3
         env:
+          DIST_PATH: ./dist/spa
           GH_PAT: ${{ secrets.FINE_PAT }}
         with:
           build_dir: ${{ env.DIST_PATH }}
@@ -48,6 +49,8 @@ jobs:
           target_branch: main
       - name: Upload artifact
         uses: actions/upload-artifact@v3
+        env:
+          DIST_PATH: ./dist/spa
         with:
           name: 26F-Studio_SPA
           path: ${{ env.DIST_PATH }}
