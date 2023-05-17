@@ -21,12 +21,14 @@ jobs:
       - name: Deploy to AliYun
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          username: '${{ secrets.SFTP_USERNAME }}'
-          server: '${{ secrets.SFTP_SERVER }}'
-          ssh_private_key: ${{ secrets.SFTP_PRIVATE_KEY }}
+          delete_remote_files: true
           local_path: './dist/spa/*'
           remote_path: '${{ secrets.SFTP_REMOTE_PATH }}'
+          server: '${{ secrets.SFTP_SERVER }}'
+          sftp_only: true
           sftpArgs: '-o ConnectTimeout=5'
+          ssh_private_key: ${{ secrets.SFTP_PRIVATE_KEY }}
+          username: '${{ secrets.SFTP_USERNAME }}'
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25.1.0
         with:
