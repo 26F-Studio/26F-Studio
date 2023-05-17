@@ -55,7 +55,6 @@ jobs:
           name: 26F-Studio_SPA
           path: ${{ env.DIST_PATH }}
       - name: Deploy to AliYun
-        if: startsWith(github.ref, 'refs/tags/v') == true
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           delete_remote_files: true
