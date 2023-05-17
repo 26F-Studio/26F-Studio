@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v') == true
+#    if: startsWith(github.ref, 'refs/tags/v') == true
     steps:
       - uses: actions/checkout@v3
       - name: Install Dependencies & Build
