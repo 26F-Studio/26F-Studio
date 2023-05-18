@@ -19,7 +19,7 @@ jobs:
       - name: Install Dependencies and Build
         run: npm i && npm run build
       - name: Deploy to AliYun
-#        if: startsWith(github.ref, 'refs/tags/v') == true
+        if: startsWith(github.ref, 'refs/tags/v') == true
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           delete_remote_files: true
