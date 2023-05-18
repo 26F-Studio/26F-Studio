@@ -19,17 +19,6 @@ module.exports = configure(function (ctx) {
 
     // https://v2.quasar.dev/quasar-cli-webpack/prefetch-feature
     // preFetch: true,
-
-    htmlVariables: {
-      extraHeads: `<script async src="https://www.googletagmanager.com/gtag/js?id={{GTAG_ID}}"></script>
-         <script>
-           window.dataLayer = window.dataLayer || [];
-           function gtag(){dataLayer.push(arguments);}
-           gtag('js', new Date());
-           gtag('config', '{{GTAG_ID}}');
-         </script>`,
-    },
-
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-webpack/boot-files
@@ -71,34 +60,6 @@ module.exports = configure(function (ctx) {
 
       // Options below are automatically set depending on the env, set them if you want to override
       // extractCSS: false,
-
-      beforeBuild({ quasarConf }) {
-        if (typeof process.env.GITHUB_REF === "string") {
-          console.info(clc.green(" App • ") + "Build in development mode");
-          quasarConf.htmlVariables.extraHeads =
-            quasarConf.htmlVariables.extraHeads.replaceAll(
-              "{{GTAG_ID}}",
-              "G-J9PXZMJLTN"
-            );
-          quasarConf.htmlVariables.extraHeads += `<script type="text/javascript">
-                 (function(l) {
-                   if (l.search[1] === '/' ) {
-                     const decoded = l.search.slice(1).split('&').map(function (s) {
-                       return s.replace(/~and~/g, '&')
-                     }).join('?');
-                     window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
-                   }
-                 }(window.location))
-               </script>`;
-        } else {
-          console.info(clc.green(" App • ") + "Build in production mode");
-          quasarConf.htmlVariables.extraHeads =
-            quasarConf.htmlVariables.extraHeads.replaceAll(
-              "{{GTAG_ID}}",
-              "G-DLZ9HGSM0C"
-            );
-        }
-      },
       // https://v2.quasar.dev/quasar-cli-webpack/handling-webpack
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
       chainWebpack(chain) {

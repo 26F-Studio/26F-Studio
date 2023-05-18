@@ -75,6 +75,7 @@ export default boot(({ app }) => {
     siteKey: "6LcwWwceAAAAAMBMVVWHO05T2fxdKncts2e7aflQ",
     loaderOptions: {
       autoHideBadge: true,
+      useRecaptchaNet: true,
       size: "invisible",
     },
   });
