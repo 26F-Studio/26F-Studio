@@ -53,7 +53,7 @@ const getLatestRelease = (owner, repo) => {
 };
 
 const baseApi = axios.create({
-  baseURL: "https://cafuuchino.the26f.org:8443/studio26f/api/v1",
+  baseURL: "https://cafuuchino.studio26f.org:8443/studio26f/api/v1",
 });
 
 const genericHttp = (
