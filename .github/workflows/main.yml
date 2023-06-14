@@ -29,15 +29,6 @@ jobs:
           sftpArgs: '-o ConnectTimeout=5'
           ssh_private_key: ${{ secrets.SFTP_PRIVATE_KEY }}
           username: '${{ secrets.SFTP_USERNAME }}'
-      - name: Deploy to Vercel
-        if: startsWith(github.ref, 'refs/tags/v') == true
-        uses: amondnet/vercel-action@v25.1.0
-        with:
-          scope: ${{ secrets.VERCEL_TEAM_ID }}
-          vercel-args: --prod
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_TEAM_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
       - name: Download and modify 404.html for github pages
         env:
           DIST_PATH: ./dist/spa
