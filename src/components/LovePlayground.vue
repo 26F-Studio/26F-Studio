@@ -3,27 +3,27 @@ import {onMounted} from "vue";
 import {Game} from "src/scripts/game.js";
 import {Love} from "src/scripts/love.js";
 
+function goFullScreen() {
+  const canvas = document.getElementById("canvas");
+  if (canvas.requestFullScreen)
+    canvas.requestFullScreen();
+  else if (canvas.webkitRequestFullScreen)
+    canvas.webkitRequestFullScreen();
+  else if (canvas.mozRequestFullScreen)
+    canvas.mozRequestFullScreen();
+}
+
+function FullScreenHook() {
+  const canvas = document.getElementById("canvas");
+  canvas.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  canvas.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+}
+
 onMounted(() => {
-  function goFullScreen() {
-    var canvas = document.getElementById("canvas");
-    if (canvas.requestFullScreen)
-      canvas.requestFullScreen();
-    else if (canvas.webkitRequestFullScreen)
-      canvas.webkitRequestFullScreen();
-    else if (canvas.mozRequestFullScreen)
-      canvas.mozRequestFullScreen();
-  }
-
-  function FullScreenHook() {
-    var canvas = document.getElementById("canvas");
-    canvas.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    canvas.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-  }
-
-  var loadingContext = document.getElementById('loadingCanvas').getContext('2d');
+  const loadingContext = document.getElementById('loadingCanvas').getContext('2d');
 
   function drawLoadingText(text) {
-    var canvas = loadingContext.canvas;
+    const canvas = loadingContext.canvas;
 
     loadingContext.fillStyle = "rgb(142, 195, 227)";
     loadingContext.fillRect(0, 0, canvas.scrollWidth, canvas.scrollHeight);
@@ -50,12 +50,15 @@ onMounted(() => {
     }
   }, false);
 
-  var Module = {
+  const module = {
     arguments: ["./game.love"],
     INITIAL_MEMORY: 134217728,
     printErr: console.error.bind(console),
+    locateFile: function (path) {
+      return process.env.PROD ? `../${path}` : path;
+    },
     canvas: (function () {
-      var canvas = document.getElementById('canvas');
+      const canvas = document.getElementById('canvas');
 
       // As a default initial behavior, pop up an alert when webgl context is lost. To make your
       // application robust, you may want to override this behavior before shipping!
@@ -70,7 +73,7 @@ onMounted(() => {
     setStatus: function (text) {
       if (text) {
         drawLoadingText(text);
-      } else if (Module.remainingDependencies === 0) {
+      } else if (module.remainingDependencies === 0) {
         document.getElementById('loadingCanvas').style.display = 'none';
         document.getElementById('canvas').style.visibility = 'visible';
       }
@@ -80,25 +83,36 @@ onMounted(() => {
     monitorRunDependencies: function (left) {
       this.remainingDependencies = left;
       this.totalDependencies = Math.max(this.totalDependencies, left);
-      Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies - left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+      module.setStatus(left ? 'Preparing... (' + (this.totalDependencies - left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
     }
   };
-  Module.setStatus('Downloading...');
+  module.setStatus('Downloading...');
   window.onerror = function (event) {
+    console.error(event);
     // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
-    Module.setStatus('Exception thrown, see JavaScript console');
-    Module.setStatus = function (text) {
-      if (text) Module.printErr('[post-exception status] ' + text);
+    module.setStatus('Exception thrown, see JavaScript console');
+    module.setStatus = function (text) {
+      if (text) module.printErr('[post-exception status] ' + text);
     };
   };
-  Game(Module);
-  Love(Module);
+  Game(module);
+  Love(module);
 });
 </script>
 
 <template>
-  <canvas id="loadingCanvas" oncontextmenu="event.preventDefault()" width="800" height="600"></canvas>
-  <canvas id="canvas" @contextmenu.prevent/>
+  <div class="column items-center full-width">
+    <canvas id="loadingCanvas" @contextmenu.prevent width="800" height="600"></canvas>
+    <canvas id="canvas" @contextmenu.prevent/>
+    <div class="row justify-center q-py-xl q-mb-xl">
+      <q-btn
+        class="btn-primary"
+        label="FullScreen"
+        padding="0.4rem 1.25rem"
+        size="1.25rem"
+        @click="goFullScreen"/>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">

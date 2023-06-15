@@ -1,8 +1,6 @@
 <template>
   <q-page className="flex flex-center bg-dark">
-    <div style="width: 1280px; height: 720px">
-      <LovePlayground />
-    </div>
+    <LovePlayground style="margin-top: 4rem"/>
   </q-page>
 </template>
 
