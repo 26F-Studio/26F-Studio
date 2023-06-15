@@ -23,7 +23,7 @@ jobs:
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           delete_remote_files: true
-          local_path: './dist/spa/*'
+          local_path: './dist/pwa/*'
           remote_path: '${{ secrets.SFTP_REMOTE_PATH }}'
           server: '${{ secrets.SFTP_SERVER }}'
           sftpArgs: '-o ConnectTimeout=5'
@@ -31,7 +31,7 @@ jobs:
           username: '${{ secrets.SFTP_USERNAME }}'
       - name: Download and modify 404.html for github pages
         env:
-          DIST_PATH: ./dist/spa
+          DIST_PATH: ./dist/pwa
           HTML_404_URL: https://raw.githubusercontent.com/rafgraph/spa-github-pages/gh-pages/404.html
         shell: python3 {0}
         run: |
@@ -52,7 +52,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v3
         env:
-          DIST_PATH: ./dist/spa
+          DIST_PATH: ./dist/pwa
           GH_PAT: ${{ secrets.FINE_PAT }}
         with:
           build_dir: ${{ env.DIST_PATH }}
@@ -63,7 +63,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         env:
-          DIST_PATH: ./dist/spa
+          DIST_PATH: ./dist/pwa
         with:
-          name: 26F-Studio_SPA
+          name: 26F-Studio_PWA
           path: ${{ env.DIST_PATH }}
