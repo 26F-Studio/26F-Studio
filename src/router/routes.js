@@ -36,6 +36,16 @@ const routes = [
         path: "products",
         children: [
           {
+            name: "techmino",
+            path: "techmino",
+            components: {
+              header: () => import("layouts/headers/MainHeader"),
+              drawer: () => import("layouts/drawers/MainDrawer"),
+              default: () => import("pages/products/TechminoPage"),
+              footer: () => import("layouts/footers/MainFooter"),
+            },
+          },
+          {
             name: "techminoGalaxy",
             path: "techmino-galaxy",
             components: {
