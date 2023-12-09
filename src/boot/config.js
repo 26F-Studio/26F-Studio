@@ -60,7 +60,7 @@ const getLatestDownloadLink = (product, platform) => {
     }
     if (extensionMap.hasOwnProperty(platform)) {
       return (
-        "https://ghproxy.com/https://github.com/26F-Studio/" +
+        "https://mirror.ghproxy.com/https://github.com/26F-Studio/" +
         repoMap[product] +
         "/releases/latest/download/" +
         `${repoMap[product]}_${extensionMap[platform]}`
