@@ -359,7 +359,7 @@ export default {
         header: "欢迎来到 26F Studio！",
         title: "我们的产品",
         invite: {
-          interested: "对你看到的\n内容感兴趣？",
+          interested: "对你看到的内容感兴趣？",
           account: "立刻创建账号！",
           button: "登录/注册",
         },

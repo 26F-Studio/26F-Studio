@@ -366,7 +366,7 @@ export default {
         header: "Welcome to 26F Studio!",
         title: "Our products",
         invite: {
-          interested: "Interested in \nwhat you see?",
+          interested: "Interested in what you see?",
           account: "Create your account now!",
           button: "Sign In/Sign Up",
         },
