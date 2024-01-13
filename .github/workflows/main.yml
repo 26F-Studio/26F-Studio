@@ -49,17 +49,17 @@ jobs:
             notfound_html_file.seek(0)
             notfound_html_file.truncate()
             notfound_html_file.write(notfound_html)
-      - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v3
-        env:
-          DIST_PATH: ./dist/pwa
-          GH_PAT: ${{ secrets.FINE_PAT }}
-        with:
-          build_dir: ${{ env.DIST_PATH }}
-          fqdn: dev.studio26f.org
-          keep_history: false
-          repo: 26F-Studio/26F-Studio.github.io
-          target_branch: main
+      # - name: Deploy to GitHub Pages
+      #   uses: crazy-max/ghaction-github-pages@v3
+      #   env:
+      #     DIST_PATH: ./dist/pwa
+      #     GH_PAT: ${{ secrets.FINE_PAT }}
+      #   with:
+      #     build_dir: ${{ env.DIST_PATH }}
+      #     fqdn: dev.studio26f.org
+      #     keep_history: false
+      #     repo: 26F-Studio/26F-Studio.github.io
+      #     target_branch: main
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         env:
