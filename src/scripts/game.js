@@ -32,7 +32,7 @@ export function Game(Module) {
 
     function fetchRemotePackage(packageName, packageSize, callback, errback) {
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', "https://raw.githubusercontent.com/26F-Studio/Techmino/web-dev/game.data", true);
+      xhr.open('GET', "https://raw.githubusercontent.com/26F-Studio/Techmino/web-dev/game.love", true);
       xhr.responseType = 'arraybuffer';
       xhr.onprogress = function (event) {
         var url = packageName;
