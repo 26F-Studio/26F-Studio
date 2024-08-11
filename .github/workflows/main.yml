@@ -51,7 +51,7 @@ jobs:
           keep_history: false
           target_branch: pages
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ env.PROJECT_NAME }}_${{ needs.get-info.outputs.branchName }}_${{ needs.get-info.outputs.commitHash }}_${{ GITHUB.RUN_NUMBER }}_GithubPages
           path: ${{ env.OUTPUT_FOLDER }}/*

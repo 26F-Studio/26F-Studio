@@ -90,9 +90,9 @@ export default configure((ctx) => {
       // polyfillModulePreload: true,
       // distDir
 
-      extendViteConf(viteConf) {
-        viteConf.base = process.env.DEPLOY_GITHUB_PAGE ? '/26F-Studio/' : '/';
-      },
+      // extendViteConf(viteConf) {
+      //   viteConf.base = process.env.DEPLOY_GITHUB_PAGE ? '/26F-Studio/' : '/';
+      // },
       // viteVuePluginOptions: {},
 
       vitePlugins: [
