@@ -2,7 +2,6 @@
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 
-import { bus } from 'boot/bus';
 import { useSettingsStore } from 'stores/settings';
 import { createI18n } from 'utils/common';
 
@@ -13,19 +12,24 @@ const i18n = createI18n(useI18n(), 'layouts.headers.MainHeader.');
 </script>
 
 <template>
-  <q-header bordered class="bg-primary text-white">
+  <q-header class="bg-transparent text-white">
     <q-toolbar>
       <q-btn
-        dense
+        aria-label="Menu"
         flat
-        icon="menu"
-        round
-        @click="bus.emit('drawer', 'toggle', 'left')"
-      />
+        no-caps
+        no-wrap
+        to="/home"
+        stretch
+      >
+        <div
+          class="text-color-white text-font-galaxy-slim self-center"
+          style="font-size: 2rem; margin-bottom: 0.3rem"
+        >
+          {{ `\u{0FFFFF}` }}
+        </div>
+      </q-btn>
       <q-toolbar-title>
-        <q-avatar>
-          <q-img src="favicon.ico" />
-        </q-avatar>
       </q-toolbar-title>
       <q-btn
         :icon="darkModeColorAndIcon.icon"
@@ -38,15 +42,10 @@ const i18n = createI18n(useI18n(), 'layouts.headers.MainHeader.');
           {{ i18n('labels.toggleDarkMode') }}
         </q-tooltip>
       </q-btn>
-      <q-btn
-        dense
-        flat
-        icon="menu"
-        round
-        @click="bus.emit('drawer', 'toggle', 'right')"
-      />
     </q-toolbar>
   </q-header>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+@import 'src/css/app.scss';
+</style>

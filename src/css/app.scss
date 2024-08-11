@@ -1,1 +1,94 @@
-// app global css in SCSS form
+@font-face {
+  font-family: inter;
+  font-weight: 1 1000;
+  font-stretch: 1% 1000%;
+  src: url(src/assets/fonts/Inter.woff2);
+}
+
+@font-face {
+  font-family: galaxy-sans;
+  font-weight: 1 1000;
+  font-stretch: 1% 1000%;
+  src: url(src/assets/fonts/26FGalaxySansVF.woff2);
+}
+
+@font-face {
+  font-family: galaxy-sans-oblique;
+  font-weight: 1 1000;
+  font-stretch: 1% 1000%;
+  src: url(src/assets/fonts/26FGalaxySans-ObliqueVF.woff2);
+}
+
+@font-face {
+  font-family: resource-han-rounded;
+  font-weight: 1 1000;
+  font-stretch: 1% 1000%;
+  src: url(src/assets/fonts/ResourceHanRoundedCN.ttf);
+}
+
+.text {
+  &-font {
+    font-feature-settings: "pnum" on, "lnum" on;
+
+    &-galaxy {
+      @extend .text-font;
+      font-family: "galaxy-sans", "resource-han-rounded", sans-serif;
+
+      &-bold {
+        @extend .text-font-galaxy;
+        font-weight: 300;
+      }
+
+      &-slim {
+        @extend .text-font-galaxy;
+        font-weight: 206;
+      }
+    }
+
+    &-galaxy-oblique {
+      @extend .text-font;
+      font-family: "galaxy-sans-oblique", "resource-han-rounded", sans-serif;
+
+      &-bold {
+        @extend .text-font-galaxy-oblique;
+        font-weight: 300;
+      }
+
+      &-slim {
+        @extend .text-font-galaxy-oblique;
+        font-weight: 206;
+      }
+    }
+
+    &-inter {
+      @extend .text-font;
+      font-family: "inter", "resource-han-rounded", sans-serif;
+      font-weight: 500;
+
+      &-slim {
+        @extend .text-font-inter;
+        font-weight: 400;
+      }
+
+      &-bold {
+        @extend .text-font-inter;
+        font-weight: 700;
+      }
+
+      &-bolder {
+        @extend .text-font-inter;
+        font-weight: 800;
+      }
+    }
+  }
+
+  &-shadow {
+    &-grey {
+      text-shadow: 0 0.2rem 1.5rem rgba(4, 0, 29, 0.15);
+    }
+
+    &-purple {
+      text-shadow: 0 0.2rem 1.5rem rgba(48, 0, 240, 0.31);
+    }
+  }
+}
