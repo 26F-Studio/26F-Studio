@@ -2,40 +2,89 @@
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 
+import NavigationDropdown, {
+  NavigationGroup,
+} from 'components/NavigationDropdown.vue';
 import { useSettingsStore } from 'stores/settings';
 import { createI18n } from 'utils/common';
+import LogoText from 'components/LogoText.vue';
 
 const { toggleDarkMode } = useSettingsStore();
 const { darkModeColorAndIcon } = storeToRefs(useSettingsStore());
 
 const i18n = createI18n(useI18n(), 'layouts.headers.MainHeader.');
+
+const navigationGroups: NavigationGroup[] = [
+  {
+    label: i18n('navigationGroups.games.label'),
+    items: [
+      {
+        label: i18n('navigationGroups.games.items.techminoGalaxy'),
+        href: '/games/techmino-galaxy',
+      },
+      {
+        label: i18n('navigationGroups.games.items.techmino'),
+        href: '/games/techmino',
+      },
+      {
+        label: i18n('navigationGroups.games.items.quatrack'),
+        href: '/games/quatrack',
+      },
+      {
+        label: i18n('navigationGroups.games.items.more'),
+        href: '/games/more',
+      },
+    ],
+  },
+  {
+    label: i18n('navigationGroups.resources.label'),
+    items: [
+      {
+        label: i18n('navigationGroups.resources.items.glossary'),
+        href: '/resources/glossary',
+      },
+    ],
+  },
+  {
+    label: i18n('navigationGroups.utilities.label'),
+    items: [],
+  },
+  {
+    label: i18n('navigationGroups.aboutUs.label'),
+    items: [
+      {
+        label: i18n('navigationGroups.aboutUs.items.github'),
+        href: 'https://github.com/26F-Studio',
+      },
+    ],
+  },
+];
 </script>
 
 <template>
-  <q-header class="bg-transparent text-white">
+  <q-header
+    class="bg-transparent"
+    :class="{
+      'text-black': !$q.dark.isActive,
+    }"
+  >
     <q-toolbar>
-      <q-btn
-        aria-label="Menu"
-        flat
-        no-caps
-        no-wrap
-        to="/home"
-        stretch
-      >
-        <div
-          class="text-color-white text-font-galaxy-slim self-center"
-          style="font-size: 2rem; margin-bottom: 0.3rem"
-        >
-          {{ `\u{0FFFFF}` }}
-        </div>
+      <q-btn aria-label="Home" flat no-caps no-wrap to="/" stretch>
+        <LogoText :rem="2"/>
       </q-btn>
-      <q-toolbar-title>
-      </q-toolbar-title>
+      <q-space />
+      <NavigationDropdown
+        v-for="(navigation, index) in navigationGroups"
+        :key="index"
+        :label="navigation.label"
+        :items="navigation.items"
+      />
+      <q-btn flat icon="search" stretch />
       <q-btn
+        flat
+        stretch
         :icon="darkModeColorAndIcon.icon"
         :text-color="darkModeColorAndIcon.color"
-        flat
-        round
         @click="toggleDarkMode"
       >
         <q-tooltip>

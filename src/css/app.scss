@@ -20,6 +20,13 @@
 }
 
 @font-face {
+  font-family: redhat-display;
+  font-weight: 1 1000;
+  font-stretch: 1% 1000%;
+  src: url(src/assets/fonts/RedHatDisplay-VariableFont_wght.ttf);
+}
+
+@font-face {
   font-family: resource-han-rounded;
   font-weight: 1 1000;
   font-stretch: 1% 1000%;
@@ -60,23 +67,23 @@
       }
     }
 
-    &-inter {
+    &-redhat {
       @extend .text-font;
-      font-family: "inter", "resource-han-rounded", sans-serif;
+      font-family: "redhat-display", "resource-han-rounded", sans-serif;
       font-weight: 500;
 
       &-slim {
-        @extend .text-font-inter;
+        @extend .text-font-redhat;
         font-weight: 400;
       }
 
       &-bold {
-        @extend .text-font-inter;
+        @extend .text-font-redhat;
         font-weight: 700;
       }
 
       &-bolder {
-        @extend .text-font-inter;
+        @extend .text-font-redhat;
         font-weight: 800;
       }
     }
