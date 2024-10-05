@@ -35,11 +35,13 @@
 
 .text {
   &-font {
-    font-feature-settings: "pnum" on, "lnum" on;
+    font-feature-settings:
+      'pnum' on,
+      'lnum' on;
 
     &-galaxy {
       @extend .text-font;
-      font-family: "galaxy-sans", "resource-han-rounded", sans-serif;
+      font-family: 'galaxy-sans', 'resource-han-rounded', sans-serif;
 
       &-bold {
         @extend .text-font-galaxy;
@@ -54,7 +56,7 @@
 
     &-galaxy-oblique {
       @extend .text-font;
-      font-family: "galaxy-sans-oblique", "resource-han-rounded", sans-serif;
+      font-family: 'galaxy-sans-oblique', 'resource-han-rounded', sans-serif;
 
       &-bold {
         @extend .text-font-galaxy-oblique;
@@ -69,7 +71,7 @@
 
     &-redhat {
       @extend .text-font;
-      font-family: "redhat-display", "resource-han-rounded", sans-serif;
+      font-family: 'redhat-display', 'resource-han-rounded', sans-serif;
       font-weight: 500;
 
       &-slim {

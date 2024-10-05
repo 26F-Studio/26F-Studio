@@ -17,26 +17,17 @@ const panelWidth = computed(() => {
       return '25rem';
     case 'xl':
     default:
-      return '35rem';
+      return '20rem';
   }
 });
 </script>
 
 <template>
   <q-card flat :style="{ borderRadius: '2rem', width: panelWidth }">
-    <div class="absolute-top-left q-pl-md">
-      <div class="row items-center q-gutter-x-xs q-pa-sm">
-        <LogoText :rem="3.5" />
-        <div class="text-font-redhat-bolder" style="font-size: 2.3rem">
-          <!--          26F Studio-->
-          {{ screen.name }}
-        </div>
-      </div>
+    <div class="absolute-left">
+      <LogoText :rem="6" style="padding-top: 2rem" />
     </div>
-    <div class="absolute-bottom-right q-pa-sm">
-      <q-icon name="r_arrow_outward" size="5rem" style="font-weight: bolder" />
-    </div>
-    <img alt="?playOpenly.svg?" src="~assets/images/playOpenly.svg" />
+    <img alt="?playOpenly.svg?" src="~assets/images/26f.svg" />
   </q-card>
 </template>
 

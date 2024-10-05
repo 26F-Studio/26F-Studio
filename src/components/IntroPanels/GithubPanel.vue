@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import LogoText from 'components/LogoText.vue';
 import { useQuasar } from 'quasar';
 import { computed } from 'vue';
 
@@ -17,26 +16,30 @@ const panelWidth = computed(() => {
       return '25rem';
     case 'xl':
     default:
-      return '35rem';
+      return '30rem';
   }
 });
 </script>
 
 <template>
   <q-card flat :style="{ borderRadius: '2rem', width: panelWidth }">
-    <div class="absolute-top-left q-pl-md">
-      <div class="row items-center q-gutter-x-xs q-pa-sm">
-        <LogoText :rem="3.5" />
-        <div class="text-font-redhat-bolder" style="font-size: 2.3rem">
-          <!--          26F Studio-->
-          {{ screen.name }}
+    <div class="absolute-bottom-left q-pl-sm">
+      <div class="column">
+        <div
+          class="text-font-redhat-bolder q-pa-sm"
+          style="font-size: 2.2rem; line-height: 1rem"
+        >
+          Check out our
+        </div>
+        <div class="row"></div>
+        <div
+          class="text-font-redhat-bolder q-pa-sm"
+          style="font-size: 2.2rem; line-height: 3rem"
+        >
+          GitHub repos
         </div>
       </div>
     </div>
-    <div class="absolute-bottom-right q-pa-sm">
-      <q-icon name="r_arrow_outward" size="5rem" style="font-weight: bolder" />
-    </div>
-    <img alt="?playOpenly.svg?" src="~assets/images/playOpenly.svg" />
   </q-card>
 </template>
 
