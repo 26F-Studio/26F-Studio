@@ -1,28 +1,9 @@
 <script setup lang="ts">
-import { useQuasar } from 'quasar';
-import { computed } from 'vue';
 
-const { screen } = useQuasar();
-
-const panelWidth = computed(() => {
-  switch (screen.name) {
-    case 'xs':
-      return '10rem';
-    case 'sm':
-      return '15rem';
-    case 'md':
-      return '20rem';
-    case 'lg':
-      return '25rem';
-    case 'xl':
-    default:
-      return '20rem';
-  }
-});
 </script>
 
 <template>
-  <q-card flat :style="{ borderRadius: '2rem', width: panelWidth }">
+  <q-card flat style="border-radius: 2rem">
     <div class="absolute-bottom-left q-pl-sm">
       <div class="column">
         <div

@@ -4,8 +4,8 @@ import IntroPanelGroup from 'components/IntroPanelGroup.vue';
 
 <template>
   <q-page class="flex flex-center justify-center q-pa-md">
-    <div class="column">
-      <IntroPanelGroup />
+    <div class="column full-width" style="max-width: 100rem">
+      <IntroPanelGroup class="full-width"/>
     </div>
   </q-page>
 </template>

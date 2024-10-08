@@ -70,7 +70,7 @@ const navigationGroups: NavigationGroup[] = [
   >
     <q-toolbar>
       <q-btn aria-label="Home" flat no-caps no-wrap to="/" stretch>
-        <LogoText :rem="2" />
+        <LogoText :ratio="2" />
       </q-btn>
       <q-space />
       <NavigationDropdown

@@ -1,36 +1,22 @@
 <script setup lang="ts">
-import LogoText from 'components/LogoText.vue';
-import { useQuasar } from 'quasar';
-import { computed } from 'vue';
-
-const { screen } = useQuasar();
-
-const panelWidth = computed(() => {
-  switch (screen.name) {
-    case 'xs':
-      return '10rem';
-    case 'sm':
-      return '15rem';
-    case 'md':
-      return '20rem';
-    case 'lg':
-      return '25rem';
-    case 'xl':
-    default:
-      return '35rem';
-  }
-});
+// import LogoText from 'components/LogoText.vue';
 </script>
 
 <template>
-  <q-card flat :style="{ borderRadius: '2rem', width: panelWidth }">
-    <div class="absolute-top-left q-pl-md">
-      <div class="row items-center q-gutter-x-xs q-pa-sm">
-        <LogoText :rem="3.5" />
-        <div class="text-font-redhat-bolder" style="font-size: 2.3rem">
-          <!--          26F Studio-->
-          {{ screen.name }}
-        </div>
+  <q-card flat style="border-radius: 2rem">
+    <div class="absolute-top-left q-pl-md" style="width: 100%">
+      <div
+        class="row items-center q-gutter-x-xs q-pa-sm"
+        style="width: inherit"
+      >
+        <div style="border: solid 1px #f04118; width: 10%" />
+        <!--        <div class="text-font-galaxy-slim self-center" style="font-size: 50%">-->
+        <!--          {{ `\u{0FFFFF}` }}-->
+        <!--        </div>-->
+        <!--        <LogoText :ratio="100" />-->
+        <!--        <div class="text-font-redhat-bolder" style="font-size: 2.3rem">-->
+        <!--          26F Studio-->
+        <!--        </div>-->
       </div>
     </div>
     <div class="absolute-bottom-right q-pa-sm">
