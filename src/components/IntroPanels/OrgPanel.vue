@@ -3,20 +3,19 @@
 </script>
 
 <template>
-  <q-card flat style="border-radius: 2rem">
+  <q-card class="org-panel" flat style="border-radius: 2rem">
     <div class="absolute-top-left q-pl-md" style="width: 100%">
       <div
         class="row items-center q-gutter-x-xs q-pa-sm"
         style="width: inherit"
       >
-        <div style="border: solid 1px #f04118; width: 10%" />
-        <!--        <div class="text-font-galaxy-slim self-center" style="font-size: 50%">-->
-        <!--          {{ `\u{0FFFFF}` }}-->
-        <!--        </div>-->
+        <div class="logo-text self-center">
+          {{ `\u{0FFFFF}` }}
+        </div>
         <!--        <LogoText :ratio="100" />-->
-        <!--        <div class="text-font-redhat-bolder" style="font-size: 2.3rem">-->
-        <!--          26F Studio-->
-        <!--        </div>-->
+        <div class="text-font-redhat-bolder" style="font-size: 2.3rem">
+          26F Studio
+        </div>
       </div>
     </div>
     <div class="absolute-bottom-right q-pa-sm">
@@ -26,4 +25,17 @@
   </q-card>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@import 'src/css/app.scss';
+
+.org-panel {
+  border-radius: 2rem;
+  container-name: org-panel-container;
+  container-type: normal;
+}
+
+.logo-text {
+  @extend .text-font-galaxy-slim;
+  font-size: 2cqw;
+}
+</style>
